@@ -17,8 +17,9 @@
 SongbirdAudioProcessor::SongbirdAudioProcessor()
 {
     mSongbird.mFilter.setVowel1(VOWEL1_DEFAULT);
-    //mSongbird.mFilter.setVowel2(VOWEL2_DEFAULT);
+    mSongbird.mFilter.setVowel2(VOWEL2_DEFAULT);
     mSongbird.mFilter.setFilterPosition(FILTER_POSITION_DEFAULT);
+    mSongbird.mFilter.setMix(MIX_DEFAULT);
     
     UIUpdateFlag = true;
 }
@@ -49,6 +50,9 @@ float SongbirdAudioProcessor::getParameter(int index) {
         case filterPosition:
             return mSongbird.mFilter.getFilterPosition();
             
+        case mix:
+            return mSongbird.mFilter.getMix();
+                        
         default:
             return 0.0f;
     }
@@ -58,12 +62,19 @@ void SongbirdAudioProcessor::setParameter(int index, float newValue) {
     switch (index) {
         case vowel1:
             mSongbird.mFilter.setVowel1(static_cast<int>(roundf(newValue)));
+            break;
             
         case vowel2:
             mSongbird.mFilter.setVowel2(static_cast<int>(roundf(newValue)));
+            break;
             
         case filterPosition:
             mSongbird.mFilter.setFilterPosition(TranslateParam_Norm2Inter(newValue, FILTER_POSITION_MIN, FILTER_POSITION_MAX));
+            break;
+            
+        case mix:
+            mSongbird.mFilter.setMix(TranslateParam_Norm2Inter(newValue, MIX_MIN, MIX_MAX));
+            break;
             
         default:
             break;
@@ -82,6 +93,9 @@ const String SongbirdAudioProcessor::getParameterName(int index) {
         case filterPosition:
             return FILTER_POSITION_STR;
             
+        case mix:
+            return MIX_STR;
+            
         default:
             return String::empty;
     }
@@ -98,6 +112,9 @@ const String SongbirdAudioProcessor::getParameterText(int index)
             
         case filterPosition:
             return String(mSongbird.mFilter.getFilterPosition());
+            
+        case mix:
+            return String(mSongbird.mFilter.getMix());
             
         default:
             return String::empty;
@@ -157,14 +174,12 @@ void SongbirdAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlo
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
     mSongbird.reset();
-    mSongbird.setSampleRate(getSampleRate());
 }
 
 void SongbirdAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
-    mSongbird.reset();
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -206,7 +221,7 @@ void SongbirdAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer
     for (int i = totalNumInputChannels; i < totalNumOutputChannels; ++i) {
         buffer.clear (i, 0, buffer.getNumSamples());
     }
-
+    
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
     if (getNumOutputChannels() == 1 && getNumOutputChannels() == 1) {
@@ -226,6 +241,7 @@ void SongbirdAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer
         float* inLeftSample {buffer.getWritePointer(0)};
         float* inRightSample {buffer.getWritePointer(1)};
         
+        mSongbird.setSampleRate(getSampleRate());
         mSongbird.Process2in2out(inLeftSample, inRightSample, buffer.getNumSamples());
     }
 }

@@ -68,6 +68,7 @@ public:
         vowel1 = 0,
         vowel2,
         filterPosition,
+        mix,
         totalNumParams
     };
     

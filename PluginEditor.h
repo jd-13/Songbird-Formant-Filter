@@ -68,6 +68,7 @@ private:
     ScopedPointer<ComboBox> Vowel1Cmb;
     ScopedPointer<Slider> FilterPosSld;
     ScopedPointer<ComboBox> Vowel2Cmb;
+    ScopedPointer<Slider> MixSld;
 
 
     //==============================================================================

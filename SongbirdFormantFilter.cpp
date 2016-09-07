@@ -13,29 +13,42 @@
 SongbirdFormantFilter::SongbirdFormantFilter(int numFormants) {
     // create and store the appropriate number of filters
     for (int iii {0}; iii < numFormants; iii++) {
-        filters.push_back(SongbirdBandPassFilter());
+        SongbirdBandPassFilter* tempFilter = new SongbirdBandPassFilter();
+        filters.push_back(tempFilter);
     }
 }
 
-void SongbirdFormantFilter::process(std::vector<float> &samples) {
-    // initialise the output buffer
-    std::vector<float> outputBuffer(samples.size(), 0);
-    
-    // perform the filtering for each formant peak
-    for (SongbirdBandPassFilter& filter : filters) {
-        // copy the input samples to a new buffer
-        std::vector<float> tempBuffer(samples);
+SongbirdFormantFilter::~SongbirdFormantFilter() {
+    for (size_t iii {0}; iii < filters.size(); iii++) {
+        SongbirdBandPassFilter* tempFilter {filters[iii]};
+        delete tempFilter;
+    }
+}
+
+void SongbirdFormantFilter::process(float* inSamples, int numSamples) {
+    if (numSamples > 0 && inSamples != nullptr) {
         
-        filter.process(tempBuffer);
+        // initialise the empty output buffer
+        std::vector<float> outputBuffer(numSamples, 0);
+                
+        // perform the filtering for each formant peak
+        for (size_t iii {0}; iii < filters.size(); iii++) {
+            // copy the input samples to a new buffer
+            std::vector<float> tempBuffer(inSamples, inSamples + numSamples);
+            
+            filters[iii]->process(&tempBuffer[0], numSamples);
+            
+            // add the processed samples to the output buffer
+            for (size_t jjj {0}; jjj < tempBuffer.size(); jjj++) {
+                outputBuffer[jjj] += tempBuffer[jjj];
+            }
+        }
         
-        // add the processed samples to the output buffer
-        for (size_t iii {0}; iii < tempBuffer.size(); iii++) {
-            outputBuffer[iii] += tempBuffer[iii];
+        // write the buffer to output
+        for (int iii {0}; iii < numSamples; iii++) {
+            inSamples[iii] = outputBuffer[iii];
         }
     }
-    
-    // write the buffer to output
-    samples = outputBuffer;
 }
 
 bool SongbirdFormantFilter::setFormants(std::vector<Formant> formants, double sampleRate) {
@@ -47,18 +60,20 @@ bool SongbirdFormantFilter::setFormants(std::vector<Formant> formants, double sa
         retVal = true;
         
         for (size_t iii {0}; iii < filters.size(); iii++) {
-            filters[iii].setup(sampleRate,
-                               formants[iii].frequency,
-                               formants[iii].bandWidth,
-                               formants[iii].gaindB);
+            filters[iii]->setup(sampleRate,
+                                formants[iii].frequency,
+                                formants[iii].bandWidth,
+                                formants[iii].gaindB);
         }
+    } else {
+        Logger::outputDebugString("Incorrect size array of formants - cannot setup filters");
     }
     
     return retVal;
 }
 
 void SongbirdFormantFilter::reset() {
-    for (SongbirdBandPassFilter& filter : filters) {
-        filter.reset();
+    for (SongbirdBandPassFilter* filter : filters) {
+        filter->reset();
     }
 }

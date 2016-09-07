@@ -22,21 +22,12 @@ const Formant SongbirdFilterModule::allFormants[NUM_VOWELS][NUM_FORMANTS_PER_VOW
 SongbirdFilterModule::SongbirdFilterModule() :  vowel1(VOWEL_A),
                                                 vowel2(VOWEL_E),
                                                 filterPosition(FILTER_POSITION_DEFAULT),
-                                                sampleRate(44100) {
-    // construct filters
-    filters1[Channels::LEFT] = SongbirdFormantFilter(5);
-    filters1[Channels::RIGHT] = SongbirdFormantFilter(5);
-    filters2[Channels::LEFT] = SongbirdFormantFilter(5);
-    filters2[Channels::RIGHT] = SongbirdFormantFilter(5);
-                    
-                                                    
+                                                sampleRate(44100),
+                                                mix(MIX_DEFAULT) {
+
     // initialise the filters to some default values
-    const std::vector<Formant> tempFormants(&allFormants[0][0],
-                                            &allFormants[0][NUM_FORMANTS_PER_VOWEL - 1]);
-    filters1[Channels::LEFT].setFormants(tempFormants, sampleRate);
-    filters1[Channels::RIGHT].setFormants(tempFormants, sampleRate);
-    filters2[Channels::LEFT].setFormants(tempFormants, sampleRate);
-    filters2[Channels::RIGHT].setFormants(tempFormants, sampleRate);
+    setVowel1(vowel1);
+    setVowel2(vowel2);
 }
 
 void SongbirdFilterModule::setVowel1(int val) {
@@ -44,7 +35,7 @@ void SongbirdFilterModule::setVowel1(int val) {
     vowel1 = boundsCheck(val, VOWEL_MIN, VOWEL_MAX);
     
     const std::vector<Formant> tempFormants(&allFormants[vowel1 - 1][0],
-                                            &allFormants[vowel1 - 1][NUM_FORMANTS_PER_VOWEL - 1]);
+                                            &allFormants[vowel1 - 1][NUM_FORMANTS_PER_VOWEL]);
     
     filters1[Channels::LEFT].setFormants(tempFormants, sampleRate);
     filters1[Channels::RIGHT].setFormants(tempFormants, sampleRate);
@@ -55,7 +46,7 @@ void SongbirdFilterModule::setVowel2(int val) {
     vowel2 = boundsCheck(val, VOWEL_MIN, VOWEL_MAX);
     
     const std::vector<Formant> tempFormants(&allFormants[vowel2 - 1][0],
-                                            &allFormants[vowel2 - 1][NUM_FORMANTS_PER_VOWEL - 1]);
+                                            &allFormants[vowel2 - 1][NUM_FORMANTS_PER_VOWEL]);
     filters2[Channels::LEFT].setFormants(tempFormants, sampleRate);
     filters2[Channels::RIGHT].setFormants(tempFormants, sampleRate);
 }
@@ -71,7 +62,12 @@ void SongbirdFilterModule::setSampleRate(float val) {
     setVowel2(vowel2);
 }
 
+void SongbirdFilterModule::setMix(float val) {
+    mix = boundsCheck(val, MIX_MIN, MIX_MAX);
+}
+
 void SongbirdFilterModule::reset() {
+    Logger::outputDebugString(__func__);
     filters1[Channels::LEFT].reset();
     filters1[Channels::RIGHT].reset();
     filters2[Channels::LEFT].reset();
@@ -90,6 +86,10 @@ float SongbirdFilterModule::getFilterPosition() {
     return filterPosition;
 }
 
+float SongbirdFilterModule::getMix() {
+    return mix;
+}
+
 void SongbirdFilterModule::Process2in2out(float* leftSamples,
                                           float* rightSamples,
                                           int numSamples) {
@@ -98,50 +98,28 @@ void SongbirdFilterModule::Process2in2out(float* leftSamples,
         // create two buffers of dry samples
         std::map<Channels, std::vector<float>> outputBuffer1;
         outputBuffer1[Channels::LEFT] = std::vector<float>(leftSamples,
-                                                           leftSamples + numSamples - 1);
+                                                           leftSamples + numSamples);
         outputBuffer1[Channels::RIGHT] = std::vector<float>(rightSamples,
-                                                            rightSamples + numSamples - 1);
+                                                            rightSamples + numSamples);
 
         std::map<Channels, std::vector<float>> outputBuffer2(outputBuffer1);
         
         // do the processing for each filter
-        filters1[Channels::LEFT].process(outputBuffer1[Channels::LEFT]);
-        filters1[Channels::RIGHT].process(outputBuffer1[Channels::RIGHT]);
+        filters1[Channels::LEFT].process(&outputBuffer1[Channels::LEFT][0], numSamples);
+        filters1[Channels::RIGHT].process(&outputBuffer1[Channels::RIGHT][0], numSamples);
         
-        filters2[Channels::LEFT].process(outputBuffer2[Channels::LEFT]);
-        filters2[Channels::RIGHT].process(outputBuffer2[Channels::RIGHT]);
+        filters2[Channels::LEFT].process(&outputBuffer2[Channels::LEFT][0], numSamples);
+        filters2[Channels::RIGHT].process(&outputBuffer2[Channels::RIGHT][0], numSamples);
         
-        
-        // apply filter position
-        std::transform(outputBuffer1[Channels::LEFT].begin(),
-                       outputBuffer1[Channels::LEFT].end(),
-                       outputBuffer1[Channels::LEFT].begin(),
-                       std::bind1st(std::multiplies<float>(), filterPosition));
-        
-        std::transform(outputBuffer1[Channels::RIGHT].begin(),
-                       outputBuffer1[Channels::RIGHT].end(),
-                       outputBuffer1[Channels::RIGHT].begin(),
-                       std::bind1st(std::multiplies<float>(), filterPosition));
-        
-        std::transform(outputBuffer2[Channels::LEFT].begin(),
-                       outputBuffer2[Channels::LEFT].end(),
-                       outputBuffer2[Channels::LEFT].begin(),
-                       std::bind1st(std::multiplies<float>(), 1 - filterPosition));
-        
-        std::transform(outputBuffer2[Channels::RIGHT].begin(),
-                       outputBuffer2[Channels::RIGHT].end(),
-                       outputBuffer2[Channels::RIGHT].begin(),
-                       std::bind1st(std::multiplies<float>(), 1 - filterPosition));
-        
-        // write to output
+        // write to output, applying filter position and mix level
         for (size_t iii {0}; iii < numSamples; iii++) {
-            leftSamples[iii] =  leftSamples[iii]
-                                + outputBuffer1[Channels::LEFT][iii]
-                                + outputBuffer2[Channels::LEFT][iii];
+            leftSamples[iii] =  leftSamples[iii] * (1 - mix)
+                                + outputBuffer1[Channels::LEFT][iii] * (1 - filterPosition) * mix
+                                + outputBuffer2[Channels::LEFT][iii] * filterPosition * mix;
             
-            rightSamples[iii] = rightSamples[iii]
-                                + outputBuffer1[Channels::RIGHT][iii]
-                                + outputBuffer2[Channels::RIGHT][iii];
+            rightSamples[iii] = rightSamples[iii] * (1 - mix)
+                                + outputBuffer1[Channels::RIGHT][iii] * (1 - filterPosition) * mix
+                                + outputBuffer2[Channels::RIGHT][iii] * filterPosition * mix;
         }
     }
 }

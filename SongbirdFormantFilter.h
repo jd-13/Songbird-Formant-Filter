@@ -18,15 +18,16 @@
 class SongbirdFormantFilter {
 public:
     SongbirdFormantFilter(int numFormants = 5);
+    ~SongbirdFormantFilter();
     
-    void process(std::vector<float>& samples);
+    void process(float* inSamples, int numSamples);
     
     bool setFormants(std::vector<Formant> formants, double sampleRate);
     
     void reset();
     
 private:
-    std::vector<SongbirdBandPassFilter> filters;
+    std::vector<SongbirdBandPassFilter*> filters;
 };
 
 

@@ -25,13 +25,18 @@ const int   VOWEL_A {1},
 
 const float FILTER_POSITION_DEFAULT {0.5},
             FILTER_POSITION_MIN {0},
-            FILTER_POSITION_MAX {1};
+            FILTER_POSITION_MAX {1},
+
+            MIX_DEFAULT {1},
+            MIX_MIN {0},
+            MIX_MAX {1};
 
 const String    VOWEL1_STR {"Vowel1"},
                 VOWEL2_STR {"Vowel2"},
-                FILTER_POSITION_STR {"Position"};
+                FILTER_POSITION_STR {"Position"},
+                MIX_STR {"Mix"};
 
-const int FILTER_ORDER {2};
+const int FILTER_ORDER {8};
 
 /* TranslateParam_Norm2Inter
  *

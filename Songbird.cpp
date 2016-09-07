@@ -11,9 +11,6 @@
 #include "Songbird.h"
 
 Songbird::Songbird() : mFilter() {
-    mFilter.setVowel1(VOWEL_A);
-    //mFilter.setVowel2(VOWEL_E);
-    
 }
 
 Songbird::~Songbird() {

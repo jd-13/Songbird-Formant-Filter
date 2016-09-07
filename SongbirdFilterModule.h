@@ -32,11 +32,13 @@ public:
     void setVowel2(int val);
     void setFilterPosition(float val);
     void setSampleRate(float val);
+    void setMix(float val);
     void reset();
     
     int getVowel1();
     int getVowel2();
     float getFilterPosition();
+    float getMix();
     
     void Process2in2out(float* leftSamples, float* rightSamples, int numSamples);
     
@@ -53,12 +55,12 @@ private:
     int vowel2;
     float filterPosition;
     float sampleRate;
+    float mix;
     
     std::map<Channels, SongbirdFormantFilter> filters1;
     std::map<Channels, SongbirdFormantFilter> filters2;
     
     static const Formant allFormants[NUM_VOWELS][NUM_FORMANTS_PER_VOWEL];
-    
 };
 
 #endif  // SONGBIRDFILTER_H_INCLUDED

@@ -48,7 +48,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     addAndMakeVisible (FilterPosSld = new Slider ("Filter Position Slider"));
     FilterPosSld->setRange (0, 1, 0);
     FilterPosSld->setSliderStyle (Slider::LinearHorizontal);
-    FilterPosSld->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
+    FilterPosSld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     FilterPosSld->addListener (this);
 
     addAndMakeVisible (Vowel2Cmb = new ComboBox ("Vowel 2 Combo Box"));
@@ -62,6 +62,12 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     Vowel2Cmb->addItem (TRANS("O"), 4);
     Vowel2Cmb->addItem (TRANS("U"), 5);
     Vowel2Cmb->addListener (this);
+
+    addAndMakeVisible (MixSld = new Slider ("Mix Slider"));
+    MixSld->setRange (0, 1, 0);
+    MixSld->setSliderStyle (Slider::RotaryVerticalDrag);
+    MixSld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    MixSld->addListener (this);
 
 
     //[UserPreSize]
@@ -83,6 +89,7 @@ SongbirdAudioProcessorEditor::~SongbirdAudioProcessorEditor()
     Vowel1Cmb = nullptr;
     FilterPosSld = nullptr;
     Vowel2Cmb = nullptr;
+    MixSld = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -106,9 +113,10 @@ void SongbirdAudioProcessorEditor::resized()
     //[UserPreResize] Add your own custom resize code here..
     //[/UserPreResize]
 
-    Vowel1Cmb->setBounds (112, 16, 150, 24);
-    FilterPosSld->setBounds (72, 56, 232, 24);
-    Vowel2Cmb->setBounds (112, 96, 150, 24);
+    Vowel1Cmb->setBounds (16, 56, 56, 24);
+    FilterPosSld->setBounds (88, 56, 184, 24);
+    Vowel2Cmb->setBounds (280, 56, 56, 24);
+    MixSld->setBounds (144, 104, 80, 72);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -148,6 +156,12 @@ void SongbirdAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWasMove
         ourProcessor->setParameter(SongbirdAudioProcessor::filterPosition, static_cast<float>(FilterPosSld->getValue()));
         //[/UserSliderCode_FilterPosSld]
     }
+    else if (sliderThatWasMoved == MixSld)
+    {
+        //[UserSliderCode_MixSld] -- add your slider handling code here..
+        ourProcessor->setParameter(SongbirdAudioProcessor::mix, static_cast<float>(MixSld->getValue()));
+        //[/UserSliderCode_MixSld]
+    }
 
     //[UsersliderValueChanged_Post]
     //[/UsersliderValueChanged_Post]
@@ -161,8 +175,9 @@ void SongbirdAudioProcessorEditor::timerCallback() {
 
     if (ourProcessor->NeedsUIUpdate()) {
         Vowel1Cmb->setSelectedId(ourProcessor->getParameter(SongbirdAudioProcessor::vowel1), dontSendNotification);
-        FilterPosSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::filterPosition), dontSendNotification);
         Vowel2Cmb->setSelectedId(ourProcessor->getParameter(SongbirdAudioProcessor::vowel2), dontSendNotification);
+        FilterPosSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::filterPosition), dontSendNotification);
+        MixSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::mix), dontSendNotification);
     }
 }
 //[/MiscUserCode]
@@ -184,18 +199,22 @@ BEGIN_JUCER_METADATA
                  fixedSize="0" initialWidth="600" initialHeight="400">
   <BACKGROUND backgroundColour="ffffffff"/>
   <COMBOBOX name="Vowel 1 Combo Box" id="ab5acbd6ca836993" memberName="Vowel1Cmb"
-            virtualName="" explicitFocusOrder="0" pos="112 16 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="16 56 56 24" editable="0"
             layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <SLIDER name="Filter Position Slider" id="1be87d051f6ceb97" memberName="FilterPosSld"
-          virtualName="" explicitFocusOrder="0" pos="72 56 232 24" min="0"
-          max="1" int="0" style="LinearHorizontal" textBoxPos="TextBoxLeft"
+          virtualName="" explicitFocusOrder="0" pos="88 56 184 24" min="0"
+          max="1" int="0" style="LinearHorizontal" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"
           needsCallback="1"/>
   <COMBOBOX name="Vowel 2 Combo Box" id="9ac26013f2f51695" memberName="Vowel2Cmb"
-            virtualName="" explicitFocusOrder="0" pos="112 96 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="280 56 56 24" editable="0"
             layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
+  <SLIDER name="Mix Slider" id="b75c053482d8ac35" memberName="MixSld" virtualName=""
+          explicitFocusOrder="0" pos="144 104 80 72" min="0" max="1" int="0"
+          style="RotaryVerticalDrag" textBoxPos="NoTextBox" textBoxEditable="1"
+          textBoxWidth="80" textBoxHeight="20" skewFactor="1" needsCallback="1"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
