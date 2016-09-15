@@ -23,6 +23,7 @@
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
+#include "SongbirdLookAndFeel.h"
 //[/Headers]
 
 
@@ -62,6 +63,7 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
+    SongbirdLookAndFeel customLookAndFeel;
     //[/UserVariables]
 
     //==============================================================================

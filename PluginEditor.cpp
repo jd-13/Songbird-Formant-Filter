@@ -77,6 +77,8 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
 
     //[Constructor] You can add your own custom stuff here..
+    LookAndFeel::setDefaultLookAndFeel(&customLookAndFeel);
+
     startTimer(200);
     //[/Constructor]
 }
@@ -113,9 +115,9 @@ void SongbirdAudioProcessorEditor::resized()
     //[UserPreResize] Add your own custom resize code here..
     //[/UserPreResize]
 
-    Vowel1Cmb->setBounds (16, 56, 56, 24);
+    Vowel1Cmb->setBounds (24, 56, 48, 24);
     FilterPosSld->setBounds (88, 56, 184, 24);
-    Vowel2Cmb->setBounds (280, 56, 56, 24);
+    Vowel2Cmb->setBounds (280, 56, 48, 24);
     MixSld->setBounds (144, 104, 80, 72);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
@@ -199,7 +201,7 @@ BEGIN_JUCER_METADATA
                  fixedSize="0" initialWidth="600" initialHeight="400">
   <BACKGROUND backgroundColour="ffffffff"/>
   <COMBOBOX name="Vowel 1 Combo Box" id="ab5acbd6ca836993" memberName="Vowel1Cmb"
-            virtualName="" explicitFocusOrder="0" pos="16 56 56 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="24 56 48 24" editable="0"
             layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <SLIDER name="Filter Position Slider" id="1be87d051f6ceb97" memberName="FilterPosSld"
@@ -208,7 +210,7 @@ BEGIN_JUCER_METADATA
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"
           needsCallback="1"/>
   <COMBOBOX name="Vowel 2 Combo Box" id="9ac26013f2f51695" memberName="Vowel2Cmb"
-            virtualName="" explicitFocusOrder="0" pos="280 56 56 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="280 56 48 24" editable="0"
             layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <SLIDER name="Mix Slider" id="b75c053482d8ac35" memberName="MixSld" virtualName=""
