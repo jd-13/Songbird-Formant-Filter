@@ -1,0 +1,1 @@
+/Users/jack/Xcode Projects/AudioUnits/Releases/Second Gen (JUCE)/Richter/Source/RichterLFOBase.h
