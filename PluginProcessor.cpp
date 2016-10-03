@@ -16,10 +16,10 @@
 //==============================================================================
 SongbirdAudioProcessor::SongbirdAudioProcessor()
 {
-    mSongbird.mFilter.setVowel1(VOWEL1_DEFAULT);
-    mSongbird.mFilter.setVowel2(VOWEL2_DEFAULT);
-    mSongbird.mFilter.setFilterPosition(FILTER_POSITION_DEFAULT);
-    mSongbird.mFilter.setMix(MIX_DEFAULT);
+    mSongbird.mFilter.setVowel1(VOWEL.defaultValue);
+    mSongbird.mFilter.setVowel2(VOWEL.defaultValue);
+    mSongbird.mFilter.setFilterPosition(FILTER_POSITION.defaultValue);
+    mSongbird.mFilter.setMix(MIX.defaultValue);
     
     UIUpdateFlag = true;
 }
@@ -48,10 +48,10 @@ float SongbirdAudioProcessor::getParameter(int index) {
             return mSongbird.mFilter.getVowel2();
             
         case filterPosition:
-            return mSongbird.mFilter.getFilterPosition();
+            return FILTER_POSITION.InteralToNormalised(mSongbird.mFilter.getFilterPosition());
             
         case mix:
-            return mSongbird.mFilter.getMix();
+            return MIX.InteralToNormalised(mSongbird.mFilter.getMix());
                         
         default:
             return 0.0f;
@@ -69,11 +69,11 @@ void SongbirdAudioProcessor::setParameter(int index, float newValue) {
             break;
             
         case filterPosition:
-            mSongbird.mFilter.setFilterPosition(TranslateParam_Norm2Inter(newValue, FILTER_POSITION_MIN, FILTER_POSITION_MAX));
+            mSongbird.mFilter.setFilterPosition(FILTER_POSITION.NormalisedToInteral(newValue));
             break;
             
         case mix:
-            mSongbird.mFilter.setMix(TranslateParam_Norm2Inter(newValue, MIX_MIN, MIX_MAX));
+            mSongbird.mFilter.setMix(MIX.NormalisedToInteral(newValue));
             break;
             
         default:
@@ -111,10 +111,10 @@ const String SongbirdAudioProcessor::getParameterText(int index)
             return String(mSongbird.mFilter.getVowel2());
             
         case filterPosition:
-            return String(mSongbird.mFilter.getFilterPosition());
+            return String(FILTER_POSITION.NormalisedToInteral(mSongbird.mFilter.getFilterPosition()));
             
         case mix:
-            return String(mSongbird.mFilter.getMix());
+            return String(MIX.NormalisedToInteral(mSongbird.mFilter.getMix()));
             
         default:
             return String::empty;
