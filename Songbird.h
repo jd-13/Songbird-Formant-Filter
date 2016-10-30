@@ -12,6 +12,7 @@
 #define SONGBIRD_H_INCLUDED
 
 #include "SongbirdFilterModule.h"
+#include "RichterMOD.h"
 
 class Songbird {
 public:
@@ -19,13 +20,14 @@ public:
     ~Songbird();
     
     SongbirdFilterModule mFilter;
+    RichterMOD mMOD;
         
+    float rawFilterPosition;
+    
     void setSampleRate(double sampleRate);
     void reset();
     
     void Process2in2out(float* leftSamples, float* rightSamples, int numSamples);
-    
-private:
 };
 
 

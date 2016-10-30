@@ -16,6 +16,17 @@
 const String    VOWEL1_STR {"Vowel1"},
                 VOWEL2_STR {"Vowel2"},
                 FILTER_POSITION_STR {"Position"},
-                MIX_STR {"Mix"};
+                MIX_STR {"Mix"},
+
+                SWITCHMOD1_STR = "MOD1Bypass",
+                PHASESYNCMOD1_STR = "MOD1PhaseSync",
+                PHASEMOD1_STR = "MOD1Phase",
+                TEMPOSYNCMOD1_STR = "MOD1TempoSync",
+                WAVEMOD1_STR = "MOD1Wave",
+                DEPTHMOD1_STR = "MOD1Depth",
+                FREQMOD1_STR = "MOD1Frequency",
+                TEMPONUMERMOD1_STR = "MOD1TempoNumerator",
+                TEMPODENOMMOD1_STR = "MOD1TempoDenominator",
+                GROUP_MOD1 = "MOD1";
 
 #endif  // PARAMETERDATA_H_INCLUDED

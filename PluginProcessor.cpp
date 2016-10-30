@@ -21,6 +21,16 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
     mSongbird.mFilter.setFilterPosition(FILTER_POSITION.defaultValue);
     mSongbird.mFilter.setMix(MIX.defaultValue);
     
+    mSongbird.mMOD.setBypassSwitch(LFOSWITCH_DEFAULT);
+    mSongbird.mMOD.setPhaseSyncSwitch(PHASESYNC_DEFAULT);
+    mSongbird.mMOD.setTempoSyncSwitch(TEMPOSYNC_DEFAULT);
+    mSongbird.mMOD.setWave(WAVE.defaultValue);
+    mSongbird.mMOD.setDepth(DEPTH.defaultValue);
+    mSongbird.mMOD.setFreq(FREQ.defaultValue);
+    mSongbird.mMOD.setManualPhase(PHASE.defaultValue);
+    mSongbird.mMOD.setTempoNumer(TEMPONUMER.defaultValue);
+    mSongbird.mMOD.setTempoDenom(TEMPODENOM.defaultValue);
+    
     UIUpdateFlag = true;
 }
 
@@ -48,11 +58,41 @@ float SongbirdAudioProcessor::getParameter(int index) {
             return mSongbird.mFilter.getVowel2();
             
         case filterPosition:
-            return FILTER_POSITION.InteralToNormalised(mSongbird.mFilter.getFilterPosition());
+            return FILTER_POSITION.InteralToNormalised(mSongbird.rawFilterPosition);
             
         case mix:
             return MIX.InteralToNormalised(mSongbird.mFilter.getMix());
-                        
+            
+            
+        
+        case bypassSwitchMOD1:
+            return mSongbird.mMOD.getBypassSwitch();
+            
+        case phaseSyncMOD1:
+            return mSongbird.mMOD.getPhaseSyncSwitch();
+            
+        case tempoSyncMOD1:
+            return mSongbird.mMOD.getTempoSyncSwitch();
+            
+        case waveMOD1:
+            return mSongbird.mMOD.getWave();
+            
+        case depthMOD1:
+            return DEPTH.InteralToNormalised(mSongbird.mMOD.getDepth());
+            
+        case freqMOD1:
+            return FREQ.InteralToNormalised(mSongbird.mMOD.getFreq());
+            
+        case phaseMOD1:
+            return PHASE.InteralToNormalised(mSongbird.mMOD.getManualPhase());
+            
+        case tempoNumerMOD1:
+            return mSongbird.mMOD.getTempoNumer();
+            
+        case tempoDenomMOD1:
+            return mSongbird.mMOD.getTempoDenom();
+            
+            
         default:
             return 0.0f;
     }
@@ -69,12 +109,50 @@ void SongbirdAudioProcessor::setParameter(int index, float newValue) {
             break;
             
         case filterPosition:
-            mSongbird.mFilter.setFilterPosition(FILTER_POSITION.NormalisedToInteral(newValue));
+            mSongbird.rawFilterPosition = FILTER_POSITION.NormalisedToInteral(newValue);
             break;
             
         case mix:
             mSongbird.mFilter.setMix(MIX.NormalisedToInteral(newValue));
             break;
+            
+            
+        case bypassSwitchMOD1:
+            mSongbird.mMOD.setBypassSwitch(newValue < 0.5);
+            break;
+            
+        case phaseSyncMOD1:
+            mSongbird.mMOD.setPhaseSyncSwitch(newValue < 0.5);
+            break;
+            
+        case tempoSyncMOD1:
+            mSongbird.mMOD.setTempoSyncSwitch(newValue < 0.5);
+            break;
+            
+        case waveMOD1:
+            mSongbird.mMOD.setWave(round(newValue));
+            break;
+            
+        case depthMOD1:
+            mSongbird.mMOD.setDepth(DEPTH.NormalisedToInteral(newValue));
+            break;
+            
+        case freqMOD1:
+            mSongbird.mMOD.setFreq(FREQ.NormalisedToInteral(newValue));
+            break;
+            
+        case phaseMOD1:
+            mSongbird.mMOD.setManualPhase(PHASE.NormalisedToInteral(newValue));
+            break;
+            
+        case tempoNumerMOD1:
+            mSongbird.mMOD.setTempoNumer(newValue);
+            break;
+            
+        case tempoDenomMOD1:
+            mSongbird.mMOD.setTempoDenom(newValue);
+            break;
+            
             
         default:
             break;
@@ -96,6 +174,34 @@ const String SongbirdAudioProcessor::getParameterName(int index) {
         case mix:
             return MIX_STR;
             
+            
+        case bypassSwitchMOD1:
+            return SWITCHMOD1_STR;
+            
+        case phaseSyncMOD1:
+            return PHASESYNCMOD1_STR;
+            
+        case tempoSyncMOD1:
+            return TEMPOSYNCMOD1_STR;
+            
+        case waveMOD1:
+            return WAVEMOD1_STR;
+            
+        case depthMOD1:
+            return DEPTHMOD1_STR;
+            
+        case freqMOD1:
+            return FREQMOD1_STR;
+            
+        case phaseMOD1:
+            return PHASEMOD1_STR;
+            
+        case tempoNumerMOD1:
+            return TEMPONUMERMOD1_STR;
+            
+        case tempoDenomMOD1:
+            return TEMPODENOMMOD1_STR;
+            
         default:
             return String::empty;
     }
@@ -111,10 +217,38 @@ const String SongbirdAudioProcessor::getParameterText(int index)
             return String(mSongbird.mFilter.getVowel2());
             
         case filterPosition:
-            return String(FILTER_POSITION.NormalisedToInteral(mSongbird.mFilter.getFilterPosition()));
+            return String(FILTER_POSITION.NormalisedToInteral(mSongbird.rawFilterPosition));
             
         case mix:
             return String(MIX.NormalisedToInteral(mSongbird.mFilter.getMix()));
+            
+            
+        case bypassSwitchMOD1:
+            return String(mSongbird.mMOD.getBypassSwitch());
+            
+        case phaseSyncMOD1:
+            return String(mSongbird.mMOD.getPhaseSyncSwitch());
+            
+        case tempoSyncMOD1:
+            return String(mSongbird.mMOD.getTempoSyncSwitch());
+            
+        case waveMOD1:
+            return String(mSongbird.mMOD.getWave());
+            
+        case depthMOD1:
+            return String(DEPTH.InteralToNormalised(mSongbird.mMOD.getDepth()));
+            
+        case freqMOD1:
+            return String(FREQ.InteralToNormalised(mSongbird.mMOD.getFreq()));
+            
+        case phaseMOD1:
+            return String(PHASE.InteralToNormalised(mSongbird.mMOD.getManualPhase()));
+            
+        case tempoNumerMOD1:
+            return String(mSongbird.mMOD.getTempoNumer());
+            
+        case tempoDenomMOD1:
+            return String(mSongbird.mMOD.getTempoDenom());
             
         default:
             return String::empty;
@@ -222,6 +356,13 @@ void SongbirdAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer
         buffer.clear (i, 0, buffer.getNumSamples());
     }
     
+    juce::AudioPlayHead::CurrentPositionInfo mTempoInfo;
+    getPlayHead()->getCurrentPosition(mTempoInfo);
+    
+    mSongbird.mMOD.prepareForNextBuffer(mTempoInfo.bpm,
+                                        mTempoInfo.timeInSeconds,
+                                        getSampleRate());
+    
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
     if (getNumOutputChannels() == 1 && getNumOutputChannels() == 1) {
@@ -293,6 +434,12 @@ void SongbirdAudioProcessor::setStateInformation (const void* data, int sizeInBy
                 }
             }
         }
+        
+        // Slightly hacky fix to prevent inverted button settings on startup
+        setParameter(bypassSwitchMOD1, getParameter(bypassSwitchMOD1));
+        setParameter(phaseSyncMOD1, getParameter(phaseSyncMOD1));
+        setParameter(tempoSyncMOD1, getParameter(tempoSyncMOD1));
+        
         
         UIUpdateFlag = true;
     }

@@ -39,7 +39,8 @@
 class SongbirdAudioProcessorEditor  : public AudioProcessorEditor,
                                       public Timer,
                                       public ComboBoxListener,
-                                      public SliderListener
+                                      public SliderListener,
+                                      public ButtonListener
 {
 public:
     //==============================================================================
@@ -58,6 +59,7 @@ public:
     void resized() override;
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
     void sliderValueChanged (Slider* sliderThatWasMoved) override;
+    void buttonClicked (Button* buttonThatWasClicked) override;
 
 
 
@@ -71,6 +73,20 @@ private:
     ScopedPointer<Slider> FilterPosSld;
     ScopedPointer<ComboBox> Vowel2Cmb;
     ScopedPointer<Slider> MixSld;
+    ScopedPointer<GroupComponent> MOD1Group;
+    ScopedPointer<Slider> DepthMOD1Sld;
+    ScopedPointer<Slider> FreqMOD1Sld;
+    ScopedPointer<ComboBox> WaveMOD1Cmb;
+    ScopedPointer<TextButton> BypassMOD1Btn;
+    ScopedPointer<Label> FreqMOD1Lbl;
+    ScopedPointer<Label> DepthMOD1Lbl;
+    ScopedPointer<Label> WaveMOD1Lbl;
+    ScopedPointer<TextButton> TempoSyncMOD1Btn;
+    ScopedPointer<Slider> TempoNumerMOD1Sld;
+    ScopedPointer<Slider> TempoDenomMOD1Sld;
+    ScopedPointer<TextButton> PhaseSyncMOD1Btn;
+    ScopedPointer<Slider> PhaseMOD1Sld;
+    ScopedPointer<Label> PhaseMOD1Lbl;
 
 
     //==============================================================================

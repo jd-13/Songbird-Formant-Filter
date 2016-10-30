@@ -69,6 +69,17 @@ public:
         vowel2,
         filterPosition,
         mix,
+        
+        bypassSwitchMOD1,
+        phaseSyncMOD1,
+        tempoSyncMOD1,
+        waveMOD1,
+        depthMOD1,
+        freqMOD1,
+        phaseMOD1,
+        tempoNumerMOD1,
+        tempoDenomMOD1,
+        
         totalNumParams
     };
     
