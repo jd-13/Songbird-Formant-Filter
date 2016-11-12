@@ -65,7 +65,9 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    SongbirdLookAndFeel customLookAndFeel;
+    SongbirdLookAndFeel blueLookAndFeel,
+                        redLookAndFeel;
+    
     //[/UserVariables]
 
     //==============================================================================

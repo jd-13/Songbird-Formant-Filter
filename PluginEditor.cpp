@@ -182,7 +182,11 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
 
     //[Constructor] You can add your own custom stuff here..
-    LookAndFeel::setDefaultLookAndFeel(&customLookAndFeel);
+    LookAndFeel::setDefaultLookAndFeel(&blueLookAndFeel);
+    blueLookAndFeel.setHighlightColours(Colour(71, 55, 219), Colour(222, 35, 35));
+    redLookAndFeel.setHighlightColour(Colour(222, 35, 35));
+
+    Vowel2Cmb->setLookAndFeel(&redLookAndFeel);
 
     startTimer(200);
 

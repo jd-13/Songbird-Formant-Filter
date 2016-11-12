@@ -15,22 +15,19 @@
 
 #include "math.h"
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "CoreLookAndFeel.h"
 
-
-
-class SongbirdLookAndFeel : public LookAndFeel_V2 {
+class SongbirdLookAndFeel : public CoreLookAndFeel {
 public:
-    SongbirdLookAndFeel();
+    SongbirdLookAndFeel() : CoreLookAndFeel(),
+                            highlightColour2(Colour(222, 35, 35)) {}
+    virtual ~SongbirdLookAndFeel() {}
     
-    virtual void drawRotarySlider(Graphics& g,
-                                  int x,
-                                  int y,
-                                  int width,
-                                  int height,
-                                  float sliderPosProportional,
-                                  float rotaryStartAngle,
-                                  float rotaryEndAngle,
-                                  Slider& slider) override;
+    void setHighlightColours(Colour newColour1, Colour newColour2) {
+        setHighlightColour(newColour1);
+        highlightColour2 = newColour2;
+    }
+    
     
     virtual void drawLinearSliderThumb(Graphics& g,
                                        int x,
@@ -67,14 +64,7 @@ public:
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SongbirdLookAndFeel)
     
-    Colour  lightGrey,
-            darkGrey,
-            deepBlue,
-            deepRed;
-    
-    Colour  &vowel1Colour,
-            &vowel2Colour;
-    
+    Colour highlightColour2;
 };
 
 #endif  // SONGBIRDLOOKANDFEEL_H_INCLUDED

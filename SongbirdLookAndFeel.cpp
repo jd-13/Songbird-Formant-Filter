@@ -10,56 +10,6 @@
 
 #include "SongbirdLookAndFeel.h"
 
-SongbirdLookAndFeel::SongbirdLookAndFeel() :    LookAndFeel_V2(),
-                                                lightGrey(200, 200, 200),
-                                                darkGrey(107, 107, 107),
-                                                deepBlue(71, 55, 219),
-                                                deepRed(222, 35, 35),
-                                                vowel1Colour(deepBlue),
-                                                vowel2Colour(deepRed) {
-    
-    setColour(PopupMenu::highlightedBackgroundColourId, darkGrey);
-    setColour(PopupMenu::backgroundColourId, lightGrey);
-}
-
-void SongbirdLookAndFeel::drawRotarySlider(Graphics& g,
-                                             int /*x*/,
-                                             int /*y*/,
-                                             int width,
-                                             int height,
-                                             float /*sliderPosProportional*/,
-                                             float /*rotaryStartAngle*/,
-                                             float /*rotaryEndAngle*/,
-                                             Slider &slider) {
-    // calculate useful constants
-    const double rangeOfMotion {260 * (M_PI / 180)};
-    const double rotation {((slider.getValue() - slider.getMinimum()) / (slider.getMaximum() - slider.getMinimum())) * rangeOfMotion - rangeOfMotion / 2};
-    
-    const int margin {1};
-    const float diameter {static_cast<float>(height - margin * 2)};
-    
-    // draw centre circle
-    Path p;
-    g.setColour(darkGrey);
-    p.addEllipse(width / 2 - diameter / 2, height / 2 - diameter / 2, diameter, diameter);
-    g.fillPath(p);
-    
-    // draw outer ring
-    if (slider.isEnabled()) {
-        g.setColour(deepBlue);
-    } else {
-        g.setColour(lightGrey);
-    }
-    
-    p.clear();
-    
-    const double gap {0.4};
-    p.addCentredArc(width / 2, height / 2, diameter / 2, diameter / 2, rotation, gap, 2 * M_PI - gap, true);
-    
-    g.strokePath(p, PathStrokeType(2.0f));
-    
-}
-
 void SongbirdLookAndFeel::drawLinearSliderThumb(Graphics& g,
                                                 int /*x*/,
                                                 int /*y*/,
@@ -95,15 +45,15 @@ void SongbirdLookAndFeel::drawLinearSliderThumb(Graphics& g,
         g.strokePath(p, PathStrokeType(lineWidth));
     };
 
-    g.setColour(darkGrey);
+    g.setColour(darkColour);
     p.addEllipse(sliderPos - sliderThumbRadius,
                  height / 2 - sliderThumbRadius,
                  sliderThumbRadius * 2,
                  sliderThumbRadius * 2);
     g.fillPath(p);
 
-    drawThumbHalf(vowel1Colour, M_PI);
-    drawThumbHalf(vowel2Colour, 0);
+    drawThumbHalf(highlightColour, M_PI);
+    drawThumbHalf(highlightColour2, 0);
     
 }
 
@@ -121,10 +71,10 @@ void SongbirdLookAndFeel::drawLinearSliderBackground(Graphics& g,
     // NOTE: assumes the only horizontal slider is the filter position
     if (slider.isHorizontal()) {
         // colour the side of the background on either side of the thumb differently
-        g.setColour(deepBlue);
+        g.setColour(highlightColour);
         g.fillRect(x, y + height / 2, static_cast<int>(sliderPos), 2);
         
-        g.setColour(deepRed);
+        g.setColour(highlightColour2);
         g.fillRect(static_cast<int>(sliderPos), y + height / 2, width, 2);
     }
 }
@@ -140,12 +90,7 @@ void SongbirdLookAndFeel::drawComboBox(Graphics& g,
                                     ComboBox& box) {
     
     // determine correct colour
-    Colour* vowelColour {nullptr};
-    if (box.getName() == "Vowel 1 Combo Box") {
-        vowelColour = &vowel1Colour;
-    } else {
-        vowelColour = &vowel2Colour;
-    }
+    Colour& vowelColour {highlightColour};
     
     // draw arrows
     const float arrowX {0.2f};
@@ -161,7 +106,7 @@ void SongbirdLookAndFeel::drawComboBox(Graphics& g,
                       buttonX + buttonW * (1.0f -arrowX),       buttonY + buttonH * 0.55f,
                       buttonX + buttonW * arrowX,               buttonY + buttonH * 0.55f);
         
-        g.setColour(box.isPopupActive() ? *vowelColour : lightGrey);
+        g.setColour(box.isPopupActive() ? vowelColour : lightColour);
         
         g.fillPath(p);
     }
@@ -177,7 +122,7 @@ void SongbirdLookAndFeel::drawComboBox(Graphics& g,
     p.addRoundedRectangle(indent, indent, width - 2 * indent, height - 2 * indent, static_cast<float>(cornerSize));
 
     
-    g.setColour(*vowelColour);
+    g.setColour(vowelColour);
     g.strokePath(p, pStroke);
     
 }
