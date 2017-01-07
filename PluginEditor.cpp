@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 4.2.1
+  Created with Projucer version: 4.3.0
 
   ------------------------------------------------------------------------------
 
@@ -174,6 +174,10 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     PhaseMOD1Lbl->setColour (TextEditor::textColourId, Colours::black);
     PhaseMOD1Lbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
+    addAndMakeVisible (ModModeBtn = new TextButton ("Mod Mode Button"));
+    ModModeBtn->setButtonText (TRANS("Blend"));
+    ModModeBtn->addListener (this);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -224,6 +228,7 @@ SongbirdAudioProcessorEditor::~SongbirdAudioProcessorEditor()
     PhaseSyncMOD1Btn = nullptr;
     PhaseMOD1Sld = nullptr;
     PhaseMOD1Lbl = nullptr;
+    ModModeBtn = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -250,7 +255,7 @@ void SongbirdAudioProcessorEditor::resized()
     Vowel1Cmb->setBounds (24, 56, 48, 24);
     FilterPosSld->setBounds (88, 56, 184, 24);
     Vowel2Cmb->setBounds (280, 56, 48, 24);
-    MixSld->setBounds (144, 104, 80, 72);
+    MixSld->setBounds (96, 104, 80, 72);
     MOD1Group->setBounds (46, 200, 280, 128);
     DepthMOD1Sld->setBounds (126, 248, 32, 24);
     FreqMOD1Sld->setBounds (70, 248, 32, 24);
@@ -265,6 +270,7 @@ void SongbirdAudioProcessorEditor::resized()
     PhaseSyncMOD1Btn->setBounds (174, 224, 56, 16);
     PhaseMOD1Sld->setBounds (182, 248, 32, 24);
     PhaseMOD1Lbl->setBounds (174, 272, 46, 24);
+    ModModeBtn->setBounds (216, 128, 79, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -375,6 +381,12 @@ void SongbirdAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
         ourProcessor->setParameter(SongbirdAudioProcessor::phaseSyncMOD1, static_cast<float>(PhaseSyncMOD1Btn->getToggleState()));
         //[/UserButtonCode_PhaseSyncMOD1Btn]
     }
+    else if (buttonThatWasClicked == ModModeBtn)
+    {
+        //[UserButtonCode_ModModeBtn] -- add your button handler code here..
+        ourProcessor->setParameter(SongbirdAudioProcessor::modMode, static_cast<float>(ModModeBtn->getToggleState()));
+        //[/UserButtonCode_ModModeBtn]
+    }
 
     //[UserbuttonClicked_Post]
     //[/UserbuttonClicked_Post]
@@ -391,6 +403,10 @@ void SongbirdAudioProcessorEditor::timerCallback() {
         Vowel2Cmb->setSelectedId(ourProcessor->getParameter(SongbirdAudioProcessor::vowel2), dontSendNotification);
         FilterPosSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::filterPosition), dontSendNotification);
         MixSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::mix), dontSendNotification);
+        ModModeBtn->setToggleState(ourProcessor->getParameter(SongbirdAudioProcessor::modMode), dontSendNotification);
+        
+        // Set text for mod mode button
+        ModModeBtn->getToggleState() ? ModModeBtn->setButtonText("FREQ") : ModModeBtn->setButtonText("BLEND");
 
         // MOD 1
         BypassMOD1Btn->setToggleState(ourProcessor->getParameter(SongbirdAudioProcessor::bypassSwitchMOD1), dontSendNotification);
@@ -452,7 +468,7 @@ BEGIN_JUCER_METADATA
             layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <SLIDER name="Mix Slider" id="b75c053482d8ac35" memberName="MixSld" virtualName=""
-          explicitFocusOrder="0" pos="144 104 80 72" min="0" max="1" int="0"
+          explicitFocusOrder="0" pos="96 104 80 72" min="0" max="1" int="0"
           style="RotaryVerticalDrag" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1" needsCallback="1"/>
   <GROUPCOMPONENT name="MOD 1 Group" id="a2c7412d0fb46a58" memberName="MOD1Group"
@@ -517,6 +533,9 @@ BEGIN_JUCER_METADATA
          edTextCol="ff000000" edBkgCol="0" labelText="Phase" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
+  <TEXTBUTTON name="Mod Mode Button" id="82ccbd2e4873bcd5" memberName="ModModeBtn"
+              virtualName="" explicitFocusOrder="0" pos="216 128 79 24" buttonText="Blend"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

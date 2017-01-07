@@ -13,6 +13,7 @@
 
 #include "SongbirdFilterModule.h"
 #include "RichterMOD.h"
+#include "ParameterData.h"
 
 class Songbird {
 public:
@@ -21,13 +22,18 @@ public:
     
     SongbirdFilterModule mFilter;
     RichterMOD mMOD;
-        
-    float rawFilterPosition;
     
     void setSampleRate(double sampleRate);
     void reset();
     
     void Process2in2out(float* leftSamples, float* rightSamples, int numSamples);
+    
+    float rawFilterPosition;
+    
+    bool modMode;
+    
+private:
+    Vowel calcModVowel();
 };
 
 

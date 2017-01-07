@@ -69,6 +69,7 @@ public:
         vowel2,
         filterPosition,
         mix,
+        modMode,
         
         bypassSwitchMOD1,
         phaseSyncMOD1,

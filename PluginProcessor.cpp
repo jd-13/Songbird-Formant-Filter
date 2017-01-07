@@ -20,6 +20,8 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
     mSongbird.mFilter.setVowel2(VOWEL.defaultValue);
     mSongbird.mFilter.setFilterPosition(FILTER_POSITION.defaultValue);
     mSongbird.mFilter.setMix(MIX.defaultValue);
+    mSongbird.rawFilterPosition = FILTER_POSITION.defaultValue;
+    mSongbird.modMode = MODMODE_DEFAULT;
     
     mSongbird.mMOD.setBypassSwitch(LFOSWITCH_DEFAULT);
     mSongbird.mMOD.setPhaseSyncSwitch(PHASESYNC_DEFAULT);
@@ -62,6 +64,9 @@ float SongbirdAudioProcessor::getParameter(int index) {
             
         case mix:
             return MIX.InteralToNormalised(mSongbird.mFilter.getMix());
+            
+        case modMode:
+            return mSongbird.modMode;
             
             
         
@@ -114,6 +119,10 @@ void SongbirdAudioProcessor::setParameter(int index, float newValue) {
             
         case mix:
             mSongbird.mFilter.setMix(MIX.NormalisedToInteral(newValue));
+            break;
+            
+        case modMode:
+            mSongbird.modMode = (newValue < 0.5);
             break;
             
             
@@ -174,6 +183,9 @@ const String SongbirdAudioProcessor::getParameterName(int index) {
         case mix:
             return MIX_STR;
             
+        case modMode:
+            return MODMODE_STR;
+            
             
         case bypassSwitchMOD1:
             return SWITCHMOD1_STR;
@@ -221,6 +233,9 @@ const String SongbirdAudioProcessor::getParameterText(int index)
             
         case mix:
             return String(MIX.NormalisedToInteral(mSongbird.mFilter.getMix()));
+            
+        case modMode:
+            return String(mSongbird.modMode);
             
             
         case bypassSwitchMOD1:
