@@ -20,8 +20,8 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
     mSongbird.mFilter.setVowel2(VOWEL.defaultValue);
     mSongbird.mFilter.setFilterPosition(FILTER_POSITION.defaultValue);
     mSongbird.mFilter.setMix(MIX.defaultValue);
-    mSongbird.rawFilterPosition = FILTER_POSITION.defaultValue;
-    mSongbird.modMode = MODMODE_DEFAULT;
+    mSongbird.mFilter.setFilterPosition(FILTER_POSITION.defaultValue);
+    mSongbird.mFilter.setModMode(MODMODE_DEFAULT);
     
     mSongbird.mMOD.setBypassSwitch(LFOSWITCH_DEFAULT);
     mSongbird.mMOD.setPhaseSyncSwitch(PHASESYNC_DEFAULT);
@@ -60,13 +60,13 @@ float SongbirdAudioProcessor::getParameter(int index) {
             return mSongbird.mFilter.getVowel2();
             
         case filterPosition:
-            return FILTER_POSITION.InteralToNormalised(mSongbird.rawFilterPosition);
+            return FILTER_POSITION.InteralToNormalised(mSongbird.mFilter.getFilterPosition());
             
         case mix:
             return MIX.InteralToNormalised(mSongbird.mFilter.getMix());
             
         case modMode:
-            return mSongbird.modMode;
+            return mSongbird.mFilter.getModMode();
             
             
         
@@ -114,7 +114,7 @@ void SongbirdAudioProcessor::setParameter(int index, float newValue) {
             break;
             
         case filterPosition:
-            mSongbird.rawFilterPosition = FILTER_POSITION.NormalisedToInteral(newValue);
+            mSongbird.mFilter.setFilterPosition(FILTER_POSITION.NormalisedToInteral(newValue));
             break;
             
         case mix:
@@ -122,7 +122,7 @@ void SongbirdAudioProcessor::setParameter(int index, float newValue) {
             break;
             
         case modMode:
-            mSongbird.modMode = (newValue < 0.5);
+            mSongbird.mFilter.setModMode(newValue < 0.5);
             break;
             
             
@@ -229,13 +229,13 @@ const String SongbirdAudioProcessor::getParameterText(int index)
             return String(mSongbird.mFilter.getVowel2());
             
         case filterPosition:
-            return String(FILTER_POSITION.NormalisedToInteral(mSongbird.rawFilterPosition));
+            return String(FILTER_POSITION.NormalisedToInteral(mSongbird.mFilter.getFilterPosition()));
             
         case mix:
             return String(MIX.NormalisedToInteral(mSongbird.mFilter.getMix()));
             
         case modMode:
-            return String(mSongbird.modMode);
+            return String(mSongbird.mFilter.getModMode());
             
             
         case bypassSwitchMOD1:

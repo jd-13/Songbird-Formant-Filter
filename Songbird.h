@@ -28,12 +28,6 @@ public:
     
     void Process2in2out(float* leftSamples, float* rightSamples, int numSamples);
     
-    float rawFilterPosition;
-    
-    bool modMode;
-    
-private:
-    Vowel calcModVowel();
 };
 
 
