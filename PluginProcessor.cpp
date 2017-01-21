@@ -381,7 +381,7 @@ void SongbirdAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
     if (getNumOutputChannels() == 1 && getNumOutputChannels() == 1) {
-        
+        // TODO: implement for all channel configurations
         /*float* inSample {buffer.getWritePointer(0)};
         mCarve.Process1in1out(inSample, buffer.getNumSamples());*/
         

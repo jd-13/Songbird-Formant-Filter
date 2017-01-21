@@ -404,7 +404,7 @@ void SongbirdAudioProcessorEditor::timerCallback() {
         FilterPosSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::filterPosition), dontSendNotification);
         MixSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::mix), dontSendNotification);
         ModModeBtn->setToggleState(ourProcessor->getParameter(SongbirdAudioProcessor::modMode), dontSendNotification);
-        
+
         // Set text for mod mode button
         ModModeBtn->getToggleState() ? ModModeBtn->setButtonText("FREQ") : ModModeBtn->setButtonText("BLEND");
 
