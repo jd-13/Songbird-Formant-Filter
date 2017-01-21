@@ -26,10 +26,14 @@ void Songbird::reset() {
     mMOD.reset();
 }
 
-void Songbird::Process2in2out(float *leftSamples, float *rightSamples, int numSamples) {
+void Songbird::Process2in2out(float* inLeftSamples, float* inRightSamples, int numSamples) {
+    
+    std::vector<double> leftSamples(inLeftSamples, inLeftSamples + numSamples);
+    std::vector<double> rightSamples(inRightSamples, inRightSamples + numSamples);
     
     mFilter.setModulation(mMOD.calcGainInLoop());
-    mFilter.Process2in2out(leftSamples, rightSamples, numSamples);
+    
+    mFilter.Process2in2out(&leftSamples[0], &rightSamples[0], numSamples);
     
     // call the LFO calcGain method to advance its internal counters manually
     // since were calling it once per buffer rather than once per sample
@@ -38,4 +42,7 @@ void Songbird::Process2in2out(float *leftSamples, float *rightSamples, int numSa
     for (size_t iii {0}; iii < numSamples - 1; iii++) {
         mMOD.calcGainInLoop();
     }
+    
+    std::copy(leftSamples.begin(), leftSamples.end(), inLeftSamples);
+    std::copy(rightSamples.begin(), rightSamples.end(), inRightSamples);
 }
