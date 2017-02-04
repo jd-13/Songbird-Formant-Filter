@@ -71,11 +71,11 @@ void SongbirdLookAndFeel::drawLinearSliderBackground(Graphics& g,
     // NOTE: assumes the only horizontal slider is the filter position
     if (slider.isHorizontal()) {
         // colour the side of the background on either side of the thumb differently
-        g.setColour(highlightColour);
-        g.fillRect(x, y + height / 2, static_cast<int>(sliderPos), 2);
-        
         g.setColour(highlightColour2);
-        g.fillRect(static_cast<int>(sliderPos), y + height / 2, width, 2);
+        g.fillRect(x, y + height / 2, width, 2);
+        
+        g.setColour(highlightColour);
+        g.fillRect(x, y + height / 2, static_cast<int>(sliderPos) , 2);
     }
 }
 
