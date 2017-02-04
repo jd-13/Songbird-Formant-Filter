@@ -68,6 +68,8 @@ private:
     SongbirdLookAndFeel blueLookAndFeel,
                         redLookAndFeel;
 
+    SongbirdButtonLookAndFeel toggleButtonLookAndFeel;
+
     //[/UserVariables]
 
     //==============================================================================
@@ -90,6 +92,7 @@ private:
     ScopedPointer<Slider> PhaseMOD1Sld;
     ScopedPointer<Label> PhaseMOD1Lbl;
     ScopedPointer<TextButton> ModModeBtn;
+    ScopedPointer<Label> MixLbl;
 
 
     //==============================================================================

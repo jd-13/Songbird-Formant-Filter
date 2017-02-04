@@ -61,10 +61,23 @@ public:
                               int buttonH,
                               ComboBox& box) override;
     
+protected:
+    Colour highlightColour2;
+    
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SongbirdLookAndFeel)
     
-    Colour highlightColour2;
+};
+
+class SongbirdButtonLookAndFeel : public SongbirdLookAndFeel {
+public:
+    SongbirdButtonLookAndFeel() :   SongbirdLookAndFeel() {
+        lightColour = highlightColour2;
+    }
+    
+    virtual ~SongbirdButtonLookAndFeel() {}
+    
+    
 };
 
 #endif  // SONGBIRDLOOKANDFEEL_H_INCLUDED

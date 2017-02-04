@@ -70,7 +70,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     MixSld->addListener (this);
 
     addAndMakeVisible (MOD1Group = new GroupComponent ("MOD 1 Group",
-                                                       TRANS("MOD1")));
+                                                       String()));
 
     addAndMakeVisible (DepthMOD1Sld = new Slider ("MOD 1 Depth Slider"));
     DepthMOD1Sld->setTooltip (TRANS("Depth of the LFO"));
@@ -101,7 +101,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     addAndMakeVisible (BypassMOD1Btn = new TextButton ("MOD 1 Bypass Button"));
     BypassMOD1Btn->setTooltip (TRANS("Bypass button for MOD 1. MOD 1 modulates the rate and depth of LFO 1."));
-    BypassMOD1Btn->setButtonText (TRANS("MOD 1"));
+    BypassMOD1Btn->setButtonText (TRANS("OSC"));
     BypassMOD1Btn->addListener (this);
 
     addAndMakeVisible (FreqMOD1Lbl = new Label ("MOD 1 Freq Label",
@@ -178,6 +178,15 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     ModModeBtn->setButtonText (TRANS("Blend"));
     ModModeBtn->addListener (this);
 
+    addAndMakeVisible (MixLbl = new Label ("Mix Label",
+                                           TRANS("Mix")));
+    MixLbl->setFont (Font (15.00f, Font::plain));
+    MixLbl->setJustificationType (Justification::centredLeft);
+    MixLbl->setEditable (false, false, false);
+    MixLbl->setColour (Label::textColourId, Colour (0xffc8c8c8));
+    MixLbl->setColour (TextEditor::textColourId, Colours::black);
+    MixLbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -189,8 +198,10 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     LookAndFeel::setDefaultLookAndFeel(&blueLookAndFeel);
     blueLookAndFeel.setHighlightColours(Colour(71, 55, 219), Colour(222, 35, 35));
     redLookAndFeel.setHighlightColour(Colour(222, 35, 35));
+    toggleButtonLookAndFeel.setHighlightColours(Colour(71, 55, 219), Colour(222, 35, 35));
 
     Vowel2Cmb->setLookAndFeel(&redLookAndFeel);
+    ModModeBtn->setLookAndFeel(&toggleButtonLookAndFeel);
 
     startTimer(200);
 
@@ -229,6 +240,7 @@ SongbirdAudioProcessorEditor::~SongbirdAudioProcessorEditor()
     PhaseMOD1Sld = nullptr;
     PhaseMOD1Lbl = nullptr;
     ModModeBtn = nullptr;
+    MixLbl = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -271,6 +283,7 @@ void SongbirdAudioProcessorEditor::resized()
     PhaseMOD1Sld->setBounds (182, 248, 32, 24);
     PhaseMOD1Lbl->setBounds (174, 272, 46, 24);
     ModModeBtn->setBounds (216, 128, 79, 24);
+    MixLbl->setBounds (120, 176, 32, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -472,7 +485,7 @@ BEGIN_JUCER_METADATA
           style="RotaryVerticalDrag" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1" needsCallback="1"/>
   <GROUPCOMPONENT name="MOD 1 Group" id="a2c7412d0fb46a58" memberName="MOD1Group"
-                  virtualName="" explicitFocusOrder="0" pos="46 200 280 128" title="MOD1"/>
+                  virtualName="" explicitFocusOrder="0" pos="46 200 280 128" title=""/>
   <SLIDER name="MOD 1 Depth Slider" id="499f6451911662cc" memberName="DepthMOD1Sld"
           virtualName="" explicitFocusOrder="0" pos="126 248 32 24" tooltip="Depth of the LFO"
           rotarysliderfill="7f00ff0d" min="0" max="1" int="0.010000000000000000208"
@@ -489,7 +502,7 @@ BEGIN_JUCER_METADATA
             textWhenNoItems="(no choices)"/>
   <TEXTBUTTON name="MOD 1 Bypass Button" id="cd667ff923e74db5" memberName="BypassMOD1Btn"
               virtualName="" explicitFocusOrder="0" pos="254 216 56 24" tooltip="Bypass button for MOD 1. MOD 1 modulates the rate and depth of LFO 1."
-              buttonText="MOD 1" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+              buttonText="OSC" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <LABEL name="MOD 1 Freq Label" id="dabfca26c640fd58" memberName="FreqMOD1Lbl"
          virtualName="" explicitFocusOrder="0" pos="68 272 40 24" textCol="ffc8c8c8"
          edTextCol="ff000000" edBkgCol="0" labelText="Rate" editableSingleClick="0"
@@ -536,6 +549,11 @@ BEGIN_JUCER_METADATA
   <TEXTBUTTON name="Mod Mode Button" id="82ccbd2e4873bcd5" memberName="ModModeBtn"
               virtualName="" explicitFocusOrder="0" pos="216 128 79 24" buttonText="Blend"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <LABEL name="Mix Label" id="49736b42e5833ce0" memberName="MixLbl" virtualName=""
+         explicitFocusOrder="0" pos="120 176 32 24" textCol="ffc8c8c8"
+         edTextCol="ff000000" edBkgCol="0" labelText="Mix" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15" bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
