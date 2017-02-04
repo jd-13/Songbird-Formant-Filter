@@ -26,6 +26,7 @@ public:
     void setSampleRate(double sampleRate);
     void reset();
     
+    void Process1in1out(float* inSamples, int numSamples);
     void Process2in2out(float* leftSamples, float* rightSamples, int numSamples);
     
 };

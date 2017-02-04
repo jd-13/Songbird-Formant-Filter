@@ -380,20 +380,25 @@ void SongbirdAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer
     
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
+    // TODO: this can be much better optimised, the 1in1out/1in2out configurations are still doing
+    // all the work of the 2in2out configuration
     if (getNumOutputChannels() == 1 && getNumOutputChannels() == 1) {
-        // TODO: implement for all channel configurations
-        /*float* inSample {buffer.getWritePointer(0)};
-        mCarve.Process1in1out(inSample, buffer.getNumSamples());*/
+        float* inSample {buffer.getWritePointer(0)};
+        
+        mSongbird.setSampleRate(getSampleRate());
+        mSongbird.Process1in1out(inSample, buffer.getNumSamples());
         
     } else if (getNumInputChannels() == 1 && getNumOutputChannels() == 2) {
-        
-        /*float* inLeftSample {buffer.getWritePointer(0)};
+        float* inLeftSample {buffer.getWritePointer(0)};
         float* inRightSample {buffer.getWritePointer(1)};
         
-        mCarve.Process1in2out(inLeftSample, inRightSample, buffer.getNumSamples());*/
+        mSongbird.setSampleRate(getSampleRate());
+        mSongbird.Process2in2out(inLeftSample, inLeftSample, buffer.getNumSamples());
+        
+        // copy the processed left channel over to the right
+        std::copy(inLeftSample, inLeftSample + buffer.getNumSamples(), inRightSample);
         
     } else {
-        
         float* inLeftSample {buffer.getWritePointer(0)};
         float* inRightSample {buffer.getWritePointer(1)};
         
