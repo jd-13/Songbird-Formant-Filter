@@ -191,7 +191,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     //[UserPreSize]
     //[/UserPreSize]
 
-    setSize (600, 400);
+    setSize (425, 350);
 
 
     //[Constructor] You can add your own custom stuff here..
@@ -264,26 +264,26 @@ void SongbirdAudioProcessorEditor::resized()
     //[UserPreResize] Add your own custom resize code here..
     //[/UserPreResize]
 
-    Vowel1Cmb->setBounds (24, 56, 48, 24);
-    FilterPosSld->setBounds (88, 56, 184, 24);
-    Vowel2Cmb->setBounds (280, 56, 48, 24);
-    MixSld->setBounds (96, 104, 80, 72);
-    MOD1Group->setBounds (46, 200, 280, 128);
-    DepthMOD1Sld->setBounds (126, 248, 32, 24);
-    FreqMOD1Sld->setBounds (70, 248, 32, 24);
-    WaveMOD1Cmb->setBounds (230, 256, 80, 24);
-    BypassMOD1Btn->setBounds (254, 216, 56, 24);
-    FreqMOD1Lbl->setBounds (68, 272, 40, 24);
-    DepthMOD1Lbl->setBounds (120, 272, 46, 24);
-    WaveMOD1Lbl->setBounds (246, 288, 46, 24);
-    TempoSyncMOD1Btn->setBounds (62, 224, 56, 16);
-    TempoNumerMOD1Sld->setBounds (62, 256, 56, 16);
-    TempoDenomMOD1Sld->setBounds (62, 288, 56, 16);
-    PhaseSyncMOD1Btn->setBounds (174, 224, 56, 16);
-    PhaseMOD1Sld->setBounds (182, 248, 32, 24);
-    PhaseMOD1Lbl->setBounds (174, 272, 46, 24);
-    ModModeBtn->setBounds (216, 128, 79, 24);
-    MixLbl->setBounds (120, 176, 32, 24);
+    Vowel1Cmb->setBounds (56, 56, 48, 24);
+    FilterPosSld->setBounds (120, 56, 184, 24);
+    Vowel2Cmb->setBounds (312, 56, 48, 24);
+    MixSld->setBounds (128, 104, 80, 72);
+    MOD1Group->setBounds (70, 200, 280, 128);
+    DepthMOD1Sld->setBounds (150, 248, 32, 24);
+    FreqMOD1Sld->setBounds (94, 248, 32, 24);
+    WaveMOD1Cmb->setBounds (254, 256, 80, 24);
+    BypassMOD1Btn->setBounds (278, 216, 56, 24);
+    FreqMOD1Lbl->setBounds (92, 272, 40, 24);
+    DepthMOD1Lbl->setBounds (144, 272, 46, 24);
+    WaveMOD1Lbl->setBounds (270, 288, 46, 24);
+    TempoSyncMOD1Btn->setBounds (86, 224, 56, 16);
+    TempoNumerMOD1Sld->setBounds (86, 256, 56, 16);
+    TempoDenomMOD1Sld->setBounds (86, 288, 56, 16);
+    PhaseSyncMOD1Btn->setBounds (198, 224, 56, 16);
+    PhaseMOD1Sld->setBounds (206, 248, 32, 24);
+    PhaseMOD1Lbl->setBounds (198, 272, 46, 24);
+    ModModeBtn->setBounds (248, 128, 79, 24);
+    MixLbl->setBounds (152, 176, 32, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -465,92 +465,92 @@ BEGIN_JUCER_METADATA
                  componentName="" parentClasses="public AudioProcessorEditor, public Timer"
                  constructorParams="SongbirdAudioProcessor&amp; ownerFilter" variableInitialisers="AudioProcessorEditor(ownerFilter)"
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
-                 fixedSize="0" initialWidth="600" initialHeight="400">
+                 fixedSize="0" initialWidth="425" initialHeight="350">
   <BACKGROUND backgroundColour="ffffffff"/>
   <COMBOBOX name="Vowel 1 Combo Box" id="ab5acbd6ca836993" memberName="Vowel1Cmb"
-            virtualName="" explicitFocusOrder="0" pos="24 56 48 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="56 56 48 24" editable="0"
             layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <SLIDER name="Filter Position Slider" id="1be87d051f6ceb97" memberName="FilterPosSld"
-          virtualName="" explicitFocusOrder="0" pos="88 56 184 24" min="0"
+          virtualName="" explicitFocusOrder="0" pos="120 56 184 24" min="0"
           max="1" int="0" style="LinearHorizontal" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"
           needsCallback="1"/>
   <COMBOBOX name="Vowel 2 Combo Box" id="9ac26013f2f51695" memberName="Vowel2Cmb"
-            virtualName="" explicitFocusOrder="0" pos="280 56 48 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="312 56 48 24" editable="0"
             layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <SLIDER name="Mix Slider" id="b75c053482d8ac35" memberName="MixSld" virtualName=""
-          explicitFocusOrder="0" pos="96 104 80 72" min="0" max="1" int="0"
+          explicitFocusOrder="0" pos="128 104 80 72" min="0" max="1" int="0"
           style="RotaryVerticalDrag" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1" needsCallback="1"/>
   <GROUPCOMPONENT name="MOD 1 Group" id="a2c7412d0fb46a58" memberName="MOD1Group"
-                  virtualName="" explicitFocusOrder="0" pos="46 200 280 128" title=""/>
+                  virtualName="" explicitFocusOrder="0" pos="70 200 280 128" title=""/>
   <SLIDER name="MOD 1 Depth Slider" id="499f6451911662cc" memberName="DepthMOD1Sld"
-          virtualName="" explicitFocusOrder="0" pos="126 248 32 24" tooltip="Depth of the LFO"
+          virtualName="" explicitFocusOrder="0" pos="150 248 32 24" tooltip="Depth of the LFO"
           rotarysliderfill="7f00ff0d" min="0" max="1" int="0.010000000000000000208"
           style="RotaryVerticalDrag" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1" needsCallback="1"/>
   <SLIDER name="MOD 1 Freq Slider" id="1d9800ca18cf5bba" memberName="FreqMOD1Sld"
-          virtualName="" explicitFocusOrder="0" pos="70 248 32 24" tooltip="Frequency of the LFO, from 2Hz to 20Hz"
+          virtualName="" explicitFocusOrder="0" pos="94 248 32 24" tooltip="Frequency of the LFO, from 2Hz to 20Hz"
           rotarysliderfill="7f00ff03" min="0" max="1" int="0.010000000000000000208"
           style="RotaryVerticalDrag" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1" needsCallback="1"/>
   <COMBOBOX name="MOD 1 Wave" id="370e5062e67cf738" memberName="WaveMOD1Cmb"
-            virtualName="" explicitFocusOrder="0" pos="230 256 80 24" tooltip="LFO wave shape"
+            virtualName="" explicitFocusOrder="0" pos="254 256 80 24" tooltip="LFO wave shape"
             editable="0" layout="33" items="Sine&#10;Square&#10;Saw" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <TEXTBUTTON name="MOD 1 Bypass Button" id="cd667ff923e74db5" memberName="BypassMOD1Btn"
-              virtualName="" explicitFocusOrder="0" pos="254 216 56 24" tooltip="Bypass button for MOD 1. MOD 1 modulates the rate and depth of LFO 1."
+              virtualName="" explicitFocusOrder="0" pos="278 216 56 24" tooltip="Bypass button for MOD 1. MOD 1 modulates the rate and depth of LFO 1."
               buttonText="OSC" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <LABEL name="MOD 1 Freq Label" id="dabfca26c640fd58" memberName="FreqMOD1Lbl"
-         virtualName="" explicitFocusOrder="0" pos="68 272 40 24" textCol="ffc8c8c8"
+         virtualName="" explicitFocusOrder="0" pos="92 272 40 24" textCol="ffc8c8c8"
          edTextCol="ff000000" edBkgCol="0" labelText="Rate" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <LABEL name="MOD 1 Depth Label" id="77092a4a55225c68" memberName="DepthMOD1Lbl"
-         virtualName="" explicitFocusOrder="0" pos="120 272 46 24" textCol="ffc8c8c8"
+         virtualName="" explicitFocusOrder="0" pos="144 272 46 24" textCol="ffc8c8c8"
          edTextCol="ff000000" edBkgCol="0" labelText="Depth" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <LABEL name="MOD 1 Wave Label" id="7eb50c1a44463588" memberName="WaveMOD1Lbl"
-         virtualName="" explicitFocusOrder="0" pos="246 288 46 24" textCol="ffc8c8c8"
+         virtualName="" explicitFocusOrder="0" pos="270 288 46 24" textCol="ffc8c8c8"
          edTextCol="ff000000" edBkgCol="0" labelText="Wave&#10;" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="MOD 1 Tempo Sync Button" id="b43affdb8ac7bb90" memberName="TempoSyncMOD1Btn"
-              virtualName="" explicitFocusOrder="0" pos="62 224 56 16" tooltip="Tempo sync LFO frequency"
+              virtualName="" explicitFocusOrder="0" pos="86 224 56 16" tooltip="Tempo sync LFO frequency"
               buttonText="Tempo Sync" connectedEdges="0" needsCallback="1"
               radioGroupId="0"/>
   <SLIDER name="MOD 1 Tempo Numer Slider" id="6c49dac77f3e6f4b" memberName="TempoNumerMOD1Sld"
-          virtualName="" explicitFocusOrder="0" pos="62 256 56 16" textboxbkgd="ffc8c8c8"
+          virtualName="" explicitFocusOrder="0" pos="86 256 56 16" textboxbkgd="ffc8c8c8"
           textboxoutline="808080" min="1" max="4" int="1" style="IncDecButtons"
           textBoxPos="TextBoxLeft" textBoxEditable="1" textBoxWidth="40"
           textBoxHeight="20" skewFactor="1" needsCallback="1"/>
   <SLIDER name="MOD 1 Tempo Denom Slider" id="a116d9c60bf4c7b5" memberName="TempoDenomMOD1Sld"
-          virtualName="" explicitFocusOrder="0" pos="62 288 56 16" textboxbkgd="ffc8c8c8"
+          virtualName="" explicitFocusOrder="0" pos="86 288 56 16" textboxbkgd="ffc8c8c8"
           textboxoutline="808080" min="1" max="32" int="1" style="IncDecButtons"
           textBoxPos="TextBoxLeft" textBoxEditable="1" textBoxWidth="40"
           textBoxHeight="20" skewFactor="1" needsCallback="1"/>
   <TEXTBUTTON name="MOD 1 Phase Sync Button" id="4509e154e4918174" memberName="PhaseSyncMOD1Btn"
-              virtualName="" explicitFocusOrder="0" pos="174 224 56 16" tooltip="Enable phase sync to ensure the phase of the LFO is consistent regardless of where the DAW playhead starts from"
+              virtualName="" explicitFocusOrder="0" pos="198 224 56 16" tooltip="Enable phase sync to ensure the phase of the LFO is consistent regardless of where the DAW playhead starts from"
               buttonText="Phase Sync" connectedEdges="0" needsCallback="1"
               radioGroupId="0"/>
   <SLIDER name="MOD 1 Phase Slider" id="3f1ef3d10c303bac" memberName="PhaseMOD1Sld"
-          virtualName="" explicitFocusOrder="0" pos="182 248 32 24" tooltip="Phase shift the LFO by up to 360 degrees"
+          virtualName="" explicitFocusOrder="0" pos="206 248 32 24" tooltip="Phase shift the LFO by up to 360 degrees"
           rotarysliderfill="7f00ff03" min="0" max="1" int="0.010000000000000000208"
           style="RotaryVerticalDrag" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1" needsCallback="1"/>
   <LABEL name="MOD 1 Phase Label" id="af1abf98d305cb5c" memberName="PhaseMOD1Lbl"
-         virtualName="" explicitFocusOrder="0" pos="174 272 46 24" textCol="ffc8c8c8"
+         virtualName="" explicitFocusOrder="0" pos="198 272 46 24" textCol="ffc8c8c8"
          edTextCol="ff000000" edBkgCol="0" labelText="Phase" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="Mod Mode Button" id="82ccbd2e4873bcd5" memberName="ModModeBtn"
-              virtualName="" explicitFocusOrder="0" pos="216 128 79 24" buttonText="Blend"
+              virtualName="" explicitFocusOrder="0" pos="248 128 79 24" buttonText="Blend"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <LABEL name="Mix Label" id="49736b42e5833ce0" memberName="MixLbl" virtualName=""
-         explicitFocusOrder="0" pos="120 176 32 24" textCol="ffc8c8c8"
+         explicitFocusOrder="0" pos="152 176 32 24" textCol="ffc8c8c8"
          edTextCol="ff000000" edBkgCol="0" labelText="Mix" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
