@@ -18,7 +18,7 @@
 class Songbird {
 public:
     Songbird();
-    ~Songbird();
+    ~Songbird() = default;
     
     SongbirdFilterModule mFilter;
     RichterMOD mMOD;

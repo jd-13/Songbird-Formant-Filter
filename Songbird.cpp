@@ -13,10 +13,6 @@
 Songbird::Songbird() :  mFilter() {
 }
 
-Songbird::~Songbird() {
-    
-}
-
 void Songbird::setSampleRate(double sampleRate) {
     mFilter.setSampleRate(sampleRate);
 }
