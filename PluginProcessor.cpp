@@ -456,6 +456,8 @@ void SongbirdAudioProcessor::setStateInformation (const void* data, int sizeInBy
         }
         
         // Slightly hacky fix to prevent inverted button settings on startup
+        setParameter(modMode, getParameter(modMode));
+        
         setParameter(bypassSwitchMOD1, getParameter(bypassSwitchMOD1));
         setParameter(phaseSyncMOD1, getParameter(phaseSyncMOD1));
         setParameter(tempoSyncMOD1, getParameter(tempoSyncMOD1));
