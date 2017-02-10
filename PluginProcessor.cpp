@@ -393,7 +393,7 @@ void SongbirdAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer
         float* inRightSample {buffer.getWritePointer(1)};
         
         mSongbird.setSampleRate(getSampleRate());
-        mSongbird.Process2in2out(inLeftSample, inLeftSample, buffer.getNumSamples());
+        mSongbird.Process1in2out(inLeftSample, inLeftSample, buffer.getNumSamples());
         
         // copy the processed left channel over to the right
         std::copy(inLeftSample, inLeftSample + buffer.getNumSamples(), inRightSample);

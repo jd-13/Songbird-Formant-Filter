@@ -27,6 +27,7 @@ public:
     void reset();
     
     void Process1in1out(float* inSamples, int numSamples);
+    void Process1in2out(float* leftSamples, float* rightSamples, int numSamples);
     void Process2in2out(float* leftSamples, float* rightSamples, int numSamples);
     
 };
