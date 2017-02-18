@@ -19,15 +19,13 @@
 
 class SongbirdLookAndFeel : public CoreLookAndFeel {
 public:
-    SongbirdLookAndFeel() : CoreLookAndFeel(),
-                            highlightColour2(Colour(222, 35, 35)) {}
-    virtual ~SongbirdLookAndFeel() {}
+    SongbirdLookAndFeel();
     
-    void setHighlightColours(Colour newColour1, Colour newColour2) {
-        setHighlightColour(newColour1);
-        highlightColour2 = newColour2;
-    }
+    virtual ~SongbirdLookAndFeel() = default;
     
+    virtual void setHighlightColour(Colour newColour) override;
+    
+    void setHighlightColours(Colour newColour1, Colour newColour2);
     
     virtual void drawLinearSliderThumb(Graphics& g,
                                        int x,
@@ -61,6 +59,8 @@ public:
                               int buttonH,
                               ComboBox& box) override;
     
+    
+    
 protected:
     Colour highlightColour2;
     
@@ -78,6 +78,24 @@ public:
     virtual ~SongbirdButtonLookAndFeel() {}
     
     
+};
+
+// needed for the small buttons on the tempo sync ratio, they look weird with a border
+class SongbirdTempoButtonLookAndFeel : public SongbirdLookAndFeel {
+public:
+    SongbirdTempoButtonLookAndFeel() : SongbirdLookAndFeel() {}
+    virtual ~SongbirdTempoButtonLookAndFeel() = default;
+    
+    virtual void drawButtonBackground(Graphics& /*g*/,
+                                      Button& /*button*/,
+                                      const Colour& /*backgroundColour*/,
+                                      bool /*isMouseOverButton*/,
+                                      bool /*isButtonDown*/) override {
+        // do nothing
+    }
+    
+private:
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SongbirdTempoButtonLookAndFeel);
 };
 
 #endif  // SONGBIRDLOOKANDFEEL_H_INCLUDED

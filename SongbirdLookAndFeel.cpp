@@ -10,6 +10,20 @@
 
 #include "SongbirdLookAndFeel.h"
 
+SongbirdLookAndFeel::SongbirdLookAndFeel() : CoreLookAndFeel(),
+                                             highlightColour2(Colour(222, 35, 35)) {
+}
+
+void SongbirdLookAndFeel::setHighlightColour(Colour newColour) {
+    CoreLookAndFeel::setHighlightColour(newColour);
+    setColour(ComboBox::textColourId, highlightColour);
+}
+
+void SongbirdLookAndFeel::setHighlightColours(Colour newColour1, Colour newColour2) {
+    setHighlightColour(newColour1);
+    highlightColour2 = newColour2;
+}
+
 void SongbirdLookAndFeel::drawLinearSliderThumb(Graphics& g,
                                                 int /*x*/,
                                                 int /*y*/,
@@ -74,8 +88,10 @@ void SongbirdLookAndFeel::drawLinearSliderBackground(Graphics& g,
         g.setColour(highlightColour2);
         g.fillRect(x, y + height / 2, width, 2);
         
+        const float sliderThumbRadius {5};
+        
         g.setColour(highlightColour);
-        g.fillRect(x, y + height / 2, static_cast<int>(sliderPos) , 2);
+        g.fillRect(x, y + height / 2, static_cast<int>(sliderPos - sliderThumbRadius), 2);
     }
 }
 
@@ -106,7 +122,7 @@ void SongbirdLookAndFeel::drawComboBox(Graphics& g,
                       buttonX + buttonW * (1.0f -arrowX),       buttonY + buttonH * 0.55f,
                       buttonX + buttonW * arrowX,               buttonY + buttonH * 0.55f);
         
-        g.setColour(box.isPopupActive() ? vowelColour : lightColour);
+        g.setColour(vowelColour);
         
         g.fillPath(p);
     }

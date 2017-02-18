@@ -69,6 +69,8 @@ private:
                         redLookAndFeel;
 
     SongbirdButtonLookAndFeel toggleButtonLookAndFeel;
+    SongbirdTempoButtonLookAndFeel tempoButtonLookAndFeel;
+
 
     //[/UserVariables]
 
