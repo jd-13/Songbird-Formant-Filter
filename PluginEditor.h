@@ -24,6 +24,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 #include "SongbirdLookAndFeel.h"
+#include "CoreJUCEPlugin/CoreProcessorEditor.h"
 //[/Headers]
 
 
@@ -36,7 +37,7 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class SongbirdAudioProcessorEditor  : public AudioProcessorEditor,
+class SongbirdAudioProcessorEditor  : public CoreProcessorEditor,
                                       public Timer,
                                       public ComboBoxListener,
                                       public SliderListener,
@@ -70,8 +71,6 @@ private:
 
     SongbirdButtonLookAndFeel toggleButtonLookAndFeel;
     SongbirdTempoButtonLookAndFeel tempoButtonLookAndFeel;
-
-
     //[/UserVariables]
 
     //==============================================================================

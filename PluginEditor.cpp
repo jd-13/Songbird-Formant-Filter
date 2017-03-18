@@ -28,12 +28,13 @@
 
 //==============================================================================
 SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcessor& ownerFilter)
-    : AudioProcessorEditor(ownerFilter)
+    : CoreProcessorEditor(ownerFilter)
 {
     //[Constructor_pre] You can add your own custom stuff here..
     //[/Constructor_pre]
 
     addAndMakeVisible (Vowel1Cmb = new ComboBox ("Vowel 1 Combo Box"));
+    Vowel1Cmb->setTooltip (TRANS("Vowel to apply in the left position"));
     Vowel1Cmb->setEditableText (false);
     Vowel1Cmb->setJustificationType (Justification::centredLeft);
     Vowel1Cmb->setTextWhenNothingSelected (String());
@@ -46,12 +47,14 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     Vowel1Cmb->addListener (this);
 
     addAndMakeVisible (FilterPosSld = new Slider ("Filter Position Slider"));
+    FilterPosSld->setTooltip (TRANS("Manully modulate between the two vowels using the mode selected below"));
     FilterPosSld->setRange (0, 1, 0);
     FilterPosSld->setSliderStyle (Slider::LinearHorizontal);
     FilterPosSld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     FilterPosSld->addListener (this);
 
     addAndMakeVisible (Vowel2Cmb = new ComboBox ("Vowel 2 Combo Box"));
+    Vowel2Cmb->setTooltip (TRANS("Vowel to apply in the right position"));
     Vowel2Cmb->setEditableText (false);
     Vowel2Cmb->setJustificationType (Justification::centredLeft);
     Vowel2Cmb->setTextWhenNothingSelected (String());
@@ -64,6 +67,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     Vowel2Cmb->addListener (this);
 
     addAndMakeVisible (MixSld = new Slider ("Mix Slider"));
+    MixSld->setTooltip (TRANS("Dry/Wet mix level"));
     MixSld->setRange (0, 1, 0);
     MixSld->setSliderStyle (Slider::RotaryVerticalDrag);
     MixSld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
@@ -102,7 +106,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     WaveMOD1Cmb->addListener (this);
 
     addAndMakeVisible (BypassMOD1Btn = new TextButton ("MOD 1 Bypass Button"));
-    BypassMOD1Btn->setTooltip (TRANS("Bypass button for MOD 1. MOD 1 modulates the rate and depth of LFO 1."));
+    BypassMOD1Btn->setTooltip (TRANS("Bypass button for the LFO. This LFO is basically moving the above modulation slider"));
     BypassMOD1Btn->setButtonText (TRANS("OSC"));
     BypassMOD1Btn->addListener (this);
 
@@ -177,6 +181,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     PhaseMOD1Lbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (ModModeBtn = new TextButton ("Mod Mode Button"));
+    ModModeBtn->setTooltip (TRANS("Modulation mode: \"Blend\" applies both vowels in parallel and blends between the two, \"Freq\" applies a single vowel which is some combination of the two selected"));
     ModModeBtn->setButtonText (TRANS("Blend"));
     ModModeBtn->addListener (this);
 
@@ -197,7 +202,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
 
     //[Constructor] You can add your own custom stuff here..
-    LookAndFeel::setDefaultLookAndFeel(&blueLookAndFeel);
+    _assignLookAndFeelToAllChildren(blueLookAndFeel);
     Colour blueHighlight(81, 65, 255);
     Colour redHighlight(222, 35, 35);
     blueLookAndFeel.setHighlightColours(blueHighlight, redHighlight);
@@ -474,28 +479,29 @@ void SongbirdAudioProcessorEditor::timerCallback() {
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="SongbirdAudioProcessorEditor"
-                 componentName="" parentClasses="public AudioProcessorEditor, public Timer"
-                 constructorParams="SongbirdAudioProcessor&amp; ownerFilter" variableInitialisers="AudioProcessorEditor(ownerFilter)"
+                 componentName="" parentClasses="public CoreProcessorEditor, public Timer"
+                 constructorParams="SongbirdAudioProcessor&amp; ownerFilter" variableInitialisers="CoreProcessorEditor(ownerFilter)"
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
                  fixedSize="0" initialWidth="425" initialHeight="350">
   <BACKGROUND backgroundColour="ffffffff"/>
   <COMBOBOX name="Vowel 1 Combo Box" id="ab5acbd6ca836993" memberName="Vowel1Cmb"
-            virtualName="" explicitFocusOrder="0" pos="60 56 48 24" editable="0"
-            layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
+            virtualName="" explicitFocusOrder="0" pos="60 56 48 24" tooltip="Vowel to apply in the left position"
+            editable="0" layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <SLIDER name="Filter Position Slider" id="1be87d051f6ceb97" memberName="FilterPosSld"
-          virtualName="" explicitFocusOrder="0" pos="124 56 184 24" min="0"
-          max="1" int="0" style="LinearHorizontal" textBoxPos="NoTextBox"
+          virtualName="" explicitFocusOrder="0" pos="124 56 184 24" tooltip="Manully modulate between the two vowels using the mode selected below"
+          min="0" max="1" int="0" style="LinearHorizontal" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"
           needsCallback="1"/>
   <COMBOBOX name="Vowel 2 Combo Box" id="9ac26013f2f51695" memberName="Vowel2Cmb"
-            virtualName="" explicitFocusOrder="0" pos="316 56 48 24" editable="0"
-            layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
+            virtualName="" explicitFocusOrder="0" pos="316 56 48 24" tooltip="Vowel to apply in the right position"
+            editable="0" layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <SLIDER name="Mix Slider" id="b75c053482d8ac35" memberName="MixSld" virtualName=""
-          explicitFocusOrder="0" pos="136 109 72 56" min="0" max="1" int="0"
-          style="RotaryVerticalDrag" textBoxPos="NoTextBox" textBoxEditable="1"
-          textBoxWidth="80" textBoxHeight="20" skewFactor="1" needsCallback="1"/>
+          explicitFocusOrder="0" pos="136 109 72 56" tooltip="Dry/Wet mix level"
+          min="0" max="1" int="0" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"
+          needsCallback="1"/>
   <GROUPCOMPONENT name="MOD 1 Group" id="a2c7412d0fb46a58" memberName="MOD1Group"
                   virtualName="" explicitFocusOrder="0" pos="73 200 280 128" outlinecol="33545454"
                   textcol="ff000000" title=""/>
@@ -514,7 +520,7 @@ BEGIN_JUCER_METADATA
             editable="0" layout="33" items="Sine&#10;Square&#10;Saw" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <TEXTBUTTON name="MOD 1 Bypass Button" id="cd667ff923e74db5" memberName="BypassMOD1Btn"
-              virtualName="" explicitFocusOrder="0" pos="281 216 56 24" tooltip="Bypass button for MOD 1. MOD 1 modulates the rate and depth of LFO 1."
+              virtualName="" explicitFocusOrder="0" pos="281 216 56 24" tooltip="Bypass button for the LFO. This LFO is basically moving the above modulation slider"
               buttonText="OSC" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <LABEL name="MOD 1 Freq Label" id="dabfca26c640fd58" memberName="FreqMOD1Lbl"
          virtualName="" explicitFocusOrder="0" pos="95 272 40 24" textCol="ffc8c8c8"
@@ -560,8 +566,8 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="Mod Mode Button" id="82ccbd2e4873bcd5" memberName="ModModeBtn"
-              virtualName="" explicitFocusOrder="0" pos="228 128 64 24" buttonText="Blend"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+              virtualName="" explicitFocusOrder="0" pos="228 128 64 24" tooltip="Modulation mode: &quot;Blend&quot; applies both vowels in parallel and blends between the two, &quot;Freq&quot; applies a single vowel which is some combination of the two selected"
+              buttonText="Blend" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <LABEL name="Mix Label" id="49736b42e5833ce0" memberName="MixLbl" virtualName=""
          explicitFocusOrder="0" pos="156 168 32 24" textCol="ffc8c8c8"
          edTextCol="ff000000" edBkgCol="0" labelText="Mix" editableSingleClick="0"

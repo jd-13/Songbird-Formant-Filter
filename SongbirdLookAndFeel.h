@@ -15,7 +15,7 @@
 
 #include "math.h"
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "CoreLookAndFeel/CoreLookAndFeel.h"
+#include "CoreJUCEPlugin/CoreLookAndFeel.h"
 
 class SongbirdLookAndFeel : public CoreLookAndFeel {
 public:
