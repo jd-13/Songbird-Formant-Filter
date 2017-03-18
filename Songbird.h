@@ -11,8 +11,8 @@
 #ifndef SONGBIRD_H_INCLUDED
 #define SONGBIRD_H_INCLUDED
 
-#include "SongbirdFilterModule.h"
-#include "RichterMOD.h"
+#include "SongbirdFilters/SongbirdFilterModule.h"
+#include "RichterLFO/RichterMOD.h"
 #include "ParameterData.h"
 
 class Songbird {
