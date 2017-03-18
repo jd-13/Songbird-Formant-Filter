@@ -54,7 +54,7 @@ void SongbirdLookAndFeel::drawLinearSliderThumb(Graphics& g,
                         sliderThumbRadius,
                         rotation,
                         0,
-                        M_PI,
+                        CoreMath::DOUBLE_PI,
                         true);
         g.strokePath(p, PathStrokeType(lineWidth));
     };
@@ -66,7 +66,7 @@ void SongbirdLookAndFeel::drawLinearSliderThumb(Graphics& g,
                  sliderThumbRadius * 2);
     g.fillPath(p);
 
-    drawThumbHalf(highlightColour, M_PI);
+    drawThumbHalf(highlightColour, CoreMath::DOUBLE_PI);
     drawThumbHalf(highlightColour2, 0);
     
 }
