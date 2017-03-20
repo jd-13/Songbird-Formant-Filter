@@ -25,9 +25,6 @@
 #ifndef SONGBIRDLOOKANDFEEL_H_INCLUDED
 #define SONGBIRDLOOKANDFEEL_H_INCLUDED
 
-#define _USE_MATH_DEFINES
-
-#include "math.h"
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "CoreJUCEPlugin/CoreLookAndFeel.h"
 
