@@ -13,3 +13,5 @@ WECore: https://github.com/jd-13/WE-Core
 Catch (for tests): https://github.com/philsquared/Catch
 
 VST SDK: https://www.steinberg.net/en/company/developers.html
+
+Vector images from https://www.Vecteezy.com
