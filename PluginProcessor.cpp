@@ -235,17 +235,17 @@ const String SongbirdAudioProcessor::getParameterText(int index)
             return String(MIX.NormalisedToInteral(mSongbird.mFilter.getMix()));
             
         case modMode:
-            return String(mSongbird.mFilter.getModMode());
+            return String(static_cast<int>(mSongbird.mFilter.getModMode()));
             
             
         case bypassSwitchMOD1:
-            return String(mSongbird.mMOD.getBypassSwitch());
+            return String(static_cast<int>(mSongbird.mMOD.getBypassSwitch()));
             
         case phaseSyncMOD1:
-            return String(mSongbird.mMOD.getPhaseSyncSwitch());
+            return String(static_cast<int>(mSongbird.mMOD.getPhaseSyncSwitch()));
             
         case tempoSyncMOD1:
-            return String(mSongbird.mMOD.getTempoSyncSwitch());
+            return String(static_cast<int>(mSongbird.mMOD.getTempoSyncSwitch()));
             
         case waveMOD1:
             return String(mSongbird.mMOD.getWave());

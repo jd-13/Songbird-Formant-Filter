@@ -7,18 +7,17 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 4.3.1
+  Created with Projucer version: 5.3.0
 
   ------------------------------------------------------------------------------
 
-  The Projucer is part of the JUCE library - "Jules' Utility Class Extensions"
-  Copyright (c) 2015 - ROLI Ltd.
+  The Projucer is part of the JUCE library.
+  Copyright (c) 2017 - ROLI Ltd.
 
   ==============================================================================
 */
 
-#ifndef __JUCE_HEADER_FB11CC1EF8D14C0F__
-#define __JUCE_HEADER_FB11CC1EF8D14C0F__
+#pragma once
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
@@ -39,9 +38,9 @@
 */
 class SongbirdAudioProcessorEditor  : public CoreProcessorEditor,
                                       public Timer,
-                                      public ComboBoxListener,
-                                      public SliderListener,
-                                      public ButtonListener
+                                      public ComboBox::Listener,
+                                      public Slider::Listener,
+                                      public Button::Listener
 {
 public:
     //==============================================================================
@@ -102,5 +101,3 @@ private:
 
 //[EndFile] You can add extra defines here...
 //[/EndFile]
-
-#endif   // __JUCE_HEADER_FB11CC1EF8D14C0F__
