@@ -28,7 +28,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "CoreJUCEPlugin/CoreLookAndFeel.h"
 
-class SongbirdLookAndFeel : public CoreLookAndFeel {
+class SongbirdLookAndFeel : public WECore::JUCEPlugin::CoreLookAndFeel {
 public:
     SongbirdLookAndFeel();
     

@@ -16,22 +16,22 @@
 //==============================================================================
 SongbirdAudioProcessor::SongbirdAudioProcessor()
 {
-    mSongbird.mFilter.setVowel1(VOWEL.defaultValue);
-    mSongbird.mFilter.setVowel2(VOWEL.defaultValue);
-    mSongbird.mFilter.setFilterPosition(FILTER_POSITION.defaultValue);
-    mSongbird.mFilter.setMix(MIX.defaultValue);
-    mSongbird.mFilter.setFilterPosition(FILTER_POSITION.defaultValue);
-    mSongbird.mFilter.setModMode(MODMODE_DEFAULT);
+    mSongbird.mFilter.setVowel1(WECore::Songbird::Parameters::VOWEL.defaultValue);
+    mSongbird.mFilter.setVowel2(WECore::Songbird::Parameters::VOWEL.defaultValue);
+    mSongbird.mFilter.setFilterPosition(WECore::Songbird::Parameters::FILTER_POSITION.defaultValue);
+    mSongbird.mFilter.setMix(WECore::Songbird::Parameters::MIX.defaultValue);
+    mSongbird.mFilter.setFilterPosition(WECore::Songbird::Parameters::FILTER_POSITION.defaultValue);
+    mSongbird.mFilter.setModMode(WECore::Songbird::Parameters::MODMODE_DEFAULT);
     
-    mSongbird.mMOD.setBypassSwitch(LFOSWITCH_DEFAULT);
-    mSongbird.mMOD.setPhaseSyncSwitch(PHASESYNC_DEFAULT);
-    mSongbird.mMOD.setTempoSyncSwitch(TEMPOSYNC_DEFAULT);
-    mSongbird.mMOD.setWave(WAVE.defaultValue);
-    mSongbird.mMOD.setDepth(DEPTH.defaultValue);
-    mSongbird.mMOD.setFreq(FREQ.defaultValue);
-    mSongbird.mMOD.setManualPhase(PHASE.defaultValue);
-    mSongbird.mMOD.setTempoNumer(TEMPONUMER.defaultValue);
-    mSongbird.mMOD.setTempoDenom(TEMPODENOM.defaultValue);
+    mSongbird.mMOD.setBypassSwitch(WECore::Richter::Parameters::LFOSWITCH_DEFAULT);
+    mSongbird.mMOD.setPhaseSyncSwitch(WECore::Richter::Parameters::PHASESYNC_DEFAULT);
+    mSongbird.mMOD.setTempoSyncSwitch(WECore::Richter::Parameters::TEMPOSYNC_DEFAULT);
+    mSongbird.mMOD.setWave(WECore::Richter::Parameters::WAVE.defaultValue);
+    mSongbird.mMOD.setDepth(WECore::Richter::Parameters::DEPTH.defaultValue);
+    mSongbird.mMOD.setFreq(WECore::Richter::Parameters::FREQ.defaultValue);
+    mSongbird.mMOD.setManualPhase(WECore::Richter::Parameters::PHASE.defaultValue);
+    mSongbird.mMOD.setTempoNumer(WECore::Richter::Parameters::TEMPONUMER.defaultValue);
+    mSongbird.mMOD.setTempoDenom(WECore::Richter::Parameters::TEMPODENOM.defaultValue);
     
     UIUpdateFlag = true;
 }
@@ -60,10 +60,10 @@ float SongbirdAudioProcessor::getParameter(int index) {
             return mSongbird.mFilter.getVowel2();
             
         case filterPosition:
-            return FILTER_POSITION.InteralToNormalised(mSongbird.mFilter.getFilterPosition());
+            return WECore::Songbird::Parameters::FILTER_POSITION.InteralToNormalised(mSongbird.mFilter.getFilterPosition());
             
         case mix:
-            return MIX.InteralToNormalised(mSongbird.mFilter.getMix());
+            return WECore::Songbird::Parameters::MIX.InteralToNormalised(mSongbird.mFilter.getMix());
             
         case modMode:
             return mSongbird.mFilter.getModMode();
@@ -83,13 +83,13 @@ float SongbirdAudioProcessor::getParameter(int index) {
             return mSongbird.mMOD.getWave();
             
         case depthMOD1:
-            return DEPTH.InteralToNormalised(mSongbird.mMOD.getDepth());
+            return WECore::Richter::Parameters::DEPTH.InteralToNormalised(mSongbird.mMOD.getDepth());
             
         case freqMOD1:
-            return FREQ.InteralToNormalised(mSongbird.mMOD.getFreq());
+            return WECore::Richter::Parameters::FREQ.InteralToNormalised(mSongbird.mMOD.getFreq());
             
         case phaseMOD1:
-            return PHASE.InteralToNormalised(mSongbird.mMOD.getManualPhase());
+            return WECore::Richter::Parameters::PHASE.InteralToNormalised(mSongbird.mMOD.getManualPhase());
             
         case tempoNumerMOD1:
             return mSongbird.mMOD.getTempoNumer();
@@ -114,11 +114,11 @@ void SongbirdAudioProcessor::setParameter(int index, float newValue) {
             break;
             
         case filterPosition:
-            mSongbird.mFilter.setFilterPosition(FILTER_POSITION.NormalisedToInteral(newValue));
+            mSongbird.mFilter.setFilterPosition(WECore::Songbird::Parameters::FILTER_POSITION.NormalisedToInteral(newValue));
             break;
             
         case mix:
-            mSongbird.mFilter.setMix(MIX.NormalisedToInteral(newValue));
+            mSongbird.mFilter.setMix(WECore::Songbird::Parameters::MIX.NormalisedToInteral(newValue));
             break;
             
         case modMode:
@@ -143,15 +143,15 @@ void SongbirdAudioProcessor::setParameter(int index, float newValue) {
             break;
             
         case depthMOD1:
-            mSongbird.mMOD.setDepth(DEPTH.NormalisedToInteral(newValue));
+            mSongbird.mMOD.setDepth(WECore::Richter::Parameters::DEPTH.NormalisedToInteral(newValue));
             break;
             
         case freqMOD1:
-            mSongbird.mMOD.setFreq(FREQ.NormalisedToInteral(newValue));
+            mSongbird.mMOD.setFreq(WECore::Richter::Parameters::FREQ.NormalisedToInteral(newValue));
             break;
             
         case phaseMOD1:
-            mSongbird.mMOD.setManualPhase(PHASE.NormalisedToInteral(newValue));
+            mSongbird.mMOD.setManualPhase(WECore::Richter::Parameters::PHASE.NormalisedToInteral(newValue));
             break;
             
         case tempoNumerMOD1:
@@ -229,10 +229,10 @@ const String SongbirdAudioProcessor::getParameterText(int index)
             return String(mSongbird.mFilter.getVowel2());
             
         case filterPosition:
-            return String(FILTER_POSITION.NormalisedToInteral(mSongbird.mFilter.getFilterPosition()));
+            return String(WECore::Songbird::Parameters::FILTER_POSITION.NormalisedToInteral(mSongbird.mFilter.getFilterPosition()));
             
         case mix:
-            return String(MIX.NormalisedToInteral(mSongbird.mFilter.getMix()));
+            return String(WECore::Songbird::Parameters::MIX.NormalisedToInteral(mSongbird.mFilter.getMix()));
             
         case modMode:
             return String(static_cast<int>(mSongbird.mFilter.getModMode()));
@@ -251,13 +251,13 @@ const String SongbirdAudioProcessor::getParameterText(int index)
             return String(mSongbird.mMOD.getWave());
             
         case depthMOD1:
-            return String(DEPTH.InteralToNormalised(mSongbird.mMOD.getDepth()));
+            return String(WECore::Richter::Parameters::DEPTH.InteralToNormalised(mSongbird.mMOD.getDepth()));
             
         case freqMOD1:
-            return String(FREQ.InteralToNormalised(mSongbird.mMOD.getFreq()));
+            return String(WECore::Richter::Parameters::FREQ.InteralToNormalised(mSongbird.mMOD.getFreq()));
             
         case phaseMOD1:
-            return String(PHASE.InteralToNormalised(mSongbird.mMOD.getManualPhase()));
+            return String(WECore::Richter::Parameters::PHASE.InteralToNormalised(mSongbird.mMOD.getManualPhase()));
             
         case tempoNumerMOD1:
             return String(mSongbird.mMOD.getTempoNumer());

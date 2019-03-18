@@ -34,8 +34,8 @@ public:
     Songbird();
     ~Songbird() = default;
     
-    SongbirdFilterModule mFilter;
-    RichterMOD mMOD;
+    WECore::Songbird::SongbirdFilterModule mFilter;
+    WECore::Richter::RichterMOD mMOD;
     
     void setSampleRate(double sampleRate);
     void reset();

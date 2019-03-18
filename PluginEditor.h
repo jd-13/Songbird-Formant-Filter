@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.3.0
+  Created with Projucer version: 5.4.1
 
   ------------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class SongbirdAudioProcessorEditor  : public CoreProcessorEditor,
+class SongbirdAudioProcessorEditor  : public WECore::JUCEPlugin::CoreProcessorEditor,
                                       public Timer,
                                       public ComboBox::Listener,
                                       public Slider::Listener,
@@ -73,26 +73,26 @@ private:
     //[/UserVariables]
 
     //==============================================================================
-    ScopedPointer<ComboBox> Vowel1Cmb;
-    ScopedPointer<Slider> FilterPosSld;
-    ScopedPointer<ComboBox> Vowel2Cmb;
-    ScopedPointer<Slider> MixSld;
-    ScopedPointer<GroupComponent> MOD1Group;
-    ScopedPointer<Slider> DepthMOD1Sld;
-    ScopedPointer<Slider> FreqMOD1Sld;
-    ScopedPointer<ComboBox> WaveMOD1Cmb;
-    ScopedPointer<TextButton> BypassMOD1Btn;
-    ScopedPointer<Label> FreqMOD1Lbl;
-    ScopedPointer<Label> DepthMOD1Lbl;
-    ScopedPointer<Label> WaveMOD1Lbl;
-    ScopedPointer<TextButton> TempoSyncMOD1Btn;
-    ScopedPointer<Slider> TempoNumerMOD1Sld;
-    ScopedPointer<Slider> TempoDenomMOD1Sld;
-    ScopedPointer<TextButton> PhaseSyncMOD1Btn;
-    ScopedPointer<Slider> PhaseMOD1Sld;
-    ScopedPointer<Label> PhaseMOD1Lbl;
-    ScopedPointer<TextButton> ModModeBtn;
-    ScopedPointer<Label> MixLbl;
+    std::unique_ptr<ComboBox> Vowel1Cmb;
+    std::unique_ptr<Slider> FilterPosSld;
+    std::unique_ptr<ComboBox> Vowel2Cmb;
+    std::unique_ptr<Slider> MixSld;
+    std::unique_ptr<GroupComponent> MOD1Group;
+    std::unique_ptr<Slider> DepthMOD1Sld;
+    std::unique_ptr<Slider> FreqMOD1Sld;
+    std::unique_ptr<ComboBox> WaveMOD1Cmb;
+    std::unique_ptr<TextButton> BypassMOD1Btn;
+    std::unique_ptr<Label> FreqMOD1Lbl;
+    std::unique_ptr<Label> DepthMOD1Lbl;
+    std::unique_ptr<Label> WaveMOD1Lbl;
+    std::unique_ptr<TextButton> TempoSyncMOD1Btn;
+    std::unique_ptr<Slider> TempoNumerMOD1Sld;
+    std::unique_ptr<Slider> TempoDenomMOD1Sld;
+    std::unique_ptr<TextButton> PhaseSyncMOD1Btn;
+    std::unique_ptr<Slider> PhaseMOD1Sld;
+    std::unique_ptr<Label> PhaseMOD1Lbl;
+    std::unique_ptr<TextButton> ModModeBtn;
+    std::unique_ptr<Label> MixLbl;
 
 
     //==============================================================================
