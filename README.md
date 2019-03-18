@@ -3,7 +3,7 @@ A VST and Audio Unit, which provides two formant filters and an LFO modulated bl
 
 For more details and a free download of the compiled plugin: https://www.whiteelephantaudio.com/#plugins  
 
-![](https://whiteelephantaudio.com/thumbs/songbirdPreReleaseThumbOriginal.png)  
+![](https://whiteelephantaudio.com/images/thumbs/originals/songbirdFull.png)  
 
 ## Built using:
 JUCE: https://www.juce.com/
