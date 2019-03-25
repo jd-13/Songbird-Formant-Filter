@@ -26,15 +26,16 @@
 #define SONGBIRD_H_INCLUDED
 
 #include "SongbirdFilters/SongbirdFilterModule.h"
+
 #include "RichterLFO/RichterMOD.h"
 #include "ParameterData.h"
 
 class Songbird {
 public:
-    Songbird();
+    Songbird() = default;
     ~Songbird() = default;
     
-    WECore::Songbird::SongbirdFilterModule mFilter;
+    WECore::Songbird::SongbirdFilterModule<float> mFilter;
     WECore::Richter::RichterMOD mMOD;
     
     void setSampleRate(double sampleRate);

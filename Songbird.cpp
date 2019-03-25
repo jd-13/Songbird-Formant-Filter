@@ -24,9 +24,6 @@
 
 #include "Songbird.h"
 
-Songbird::Songbird() :  mFilter() {
-}
-
 void Songbird::setSampleRate(double sampleRate) {
     mFilter.setSampleRate(sampleRate);
 }
@@ -37,14 +34,14 @@ void Songbird::reset() {
 }
 
 void Songbird::Process1in1out(float* inSamples, int numSamples) {
-    
-    // need to convert to double to work with WECore
-    std::vector<double> samples(inSamples, inSamples + numSamples);
-    std::vector<double> emptySamples{samples};
+
+    // Hack, to be fixed soon.
+    // We don't have a proper 1-in-1-out method so use a 2-in-2out with an empty right channel
+    std::vector<float> emptySamples(numSamples);
     
     mFilter.setModulation(mMOD.calcGainInLoop());
     
-    mFilter.Process2in2out(&samples[0], &emptySamples[0], numSamples);
+    mFilter.Process2in2out(inSamples, &emptySamples[0], numSamples);
     
     // call the LFO calcGain method to advance its internal counters manually
     // since were calling it once per buffer rather than once per sample
@@ -53,19 +50,13 @@ void Songbird::Process1in1out(float* inSamples, int numSamples) {
     for (size_t iii {0}; iii < numSamples - 1; iii++) {
         mMOD.calcGainInLoop();
     }
-    
-    std::copy(samples.begin(), samples.end(), inSamples);
 }
 
 void Songbird::Process1in2out(float* inLeftSamples, float* inRightSamples, int numSamples) {
     
-    // need to convert to double to work with WECore
-    std::vector<double> leftSamples(inLeftSamples, inLeftSamples + numSamples);
-    std::vector<double> rightSamples(inRightSamples, inRightSamples + numSamples);
-    
     mFilter.setModulation(mMOD.calcGainInLoop());
     
-    mFilter.Process2in2out(&leftSamples[0], &rightSamples[0], numSamples);
+    mFilter.Process2in2out(inLeftSamples, inRightSamples, numSamples);
     
     // call the LFO calcGain method to advance its internal counters manually
     // since were calling it once per buffer rather than once per sample
@@ -75,19 +66,15 @@ void Songbird::Process1in2out(float* inLeftSamples, float* inRightSamples, int n
         mMOD.calcGainInLoop();
     }
     
-    std::copy(leftSamples.begin(), leftSamples.end(), inLeftSamples);
-    std::copy(leftSamples.begin(), leftSamples.end(), inRightSamples);
+    // Copy the left buffer into the right, so that we have mono to stereo
+    std::copy(inLeftSamples, inLeftSamples + numSamples, inRightSamples);
 }
 
 void Songbird::Process2in2out(float* inLeftSamples, float* inRightSamples, int numSamples) {
-    
-    // need to convert to double to work with WECore
-    std::vector<double> leftSamples(inLeftSamples, inLeftSamples + numSamples);
-    std::vector<double> rightSamples(inRightSamples, inRightSamples + numSamples);
-    
+
     mFilter.setModulation(mMOD.calcGainInLoop());
     
-    mFilter.Process2in2out(&leftSamples[0], &rightSamples[0], numSamples);
+    mFilter.Process2in2out(inLeftSamples, inRightSamples, numSamples);
     
     // call the LFO calcGain method to advance its internal counters manually
     // since were calling it once per buffer rather than once per sample
@@ -96,7 +83,4 @@ void Songbird::Process2in2out(float* inLeftSamples, float* inRightSamples, int n
     for (size_t iii {0}; iii < numSamples - 1; iii++) {
         mMOD.calcGainInLoop();
     }
-    
-    std::copy(leftSamples.begin(), leftSamples.end(), inLeftSamples);
-    std::copy(rightSamples.begin(), rightSamples.end(), inRightSamples);
 }
