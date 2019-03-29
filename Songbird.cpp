@@ -34,14 +34,10 @@ void Songbird::reset() {
 }
 
 void Songbird::Process1in1out(float* inSamples, int numSamples) {
-
-    // Hack, to be fixed soon.
-    // We don't have a proper 1-in-1-out method so use a 2-in-2out with an empty right channel
-    std::vector<float> emptySamples(numSamples);
     
     mFilter.setModulation(mMOD.calcGainInLoop());
     
-    mFilter.Process2in2out(inSamples, &emptySamples[0], numSamples);
+    mFilter.Process1in1out(inSamples, numSamples);
     
     // call the LFO calcGain method to advance its internal counters manually
     // since were calling it once per buffer rather than once per sample
@@ -56,8 +52,8 @@ void Songbird::Process1in2out(float* inLeftSamples, float* inRightSamples, int n
     
     mFilter.setModulation(mMOD.calcGainInLoop());
     
-    mFilter.Process2in2out(inLeftSamples, inRightSamples, numSamples);
-    
+    mFilter.Process1in1out(inLeftSamples, numSamples);
+
     // call the LFO calcGain method to advance its internal counters manually
     // since were calling it once per buffer rather than once per sample
     // TODO: provide protection to make sure this is still effective for large
