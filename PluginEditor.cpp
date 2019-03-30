@@ -99,10 +99,9 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     DepthMOD1Sld->setRange (0, 1, 0.01);
     DepthMOD1Sld->setSliderStyle (Slider::RotaryVerticalDrag);
     DepthMOD1Sld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
-    DepthMOD1Sld->setColour (Slider::rotarySliderFillColourId, Colour (0x7f00ff0d));
     DepthMOD1Sld->addListener (this);
 
-    DepthMOD1Sld->setBounds (153, 248, 32, 24);
+    DepthMOD1Sld->setBounds (160, 256, 32, 24);
 
     FreqMOD1Sld.reset (new Slider ("MOD 1 Freq Slider"));
     addAndMakeVisible (FreqMOD1Sld.get());
@@ -110,10 +109,9 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     FreqMOD1Sld->setRange (0, 1, 0.01);
     FreqMOD1Sld->setSliderStyle (Slider::RotaryVerticalDrag);
     FreqMOD1Sld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
-    FreqMOD1Sld->setColour (Slider::rotarySliderFillColourId, Colour (0x7f00ff03));
     FreqMOD1Sld->addListener (this);
 
-    FreqMOD1Sld->setBounds (97, 248, 32, 24);
+    FreqMOD1Sld->setBounds (104, 256, 32, 24);
 
     WaveMOD1Cmb.reset (new ComboBox ("MOD 1 Wave"));
     addAndMakeVisible (WaveMOD1Cmb.get());
@@ -132,7 +130,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     BypassMOD1Btn.reset (new TextButton ("MOD 1 Bypass Button"));
     addAndMakeVisible (BypassMOD1Btn.get());
     BypassMOD1Btn->setTooltip (TRANS("Bypass button for the LFO. This LFO is basically moving the above modulation slider"));
-    BypassMOD1Btn->setButtonText (TRANS("OSC"));
+    BypassMOD1Btn->setButtonText (TRANS("LFO"));
     BypassMOD1Btn->addListener (this);
 
     BypassMOD1Btn->setBounds (281, 216, 56, 24);
@@ -140,31 +138,31 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     FreqMOD1Lbl.reset (new Label ("MOD 1 Freq Label",
                                   TRANS("Rate")));
     addAndMakeVisible (FreqMOD1Lbl.get());
-    FreqMOD1Lbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
+    FreqMOD1Lbl->setFont (Font ("Courier New", 15.0f, Font::plain).withTypefaceStyle ("Regular"));
     FreqMOD1Lbl->setJustificationType (Justification::centredLeft);
     FreqMOD1Lbl->setEditable (false, false, false);
     FreqMOD1Lbl->setColour (Label::textColourId, Colour (0xffc8c8c8));
     FreqMOD1Lbl->setColour (TextEditor::textColourId, Colours::black);
     FreqMOD1Lbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    FreqMOD1Lbl->setBounds (95, 272, 40, 24);
+    FreqMOD1Lbl->setBounds (96, 288, 40, 24);
 
     DepthMOD1Lbl.reset (new Label ("MOD 1 Depth Label",
                                    TRANS("Depth")));
     addAndMakeVisible (DepthMOD1Lbl.get());
-    DepthMOD1Lbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
+    DepthMOD1Lbl->setFont (Font ("Courier New", 15.0f, Font::plain).withTypefaceStyle ("Regular"));
     DepthMOD1Lbl->setJustificationType (Justification::centredLeft);
     DepthMOD1Lbl->setEditable (false, false, false);
     DepthMOD1Lbl->setColour (Label::textColourId, Colour (0xffc8c8c8));
     DepthMOD1Lbl->setColour (TextEditor::textColourId, Colours::black);
     DepthMOD1Lbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    DepthMOD1Lbl->setBounds (147, 272, 46, 24);
+    DepthMOD1Lbl->setBounds (152, 288, 46, 24);
 
     WaveMOD1Lbl.reset (new Label ("MOD 1 Wave Label",
                                   TRANS("Wave\n")));
     addAndMakeVisible (WaveMOD1Lbl.get());
-    WaveMOD1Lbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
+    WaveMOD1Lbl->setFont (Font ("Courier New", 15.0f, Font::plain).withTypefaceStyle ("Regular"));
     WaveMOD1Lbl->setJustificationType (Justification::centredLeft);
     WaveMOD1Lbl->setEditable (false, false, false);
     WaveMOD1Lbl->setColour (Label::textColourId, Colour (0xffc8c8c8));
@@ -179,7 +177,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     TempoSyncMOD1Btn->setButtonText (TRANS("Tempo Sync"));
     TempoSyncMOD1Btn->addListener (this);
 
-    TempoSyncMOD1Btn->setBounds (89, 224, 56, 16);
+    TempoSyncMOD1Btn->setBounds (88, 224, 66, 16);
 
     TempoNumerMOD1Sld.reset (new Slider ("MOD 1 Tempo Numer Slider"));
     addAndMakeVisible (TempoNumerMOD1Sld.get());
@@ -209,7 +207,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     PhaseSyncMOD1Btn->setButtonText (TRANS("Phase Sync"));
     PhaseSyncMOD1Btn->addListener (this);
 
-    PhaseSyncMOD1Btn->setBounds (201, 224, 56, 16);
+    PhaseSyncMOD1Btn->setBounds (192, 224, 71, 16);
 
     PhaseMOD1Sld.reset (new Slider ("MOD 1 Phase Slider"));
     addAndMakeVisible (PhaseMOD1Sld.get());
@@ -217,35 +215,38 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     PhaseMOD1Sld->setRange (0, 1, 0.01);
     PhaseMOD1Sld->setSliderStyle (Slider::RotaryVerticalDrag);
     PhaseMOD1Sld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
-    PhaseMOD1Sld->setColour (Slider::rotarySliderFillColourId, Colour (0x7f00ff03));
     PhaseMOD1Sld->addListener (this);
 
-    PhaseMOD1Sld->setBounds (209, 248, 32, 24);
+    PhaseMOD1Sld->setBounds (208, 256, 32, 24);
 
     PhaseMOD1Lbl.reset (new Label ("MOD 1 Phase Label",
                                    TRANS("Phase")));
     addAndMakeVisible (PhaseMOD1Lbl.get());
-    PhaseMOD1Lbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
+    PhaseMOD1Lbl->setFont (Font ("Courier New", 15.0f, Font::plain).withTypefaceStyle ("Regular"));
     PhaseMOD1Lbl->setJustificationType (Justification::centredLeft);
     PhaseMOD1Lbl->setEditable (false, false, false);
     PhaseMOD1Lbl->setColour (Label::textColourId, Colour (0xffc8c8c8));
     PhaseMOD1Lbl->setColour (TextEditor::textColourId, Colours::black);
     PhaseMOD1Lbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    PhaseMOD1Lbl->setBounds (201, 272, 46, 24);
+    PhaseMOD1Lbl->setBounds (200, 288, 46, 24);
 
     ModModeBtn.reset (new TextButton ("Mod Mode Button"));
     addAndMakeVisible (ModModeBtn.get());
     ModModeBtn->setTooltip (TRANS("Modulation mode: \"Blend\" applies both vowels in parallel and blends between the two, \"Freq\" applies a single vowel which is some combination of the two selected"));
     ModModeBtn->setButtonText (TRANS("Blend"));
     ModModeBtn->addListener (this);
+    ModModeBtn->setColour (TextButton::buttonColourId, Colour (0xffffcc00));
+    ModModeBtn->setColour (TextButton::buttonOnColourId, Colour (0xff2dcc05));
+    ModModeBtn->setColour (TextButton::textColourOffId, Colour (0xffffcc00));
+    ModModeBtn->setColour (TextButton::textColourOnId, Colour (0xff2dcc05));
 
     ModModeBtn->setBounds (228, 128, 64, 24);
 
     MixLbl.reset (new Label ("Mix Label",
                              TRANS("Mix")));
     addAndMakeVisible (MixLbl.get());
-    MixLbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
+    MixLbl->setFont (Font ("Courier New", 15.0f, Font::plain).withTypefaceStyle ("Regular"));
     MixLbl->setJustificationType (Justification::centredLeft);
     MixLbl->setEditable (false, false, false);
     MixLbl->setColour (Label::textColourId, Colour (0xffc8c8c8));
@@ -262,19 +263,43 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
 
     //[Constructor] You can add your own custom stuff here..
-    _assignLookAndFeelToAllChildren(blueLookAndFeel);
-    Colour blueHighlight(81, 65, 255);
-    Colour redHighlight(222, 35, 35);
-    blueLookAndFeel.setHighlightColours(blueHighlight, redHighlight);
-    redLookAndFeel.setHighlightColour(redHighlight);
-    toggleButtonLookAndFeel.setHighlightColours(blueHighlight, redHighlight);
-    tempoButtonLookAndFeel.setHighlightColours(blueHighlight, redHighlight);
+    const Colour orangeHighlight(255, 80, 50);
+    const Colour lightOrange(255, 118, 80);
+    const Colour yellowHighlight(255, 204, 0);
+    const Colour lightYellow(255, 221, 89);
 
+    const Colour menuDark(0.0f, 0.0f, 0.17f, 1.0f);
 
-    Vowel2Cmb->setLookAndFeel(&redLookAndFeel);
-    BypassMOD1Btn->setLookAndFeel(&redLookAndFeel);
-    WaveMOD1Cmb->setLookAndFeel(&redLookAndFeel);
-    ModModeBtn->setLookAndFeel(&toggleButtonLookAndFeel);
+    orangeLookAndFeel.setHighlightColours(orangeHighlight, yellowHighlight);
+    yellowLookAndFeel.setHighlightColour(yellowHighlight);
+    tempoButtonLookAndFeel.setHighlightColours(orangeHighlight, yellowHighlight);
+
+    // Set the popup menu colours
+    orangeLookAndFeel.setColour(PopupMenu::ColourIds::backgroundColourId,
+                              menuDark);
+    orangeLookAndFeel.setColour(PopupMenu::ColourIds::textColourId, lightOrange);
+    orangeLookAndFeel.setColour(PopupMenu::ColourIds::highlightedBackgroundColourId,
+                              lightOrange);
+    orangeLookAndFeel.setColour(PopupMenu::ColourIds::highlightedTextColourId,
+                                 menuDark);
+
+    yellowLookAndFeel.setColour(PopupMenu::ColourIds::backgroundColourId,
+                              menuDark);
+    yellowLookAndFeel.setColour(PopupMenu::ColourIds::textColourId, lightYellow);
+    yellowLookAndFeel.setColour(PopupMenu::ColourIds::highlightedBackgroundColourId,
+                              lightYellow);
+    yellowLookAndFeel.setColour(PopupMenu::ColourIds::highlightedTextColourId,
+                              menuDark);
+
+    // Assign the look and feel classes
+    _assignLookAndFeelToAllChildren(orangeLookAndFeel);
+
+    FreqMOD1Sld->setLookAndFeel(&yellowLookAndFeel);
+    DepthMOD1Sld->setLookAndFeel(&yellowLookAndFeel);
+    Vowel2Cmb->setLookAndFeel(&yellowLookAndFeel);
+    PhaseMOD1Sld->setLookAndFeel(&yellowLookAndFeel);
+    WaveMOD1Cmb->setLookAndFeel(&yellowLookAndFeel);
+
     TempoNumerMOD1Sld->setLookAndFeel(&tempoButtonLookAndFeel);
     TempoDenomMOD1Sld->setLookAndFeel(&tempoButtonLookAndFeel);
 
@@ -334,7 +359,7 @@ void SongbirdAudioProcessorEditor::paint (Graphics& g)
     g.fillAll (Colours::white);
 
     //[UserPaint] Add your own custom painting code here..
-    Image bg = ImageCache::getFromMemory(BinaryData::Background_jpeg, BinaryData::Background_jpegSize);
+    Image bg = ImageCache::getFromMemory(BinaryData::Background_png, BinaryData::Background_pngSize);
     g.drawImage(bg, 0, 0, 425, 350, 0, 0, 5 * 425, 5 * 350);
     //[/UserPaint]
 }
@@ -522,7 +547,7 @@ void SongbirdAudioProcessorEditor::timerCallback() {
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="SongbirdAudioProcessorEditor"
-                 componentName="" parentClasses="public CoreProcessorEditor, public Timer"
+                 componentName="" parentClasses="public WECore::JUCEPlugin::CoreProcessorEditor, public Timer"
                  constructorParams="SongbirdAudioProcessor&amp; ownerFilter" variableInitialisers="CoreProcessorEditor(ownerFilter)"
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.33"
                  fixedSize="0" initialWidth="425" initialHeight="350">
@@ -549,39 +574,39 @@ BEGIN_JUCER_METADATA
                   virtualName="" explicitFocusOrder="0" pos="73 200 280 128" outlinecol="33545454"
                   textcol="ff000000" title=""/>
   <SLIDER name="MOD 1 Depth Slider" id="499f6451911662cc" memberName="DepthMOD1Sld"
-          virtualName="" explicitFocusOrder="0" pos="153 248 32 24" tooltip="Depth of the LFO"
-          rotarysliderfill="7f00ff0d" min="0.0" max="1.0" int="0.01000000000000000021"
-          style="RotaryVerticalDrag" textBoxPos="NoTextBox" textBoxEditable="1"
-          textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
+          virtualName="" explicitFocusOrder="0" pos="160 256 32 24" tooltip="Depth of the LFO"
+          min="0.0" max="1.0" int="0.01000000000000000021" style="RotaryVerticalDrag"
+          textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
+          textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
   <SLIDER name="MOD 1 Freq Slider" id="1d9800ca18cf5bba" memberName="FreqMOD1Sld"
-          virtualName="" explicitFocusOrder="0" pos="97 248 32 24" tooltip="Frequency of the LFO, from 2Hz to 20Hz"
-          rotarysliderfill="7f00ff03" min="0.0" max="1.0" int="0.01000000000000000021"
-          style="RotaryVerticalDrag" textBoxPos="NoTextBox" textBoxEditable="1"
-          textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
+          virtualName="" explicitFocusOrder="0" pos="104 256 32 24" tooltip="Frequency of the LFO, from 2Hz to 20Hz"
+          min="0.0" max="1.0" int="0.01000000000000000021" style="RotaryVerticalDrag"
+          textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
+          textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
   <COMBOBOX name="MOD 1 Wave" id="370e5062e67cf738" memberName="WaveMOD1Cmb"
             virtualName="" explicitFocusOrder="0" pos="257 256 80 24" tooltip="LFO wave shape"
             editable="0" layout="33" items="Sine&#10;Square&#10;Saw" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <TEXTBUTTON name="MOD 1 Bypass Button" id="cd667ff923e74db5" memberName="BypassMOD1Btn"
               virtualName="" explicitFocusOrder="0" pos="281 216 56 24" tooltip="Bypass button for the LFO. This LFO is basically moving the above modulation slider"
-              buttonText="OSC" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+              buttonText="LFO" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <LABEL name="MOD 1 Freq Label" id="dabfca26c640fd58" memberName="FreqMOD1Lbl"
-         virtualName="" explicitFocusOrder="0" pos="95 272 40 24" textCol="ffc8c8c8"
+         virtualName="" explicitFocusOrder="0" pos="96 288 40 24" textCol="ffc8c8c8"
          edTextCol="ff000000" edBkgCol="0" labelText="Rate" editableSingleClick="0"
-         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Courier New"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
   <LABEL name="MOD 1 Depth Label" id="77092a4a55225c68" memberName="DepthMOD1Lbl"
-         virtualName="" explicitFocusOrder="0" pos="147 272 46 24" textCol="ffc8c8c8"
+         virtualName="" explicitFocusOrder="0" pos="152 288 46 24" textCol="ffc8c8c8"
          edTextCol="ff000000" edBkgCol="0" labelText="Depth" editableSingleClick="0"
-         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Courier New"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
   <LABEL name="MOD 1 Wave Label" id="7eb50c1a44463588" memberName="WaveMOD1Lbl"
          virtualName="" explicitFocusOrder="0" pos="273 288 46 24" textCol="ffc8c8c8"
          edTextCol="ff000000" edBkgCol="0" labelText="Wave&#10;" editableSingleClick="0"
-         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Courier New"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="MOD 1 Tempo Sync Button" id="b43affdb8ac7bb90" memberName="TempoSyncMOD1Btn"
-              virtualName="" explicitFocusOrder="0" pos="89 224 56 16" tooltip="Tempo sync LFO frequency"
+              virtualName="" explicitFocusOrder="0" pos="88 224 66 16" tooltip="Tempo sync LFO frequency"
               buttonText="Tempo Sync" connectedEdges="0" needsCallback="1"
               radioGroupId="0"/>
   <SLIDER name="MOD 1 Tempo Numer Slider" id="6c49dac77f3e6f4b" memberName="TempoNumerMOD1Sld"
@@ -595,26 +620,27 @@ BEGIN_JUCER_METADATA
           textBoxPos="TextBoxLeft" textBoxEditable="1" textBoxWidth="40"
           textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
   <TEXTBUTTON name="MOD 1 Phase Sync Button" id="4509e154e4918174" memberName="PhaseSyncMOD1Btn"
-              virtualName="" explicitFocusOrder="0" pos="201 224 56 16" tooltip="Enable phase sync to ensure the phase of the LFO is consistent regardless of where the DAW playhead starts from"
+              virtualName="" explicitFocusOrder="0" pos="192 224 71 16" tooltip="Enable phase sync to ensure the phase of the LFO is consistent regardless of where the DAW playhead starts from"
               buttonText="Phase Sync" connectedEdges="0" needsCallback="1"
               radioGroupId="0"/>
   <SLIDER name="MOD 1 Phase Slider" id="3f1ef3d10c303bac" memberName="PhaseMOD1Sld"
-          virtualName="" explicitFocusOrder="0" pos="209 248 32 24" tooltip="Phase shift the LFO by up to 360 degrees"
-          rotarysliderfill="7f00ff03" min="0.0" max="1.0" int="0.01000000000000000021"
-          style="RotaryVerticalDrag" textBoxPos="NoTextBox" textBoxEditable="1"
-          textBoxWidth="80" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
+          virtualName="" explicitFocusOrder="0" pos="208 256 32 24" tooltip="Phase shift the LFO by up to 360 degrees"
+          min="0.0" max="1.0" int="0.01000000000000000021" style="RotaryVerticalDrag"
+          textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
+          textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
   <LABEL name="MOD 1 Phase Label" id="af1abf98d305cb5c" memberName="PhaseMOD1Lbl"
-         virtualName="" explicitFocusOrder="0" pos="201 272 46 24" textCol="ffc8c8c8"
+         virtualName="" explicitFocusOrder="0" pos="200 288 46 24" textCol="ffc8c8c8"
          edTextCol="ff000000" edBkgCol="0" labelText="Phase" editableSingleClick="0"
-         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Courier New"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="Mod Mode Button" id="82ccbd2e4873bcd5" memberName="ModModeBtn"
               virtualName="" explicitFocusOrder="0" pos="228 128 64 24" tooltip="Modulation mode: &quot;Blend&quot; applies both vowels in parallel and blends between the two, &quot;Freq&quot; applies a single vowel which is some combination of the two selected"
+              bgColOff="ffffcc00" bgColOn="ff2dcc05" textCol="ffffcc00" textColOn="ff2dcc05"
               buttonText="Blend" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <LABEL name="Mix Label" id="49736b42e5833ce0" memberName="MixLbl" virtualName=""
          explicitFocusOrder="0" pos="156 168 32 24" textCol="ffc8c8c8"
          edTextCol="ff000000" edBkgCol="0" labelText="Mix" editableSingleClick="0"
-         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Courier New"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>
 

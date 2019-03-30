@@ -65,10 +65,9 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    SongbirdLookAndFeel blueLookAndFeel,
-                        redLookAndFeel;
+    SongbirdLookAndFeel orangeLookAndFeel,
+                        yellowLookAndFeel;
 
-    SongbirdButtonLookAndFeel toggleButtonLookAndFeel;
     SongbirdTempoButtonLookAndFeel tempoButtonLookAndFeel;
     //[/UserVariables]
 

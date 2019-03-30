@@ -24,18 +24,17 @@
 
 #include "SongbirdLookAndFeel.h"
 
-SongbirdLookAndFeel::SongbirdLookAndFeel() : CoreLookAndFeel(),
-                                             highlightColour2(Colour(222, 35, 35)) {
+SongbirdLookAndFeel::SongbirdLookAndFeel() : _highlightColour2(Colour(222, 35, 35)) {
 }
 
 void SongbirdLookAndFeel::setHighlightColour(Colour newColour) {
-    CoreLookAndFeel::setHighlightColour(newColour);
+    WECore::LookAndFeelMixins::WEV2LookAndFeel::setHighlightColour(newColour);
     setColour(ComboBox::textColourId, highlightColour);
 }
 
 void SongbirdLookAndFeel::setHighlightColours(Colour newColour1, Colour newColour2) {
     setHighlightColour(newColour1);
-    highlightColour2 = newColour2;
+    _highlightColour2 = newColour2;
 }
 
 void SongbirdLookAndFeel::drawLinearSliderThumb(Graphics& g,
@@ -51,15 +50,15 @@ void SongbirdLookAndFeel::drawLinearSliderThumb(Graphics& g,
     
     
     Path p;
-    const float lineWidth {1.5f};
-    const float sliderThumbRadius {5};
+    constexpr float lineWidth {1.5f};
     
     auto drawThumbHalf = [&g,
                           &p,
                           height,
-                          sliderThumbRadius,
                           sliderPos,
-                          lineWidth](Colour colour, double rotation) -> void {
+                          lineWidth](Colour colour,
+                                     double rotation,
+                                     float sliderThumbRadius) -> void {
         p.clear();
         g.setColour(colour);
         p.addCentredArc(sliderPos,
@@ -74,15 +73,10 @@ void SongbirdLookAndFeel::drawLinearSliderThumb(Graphics& g,
     };
 
     g.setColour(darkColour);
-    p.addEllipse(sliderPos - sliderThumbRadius,
-                 height / 2 - sliderThumbRadius,
-                 sliderThumbRadius * 2,
-                 sliderThumbRadius * 2);
     g.fillPath(p);
 
-    drawThumbHalf(highlightColour, CoreMath::DOUBLE_PI);
-    drawThumbHalf(highlightColour2, 0);
-    
+    drawThumbHalf(highlightColour, CoreMath::DOUBLE_PI, _sliderThumbRadius);
+    drawThumbHalf(_highlightColour2, 0, _sliderThumbRadius);
 }
 
 void SongbirdLookAndFeel::drawLinearSliderBackground(Graphics& g,
@@ -98,61 +92,26 @@ void SongbirdLookAndFeel::drawLinearSliderBackground(Graphics& g,
     
     // NOTE: assumes the only horizontal slider is the filter position
     if (slider.isHorizontal()) {
-        // colour the side of the background on either side of the thumb differently
-        g.setColour(highlightColour2);
-        g.fillRect(x, y + height / 2, width, 2);
         
-        const float sliderThumbRadius {5};
+        // Colour the side of the background on either side of the thumb differently
+        constexpr int lineThickness {2};
+        const int lineY {(y + height / 2) - (lineThickness / 2)};
         
-        g.setColour(highlightColour);
-        g.fillRect(x, y + height / 2, static_cast<int>(sliderPos - sliderThumbRadius), 2);
+        // Draw the green half
+        const int greenLength {static_cast<int>(sliderPos - _sliderThumbRadius - x)};
+        
+        if (greenLength > 0) {
+            g.setColour(highlightColour);
+            g.fillRect(x, lineY, greenLength, lineThickness);
+        }
+        
+        // Draw the yellow half
+        const int yellowStartX {static_cast<int>(sliderPos + _sliderThumbRadius)};
+        const int yellowLength {width - yellowStartX + x};
+        
+        if (yellowLength > 0) {
+            g.setColour(_highlightColour2);
+            g.fillRect(yellowStartX, lineY, yellowLength, lineThickness);
+        }
     }
-}
-
-void SongbirdLookAndFeel::drawComboBox(Graphics& g,
-                                    int width,
-                                    int height,
-                                    const bool /*isButtonDown*/,
-                                    int buttonX,
-                                    int buttonY,
-                                    int buttonW,
-                                    int buttonH,
-                                    ComboBox& box) {
-    
-    // determine correct colour
-    Colour& vowelColour {highlightColour};
-    
-    // draw arrows
-    const float arrowX {0.2f};
-    const float arrowH {0.3f};
-    
-    if (box.isEnabled()) {
-        Path p;
-        p.addTriangle(buttonX + buttonW * 0.5f,                 buttonY + buttonH * (0.45f - arrowH),
-                      buttonX + buttonW * (1.0f - arrowX),      buttonY + buttonH * 0.45f,
-                      buttonX + buttonW * arrowX,               buttonY + buttonH * 0.45f);
-        
-        p.addTriangle(buttonX + buttonW * 0.5f,                 buttonY + buttonH * (0.55f + arrowH),
-                      buttonX + buttonW * (1.0f -arrowX),       buttonY + buttonH * 0.55f,
-                      buttonX + buttonW * arrowX,               buttonY + buttonH * 0.55f);
-        
-        g.setColour(vowelColour);
-        
-        g.fillPath(p);
-    }
-    
-    const float indent {2.0f};
-    const int cornerSize {jmin (roundToInt(width * 0.2f),
-                                roundToInt(height * 0.2f))};
-    
-    Path p;
-    PathStrokeType pStroke(1);
-    
-    
-    p.addRoundedRectangle(indent, indent, width - 2 * indent, height - 2 * indent, static_cast<float>(cornerSize));
-
-    
-    g.setColour(vowelColour);
-    g.strokePath(p, pStroke);
-    
 }

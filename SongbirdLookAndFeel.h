@@ -22,13 +22,12 @@
  *
  */
 
-#ifndef SONGBIRDLOOKANDFEEL_H_INCLUDED
-#define SONGBIRDLOOKANDFEEL_H_INCLUDED
+#pragma once
 
-#include "../JuceLibraryCode/JuceHeader.h"
 #include "CoreJUCEPlugin/CoreLookAndFeel.h"
+#include "CoreJUCEPlugin/LookAndFeelMixins/LookAndFeelMixins.h"
 
-class SongbirdLookAndFeel : public WECore::JUCEPlugin::CoreLookAndFeel {
+class SongbirdLookAndFeel : public WECore::LookAndFeelMixins::WEV2LookAndFeel {
 public:
     SongbirdLookAndFeel();
     
@@ -36,7 +35,7 @@ public:
     
     virtual void setHighlightColour(Colour newColour) override;
     
-    void setHighlightColours(Colour newColour1, Colour newColour2);
+    virtual void setHighlightColours(Colour newColour1, Colour newColour2);
     
     virtual void drawLinearSliderThumb(Graphics& g,
                                        int x,
@@ -59,39 +58,17 @@ public:
                                             float maxSliderPos,
                                             const Slider::SliderStyle style,
                                             Slider& slider) override;
-    
-    virtual void drawComboBox(Graphics& g,
-                              int width,
-                              int height,
-                              const bool isButtonDown,
-                              int buttonX,
-                              int buttonY,
-                              int buttonW,
-                              int buttonH,
-                              ComboBox& box) override;
-    
-    
-    
+
 protected:
-    Colour highlightColour2;
+    Colour _highlightColour2;
+    
+    static constexpr float _sliderThumbRadius {5};
     
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SongbirdLookAndFeel)
-    
 };
 
-class SongbirdButtonLookAndFeel : public SongbirdLookAndFeel {
-public:
-    SongbirdButtonLookAndFeel() :   SongbirdLookAndFeel() {
-        lightColour = highlightColour2;
-    }
-    
-    virtual ~SongbirdButtonLookAndFeel() {}
-    
-    
-};
-
-// needed for the small buttons on the tempo sync ratio, they look weird with a border
+// Needed for the small buttons on the tempo sync ratio, they look weird with a border
 class SongbirdTempoButtonLookAndFeel : public SongbirdLookAndFeel {
 public:
     SongbirdTempoButtonLookAndFeel() : SongbirdLookAndFeel() {}
@@ -108,5 +85,3 @@ public:
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SongbirdTempoButtonLookAndFeel);
 };
-
-#endif  // SONGBIRDLOOKANDFEEL_H_INCLUDED
