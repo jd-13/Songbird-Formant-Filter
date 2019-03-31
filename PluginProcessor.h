@@ -71,7 +71,6 @@ public:
         mix,
         modMode,
         
-        bypassSwitchMOD1,
         phaseSyncMOD1,
         tempoSyncMOD1,
         waveMOD1,

@@ -80,7 +80,6 @@ private:
     std::unique_ptr<Slider> DepthMOD1Sld;
     std::unique_ptr<Slider> FreqMOD1Sld;
     std::unique_ptr<ComboBox> WaveMOD1Cmb;
-    std::unique_ptr<TextButton> BypassMOD1Btn;
     std::unique_ptr<Label> FreqMOD1Lbl;
     std::unique_ptr<Label> DepthMOD1Lbl;
     std::unique_ptr<TextButton> TempoSyncMOD1Btn;

@@ -127,14 +127,6 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     WaveMOD1Cmb->setBounds (257, 273, 80, 24);
 
-    BypassMOD1Btn.reset (new TextButton ("MOD 1 Bypass Button"));
-    addAndMakeVisible (BypassMOD1Btn.get());
-    BypassMOD1Btn->setTooltip (TRANS("Bypass button for the LFO. This LFO is effectively moving the above modulation slider"));
-    BypassMOD1Btn->setButtonText (TRANS("LFO"));
-    BypassMOD1Btn->addListener (this);
-
-    BypassMOD1Btn->setBounds (276, 228, 41, 24);
-
     FreqMOD1Lbl.reset (new Label ("MOD 1 Freq Label",
                                   TRANS("Rate")));
     addAndMakeVisible (FreqMOD1Lbl.get());
@@ -323,7 +315,6 @@ SongbirdAudioProcessorEditor::~SongbirdAudioProcessorEditor()
     DepthMOD1Sld = nullptr;
     FreqMOD1Sld = nullptr;
     WaveMOD1Cmb = nullptr;
-    BypassMOD1Btn = nullptr;
     FreqMOD1Lbl = nullptr;
     DepthMOD1Lbl = nullptr;
     TempoSyncMOD1Btn = nullptr;
@@ -372,19 +363,22 @@ void SongbirdAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasCha
     if (comboBoxThatHasChanged == Vowel1Cmb.get())
     {
         //[UserComboBoxCode_Vowel1Cmb] -- add your combo box handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::vowel1, static_cast<float>(Vowel1Cmb->getSelectedId()));
+        ourProcessor->setParameter(SongbirdAudioProcessor::vowel1,
+                                   static_cast<float>(Vowel1Cmb->getSelectedId()));
         //[/UserComboBoxCode_Vowel1Cmb]
     }
     else if (comboBoxThatHasChanged == Vowel2Cmb.get())
     {
         //[UserComboBoxCode_Vowel2Cmb] -- add your combo box handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::vowel2, static_cast<float>(Vowel2Cmb->getSelectedId()));
+        ourProcessor->setParameter(SongbirdAudioProcessor::vowel2,
+                                   static_cast<float>(Vowel2Cmb->getSelectedId()));
         //[/UserComboBoxCode_Vowel2Cmb]
     }
     else if (comboBoxThatHasChanged == WaveMOD1Cmb.get())
     {
         //[UserComboBoxCode_WaveMOD1Cmb] -- add your combo box handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::waveMOD1, static_cast<float>(WaveMOD1Cmb->getSelectedId()));
+        ourProcessor->setParameter(SongbirdAudioProcessor::waveMOD1,
+                                   static_cast<float>(WaveMOD1Cmb->getSelectedId()));
         //[/UserComboBoxCode_WaveMOD1Cmb]
     }
 
@@ -401,43 +395,50 @@ void SongbirdAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWasMove
     if (sliderThatWasMoved == FilterPosSld.get())
     {
         //[UserSliderCode_FilterPosSld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::filterPosition, static_cast<float>(FilterPosSld->getValue()));
+        ourProcessor->setParameter(SongbirdAudioProcessor::filterPosition,
+                                   static_cast<float>(FilterPosSld->getValue()));
         //[/UserSliderCode_FilterPosSld]
     }
     else if (sliderThatWasMoved == MixSld.get())
     {
         //[UserSliderCode_MixSld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::mix, static_cast<float>(MixSld->getValue()));
+        ourProcessor->setParameter(SongbirdAudioProcessor::mix,
+                                   static_cast<float>(MixSld->getValue()));
         //[/UserSliderCode_MixSld]
     }
     else if (sliderThatWasMoved == DepthMOD1Sld.get())
     {
         //[UserSliderCode_DepthMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::depthMOD1, static_cast<float>(DepthMOD1Sld->getValue()));
+        ourProcessor->setParameter(SongbirdAudioProcessor::depthMOD1,
+                                   static_cast<float>(DepthMOD1Sld->getValue()));
         //[/UserSliderCode_DepthMOD1Sld]
     }
     else if (sliderThatWasMoved == FreqMOD1Sld.get())
     {
         //[UserSliderCode_FreqMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::freqMOD1, static_cast<float>(FreqMOD1Sld->getValue()));
+        ourProcessor->setParameter(SongbirdAudioProcessor::freqMOD1,
+                                   static_cast<float>(FreqMOD1Sld->getValue()));
         //[/UserSliderCode_FreqMOD1Sld]
     }
     else if (sliderThatWasMoved == TempoNumerMOD1Sld.get())
     {
         //[UserSliderCode_TempoNumerMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::tempoNumerMOD1, static_cast<float>(TempoNumerMOD1Sld->getValue()));
+        ourProcessor->setParameter(SongbirdAudioProcessor::tempoNumerMOD1,
+                                   static_cast<float>(TempoNumerMOD1Sld->getValue()));
         //[/UserSliderCode_TempoNumerMOD1Sld]
     }
     else if (sliderThatWasMoved == TempoDenomMOD1Sld.get())
     {
         //[UserSliderCode_TempoDenomMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::tempoDenomMOD1, static_cast<float>(TempoDenomMOD1Sld->getValue()));
+        ourProcessor->setParameter(SongbirdAudioProcessor::tempoDenomMOD1,
+                                   static_cast<float>(TempoDenomMOD1Sld->getValue()));
         //[/UserSliderCode_TempoDenomMOD1Sld]
     }
     else if (sliderThatWasMoved == PhaseMOD1Sld.get())
     {
         //[UserSliderCode_PhaseMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::phaseMOD1, static_cast<float>(PhaseMOD1Sld->getValue()));
+        ourProcessor->setParameter(SongbirdAudioProcessor::phaseMOD1,
+                                   static_cast<float>(PhaseMOD1Sld->getValue()));
         //[/UserSliderCode_PhaseMOD1Sld]
     }
 
@@ -451,28 +452,25 @@ void SongbirdAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
     SongbirdAudioProcessor* ourProcessor {getProcessor()};
     //[/UserbuttonClicked_Pre]
 
-    if (buttonThatWasClicked == BypassMOD1Btn.get())
-    {
-        //[UserButtonCode_BypassMOD1Btn] -- add your button handler code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::bypassSwitchMOD1, static_cast<float>(BypassMOD1Btn->getToggleState()));
-        //[/UserButtonCode_BypassMOD1Btn]
-    }
-    else if (buttonThatWasClicked == TempoSyncMOD1Btn.get())
+    if (buttonThatWasClicked == TempoSyncMOD1Btn.get())
     {
         //[UserButtonCode_TempoSyncMOD1Btn] -- add your button handler code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::tempoSyncMOD1, static_cast<float>(TempoSyncMOD1Btn->getToggleState()));
+        ourProcessor->setParameter(SongbirdAudioProcessor::tempoSyncMOD1,
+                                   static_cast<float>(TempoSyncMOD1Btn->getToggleState()));
         //[/UserButtonCode_TempoSyncMOD1Btn]
     }
     else if (buttonThatWasClicked == PhaseSyncMOD1Btn.get())
     {
         //[UserButtonCode_PhaseSyncMOD1Btn] -- add your button handler code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::phaseSyncMOD1, static_cast<float>(PhaseSyncMOD1Btn->getToggleState()));
+        ourProcessor->setParameter(SongbirdAudioProcessor::phaseSyncMOD1,
+                                   static_cast<float>(PhaseSyncMOD1Btn->getToggleState()));
         //[/UserButtonCode_PhaseSyncMOD1Btn]
     }
     else if (buttonThatWasClicked == ModModeBtn.get())
     {
         //[UserButtonCode_ModModeBtn] -- add your button handler code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::modMode, static_cast<float>(ModModeBtn->getToggleState()));
+        ourProcessor->setParameter(SongbirdAudioProcessor::modMode,
+                                   static_cast<float>(ModModeBtn->getToggleState()));
         //[/UserButtonCode_ModModeBtn]
     }
 
@@ -487,25 +485,46 @@ void SongbirdAudioProcessorEditor::timerCallback() {
     SongbirdAudioProcessor* ourProcessor {getProcessor()};
 
     if (ourProcessor->NeedsUIUpdate()) {
-        Vowel1Cmb->setSelectedId(ourProcessor->getParameter(SongbirdAudioProcessor::vowel1), dontSendNotification);
-        Vowel2Cmb->setSelectedId(ourProcessor->getParameter(SongbirdAudioProcessor::vowel2), dontSendNotification);
-        FilterPosSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::filterPosition), dontSendNotification);
-        MixSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::mix), dontSendNotification);
-        ModModeBtn->setToggleState(ourProcessor->getParameter(SongbirdAudioProcessor::modMode), dontSendNotification);
+        Vowel1Cmb->setSelectedId(ourProcessor->getParameter(SongbirdAudioProcessor::vowel1),
+                                                            dontSendNotification);
+        Vowel2Cmb->setSelectedId(ourProcessor->getParameter(SongbirdAudioProcessor::vowel2),
+                                                            dontSendNotification);
+        FilterPosSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::filterPosition),
+                                                          dontSendNotification);
+        MixSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::mix),
+                                                    dontSendNotification);
+        ModModeBtn->setToggleState(ourProcessor->getParameter(SongbirdAudioProcessor::modMode),
+                                                              dontSendNotification);
 
         // Set text for mod mode button
-        ModModeBtn->getToggleState() ? ModModeBtn->setButtonText("FREQ") : ModModeBtn->setButtonText("BLEND");
+        ModModeBtn->getToggleState() ? ModModeBtn->setButtonText("FREQ") :
+                                       ModModeBtn->setButtonText("BLEND");
 
         // MOD 1
-        BypassMOD1Btn->setToggleState(ourProcessor->getParameter(SongbirdAudioProcessor::bypassSwitchMOD1), dontSendNotification);
-        PhaseSyncMOD1Btn->setToggleState(ourProcessor->getParameter(SongbirdAudioProcessor::phaseSyncMOD1), dontSendNotification);
-        TempoSyncMOD1Btn->setToggleState(ourProcessor->getParameter(SongbirdAudioProcessor::tempoSyncMOD1), dontSendNotification);
-        WaveMOD1Cmb->setSelectedId(ourProcessor->getParameter(SongbirdAudioProcessor::waveMOD1), dontSendNotification);
-        DepthMOD1Sld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::depthMOD1), dontSendNotification);
-        FreqMOD1Sld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::freqMOD1), dontSendNotification);
-        PhaseMOD1Sld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::phaseMOD1), dontSendNotification);
-        TempoNumerMOD1Sld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::tempoNumerMOD1), dontSendNotification);
-        TempoDenomMOD1Sld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::tempoDenomMOD1), dontSendNotification);
+        PhaseSyncMOD1Btn->setToggleState(
+                ourProcessor->getParameter(SongbirdAudioProcessor::phaseSyncMOD1),
+                                           dontSendNotification);
+        TempoSyncMOD1Btn->setToggleState(
+                ourProcessor->getParameter(SongbirdAudioProcessor::tempoSyncMOD1),
+                                           dontSendNotification);
+        WaveMOD1Cmb->setSelectedId(
+                ourProcessor->getParameter(SongbirdAudioProcessor::waveMOD1),
+                                           dontSendNotification);
+        DepthMOD1Sld->setValue(
+                ourProcessor->getParameter(SongbirdAudioProcessor::depthMOD1),
+                                           dontSendNotification);
+        FreqMOD1Sld->setValue(
+                ourProcessor->getParameter(SongbirdAudioProcessor::freqMOD1),
+                                           dontSendNotification);
+        PhaseMOD1Sld->setValue(
+                ourProcessor->getParameter(SongbirdAudioProcessor::phaseMOD1),
+                                           dontSendNotification);
+        TempoNumerMOD1Sld->setValue(
+                ourProcessor->getParameter(SongbirdAudioProcessor::tempoNumerMOD1),
+                                           dontSendNotification);
+        TempoDenomMOD1Sld->setValue(
+                ourProcessor->getParameter(SongbirdAudioProcessor::tempoDenomMOD1),
+                                           dontSendNotification);
 
         // Activate/Deactivale phase control depending on phase sync
         PhaseMOD1Sld->setEnabled(PhaseSyncMOD1Btn->getToggleState());
@@ -582,9 +601,6 @@ BEGIN_JUCER_METADATA
             virtualName="" explicitFocusOrder="0" pos="257 273 80 24" tooltip="LFO wave shape"
             editable="0" layout="33" items="Sine&#10;Square&#10;Saw" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
-  <TEXTBUTTON name="MOD 1 Bypass Button" id="cd667ff923e74db5" memberName="BypassMOD1Btn"
-              virtualName="" explicitFocusOrder="0" pos="276 228 41 24" tooltip="Bypass button for the LFO. This LFO is effectively moving the above modulation slider"
-              buttonText="LFO" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <LABEL name="MOD 1 Freq Label" id="dabfca26c640fd58" memberName="FreqMOD1Lbl"
          virtualName="" explicitFocusOrder="0" pos="84 296 56 24" textCol="ffffdf5e"
          edTextCol="ff000000" edBkgCol="0" labelText="Rate" editableSingleClick="0"
