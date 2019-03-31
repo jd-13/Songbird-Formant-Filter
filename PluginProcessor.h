@@ -84,17 +84,13 @@ public:
         totalNumParams
     };
     
-    bool NeedsUIUpdate() {
-        return UIUpdateFlag;
-    }
+    bool NeedsUIUpdate() { return UIUpdateFlag; }
     
-    void RequestUIUpdate() {
-        UIUpdateFlag=true;
-    }
+    void RequestUIUpdate() { UIUpdateFlag=true; }
     
-    void ClearUIUpdateFlag() {
-        UIUpdateFlag=false;
-    }
+    void ClearUIUpdateFlag() { UIUpdateFlag=false; }
+    
+    double getLastLFOOutput() { return mSongbird.getLastLFOOutput(); }
 
 private:
     Songbird mSongbird;

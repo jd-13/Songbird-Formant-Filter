@@ -37,6 +37,8 @@ public:
     
     virtual void setHighlightColours(Colour newColour1, Colour newColour2);
     
+    virtual void updateLFOOutput(double value);
+    
     virtual void drawLinearSliderThumb(Graphics& g,
                                        int x,
                                        int y,
@@ -59,12 +61,13 @@ public:
                                             const Slider::SliderStyle style,
                                             Slider& slider) override;
 
-protected:
+private:
     Colour _highlightColour2;
     
     static constexpr float _sliderThumbRadius {5};
     
-private:
+    double _lfoOutput;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SongbirdLookAndFeel)
 };
 

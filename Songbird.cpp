@@ -33,19 +33,17 @@ void Songbird::reset() {
     mMOD.reset();
 }
 
+double Songbird::getLastLFOOutput() const {
+    return _lastLFOOutput;
+}
+
 void Songbird::Process1in1out(float* inSamples, int numSamples) {
     
     mFilter.setModulation(mMOD.calcGainInLoop());
     
     mFilter.Process1in1out(inSamples, numSamples);
     
-    // call the LFO calcGain method to advance its internal counters manually
-    // since were calling it once per buffer rather than once per sample
-    // TODO: provide protection to make sure this is still effective for large
-    // buffers
-    for (size_t iii {0}; iii < numSamples - 1; iii++) {
-        mMOD.calcGainInLoop();
-    }
+    _advanceLFOState(numSamples - 1);
 }
 
 void Songbird::Process1in2out(float* inLeftSamples, float* inRightSamples, int numSamples) {
@@ -54,13 +52,7 @@ void Songbird::Process1in2out(float* inLeftSamples, float* inRightSamples, int n
     
     mFilter.Process1in1out(inLeftSamples, numSamples);
 
-    // call the LFO calcGain method to advance its internal counters manually
-    // since were calling it once per buffer rather than once per sample
-    // TODO: provide protection to make sure this is still effective for large
-    // buffers
-    for (size_t iii {0}; iii < numSamples - 1; iii++) {
-        mMOD.calcGainInLoop();
-    }
+    _advanceLFOState(numSamples - 1);
     
     // Copy the left buffer into the right, so that we have mono to stereo
     std::copy(inLeftSamples, inLeftSamples + numSamples, inRightSamples);
@@ -71,12 +63,17 @@ void Songbird::Process2in2out(float* inLeftSamples, float* inRightSamples, int n
     mFilter.setModulation(mMOD.calcGainInLoop());
     
     mFilter.Process2in2out(inLeftSamples, inRightSamples, numSamples);
+
+    _advanceLFOState(numSamples - 1);
+}
+
+void Songbird::_advanceLFOState(int numSteps) {
     
-    // call the LFO calcGain method to advance its internal counters manually
-    // since were calling it once per buffer rather than once per sample
-    // TODO: provide protection to make sure this is still effective for large
-    // buffers
-    for (size_t iii {0}; iii < numSamples - 1; iii++) {
+    // Stop one short of numSteps, we'll call calcGainInLoop once more to cache the last output
+    for (int iii {0}; iii < numSteps - 1; iii++) {
         mMOD.calcGainInLoop();
     }
+    
+    // Cache the last LFO output from this buffer
+    _lastLFOOutput = mMOD.calcGainInLoop();
 }

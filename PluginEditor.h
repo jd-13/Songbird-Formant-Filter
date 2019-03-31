@@ -72,18 +72,17 @@ private:
     //[/UserVariables]
 
     //==============================================================================
+    std::unique_ptr<GroupComponent> MOD1Group;
     std::unique_ptr<ComboBox> Vowel1Cmb;
     std::unique_ptr<Slider> FilterPosSld;
     std::unique_ptr<ComboBox> Vowel2Cmb;
     std::unique_ptr<Slider> MixSld;
-    std::unique_ptr<GroupComponent> MOD1Group;
     std::unique_ptr<Slider> DepthMOD1Sld;
     std::unique_ptr<Slider> FreqMOD1Sld;
     std::unique_ptr<ComboBox> WaveMOD1Cmb;
     std::unique_ptr<TextButton> BypassMOD1Btn;
     std::unique_ptr<Label> FreqMOD1Lbl;
     std::unique_ptr<Label> DepthMOD1Lbl;
-    std::unique_ptr<Label> WaveMOD1Lbl;
     std::unique_ptr<TextButton> TempoSyncMOD1Btn;
     std::unique_ptr<Slider> TempoNumerMOD1Sld;
     std::unique_ptr<Slider> TempoDenomMOD1Sld;

@@ -24,7 +24,8 @@
 
 #include "SongbirdLookAndFeel.h"
 
-SongbirdLookAndFeel::SongbirdLookAndFeel() : _highlightColour2(Colour(222, 35, 35)) {
+SongbirdLookAndFeel::SongbirdLookAndFeel() : _highlightColour2(Colour(222, 35, 35)),
+                                             _lfoOutput(0) {
 }
 
 void SongbirdLookAndFeel::setHighlightColour(Colour newColour) {
@@ -35,6 +36,10 @@ void SongbirdLookAndFeel::setHighlightColour(Colour newColour) {
 void SongbirdLookAndFeel::setHighlightColours(Colour newColour1, Colour newColour2) {
     setHighlightColour(newColour1);
     _highlightColour2 = newColour2;
+}
+
+void SongbirdLookAndFeel::updateLFOOutput(double value) {
+    _lfoOutput = value;
 }
 
 void SongbirdLookAndFeel::drawLinearSliderThumb(Graphics& g,
@@ -113,5 +118,24 @@ void SongbirdLookAndFeel::drawLinearSliderBackground(Graphics& g,
             g.setColour(_highlightColour2);
             g.fillRect(yellowStartX, lineY, yellowLength, lineThickness);
         }
+        
+        // Draw in the modulation line
+        constexpr int modLineThickness {1};
+        const int modOffset {static_cast<int>((_lfoOutput * width))};
+        
+        // Alternate colours above and below 0
+        if (modOffset < 0) {
+            g.setColour(highlightColour);
+        } else {
+            g.setColour(_highlightColour2);
+        }
+        
+        g.fillRect(static_cast<int>(sliderPos),
+                   y + height - 2,
+                   modOffset,
+                   modLineThickness);
+        
+    } else {
+        assert(false && "Unsupported slider type");
     }
 }
