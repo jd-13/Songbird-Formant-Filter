@@ -122,19 +122,23 @@ void SongbirdLookAndFeel::drawLinearSliderBackground(Graphics& g,
         // Draw in the modulation line
         constexpr int modLineThickness {1};
         const int modOffset {static_cast<int>((_lfoOutput * width))};
+        const int modLineY {y + height - 2};
         
-        // Alternate colours above and below 0
         if (modOffset < 0) {
             g.setColour(highlightColour);
+            
+            g.fillRect(static_cast<int>(sliderPos + modOffset),
+                       modLineY,
+                       -modOffset,
+                       modLineThickness);
         } else {
             g.setColour(_highlightColour2);
+            
+            g.fillRect(static_cast<int>(sliderPos),
+                       modLineY,
+                       modOffset,
+                       modLineThickness);
         }
-        
-        g.fillRect(static_cast<int>(sliderPos),
-                   y + height - 2,
-                   modOffset,
-                   modLineThickness);
-        
     } else {
         assert(false && "Unsupported slider type");
     }
@@ -183,6 +187,9 @@ void SongbirdLookAndFeel::drawGroupComponentOutline(Graphics& g,
                                      lineY,
                                      true));
     
-    g.fillRect(textCentreX - (lineGap / 2), lineY, -lineLength, lineThickness);
-    g.drawRect(textCentreX + (lineGap / 2), lineY, lineLength, lineThickness);
+    const int leftLineX {textCentreX - (lineGap / 2) - lineLength};
+    const int rightLineX {textCentreX + (lineGap / 2)};
+    
+    g.fillRect(leftLineX, lineY, lineLength, lineThickness);
+    g.fillRect(rightLineX, lineY, lineLength, lineThickness);
 }
