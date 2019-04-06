@@ -29,7 +29,7 @@ SongbirdLookAndFeel::SongbirdLookAndFeel() : _highlightColour2(Colour(222, 35, 3
 }
 
 void SongbirdLookAndFeel::setHighlightColour(Colour newColour) {
-    WECore::LookAndFeelMixins::WEV2LookAndFeel::setHighlightColour(newColour);
+    SongbirdLookAndFeelBase::setHighlightColour(newColour);
     setColour(ComboBox::textColourId, highlightColour);
 }
 
@@ -102,7 +102,7 @@ void SongbirdLookAndFeel::drawLinearSliderBackground(Graphics& g,
         constexpr int lineThickness {2};
         const int lineY {(y + height / 2) - (lineThickness / 2)};
         
-        // Draw the green half
+        // Draw the red half
         const int greenLength {static_cast<int>(sliderPos - _sliderThumbRadius - x)};
         
         if (greenLength > 0) {
@@ -138,4 +138,51 @@ void SongbirdLookAndFeel::drawLinearSliderBackground(Graphics& g,
     } else {
         assert(false && "Unsupported slider type");
     }
+}
+
+void SongbirdLookAndFeel::drawGroupComponentOutline(Graphics& g,
+                                                    int width,
+                                                    int height,
+                                                    const String& text,
+                                                    const Justification& /*justification*/,
+                                                    GroupComponent& group) {
+    
+    constexpr int MARGIN {2};
+    
+    g.setColour(group.findColour(GroupComponent::textColourId));
+    
+    // Draw the text
+    Font font;
+    font.setTypefaceName("Courier New");
+    g.setFont(font);
+    
+    g.drawText(text,
+               (width / 2) - 12,
+               MARGIN,
+               width,
+               height,
+               Justification::topLeft,
+               true);
+    
+    // Draw the separator
+    const Colour outlineColour = group.findColour(GroupComponent::outlineColourId);
+    const int textCentreX {width / 2};
+    const int lineGap {34};
+    const int lineThickness {1};
+    const int lineLength {(width / 2) - (lineGap / 2) - MARGIN};
+    const int lineY {static_cast<int>(
+                        MARGIN + (font.getHeight() / 2) - (lineThickness / 2)
+                     )};
+    
+    
+    g.setGradientFill(ColourGradient(outlineColour,
+                                     textCentreX,
+                                     lineY,
+                                     outlineColour.withAlpha(0.0f),
+                                     0,
+                                     lineY,
+                                     true));
+    
+    g.fillRect(textCentreX - (lineGap / 2), lineY, -lineLength, lineThickness);
+    g.drawRect(textCentreX + (lineGap / 2), lineY, lineLength, lineThickness);
 }

@@ -27,7 +27,15 @@
 #include "CoreJUCEPlugin/CoreLookAndFeel.h"
 #include "CoreJUCEPlugin/LookAndFeelMixins/LookAndFeelMixins.h"
 
-class SongbirdLookAndFeel : public WECore::LookAndFeelMixins::WEV2LookAndFeel {
+namespace LF = WECore::LookAndFeelMixins;
+typedef LF::ButtonV2<
+        LF::ComboBoxV2<
+        LF::PopupMenuV2<
+        LF::RotarySliderV2<
+            WECore::JUCEPlugin::CoreLookAndFeel
+        >>>> SongbirdLookAndFeelBase;
+
+class SongbirdLookAndFeel : public SongbirdLookAndFeelBase {
 public:
     SongbirdLookAndFeel();
     
@@ -60,6 +68,13 @@ public:
                                             float maxSliderPos,
                                             const Slider::SliderStyle style,
                                             Slider& slider) override;
+    
+    virtual void drawGroupComponentOutline(Graphics& g,
+                                           int width,
+                                           int height,
+                                           const String& text,
+                                           const Justification& /*justification*/,
+                                           GroupComponent& group) override;
 
 private:
     Colour _highlightColour2;

@@ -90,6 +90,7 @@ private:
     std::unique_ptr<Label> PhaseMOD1Lbl;
     std::unique_ptr<TextButton> ModModeBtn;
     std::unique_ptr<Label> MixLbl;
+    std::unique_ptr<Label> ModeLbl;
 
 
     //==============================================================================
