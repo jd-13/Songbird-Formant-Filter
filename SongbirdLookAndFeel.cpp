@@ -24,18 +24,22 @@
 
 #include "SongbirdLookAndFeel.h"
 
-SongbirdLookAndFeel::SongbirdLookAndFeel() : CoreLookAndFeel(),
-                                             highlightColour2(Colour(222, 35, 35)) {
+SongbirdLookAndFeel::SongbirdLookAndFeel() : _highlightColour2(Colour(222, 35, 35)),
+                                             _lfoOutput(0) {
 }
 
 void SongbirdLookAndFeel::setHighlightColour(Colour newColour) {
-    CoreLookAndFeel::setHighlightColour(newColour);
+    SongbirdLookAndFeelBase::setHighlightColour(newColour);
     setColour(ComboBox::textColourId, highlightColour);
 }
 
 void SongbirdLookAndFeel::setHighlightColours(Colour newColour1, Colour newColour2) {
     setHighlightColour(newColour1);
-    highlightColour2 = newColour2;
+    _highlightColour2 = newColour2;
+}
+
+void SongbirdLookAndFeel::updateLFOOutput(double value) {
+    _lfoOutput = value;
 }
 
 void SongbirdLookAndFeel::drawLinearSliderThumb(Graphics& g,
@@ -51,15 +55,15 @@ void SongbirdLookAndFeel::drawLinearSliderThumb(Graphics& g,
     
     
     Path p;
-    const float lineWidth {1.5f};
-    const float sliderThumbRadius {5};
+    constexpr float lineWidth {1.5f};
     
     auto drawThumbHalf = [&g,
                           &p,
                           height,
-                          sliderThumbRadius,
                           sliderPos,
-                          lineWidth](Colour colour, double rotation) -> void {
+                          lineWidth](Colour colour,
+                                     double rotation,
+                                     float sliderThumbRadius) -> void {
         p.clear();
         g.setColour(colour);
         p.addCentredArc(sliderPos,
@@ -74,15 +78,10 @@ void SongbirdLookAndFeel::drawLinearSliderThumb(Graphics& g,
     };
 
     g.setColour(darkColour);
-    p.addEllipse(sliderPos - sliderThumbRadius,
-                 height / 2 - sliderThumbRadius,
-                 sliderThumbRadius * 2,
-                 sliderThumbRadius * 2);
     g.fillPath(p);
 
-    drawThumbHalf(highlightColour, CoreMath::DOUBLE_PI);
-    drawThumbHalf(highlightColour2, 0);
-    
+    drawThumbHalf(highlightColour, CoreMath::DOUBLE_PI, _sliderThumbRadius);
+    drawThumbHalf(_highlightColour2, 0, _sliderThumbRadius);
 }
 
 void SongbirdLookAndFeel::drawLinearSliderBackground(Graphics& g,
@@ -98,61 +97,99 @@ void SongbirdLookAndFeel::drawLinearSliderBackground(Graphics& g,
     
     // NOTE: assumes the only horizontal slider is the filter position
     if (slider.isHorizontal()) {
-        // colour the side of the background on either side of the thumb differently
-        g.setColour(highlightColour2);
-        g.fillRect(x, y + height / 2, width, 2);
         
-        const float sliderThumbRadius {5};
+        // Colour the side of the background on either side of the thumb differently
+        constexpr int lineThickness {2};
+        const int lineY {(y + height / 2) - (lineThickness / 2)};
         
-        g.setColour(highlightColour);
-        g.fillRect(x, y + height / 2, static_cast<int>(sliderPos - sliderThumbRadius), 2);
+        // Draw the red half
+        const int greenLength {static_cast<int>(sliderPos - _sliderThumbRadius - x)};
+        
+        if (greenLength > 0) {
+            g.setColour(highlightColour);
+            g.fillRect(x, lineY, greenLength, lineThickness);
+        }
+        
+        // Draw the yellow half
+        const int yellowStartX {static_cast<int>(sliderPos + _sliderThumbRadius)};
+        const int yellowLength {width - yellowStartX + x};
+        
+        if (yellowLength > 0) {
+            g.setColour(_highlightColour2);
+            g.fillRect(yellowStartX, lineY, yellowLength, lineThickness);
+        }
+        
+        // Draw in the modulation line
+        constexpr int modLineThickness {1};
+        const int modOffset {static_cast<int>((_lfoOutput * width))};
+        const int modLineY {y + height - 2};
+        
+        if (modOffset < 0) {
+            g.setColour(highlightColour);
+            
+            g.fillRect(static_cast<int>(sliderPos + modOffset),
+                       modLineY,
+                       -modOffset,
+                       modLineThickness);
+        } else {
+            g.setColour(_highlightColour2);
+            
+            g.fillRect(static_cast<int>(sliderPos),
+                       modLineY,
+                       modOffset,
+                       modLineThickness);
+        }
+    } else {
+        assert(false && "Unsupported slider type");
     }
 }
 
-void SongbirdLookAndFeel::drawComboBox(Graphics& g,
-                                    int width,
-                                    int height,
-                                    const bool /*isButtonDown*/,
-                                    int buttonX,
-                                    int buttonY,
-                                    int buttonW,
-                                    int buttonH,
-                                    ComboBox& box) {
+void SongbirdLookAndFeel::drawGroupComponentOutline(Graphics& g,
+                                                    int width,
+                                                    int height,
+                                                    const String& text,
+                                                    const Justification& /*justification*/,
+                                                    GroupComponent& group) {
     
-    // determine correct colour
-    Colour& vowelColour {highlightColour};
+    constexpr int MARGIN {2};
     
-    // draw arrows
-    const float arrowX {0.2f};
-    const float arrowH {0.3f};
+    g.setColour(group.findColour(GroupComponent::textColourId));
     
-    if (box.isEnabled()) {
-        Path p;
-        p.addTriangle(buttonX + buttonW * 0.5f,                 buttonY + buttonH * (0.45f - arrowH),
-                      buttonX + buttonW * (1.0f - arrowX),      buttonY + buttonH * 0.45f,
-                      buttonX + buttonW * arrowX,               buttonY + buttonH * 0.45f);
-        
-        p.addTriangle(buttonX + buttonW * 0.5f,                 buttonY + buttonH * (0.55f + arrowH),
-                      buttonX + buttonW * (1.0f -arrowX),       buttonY + buttonH * 0.55f,
-                      buttonX + buttonW * arrowX,               buttonY + buttonH * 0.55f);
-        
-        g.setColour(vowelColour);
-        
-        g.fillPath(p);
-    }
+    // Draw the text
+    Font font;
+    font.setTypefaceName("Courier New");
+    g.setFont(font);
     
-    const float indent {2.0f};
-    const int cornerSize {jmin (roundToInt(width * 0.2f),
-                                roundToInt(height * 0.2f))};
+    g.drawText(text,
+               (width / 2) - 12,
+               MARGIN,
+               width,
+               height,
+               Justification::topLeft,
+               true);
     
-    Path p;
-    PathStrokeType pStroke(1);
+    // Draw the separator
+    const Colour outlineColour = group.findColour(GroupComponent::outlineColourId);
+    const int textCentreX {width / 2};
+    const int lineGap {34};
+    const int lineThickness {1};
+    const int lineLength {(width / 2) - (lineGap / 2) - MARGIN};
+    const int lineY {static_cast<int>(
+                        MARGIN + (font.getHeight() / 2) - (lineThickness / 2)
+                     )};
     
     
-    p.addRoundedRectangle(indent, indent, width - 2 * indent, height - 2 * indent, static_cast<float>(cornerSize));
-
+    g.setGradientFill(ColourGradient(outlineColour,
+                                     textCentreX,
+                                     lineY,
+                                     outlineColour.withAlpha(0.0f),
+                                     0,
+                                     lineY,
+                                     true));
     
-    g.setColour(vowelColour);
-    g.strokePath(p, pStroke);
+    const int leftLineX {textCentreX - (lineGap / 2) - lineLength};
+    const int rightLineX {textCentreX + (lineGap / 2)};
     
+    g.fillRect(leftLineX, lineY, lineLength, lineThickness);
+    g.fillRect(rightLineX, lineY, lineLength, lineThickness);
 }

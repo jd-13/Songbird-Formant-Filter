@@ -23,7 +23,7 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
     mSongbird.mFilter.setFilterPosition(WECore::Songbird::Parameters::FILTER_POSITION.defaultValue);
     mSongbird.mFilter.setModMode(WECore::Songbird::Parameters::MODMODE_DEFAULT);
     
-    mSongbird.mMOD.setBypassSwitch(WECore::Richter::Parameters::LFOSWITCH_DEFAULT);
+    mSongbird.mMOD.setBypassSwitch(WECore::Richter::Parameters::LFOSWITCH_ON);
     mSongbird.mMOD.setPhaseSyncSwitch(WECore::Richter::Parameters::PHASESYNC_DEFAULT);
     mSongbird.mMOD.setTempoSyncSwitch(WECore::Richter::Parameters::TEMPOSYNC_DEFAULT);
     mSongbird.mMOD.setWave(WECore::Richter::Parameters::WAVE.defaultValue);
@@ -69,9 +69,7 @@ float SongbirdAudioProcessor::getParameter(int index) {
             return mSongbird.mFilter.getModMode();
             
             
-        
-        case bypassSwitchMOD1:
-            return mSongbird.mMOD.getBypassSwitch();
+
             
         case phaseSyncMOD1:
             return mSongbird.mMOD.getPhaseSyncSwitch();
@@ -125,10 +123,7 @@ void SongbirdAudioProcessor::setParameter(int index, float newValue) {
             mSongbird.mFilter.setModMode(newValue < 0.5);
             break;
             
-            
-        case bypassSwitchMOD1:
-            mSongbird.mMOD.setBypassSwitch(newValue < 0.5);
-            break;
+
             
         case phaseSyncMOD1:
             mSongbird.mMOD.setPhaseSyncSwitch(newValue < 0.5);
@@ -186,9 +181,7 @@ const String SongbirdAudioProcessor::getParameterName(int index) {
         case modMode:
             return MODMODE_STR;
             
-            
-        case bypassSwitchMOD1:
-            return SWITCHMOD1_STR;
+
             
         case phaseSyncMOD1:
             return PHASESYNCMOD1_STR;
@@ -237,9 +230,7 @@ const String SongbirdAudioProcessor::getParameterText(int index)
         case modMode:
             return String(static_cast<int>(mSongbird.mFilter.getModMode()));
             
-            
-        case bypassSwitchMOD1:
-            return String(static_cast<int>(mSongbird.mMOD.getBypassSwitch()));
+
             
         case phaseSyncMOD1:
             return String(static_cast<int>(mSongbird.mMOD.getPhaseSyncSwitch()));
@@ -458,7 +449,6 @@ void SongbirdAudioProcessor::setStateInformation (const void* data, int sizeInBy
         // Slightly hacky fix to prevent inverted button settings on startup
         setParameter(modMode, getParameter(modMode));
         
-        setParameter(bypassSwitchMOD1, getParameter(bypassSwitchMOD1));
         setParameter(phaseSyncMOD1, getParameter(phaseSyncMOD1));
         setParameter(tempoSyncMOD1, getParameter(tempoSyncMOD1));
         

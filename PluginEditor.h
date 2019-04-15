@@ -65,26 +65,23 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    SongbirdLookAndFeel blueLookAndFeel,
-                        redLookAndFeel;
+    SongbirdLookAndFeel orangeLookAndFeel,
+                        yellowLookAndFeel;
 
-    SongbirdButtonLookAndFeel toggleButtonLookAndFeel;
     SongbirdTempoButtonLookAndFeel tempoButtonLookAndFeel;
     //[/UserVariables]
 
     //==============================================================================
+    std::unique_ptr<GroupComponent> MOD1Group;
     std::unique_ptr<ComboBox> Vowel1Cmb;
     std::unique_ptr<Slider> FilterPosSld;
     std::unique_ptr<ComboBox> Vowel2Cmb;
     std::unique_ptr<Slider> MixSld;
-    std::unique_ptr<GroupComponent> MOD1Group;
     std::unique_ptr<Slider> DepthMOD1Sld;
     std::unique_ptr<Slider> FreqMOD1Sld;
     std::unique_ptr<ComboBox> WaveMOD1Cmb;
-    std::unique_ptr<TextButton> BypassMOD1Btn;
     std::unique_ptr<Label> FreqMOD1Lbl;
     std::unique_ptr<Label> DepthMOD1Lbl;
-    std::unique_ptr<Label> WaveMOD1Lbl;
     std::unique_ptr<TextButton> TempoSyncMOD1Btn;
     std::unique_ptr<Slider> TempoNumerMOD1Sld;
     std::unique_ptr<Slider> TempoDenomMOD1Sld;
@@ -93,6 +90,7 @@ private:
     std::unique_ptr<Label> PhaseMOD1Lbl;
     std::unique_ptr<TextButton> ModModeBtn;
     std::unique_ptr<Label> MixLbl;
+    std::unique_ptr<Label> ModeLbl;
 
 
     //==============================================================================

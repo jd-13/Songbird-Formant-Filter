@@ -26,24 +26,36 @@
 #define SONGBIRD_H_INCLUDED
 
 #include "SongbirdFilters/SongbirdFilterModule.h"
+
 #include "RichterLFO/RichterMOD.h"
 #include "ParameterData.h"
 
 class Songbird {
 public:
-    Songbird();
+    Songbird() : _lastLFOOutput(0) {}
     ~Songbird() = default;
     
-    WECore::Songbird::SongbirdFilterModule mFilter;
+    WECore::Songbird::SongbirdFilterModule<float> mFilter;
     WECore::Richter::RichterMOD mMOD;
     
     void setSampleRate(double sampleRate);
     void reset();
     
+    double getLastLFOOutput() const;
+    
     void Process1in1out(float* inSamples, int numSamples);
     void Process1in2out(float* leftSamples, float* rightSamples, int numSamples);
     void Process2in2out(float* leftSamples, float* rightSamples, int numSamples);
+  
+private:
+    double _lastLFOOutput;
     
+    /**
+     * This needs to be called once per buffer to advance the LFO's internal counters manually.
+     *
+     * TODO: provide protection to make sure this is still effective for large buffers.
+     */
+    void _advanceLFOState(int numSteps);
 };
 
 
