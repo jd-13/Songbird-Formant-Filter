@@ -139,8 +139,6 @@ void SongbirdLookAndFeel::drawLinearSliderBackground(Graphics& g,
                        modOffset,
                        modLineThickness);
         }
-    } else {
-        assert(false && "Unsupported slider type");
     }
 }
 
