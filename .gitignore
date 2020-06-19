@@ -1,7 +1,4 @@
-Source/Graphics/5-07.eps
-Source/Graphics/Free-flying-bird-silhouette-Series.ai
-Source/Graphics/VT-00166.eps
-Source/Graphics/VT-00166.jpg
-Builds/*
-JuceLibraryCode/*
+Builds
+JuceLibraryCode
 .DS_Store
+private
