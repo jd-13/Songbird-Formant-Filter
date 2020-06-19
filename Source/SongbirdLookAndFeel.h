@@ -38,15 +38,15 @@ typedef LF::ButtonV2<
 class SongbirdLookAndFeel : public SongbirdLookAndFeelBase {
 public:
     SongbirdLookAndFeel();
-    
+
     virtual ~SongbirdLookAndFeel() = default;
-    
+
     virtual void setHighlightColour(Colour newColour) override;
-    
+
     virtual void setHighlightColours(Colour newColour1, Colour newColour2);
-    
+
     virtual void updateLFOOutput(double value);
-    
+
     virtual void drawLinearSliderThumb(Graphics& g,
                                        int x,
                                        int y,
@@ -57,7 +57,7 @@ public:
                                        float maxSliderPos,
                                        const Slider::SliderStyle style,
                                        Slider& slider) override;
-    
+
     virtual void drawLinearSliderBackground(Graphics& g,
                                             int x,
                                             int y,
@@ -68,7 +68,7 @@ public:
                                             float maxSliderPos,
                                             const Slider::SliderStyle style,
                                             Slider& slider) override;
-    
+
     virtual void drawGroupComponentOutline(Graphics& g,
                                            int width,
                                            int height,
@@ -76,13 +76,14 @@ public:
                                            const Justification& /*justification*/,
                                            GroupComponent& group) override;
 
+    virtual Typeface::Ptr getTypefaceForFont(const Font& font) override;
+
 private:
     Colour _highlightColour2;
-    
     static constexpr float _sliderThumbRadius {5};
-    
     double _lfoOutput;
-    
+    Font _regularFont;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SongbirdLookAndFeel)
 };
 
@@ -91,7 +92,7 @@ class SongbirdTempoButtonLookAndFeel : public SongbirdLookAndFeel {
 public:
     SongbirdTempoButtonLookAndFeel() : SongbirdLookAndFeel() {}
     virtual ~SongbirdTempoButtonLookAndFeel() = default;
-    
+
     virtual void drawButtonBackground(Graphics& /*g*/,
                                       Button& /*button*/,
                                       const Colour& /*backgroundColour*/,
@@ -99,7 +100,7 @@ public:
                                       bool /*isButtonDown*/) override {
         // do nothing
     }
-    
+
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SongbirdTempoButtonLookAndFeel);
 };

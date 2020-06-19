@@ -14,6 +14,8 @@
               enableIAA="0">
   <MAINGROUP id="DVYMLo" name="Songbird">
     <GROUP id="{DAA5CD34-6B86-E290-FBC3-480FF7B3C508}" name="Graphics">
+      <FILE id="shJHBm" name="AnonymousPro-Regular.ttf" compile="0" resource="1"
+            file="Source/Graphics/AnonymousPro-Regular.ttf"/>
       <FILE id="cAURYo" name="Background.png" compile="0" resource="1" file="Source/Graphics/Background.png"/>
     </GROUP>
     <GROUP id="{68D8F4B7-2C21-EDF6-997F-63EB52D5C65E}" name="Source">
@@ -38,7 +40,7 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" vstFolder="" extraCompilerFlags="-Wall -Wextra -Wconversion -Wshadow -Wpedantic -Wdocumentation">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" optimisation="3" targetName="Songbird" headerPath="$(WECORE_SRC)"
+        <CONFIGURATION name="Debug" optimisation="3" targetName="Songbird" headerPath="../../../WECore/Source/WECore"
                        linkTimeOptimisation="1" osxArchitecture="64BitIntel" isDebug="0"/>
         <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="Songbird"/>
       </CONFIGURATIONS>
@@ -62,8 +64,7 @@
     <LINUX_MAKE targetFolder="Builds/LinuxMakefile" vstFolder="">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="0" optimisation="3"
-                       targetName="Songbird" headerPath="~/WEA/WECore/Source/"
-                       linuxArchitecture="-m64"/>
+                       targetName="Songbird" headerPath="~/WEA/WECore/Source/" linuxArchitecture="-m64"/>
         <CONFIGURATION name="Release" libraryPath="/usr/X11R6/lib/" isDebug="0" optimisation="3"
                        targetName="Songbird"/>
       </CONFIGURATIONS>

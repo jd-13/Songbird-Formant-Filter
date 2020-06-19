@@ -131,7 +131,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     FreqMOD1Lbl.reset (new Label ("MOD 1 Freq Label",
                                   TRANS("Rate")));
     addAndMakeVisible (FreqMOD1Lbl.get());
-    FreqMOD1Lbl->setFont (Font ("Courier New", 15.0f, Font::plain).withTypefaceStyle ("Regular"));
+    FreqMOD1Lbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
     FreqMOD1Lbl->setJustificationType (Justification::centredLeft);
     FreqMOD1Lbl->setEditable (false, false, false);
     FreqMOD1Lbl->setColour (Label::textColourId, Colour (0xffffdf5e));
@@ -143,7 +143,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     DepthMOD1Lbl.reset (new Label ("MOD 1 Depth Label",
                                    TRANS("Depth")));
     addAndMakeVisible (DepthMOD1Lbl.get());
-    DepthMOD1Lbl->setFont (Font ("Courier New", 15.0f, Font::plain).withTypefaceStyle ("Regular"));
+    DepthMOD1Lbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
     DepthMOD1Lbl->setJustificationType (Justification::centredLeft);
     DepthMOD1Lbl->setEditable (false, false, false);
     DepthMOD1Lbl->setColour (Label::textColourId, Colour (0xffffdf5e));
@@ -206,7 +206,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     PhaseMOD1Lbl.reset (new Label ("MOD 1 Phase Label",
                                    TRANS("Phase")));
     addAndMakeVisible (PhaseMOD1Lbl.get());
-    PhaseMOD1Lbl->setFont (Font ("Courier New", 15.0f, Font::plain).withTypefaceStyle ("Regular"));
+    PhaseMOD1Lbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
     PhaseMOD1Lbl->setJustificationType (Justification::centredLeft);
     PhaseMOD1Lbl->setEditable (false, false, false);
     PhaseMOD1Lbl->setColour (Label::textColourId, Colour (0xffffdf5e));
@@ -230,7 +230,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     MixLbl.reset (new Label ("Mix Label",
                              TRANS("Mix")));
     addAndMakeVisible (MixLbl.get());
-    MixLbl->setFont (Font ("Courier New", 15.0f, Font::plain).withTypefaceStyle ("Regular"));
+    MixLbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
     MixLbl->setJustificationType (Justification::centredLeft);
     MixLbl->setEditable (false, false, false);
     MixLbl->setColour (Label::textColourId, Colour (0xffff8773));
@@ -242,7 +242,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     ModeLbl.reset (new Label ("Mode Label",
                               TRANS("Mode")));
     addAndMakeVisible (ModeLbl.get());
-    ModeLbl->setFont (Font ("Courier New", 15.0f, Font::plain).withTypefaceStyle ("Regular"));
+    ModeLbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
     ModeLbl->setJustificationType (Justification::centredLeft);
     ModeLbl->setEditable (false, false, false);
     ModeLbl->setColour (Label::textColourId, Colour (0xffff8773));
@@ -301,6 +301,9 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     TempoNumerMOD1Sld->setLookAndFeel(&tempoButtonLookAndFeel);
     TempoDenomMOD1Sld->setLookAndFeel(&tempoButtonLookAndFeel);
+
+    // This is needed for the fonts to be applied
+    SongbirdLookAndFeel::setDefaultLookAndFeel(&yellowLookAndFeel);
 
     startTimer(40);
 
@@ -622,12 +625,12 @@ BEGIN_JUCER_METADATA
   <LABEL name="MOD 1 Freq Label" id="dabfca26c640fd58" memberName="FreqMOD1Lbl"
          virtualName="" explicitFocusOrder="0" pos="86 306 56 24" textCol="ffffdf5e"
          edTextCol="ff000000" edBkgCol="0" labelText="Rate" editableSingleClick="0"
-         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Courier New"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
   <LABEL name="MOD 1 Depth Label" id="77092a4a55225c68" memberName="DepthMOD1Lbl"
          virtualName="" explicitFocusOrder="0" pos="143 306 54 24" textCol="ffffdf5e"
          edTextCol="ff000000" edBkgCol="0" labelText="Depth" editableSingleClick="0"
-         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Courier New"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="MOD 1 Tempo Sync Button" id="b43affdb8ac7bb90" memberName="TempoSyncMOD1Btn"
               virtualName="" explicitFocusOrder="0" pos="83 242 54 16" tooltip="Tempo sync LFO frequency"
@@ -654,7 +657,7 @@ BEGIN_JUCER_METADATA
   <LABEL name="MOD 1 Phase Label" id="af1abf98d305cb5c" memberName="PhaseMOD1Lbl"
          virtualName="" explicitFocusOrder="0" pos="202 306 56 24" textCol="ffffdf5e"
          edTextCol="ff000000" edBkgCol="0" labelText="Phase" editableSingleClick="0"
-         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Courier New"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="Mod Mode Button" id="82ccbd2e4873bcd5" memberName="ModModeBtn"
               virtualName="" explicitFocusOrder="0" pos="248 136 64 24" tooltip="Modulation mode: &quot;Blend&quot; applies both vowels in parallel and blends between the two, &quot;Freq&quot; applies a single vowel which is some combination of the two selected"
@@ -663,12 +666,12 @@ BEGIN_JUCER_METADATA
   <LABEL name="Mix Label" id="49736b42e5833ce0" memberName="MixLbl" virtualName=""
          explicitFocusOrder="0" pos="132 176 32 24" textCol="ffff8773"
          edTextCol="ff000000" edBkgCol="0" labelText="Mix" editableSingleClick="0"
-         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Courier New"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
   <LABEL name="Mode Label" id="8aeac08f9afe843a" memberName="ModeLbl"
          virtualName="" explicitFocusOrder="0" pos="258 176 54 24" textCol="ffff8773"
          edTextCol="ff000000" edBkgCol="0" labelText="Mode" editableSingleClick="0"
-         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Courier New"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>
 

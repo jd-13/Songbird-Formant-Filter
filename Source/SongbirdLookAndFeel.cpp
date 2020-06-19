@@ -26,6 +26,8 @@
 
 SongbirdLookAndFeel::SongbirdLookAndFeel() : _highlightColour2(Colour(222, 35, 35)),
                                              _lfoOutput(0) {
+    _regularFont = Font(Typeface::createSystemTypefaceFor(BinaryData::AnonymousProRegular_ttf,
+                                                          BinaryData::AnonymousProRegular_ttfSize));
 }
 
 void SongbirdLookAndFeel::setHighlightColour(Colour newColour) {
@@ -52,11 +54,11 @@ void SongbirdLookAndFeel::drawLinearSliderThumb(Graphics& g,
                                                 float /*maxSliderPos*/,
                                                 const Slider::SliderStyle /*style*/,
                                                 Slider& /*slider*/) {
-    
-    
+
+
     Path p;
     constexpr float lineWidth {1.5f};
-    
+
     auto drawThumbHalf = [&g,
                           &p,
                           height,
@@ -94,46 +96,46 @@ void SongbirdLookAndFeel::drawLinearSliderBackground(Graphics& g,
                                                      float /*maxSliderPos*/,
                                                      const Slider::SliderStyle /*style*/,
                                                      Slider& slider) {
-    
+
     // NOTE: assumes the only horizontal slider is the filter position
     if (slider.isHorizontal()) {
-        
+
         // Colour the side of the background on either side of the thumb differently
         constexpr int lineThickness {2};
         const int lineY {(y + height / 2) - (lineThickness / 2)};
-        
+
         // Draw the red half
         const int greenLength {static_cast<int>(sliderPos - _sliderThumbRadius - x)};
-        
+
         if (greenLength > 0) {
             g.setColour(highlightColour);
             g.fillRect(x, lineY, greenLength, lineThickness);
         }
-        
+
         // Draw the yellow half
         const int yellowStartX {static_cast<int>(sliderPos + _sliderThumbRadius)};
         const int yellowLength {width - yellowStartX + x};
-        
+
         if (yellowLength > 0) {
             g.setColour(_highlightColour2);
             g.fillRect(yellowStartX, lineY, yellowLength, lineThickness);
         }
-        
+
         // Draw in the modulation line
         constexpr int modLineThickness {1};
         const int modOffset {static_cast<int>((_lfoOutput * width))};
         const int modLineY {y + height - 2};
-        
+
         if (modOffset < 0) {
             g.setColour(highlightColour);
-            
+
             g.fillRect(static_cast<int>(sliderPos + modOffset),
                        modLineY,
                        -modOffset,
                        modLineThickness);
         } else {
             g.setColour(_highlightColour2);
-            
+
             g.fillRect(static_cast<int>(sliderPos),
                        modLineY,
                        modOffset,
@@ -148,16 +150,16 @@ void SongbirdLookAndFeel::drawGroupComponentOutline(Graphics& g,
                                                     const String& text,
                                                     const Justification& /*justification*/,
                                                     GroupComponent& group) {
-    
+
     constexpr int MARGIN {2};
-    
+
     g.setColour(group.findColour(GroupComponent::textColourId));
-    
+
     // Draw the text
     Font font;
-    font.setTypefaceName("Courier New");
+    font.setTypefaceName(getTypefaceForFont(font)->getName());
     g.setFont(font);
-    
+
     g.drawText(text,
                (width / 2) - 12,
                MARGIN,
@@ -165,7 +167,7 @@ void SongbirdLookAndFeel::drawGroupComponentOutline(Graphics& g,
                height,
                Justification::topLeft,
                true);
-    
+
     // Draw the separator
     const Colour outlineColour = group.findColour(GroupComponent::outlineColourId);
     const int textCentreX {width / 2};
@@ -175,8 +177,8 @@ void SongbirdLookAndFeel::drawGroupComponentOutline(Graphics& g,
     const int lineY {static_cast<int>(
                         MARGIN + (font.getHeight() / 2) - (lineThickness / 2)
                      )};
-    
-    
+
+
     g.setGradientFill(ColourGradient(outlineColour,
                                      textCentreX,
                                      lineY,
@@ -184,10 +186,14 @@ void SongbirdLookAndFeel::drawGroupComponentOutline(Graphics& g,
                                      0,
                                      lineY,
                                      true));
-    
+
     const int leftLineX {textCentreX - (lineGap / 2) - lineLength};
     const int rightLineX {textCentreX + (lineGap / 2)};
-    
+
     g.fillRect(leftLineX, lineY, lineLength, lineThickness);
     g.fillRect(rightLineX, lineY, lineLength, lineThickness);
+}
+
+Typeface::Ptr SongbirdLookAndFeel::getTypefaceForFont(const Font& /*font*/) {
+    return _regularFont.getTypeface();
 }
