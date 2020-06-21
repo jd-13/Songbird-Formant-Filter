@@ -22,5 +22,5 @@ Like other JUCE applications, Songbird is built using the Projucer. There are ho
 before it will build successfully:
 
 1. Update the header search paths to point to the location of WECore on your machine
-2. Download the font [Anonymous Pro](https://fonts.google.com/specimen/Anonymous+Pro) and place the
+2. Download the font [Montserrat](https://fonts.google.com/specimen/Montserrat) and place the
 regular ttf file in Source/Graphics
