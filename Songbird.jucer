@@ -14,9 +14,9 @@
               enableIAA="0">
   <MAINGROUP id="DVYMLo" name="Songbird">
     <GROUP id="{DAA5CD34-6B86-E290-FBC3-480FF7B3C508}" name="Graphics">
-      <FILE id="shJHBm" name="AnonymousPro-Regular.ttf" compile="0" resource="1"
-            file="Source/Graphics/AnonymousPro-Regular.ttf"/>
       <FILE id="cAURYo" name="Background.png" compile="0" resource="1" file="Source/Graphics/Background.png"/>
+      <FILE id="sM50Sc" name="Montserrat-Regular.ttf" compile="0" resource="1"
+            file="Source/Graphics/Montserrat-Regular.ttf"/>
     </GROUP>
     <GROUP id="{68D8F4B7-2C21-EDF6-997F-63EB52D5C65E}" name="Source">
       <GROUP id="{60BCB8F0-FDED-0D30-1768-BDA4A94E742C}" name="GUI">

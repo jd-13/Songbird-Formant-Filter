@@ -26,8 +26,8 @@
 
 SongbirdLookAndFeel::SongbirdLookAndFeel() : _highlightColour2(Colour(222, 35, 35)),
                                              _lfoOutput(0) {
-    _regularFont = Font(Typeface::createSystemTypefaceFor(BinaryData::AnonymousProRegular_ttf,
-                                                          BinaryData::AnonymousProRegular_ttfSize));
+    _regularFont = Font(Typeface::createSystemTypefaceFor(BinaryData::MontserratRegular_ttf,
+                                                          BinaryData::MontserratRegular_ttfSize));
 }
 
 void SongbirdLookAndFeel::setHighlightColour(Colour newColour) {
