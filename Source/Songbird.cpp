@@ -38,22 +38,22 @@ double Songbird::getLastLFOOutput() const {
 }
 
 void Songbird::Process1in1out(float* inSamples, int numSamples) {
-    
+
     mFilter.setModulation(mMOD.calcGainInLoop());
-    
+
     mFilter.Process1in1out(inSamples, numSamples);
-    
+
     _advanceLFOState(numSamples - 1);
 }
 
 void Songbird::Process1in2out(float* inLeftSamples, float* inRightSamples, int numSamples) {
-    
+
     mFilter.setModulation(mMOD.calcGainInLoop());
-    
+
     mFilter.Process1in1out(inLeftSamples, numSamples);
 
     _advanceLFOState(numSamples - 1);
-    
+
     // Copy the left buffer into the right, so that we have mono to stereo
     std::copy(inLeftSamples, inLeftSamples + numSamples, inRightSamples);
 }
@@ -61,19 +61,19 @@ void Songbird::Process1in2out(float* inLeftSamples, float* inRightSamples, int n
 void Songbird::Process2in2out(float* inLeftSamples, float* inRightSamples, int numSamples) {
 
     mFilter.setModulation(mMOD.calcGainInLoop());
-    
+
     mFilter.Process2in2out(inLeftSamples, inRightSamples, numSamples);
 
     _advanceLFOState(numSamples - 1);
 }
 
 void Songbird::_advanceLFOState(int numSteps) {
-    
+
     // Stop one short of numSteps, we'll call calcGainInLoop once more to cache the last output
     for (int iii {0}; iii < numSteps - 1; iii++) {
         mMOD.calcGainInLoop();
     }
-    
+
     // Cache the last LFO output from this buffer
     _lastLFOOutput = mMOD.calcGainInLoop();
 }
