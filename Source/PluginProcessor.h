@@ -13,12 +13,13 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Songbird.h"
+#include "CoreJUCEPlugin/CoreAudioProcessor.h"
 
 
 //==============================================================================
 /**
 */
-class SongbirdAudioProcessor  : public AudioProcessor
+class SongbirdAudioProcessor  : public WECore::JUCEPlugin::CoreAudioProcessor
 {
 public:
     //==============================================================================
@@ -45,10 +46,10 @@ public:
     int getNumParameters() override;
     float getParameter (int index) override;
     void setParameter (int index, float newValue) override;
-    
+
     const String getParameterName (int index) override;
     const String getParameterText (int index) override;
-    
+
     bool acceptsMidi() const override;
     bool producesMidi() const override;
     double getTailLengthSeconds() const override;
@@ -63,14 +64,14 @@ public:
     //==============================================================================
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
-    
+
     enum Parameters{
         vowel1 = 0,
         vowel2,
         filterPosition,
         mix,
         modMode,
-        
+
         phaseSyncMOD1,
         tempoSyncMOD1,
         waveMOD1,
@@ -79,25 +80,17 @@ public:
         phaseMOD1,
         tempoNumerMOD1,
         tempoDenomMOD1,
-        
+
+        outputGain,
+
         totalNumParams
     };
-    
-    bool NeedsUIUpdate() { return UIUpdateFlag; }
-    
-    void RequestUIUpdate() { UIUpdateFlag=true; }
-    
-    void ClearUIUpdateFlag() { UIUpdateFlag=false; }
-    
+
     double getLastLFOOutput() { return mSongbird.getLastLFOOutput(); }
 
 private:
     Songbird mSongbird;
-    bool UIUpdateFlag;
-    
-    String floatVectorToString(const std::vector<float>& fData) const;
-    
-    int stringToFloatVector(const String sFloatCSV, std::vector<float>& fData, int maxNumFloat) const;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SongbirdAudioProcessor)
 };

@@ -92,7 +92,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     MixSld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     MixSld->addListener (this);
 
-    MixSld->setBounds (112, 117, 72, 56);
+    MixSld->setBounds (80, 117, 72, 56);
 
     DepthMOD1Sld.reset (new Slider ("MOD 1 Depth Slider"));
     addAndMakeVisible (DepthMOD1Sld.get());
@@ -225,7 +225,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     ModModeBtn->setColour (TextButton::textColourOffId, Colour (0xffffcc00));
     ModModeBtn->setColour (TextButton::textColourOnId, Colour (0xffff5032));
 
-    ModModeBtn->setBounds (248, 136, 64, 24);
+    ModModeBtn->setBounds (184, 136, 64, 24);
 
     MixLbl.reset (new Label ("Mix Label",
                              TRANS("Mix")));
@@ -237,7 +237,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     MixLbl->setColour (TextEditor::textColourId, Colours::black);
     MixLbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    MixLbl->setBounds (132, 176, 32, 24);
+    MixLbl->setBounds (100, 176, 32, 24);
 
     ModeLbl.reset (new Label ("Mode Label",
                               TRANS("Mode")));
@@ -249,7 +249,29 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     ModeLbl->setColour (TextEditor::textColourId, Colours::black);
     ModeLbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    ModeLbl->setBounds (258, 176, 54, 24);
+    ModeLbl->setBounds (194, 176, 46, 24);
+
+    OutputGainSld.reset (new Slider ("Output Gain Slider"));
+    addAndMakeVisible (OutputGainSld.get());
+    OutputGainSld->setTooltip (TRANS("Output gain"));
+    OutputGainSld->setRange (0, 1, 0);
+    OutputGainSld->setSliderStyle (Slider::RotaryVerticalDrag);
+    OutputGainSld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    OutputGainSld->addListener (this);
+
+    OutputGainSld->setBounds (280, 117, 72, 56);
+
+    OutputGainLbl.reset (new Label ("Output Gain Label",
+                                    TRANS("Output Gain")));
+    addAndMakeVisible (OutputGainLbl.get());
+    OutputGainLbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
+    OutputGainLbl->setJustificationType (Justification::centredLeft);
+    OutputGainLbl->setEditable (false, false, false);
+    OutputGainLbl->setColour (Label::textColourId, Colour (0xffffdf5e));
+    OutputGainLbl->setColour (TextEditor::textColourId, Colours::black);
+    OutputGainLbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    OutputGainLbl->setBounds (272, 176, 88, 24);
 
 
     //[UserPreSize]
@@ -298,6 +320,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     Vowel2Cmb->setLookAndFeel(&yellowLookAndFeel);
     PhaseMOD1Sld->setLookAndFeel(&yellowLookAndFeel);
     WaveMOD1Cmb->setLookAndFeel(&yellowLookAndFeel);
+    OutputGainSld->setLookAndFeel(&yellowLookAndFeel);
 
     TempoNumerMOD1Sld->setLookAndFeel(&tempoButtonLookAndFeel);
     TempoDenomMOD1Sld->setLookAndFeel(&tempoButtonLookAndFeel);
@@ -307,9 +330,17 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     startTimer(40);
 
-    // make tempo sync buttons draggable
+    // Make tempo sync buttons draggable
     TempoNumerMOD1Sld->setIncDecButtonsMode(Slider::incDecButtonsDraggable_Vertical);
     TempoDenomMOD1Sld->setIncDecButtonsMode(Slider::incDecButtonsDraggable_Vertical);
+
+    // Double click to default
+    FilterPosSld->setDoubleClickReturnValue(true,
+        WECore::Songbird::Parameters::FILTER_POSITION.InteralToNormalised(WECore::Songbird::Parameters::FILTER_POSITION.defaultValue));
+    MixSld->setDoubleClickReturnValue(true,
+        WECore::Songbird::Parameters::MIX.InteralToNormalised(WECore::Songbird::Parameters::MIX.defaultValue));
+    OutputGainSld->setDoubleClickReturnValue(true,
+        WECore::Songbird::Parameters::OUTPUTGAIN.InteralToNormalised(WECore::Songbird::Parameters::OUTPUTGAIN.defaultValue));
 
     FreqMOD1Sld->setDoubleClickReturnValue(true,
         WECore::Richter::Parameters::FREQ.InteralToNormalised(WECore::Richter::Parameters::FREQ.defaultValue));
@@ -345,6 +376,8 @@ SongbirdAudioProcessorEditor::~SongbirdAudioProcessorEditor()
     ModModeBtn = nullptr;
     MixLbl = nullptr;
     ModeLbl = nullptr;
+    OutputGainSld = nullptr;
+    OutputGainLbl = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -462,6 +495,13 @@ void SongbirdAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWasMove
                                    static_cast<float>(PhaseMOD1Sld->getValue()));
         //[/UserSliderCode_PhaseMOD1Sld]
     }
+    else if (sliderThatWasMoved == OutputGainSld.get())
+    {
+        //[UserSliderCode_OutputGainSld] -- add your slider handling code here..
+        ourProcessor->setParameter(SongbirdAudioProcessor::outputGain,
+                                   static_cast<float>(OutputGainSld->getValue()));
+        //[/UserSliderCode_OutputGainSld]
+    }
 
     //[UsersliderValueChanged_Post]
     //[/UsersliderValueChanged_Post]
@@ -505,17 +545,19 @@ void SongbirdAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
 void SongbirdAudioProcessorEditor::timerCallback() {
     SongbirdAudioProcessor* ourProcessor {getProcessor()};
 
-    if (ourProcessor->NeedsUIUpdate()) {
+    if (ourProcessor->needsUIUpdate()) {
         Vowel1Cmb->setSelectedId(ourProcessor->getParameter(SongbirdAudioProcessor::vowel1),
-                                                            dontSendNotification);
+                                 dontSendNotification);
         Vowel2Cmb->setSelectedId(ourProcessor->getParameter(SongbirdAudioProcessor::vowel2),
-                                                            dontSendNotification);
+                                 dontSendNotification);
         FilterPosSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::filterPosition),
-                                                          dontSendNotification);
+                               dontSendNotification);
         MixSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::mix),
-                                                    dontSendNotification);
+                         dontSendNotification);
         ModModeBtn->setToggleState(ourProcessor->getParameter(SongbirdAudioProcessor::modMode),
-                                                              dontSendNotification);
+                                   dontSendNotification);
+        OutputGainSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::outputGain),
+                                dontSendNotification);
 
         // Set text for mod mode button
         ModModeBtn->getToggleState() ? ModModeBtn->setButtonText("FREQ") :
@@ -604,7 +646,7 @@ BEGIN_JUCER_METADATA
             editable="0" layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <SLIDER name="Mix Slider" id="b75c053482d8ac35" memberName="MixSld" virtualName=""
-          explicitFocusOrder="0" pos="112 117 72 56" tooltip="Dry/Wet mix level"
+          explicitFocusOrder="0" pos="80 117 72 56" tooltip="Dry/Wet mix level"
           min="0.0" max="1.0" int="0.0" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
@@ -660,17 +702,27 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="Mod Mode Button" id="82ccbd2e4873bcd5" memberName="ModModeBtn"
-              virtualName="" explicitFocusOrder="0" pos="248 136 64 24" tooltip="Modulation mode: &quot;Blend&quot; applies both vowels in parallel and blends between the two, &quot;Freq&quot; applies a single vowel which is some combination of the two selected"
+              virtualName="" explicitFocusOrder="0" pos="184 136 64 24" tooltip="Modulation mode: &quot;Blend&quot; applies both vowels in parallel and blends between the two, &quot;Freq&quot; applies a single vowel which is some combination of the two selected"
               bgColOff="ffffcc00" bgColOn="ffff5032" textCol="ffffcc00" textColOn="ffff5032"
               buttonText="Blend" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <LABEL name="Mix Label" id="49736b42e5833ce0" memberName="MixLbl" virtualName=""
-         explicitFocusOrder="0" pos="132 176 32 24" textCol="ffff8773"
+         explicitFocusOrder="0" pos="100 176 32 24" textCol="ffff8773"
          edTextCol="ff000000" edBkgCol="0" labelText="Mix" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
   <LABEL name="Mode Label" id="8aeac08f9afe843a" memberName="ModeLbl"
-         virtualName="" explicitFocusOrder="0" pos="258 176 54 24" textCol="ffff8773"
+         virtualName="" explicitFocusOrder="0" pos="194 176 46 24" textCol="ffff8773"
          edTextCol="ff000000" edBkgCol="0" labelText="Mode" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
+  <SLIDER name="Output Gain Slider" id="69d51698f3b89634" memberName="OutputGainSld"
+          virtualName="" explicitFocusOrder="0" pos="280 117 72 56" tooltip="Output gain"
+          min="0.0" max="1.0" int="0.0" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
+          needsCallback="1"/>
+  <LABEL name="Output Gain Label" id="fe76b3e123fa3f5" memberName="OutputGainLbl"
+         virtualName="" explicitFocusOrder="0" pos="272 176 88 24" textCol="ffffdf5e"
+         edTextCol="ff000000" edBkgCol="0" labelText="Output Gain" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>

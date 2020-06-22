@@ -91,6 +91,8 @@ private:
     std::unique_ptr<TextButton> ModModeBtn;
     std::unique_ptr<Label> MixLbl;
     std::unique_ptr<Label> ModeLbl;
+    std::unique_ptr<Slider> OutputGainSld;
+    std::unique_ptr<Label> OutputGainLbl;
 
 
     //==============================================================================
