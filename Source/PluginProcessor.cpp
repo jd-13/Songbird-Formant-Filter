@@ -219,7 +219,7 @@ const String SongbirdAudioProcessor::getParameterName(int index) {
             return TEMPODENOMMOD1_STR;
 
         default:
-            return String::empty;
+            return String();
     }
 }
 
@@ -270,7 +270,7 @@ const String SongbirdAudioProcessor::getParameterText(int index)
             return String(mSongbird.mMOD.getTempoDenom());
 
         default:
-            return String::empty;
+            return String();
     }
 }
 
