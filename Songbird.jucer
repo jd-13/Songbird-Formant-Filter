@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="KSzb4y" name="Songbird" projectType="audioplug" version="2.0.0"
               bundleIdentifier="com.whiteelephantaudio.Songbird" includeBinaryInAppConfig="1"
-              buildVST="1" buildVST3="1" buildAU="1" buildAUv3="0" buildRTAS="0"
+              buildVST="0" buildVST3="1" buildAU="1" buildAUv3="0" buildRTAS="0"
               buildAAX="0" pluginName="Songbird" pluginDesc="Songbird" pluginManufacturer="White Elephant Audio"
               pluginManufacturerCode="WEle" pluginCode="Sbrd" pluginChannelConfigs="{1, 1}, {1, 2}, {2, 2}"
               pluginIsSynth="0" pluginWantsMidiIn="0" pluginProducesMidiOut="0"
@@ -10,8 +10,7 @@
               pluginRTASCategory="" aaxIdentifier="com.whiteelephantaudio.Songbird"
               pluginAAXCategory="2" jucerVersion="5.4.1" companyName="White Elephant Audio"
               companyWebsite="www.whiteelephantaudio.com" companyEmail="info@whiteelephantaudio.com"
-              pluginFormats="buildAU,buildVST,buildVST3" buildStandalone="0"
-              enableIAA="0">
+              pluginFormats="buildAU,buildVST3" buildStandalone="0" enableIAA="0">
   <MAINGROUP id="DVYMLo" name="Songbird">
     <GROUP id="{DAA5CD34-6B86-E290-FBC3-480FF7B3C508}" name="Graphics">
       <FILE id="cAURYo" name="Background.png" compile="0" resource="1" file="Source/Graphics/Background.png"/>
