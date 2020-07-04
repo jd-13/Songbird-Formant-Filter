@@ -84,7 +84,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     Vowel2Cmb->setBounds (316, 64, 48, 24);
 
-    MixSld.reset (new Slider ("Mix Slider"));
+    MixSld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("Mix Slider"));
     addAndMakeVisible (MixSld.get());
     MixSld->setTooltip (TRANS("Dry/Wet mix level"));
     MixSld->setRange (0, 1, 0);
@@ -94,7 +94,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     MixSld->setBounds (80, 117, 72, 56);
 
-    DepthMOD1Sld.reset (new Slider ("MOD 1 Depth Slider"));
+    DepthMOD1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("MOD 1 Depth Slider"));
     addAndMakeVisible (DepthMOD1Sld.get());
     DepthMOD1Sld->setTooltip (TRANS("Depth of the LFO"));
     DepthMOD1Sld->setRange (0, 1, 0.01);
@@ -104,7 +104,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     DepthMOD1Sld->setBounds (151, 276, 32, 24);
 
-    FreqMOD1Sld.reset (new Slider ("MOD 1 Freq Slider"));
+    FreqMOD1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("MOD 1 Freq Slider"));
     addAndMakeVisible (FreqMOD1Sld.get());
     FreqMOD1Sld->setTooltip (TRANS("Frequency of the LFO, from 2Hz to 20Hz"));
     FreqMOD1Sld->setRange (0, 1, 0.01);
@@ -193,7 +193,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     PhaseSyncMOD1Btn->setBounds (205, 242, 43, 16);
 
-    PhaseMOD1Sld.reset (new Slider ("MOD 1 Phase Slider"));
+    PhaseMOD1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("MOD 1 Phase Slider"));
     addAndMakeVisible (PhaseMOD1Sld.get());
     PhaseMOD1Sld->setTooltip (TRANS("Phase shift the LFO by up to 360 degrees"));
     PhaseMOD1Sld->setRange (0, 1, 0.01);
@@ -251,7 +251,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     ModeLbl->setBounds (194, 176, 46, 24);
 
-    OutputGainSld.reset (new Slider ("Output Gain Slider"));
+    OutputGainSld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("Output Gain Slider"));
     addAndMakeVisible (OutputGainSld.get());
     OutputGainSld->setTooltip (TRANS("Output gain"));
     OutputGainSld->setRange (0, 1, 0);
@@ -334,27 +334,16 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     TempoNumerMOD1Sld->setIncDecButtonsMode(Slider::incDecButtonsDraggable_Vertical);
     TempoDenomMOD1Sld->setIncDecButtonsMode(Slider::incDecButtonsDraggable_Vertical);
 
-    // Double click to default
-    FilterPosSld->setDoubleClickReturnValue(true,
-        WECore::Songbird::Parameters::FILTER_POSITION.InteralToNormalised(WECore::Songbird::Parameters::FILTER_POSITION.defaultValue));
-    MixSld->setDoubleClickReturnValue(true,
-        WECore::Songbird::Parameters::MIX.InteralToNormalised(WECore::Songbird::Parameters::MIX.defaultValue));
-    OutputGainSld->setDoubleClickReturnValue(true,
-        WECore::Songbird::Parameters::OUTPUTGAIN.InteralToNormalised(WECore::Songbird::Parameters::OUTPUTGAIN.defaultValue));
+    _enableDoubleClickToDefault();
 
-    FreqMOD1Sld->setDoubleClickReturnValue(true,
-        WECore::Richter::Parameters::FREQ.InteralToNormalised(WECore::Richter::Parameters::FREQ.defaultValue));
-    DepthMOD1Sld->setDoubleClickReturnValue(true,
-        WECore::Richter::Parameters::DEPTH.InteralToNormalised(WECore::Richter::Parameters::DEPTH.defaultValue));
-    PhaseMOD1Sld->setDoubleClickReturnValue(true,
-        WECore::Richter::Parameters::PHASE.InteralToNormalised(WECore::Richter::Parameters::PHASE.defaultValue));
-
+    _startSliderReadouts();
     //[/Constructor]
 }
 
 SongbirdAudioProcessorEditor::~SongbirdAudioProcessorEditor()
 {
     //[Destructor_pre]. You can add your own custom destruction code here..
+    _stopSliderReadouts();
     //[/Destructor_pre]
 
     MOD1Group = nullptr;
@@ -610,6 +599,41 @@ void SongbirdAudioProcessorEditor::timerCallback() {
     orangeLookAndFeel.updateLFOOutput(ourProcessor->getLastLFOOutput());
     FilterPosSld->repaint();
 }
+
+void SongbirdAudioProcessorEditor::_enableDoubleClickToDefault() {
+    FilterPosSld->setDoubleClickReturnValue(true,
+        WECore::Songbird::Parameters::FILTER_POSITION.InteralToNormalised(WECore::Songbird::Parameters::FILTER_POSITION.defaultValue));
+    MixSld->setDoubleClickReturnValue(true,
+        WECore::Songbird::Parameters::MIX.InteralToNormalised(WECore::Songbird::Parameters::MIX.defaultValue));
+    OutputGainSld->setDoubleClickReturnValue(true,
+        WECore::Songbird::Parameters::OUTPUTGAIN.InteralToNormalised(WECore::Songbird::Parameters::OUTPUTGAIN.defaultValue));
+
+    FreqMOD1Sld->setDoubleClickReturnValue(true,
+        WECore::Richter::Parameters::FREQ.InteralToNormalised(WECore::Richter::Parameters::FREQ.defaultValue));
+    DepthMOD1Sld->setDoubleClickReturnValue(true,
+        WECore::Richter::Parameters::DEPTH.InteralToNormalised(WECore::Richter::Parameters::DEPTH.defaultValue));
+    PhaseMOD1Sld->setDoubleClickReturnValue(true,
+        WECore::Richter::Parameters::PHASE.InteralToNormalised(WECore::Richter::Parameters::PHASE.defaultValue));
+}
+
+void SongbirdAudioProcessorEditor::_startSliderReadouts() {
+    MixSld->start(MixLbl.get(), MixLbl->getText(), &WECore::Songbird::Parameters::MIX);
+    OutputGainSld->start(OutputGainLbl.get(), OutputGainLbl->getText(), &WECore::Songbird::Parameters::OUTPUTGAIN);
+
+    FreqMOD1Sld->start(FreqMOD1Lbl.get(), FreqMOD1Lbl->getText(), &WECore::Richter::Parameters::FREQ);
+    DepthMOD1Sld->start(DepthMOD1Lbl.get(), DepthMOD1Lbl->getText(), &WECore::Richter::Parameters::DEPTH);
+    PhaseMOD1Sld->start(PhaseMOD1Lbl.get(), PhaseMOD1Lbl->getText(), &WECore::Richter::Parameters::PHASE);
+}
+
+void SongbirdAudioProcessorEditor::_stopSliderReadouts() {
+    MixSld->stop();
+    OutputGainSld->stop();
+
+    FreqMOD1Sld->stop();
+    DepthMOD1Sld->stop();
+    PhaseMOD1Sld->stop();
+}
+
 //[/MiscUserCode]
 
 
@@ -645,18 +669,18 @@ BEGIN_JUCER_METADATA
             virtualName="" explicitFocusOrder="0" pos="316 64 48 24" tooltip="Vowel to apply in the right position"
             editable="0" layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
-  <SLIDER name="Mix Slider" id="b75c053482d8ac35" memberName="MixSld" virtualName=""
-          explicitFocusOrder="0" pos="80 117 72 56" tooltip="Dry/Wet mix level"
+  <SLIDER name="Mix Slider" id="b75c053482d8ac35" memberName="MixSld"
+          virtualName="WECore::JUCEPlugin::LabelReadoutSlider<double>" explicitFocusOrder="0" pos="80 117 72 56" tooltip="Dry/Wet mix level"
           min="0.0" max="1.0" int="0.0" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
   <SLIDER name="MOD 1 Depth Slider" id="499f6451911662cc" memberName="DepthMOD1Sld"
-          virtualName="" explicitFocusOrder="0" pos="151 276 32 24" tooltip="Depth of the LFO"
+          virtualName="WECore::JUCEPlugin::LabelReadoutSlider<double>" explicitFocusOrder="0" pos="151 276 32 24" tooltip="Depth of the LFO"
           min="0.0" max="1.0" int="0.01000000000000000021" style="RotaryVerticalDrag"
           textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
           textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
   <SLIDER name="MOD 1 Freq Slider" id="1d9800ca18cf5bba" memberName="FreqMOD1Sld"
-          virtualName="" explicitFocusOrder="0" pos="92 276 32 24" tooltip="Frequency of the LFO, from 2Hz to 20Hz"
+          virtualName="WECore::JUCEPlugin::LabelReadoutSlider<double>" explicitFocusOrder="0" pos="92 276 32 24" tooltip="Frequency of the LFO, from 2Hz to 20Hz"
           min="0.0" max="1.0" int="0.01000000000000000021" style="RotaryVerticalDrag"
           textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
           textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
@@ -692,7 +716,7 @@ BEGIN_JUCER_METADATA
               virtualName="" explicitFocusOrder="0" pos="205 242 43 16" tooltip="Enable phase sync to ensure the phase of the LFO is consistent regardless of where the DAW playhead starts from"
               buttonText="Sync" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <SLIDER name="MOD 1 Phase Slider" id="3f1ef3d10c303bac" memberName="PhaseMOD1Sld"
-          virtualName="" explicitFocusOrder="0" pos="210 276 32 24" tooltip="Phase shift the LFO by up to 360 degrees"
+          virtualName="WECore::JUCEPlugin::LabelReadoutSlider<double>" explicitFocusOrder="0" pos="210 276 32 24" tooltip="Phase shift the LFO by up to 360 degrees"
           min="0.0" max="1.0" int="0.01000000000000000021" style="RotaryVerticalDrag"
           textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
           textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
@@ -716,7 +740,7 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
   <SLIDER name="Output Gain Slider" id="69d51698f3b89634" memberName="OutputGainSld"
-          virtualName="" explicitFocusOrder="0" pos="280 117 72 56" tooltip="Output gain"
+          virtualName="WECore::JUCEPlugin::LabelReadoutSlider<double>" explicitFocusOrder="0" pos="280 117 72 56" tooltip="Output gain"
           min="0.0" max="1.0" int="0.0" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>

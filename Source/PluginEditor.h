@@ -24,6 +24,7 @@
 #include "PluginProcessor.h"
 #include "SongbirdLookAndFeel.h"
 #include "CoreJUCEPlugin/CoreProcessorEditor.h"
+#include "CoreJUCEPlugin/LabelReadoutSlider.h"
 //[/Headers]
 
 
@@ -69,6 +70,10 @@ private:
                         yellowLookAndFeel;
 
     SongbirdTempoButtonLookAndFeel tempoButtonLookAndFeel;
+
+    void _enableDoubleClickToDefault();
+    void _startSliderReadouts();
+    void _stopSliderReadouts();
     //[/UserVariables]
 
     //==============================================================================
@@ -76,9 +81,9 @@ private:
     std::unique_ptr<ComboBox> Vowel1Cmb;
     std::unique_ptr<Slider> FilterPosSld;
     std::unique_ptr<ComboBox> Vowel2Cmb;
-    std::unique_ptr<Slider> MixSld;
-    std::unique_ptr<Slider> DepthMOD1Sld;
-    std::unique_ptr<Slider> FreqMOD1Sld;
+    std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> MixSld;
+    std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> DepthMOD1Sld;
+    std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> FreqMOD1Sld;
     std::unique_ptr<ComboBox> WaveMOD1Cmb;
     std::unique_ptr<Label> FreqMOD1Lbl;
     std::unique_ptr<Label> DepthMOD1Lbl;
@@ -86,12 +91,12 @@ private:
     std::unique_ptr<Slider> TempoNumerMOD1Sld;
     std::unique_ptr<Slider> TempoDenomMOD1Sld;
     std::unique_ptr<TextButton> PhaseSyncMOD1Btn;
-    std::unique_ptr<Slider> PhaseMOD1Sld;
+    std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> PhaseMOD1Sld;
     std::unique_ptr<Label> PhaseMOD1Lbl;
     std::unique_ptr<TextButton> ModModeBtn;
     std::unique_ptr<Label> MixLbl;
     std::unique_ptr<Label> ModeLbl;
-    std::unique_ptr<Slider> OutputGainSld;
+    std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> OutputGainSld;
     std::unique_ptr<Label> OutputGainLbl;
 
 
