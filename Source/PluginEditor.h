@@ -7,12 +7,12 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.4.1
+  Created with Projucer version: 6.0.1
 
   ------------------------------------------------------------------------------
 
   The Projucer is part of the JUCE library.
-  Copyright (c) 2017 - ROLI Ltd.
+  Copyright (c) 2020 - Raw Material Software Limited.
 
   ==============================================================================
 */
@@ -39,14 +39,14 @@
 */
 class SongbirdAudioProcessorEditor  : public WECore::JUCEPlugin::CoreProcessorEditor,
                                       public Timer,
-                                      public ComboBox::Listener,
-                                      public Slider::Listener,
-                                      public Button::Listener
+                                      public juce::ComboBox::Listener,
+                                      public juce::Slider::Listener,
+                                      public juce::Button::Listener
 {
 public:
     //==============================================================================
     SongbirdAudioProcessorEditor (SongbirdAudioProcessor& ownerFilter);
-    ~SongbirdAudioProcessorEditor();
+    ~SongbirdAudioProcessorEditor() override;
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
@@ -56,11 +56,11 @@ public:
     }
     //[/UserMethods]
 
-    void paint (Graphics& g) override;
+    void paint (juce::Graphics& g) override;
     void resized() override;
-    void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
-    void sliderValueChanged (Slider* sliderThatWasMoved) override;
-    void buttonClicked (Button* buttonThatWasClicked) override;
+    void comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged) override;
+    void sliderValueChanged (juce::Slider* sliderThatWasMoved) override;
+    void buttonClicked (juce::Button* buttonThatWasClicked) override;
 
 
 
@@ -77,27 +77,27 @@ private:
     //[/UserVariables]
 
     //==============================================================================
-    std::unique_ptr<GroupComponent> MOD1Group;
-    std::unique_ptr<ComboBox> Vowel1Cmb;
+    std::unique_ptr<juce::GroupComponent> MOD1Group;
+    std::unique_ptr<juce::ComboBox> Vowel1Cmb;
     std::unique_ptr<Slider> FilterPosSld;
-    std::unique_ptr<ComboBox> Vowel2Cmb;
+    std::unique_ptr<juce::ComboBox> Vowel2Cmb;
     std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> MixSld;
     std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> DepthMOD1Sld;
     std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> FreqMOD1Sld;
-    std::unique_ptr<ComboBox> WaveMOD1Cmb;
-    std::unique_ptr<Label> FreqMOD1Lbl;
-    std::unique_ptr<Label> DepthMOD1Lbl;
-    std::unique_ptr<TextButton> TempoSyncMOD1Btn;
-    std::unique_ptr<Slider> TempoNumerMOD1Sld;
-    std::unique_ptr<Slider> TempoDenomMOD1Sld;
-    std::unique_ptr<TextButton> PhaseSyncMOD1Btn;
+    std::unique_ptr<juce::ComboBox> WaveMOD1Cmb;
+    std::unique_ptr<juce::Label> FreqMOD1Lbl;
+    std::unique_ptr<juce::Label> DepthMOD1Lbl;
+    std::unique_ptr<juce::TextButton> TempoSyncMOD1Btn;
+    std::unique_ptr<juce::Slider> TempoNumerMOD1Sld;
+    std::unique_ptr<juce::Slider> TempoDenomMOD1Sld;
+    std::unique_ptr<juce::TextButton> PhaseSyncMOD1Btn;
     std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> PhaseMOD1Sld;
-    std::unique_ptr<Label> PhaseMOD1Lbl;
-    std::unique_ptr<TextButton> ModModeBtn;
-    std::unique_ptr<Label> MixLbl;
-    std::unique_ptr<Label> ModeLbl;
+    std::unique_ptr<juce::Label> PhaseMOD1Lbl;
+    std::unique_ptr<juce::TextButton> ModModeBtn;
+    std::unique_ptr<juce::Label> MixLbl;
+    std::unique_ptr<juce::Label> ModeLbl;
     std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> OutputGainSld;
-    std::unique_ptr<Label> OutputGainLbl;
+    std::unique_ptr<juce::Label> OutputGainLbl;
 
 
     //==============================================================================
@@ -106,3 +106,4 @@ private:
 
 //[EndFile] You can add extra defines here...
 //[/EndFile]
+

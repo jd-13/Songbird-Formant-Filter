@@ -7,12 +7,12 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.4.1
+  Created with Projucer version: 6.0.1
 
   ------------------------------------------------------------------------------
 
   The Projucer is part of the JUCE library.
-  Copyright (c) 2017 - ROLI Ltd.
+  Copyright (c) 2020 - Raw Material Software Limited.
 
   ==============================================================================
 */
@@ -33,21 +33,21 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     //[Constructor_pre] You can add your own custom stuff here..
     //[/Constructor_pre]
 
-    MOD1Group.reset (new GroupComponent ("MOD 1 Group",
-                                         TRANS("LFO")));
+    MOD1Group.reset (new juce::GroupComponent ("MOD 1 Group",
+                                               TRANS("LFO")));
     addAndMakeVisible (MOD1Group.get());
-    MOD1Group->setTextLabelPosition (Justification::centred);
-    MOD1Group->setColour (GroupComponent::outlineColourId, Colour (0xffff8773));
-    MOD1Group->setColour (GroupComponent::textColourId, Colour (0xffff8773));
+    MOD1Group->setTextLabelPosition (juce::Justification::centred);
+    MOD1Group->setColour (juce::GroupComponent::outlineColourId, juce::Colour (0xffff8773));
+    MOD1Group->setColour (juce::GroupComponent::textColourId, juce::Colour (0xffff8773));
 
     MOD1Group->setBounds (72, 214, 280, 136);
 
-    Vowel1Cmb.reset (new ComboBox ("Vowel 1 Combo Box"));
+    Vowel1Cmb.reset (new juce::ComboBox ("Vowel 1 Combo Box"));
     addAndMakeVisible (Vowel1Cmb.get());
     Vowel1Cmb->setTooltip (TRANS("Vowel to apply in the left position"));
     Vowel1Cmb->setEditableText (false);
-    Vowel1Cmb->setJustificationType (Justification::centredLeft);
-    Vowel1Cmb->setTextWhenNothingSelected (String());
+    Vowel1Cmb->setJustificationType (juce::Justification::centredLeft);
+    Vowel1Cmb->setTextWhenNothingSelected (juce::String());
     Vowel1Cmb->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     Vowel1Cmb->addItem (TRANS("A"), 1);
     Vowel1Cmb->addItem (TRANS("E"), 2);
@@ -62,18 +62,18 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     addAndMakeVisible (FilterPosSld.get());
     FilterPosSld->setTooltip (TRANS("Manully modulate between the two vowels using the mode selected below"));
     FilterPosSld->setRange (0, 1, 0);
-    FilterPosSld->setSliderStyle (Slider::LinearHorizontal);
-    FilterPosSld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    FilterPosSld->setSliderStyle (juce::Slider::LinearHorizontal);
+    FilterPosSld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     FilterPosSld->addListener (this);
 
     FilterPosSld->setBounds (124, 64, 184, 24);
 
-    Vowel2Cmb.reset (new ComboBox ("Vowel 2 Combo Box"));
+    Vowel2Cmb.reset (new juce::ComboBox ("Vowel 2 Combo Box"));
     addAndMakeVisible (Vowel2Cmb.get());
     Vowel2Cmb->setTooltip (TRANS("Vowel to apply in the right position"));
     Vowel2Cmb->setEditableText (false);
-    Vowel2Cmb->setJustificationType (Justification::centredLeft);
-    Vowel2Cmb->setTextWhenNothingSelected (String());
+    Vowel2Cmb->setJustificationType (juce::Justification::centredLeft);
+    Vowel2Cmb->setTextWhenNothingSelected (juce::String());
     Vowel2Cmb->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     Vowel2Cmb->addItem (TRANS("A"), 1);
     Vowel2Cmb->addItem (TRANS("E"), 2);
@@ -88,8 +88,8 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     addAndMakeVisible (MixSld.get());
     MixSld->setTooltip (TRANS("Dry/Wet mix level"));
     MixSld->setRange (0, 1, 0);
-    MixSld->setSliderStyle (Slider::RotaryVerticalDrag);
-    MixSld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    MixSld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
+    MixSld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     MixSld->addListener (this);
 
     MixSld->setBounds (80, 117, 72, 56);
@@ -98,8 +98,8 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     addAndMakeVisible (DepthMOD1Sld.get());
     DepthMOD1Sld->setTooltip (TRANS("Depth of the LFO"));
     DepthMOD1Sld->setRange (0, 1, 0.01);
-    DepthMOD1Sld->setSliderStyle (Slider::RotaryVerticalDrag);
-    DepthMOD1Sld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    DepthMOD1Sld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
+    DepthMOD1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     DepthMOD1Sld->addListener (this);
 
     DepthMOD1Sld->setBounds (151, 276, 32, 24);
@@ -108,18 +108,18 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     addAndMakeVisible (FreqMOD1Sld.get());
     FreqMOD1Sld->setTooltip (TRANS("Frequency of the LFO, from 2Hz to 20Hz"));
     FreqMOD1Sld->setRange (0, 1, 0.01);
-    FreqMOD1Sld->setSliderStyle (Slider::RotaryVerticalDrag);
-    FreqMOD1Sld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    FreqMOD1Sld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
+    FreqMOD1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     FreqMOD1Sld->addListener (this);
 
     FreqMOD1Sld->setBounds (92, 276, 32, 24);
 
-    WaveMOD1Cmb.reset (new ComboBox ("MOD 1 Wave"));
+    WaveMOD1Cmb.reset (new juce::ComboBox ("MOD 1 Wave"));
     addAndMakeVisible (WaveMOD1Cmb.get());
     WaveMOD1Cmb->setTooltip (TRANS("LFO wave shape"));
     WaveMOD1Cmb->setEditableText (false);
-    WaveMOD1Cmb->setJustificationType (Justification::centredLeft);
-    WaveMOD1Cmb->setTextWhenNothingSelected (String());
+    WaveMOD1Cmb->setJustificationType (juce::Justification::centredLeft);
+    WaveMOD1Cmb->setTextWhenNothingSelected (juce::String());
     WaveMOD1Cmb->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     WaveMOD1Cmb->addItem (TRANS("Sine"), 1);
     WaveMOD1Cmb->addItem (TRANS("Square"), 2);
@@ -128,31 +128,31 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     WaveMOD1Cmb->setBounds (259, 283, 80, 24);
 
-    FreqMOD1Lbl.reset (new Label ("MOD 1 Freq Label",
-                                  TRANS("Rate")));
+    FreqMOD1Lbl.reset (new juce::Label ("MOD 1 Freq Label",
+                                        TRANS("Rate")));
     addAndMakeVisible (FreqMOD1Lbl.get());
-    FreqMOD1Lbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
-    FreqMOD1Lbl->setJustificationType (Justification::centredLeft);
+    FreqMOD1Lbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    FreqMOD1Lbl->setJustificationType (juce::Justification::centredLeft);
     FreqMOD1Lbl->setEditable (false, false, false);
-    FreqMOD1Lbl->setColour (Label::textColourId, Colour (0xffffdf5e));
-    FreqMOD1Lbl->setColour (TextEditor::textColourId, Colours::black);
-    FreqMOD1Lbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    FreqMOD1Lbl->setColour (juce::Label::textColourId, juce::Colour (0xffffdf5e));
+    FreqMOD1Lbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    FreqMOD1Lbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
     FreqMOD1Lbl->setBounds (86, 306, 56, 24);
 
-    DepthMOD1Lbl.reset (new Label ("MOD 1 Depth Label",
-                                   TRANS("Depth")));
+    DepthMOD1Lbl.reset (new juce::Label ("MOD 1 Depth Label",
+                                         TRANS("Depth")));
     addAndMakeVisible (DepthMOD1Lbl.get());
-    DepthMOD1Lbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
-    DepthMOD1Lbl->setJustificationType (Justification::centredLeft);
+    DepthMOD1Lbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    DepthMOD1Lbl->setJustificationType (juce::Justification::centredLeft);
     DepthMOD1Lbl->setEditable (false, false, false);
-    DepthMOD1Lbl->setColour (Label::textColourId, Colour (0xffffdf5e));
-    DepthMOD1Lbl->setColour (TextEditor::textColourId, Colours::black);
-    DepthMOD1Lbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    DepthMOD1Lbl->setColour (juce::Label::textColourId, juce::Colour (0xffffdf5e));
+    DepthMOD1Lbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    DepthMOD1Lbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
     DepthMOD1Lbl->setBounds (143, 306, 54, 24);
 
-    TempoSyncMOD1Btn.reset (new TextButton ("MOD 1 Tempo Sync Button"));
+    TempoSyncMOD1Btn.reset (new juce::TextButton ("MOD 1 Tempo Sync Button"));
     addAndMakeVisible (TempoSyncMOD1Btn.get());
     TempoSyncMOD1Btn->setTooltip (TRANS("Tempo sync LFO frequency"));
     TempoSyncMOD1Btn->setButtonText (TRANS("Tempo"));
@@ -160,32 +160,32 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     TempoSyncMOD1Btn->setBounds (83, 242, 54, 16);
 
-    TempoNumerMOD1Sld.reset (new Slider ("MOD 1 Tempo Numer Slider"));
+    TempoNumerMOD1Sld.reset (new juce::Slider ("MOD 1 Tempo Numer Slider"));
     addAndMakeVisible (TempoNumerMOD1Sld.get());
     TempoNumerMOD1Sld->setRange (1, 4, 1);
-    TempoNumerMOD1Sld->setSliderStyle (Slider::IncDecButtons);
-    TempoNumerMOD1Sld->setTextBoxStyle (Slider::TextBoxLeft, false, 40, 20);
-    TempoNumerMOD1Sld->setColour (Slider::textBoxTextColourId, Colour (0xffffdf5e));
-    TempoNumerMOD1Sld->setColour (Slider::textBoxBackgroundColourId, Colour (0x00c8c8c8));
-    TempoNumerMOD1Sld->setColour (Slider::textBoxOutlineColourId, Colour (0x00808080));
+    TempoNumerMOD1Sld->setSliderStyle (juce::Slider::IncDecButtons);
+    TempoNumerMOD1Sld->setTextBoxStyle (juce::Slider::TextBoxLeft, false, 40, 20);
+    TempoNumerMOD1Sld->setColour (juce::Slider::textBoxTextColourId, juce::Colour (0xffffdf5e));
+    TempoNumerMOD1Sld->setColour (juce::Slider::textBoxBackgroundColourId, juce::Colour (0x00c8c8c8));
+    TempoNumerMOD1Sld->setColour (juce::Slider::textBoxOutlineColourId, juce::Colour (0x00808080));
     TempoNumerMOD1Sld->addListener (this);
 
     TempoNumerMOD1Sld->setBounds (78, 274, 56, 16);
 
-    TempoDenomMOD1Sld.reset (new Slider ("MOD 1 Tempo Denom Slider"));
+    TempoDenomMOD1Sld.reset (new juce::Slider ("MOD 1 Tempo Denom Slider"));
     addAndMakeVisible (TempoDenomMOD1Sld.get());
     TempoDenomMOD1Sld->setRange (1, 32, 1);
-    TempoDenomMOD1Sld->setSliderStyle (Slider::IncDecButtons);
-    TempoDenomMOD1Sld->setTextBoxStyle (Slider::TextBoxLeft, false, 40, 20);
-    TempoDenomMOD1Sld->setColour (Slider::backgroundColourId, Colour (0xff263238));
-    TempoDenomMOD1Sld->setColour (Slider::textBoxTextColourId, Colour (0xffffdf5e));
-    TempoDenomMOD1Sld->setColour (Slider::textBoxBackgroundColourId, Colour (0x00c8c8c8));
-    TempoDenomMOD1Sld->setColour (Slider::textBoxOutlineColourId, Colour (0x00808080));
+    TempoDenomMOD1Sld->setSliderStyle (juce::Slider::IncDecButtons);
+    TempoDenomMOD1Sld->setTextBoxStyle (juce::Slider::TextBoxLeft, false, 40, 20);
+    TempoDenomMOD1Sld->setColour (juce::Slider::backgroundColourId, juce::Colour (0xff263238));
+    TempoDenomMOD1Sld->setColour (juce::Slider::textBoxTextColourId, juce::Colour (0xffffdf5e));
+    TempoDenomMOD1Sld->setColour (juce::Slider::textBoxBackgroundColourId, juce::Colour (0x00c8c8c8));
+    TempoDenomMOD1Sld->setColour (juce::Slider::textBoxOutlineColourId, juce::Colour (0x00808080));
     TempoDenomMOD1Sld->addListener (this);
 
     TempoDenomMOD1Sld->setBounds (78, 306, 56, 16);
 
-    PhaseSyncMOD1Btn.reset (new TextButton ("MOD 1 Phase Sync Button"));
+    PhaseSyncMOD1Btn.reset (new juce::TextButton ("MOD 1 Phase Sync Button"));
     addAndMakeVisible (PhaseSyncMOD1Btn.get());
     PhaseSyncMOD1Btn->setTooltip (TRANS("Enable phase sync to ensure the phase of the LFO is consistent regardless of where the DAW playhead starts from"));
     PhaseSyncMOD1Btn->setButtonText (TRANS("Sync"));
@@ -197,57 +197,57 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     addAndMakeVisible (PhaseMOD1Sld.get());
     PhaseMOD1Sld->setTooltip (TRANS("Phase shift the LFO by up to 360 degrees"));
     PhaseMOD1Sld->setRange (0, 1, 0.01);
-    PhaseMOD1Sld->setSliderStyle (Slider::RotaryVerticalDrag);
-    PhaseMOD1Sld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    PhaseMOD1Sld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
+    PhaseMOD1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     PhaseMOD1Sld->addListener (this);
 
     PhaseMOD1Sld->setBounds (210, 276, 32, 24);
 
-    PhaseMOD1Lbl.reset (new Label ("MOD 1 Phase Label",
-                                   TRANS("Phase")));
+    PhaseMOD1Lbl.reset (new juce::Label ("MOD 1 Phase Label",
+                                         TRANS("Phase")));
     addAndMakeVisible (PhaseMOD1Lbl.get());
-    PhaseMOD1Lbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
-    PhaseMOD1Lbl->setJustificationType (Justification::centredLeft);
+    PhaseMOD1Lbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    PhaseMOD1Lbl->setJustificationType (juce::Justification::centredLeft);
     PhaseMOD1Lbl->setEditable (false, false, false);
-    PhaseMOD1Lbl->setColour (Label::textColourId, Colour (0xffffdf5e));
-    PhaseMOD1Lbl->setColour (TextEditor::textColourId, Colours::black);
-    PhaseMOD1Lbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    PhaseMOD1Lbl->setColour (juce::Label::textColourId, juce::Colour (0xffffdf5e));
+    PhaseMOD1Lbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    PhaseMOD1Lbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
     PhaseMOD1Lbl->setBounds (202, 306, 56, 24);
 
-    ModModeBtn.reset (new TextButton ("Mod Mode Button"));
+    ModModeBtn.reset (new juce::TextButton ("Mod Mode Button"));
     addAndMakeVisible (ModModeBtn.get());
     ModModeBtn->setTooltip (TRANS("Modulation mode: \"Blend\" applies both vowels in parallel and blends between the two, \"Freq\" applies a single vowel which is some combination of the two selected"));
     ModModeBtn->setButtonText (TRANS("Blend"));
     ModModeBtn->addListener (this);
-    ModModeBtn->setColour (TextButton::buttonColourId, Colour (0xffffcc00));
-    ModModeBtn->setColour (TextButton::buttonOnColourId, Colour (0xffff5032));
-    ModModeBtn->setColour (TextButton::textColourOffId, Colour (0xffffcc00));
-    ModModeBtn->setColour (TextButton::textColourOnId, Colour (0xffff5032));
+    ModModeBtn->setColour (juce::TextButton::buttonColourId, juce::Colour (0xffffcc00));
+    ModModeBtn->setColour (juce::TextButton::buttonOnColourId, juce::Colour (0xffff5032));
+    ModModeBtn->setColour (juce::TextButton::textColourOffId, juce::Colour (0xffffcc00));
+    ModModeBtn->setColour (juce::TextButton::textColourOnId, juce::Colour (0xffff5032));
 
     ModModeBtn->setBounds (184, 136, 64, 24);
 
-    MixLbl.reset (new Label ("Mix Label",
-                             TRANS("Mix")));
+    MixLbl.reset (new juce::Label ("Mix Label",
+                                   TRANS("Mix")));
     addAndMakeVisible (MixLbl.get());
-    MixLbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
-    MixLbl->setJustificationType (Justification::centredLeft);
+    MixLbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    MixLbl->setJustificationType (juce::Justification::centredLeft);
     MixLbl->setEditable (false, false, false);
-    MixLbl->setColour (Label::textColourId, Colour (0xffff8773));
-    MixLbl->setColour (TextEditor::textColourId, Colours::black);
-    MixLbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    MixLbl->setColour (juce::Label::textColourId, juce::Colour (0xffff8773));
+    MixLbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    MixLbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
     MixLbl->setBounds (100, 176, 32, 24);
 
-    ModeLbl.reset (new Label ("Mode Label",
-                              TRANS("Mode")));
+    ModeLbl.reset (new juce::Label ("Mode Label",
+                                    TRANS("Mode")));
     addAndMakeVisible (ModeLbl.get());
-    ModeLbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
-    ModeLbl->setJustificationType (Justification::centredLeft);
+    ModeLbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    ModeLbl->setJustificationType (juce::Justification::centredLeft);
     ModeLbl->setEditable (false, false, false);
-    ModeLbl->setColour (Label::textColourId, Colour (0xffff8773));
-    ModeLbl->setColour (TextEditor::textColourId, Colours::black);
-    ModeLbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    ModeLbl->setColour (juce::Label::textColourId, juce::Colour (0xffff8773));
+    ModeLbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    ModeLbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
     ModeLbl->setBounds (194, 176, 46, 24);
 
@@ -255,21 +255,21 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     addAndMakeVisible (OutputGainSld.get());
     OutputGainSld->setTooltip (TRANS("Output gain"));
     OutputGainSld->setRange (0, 1, 0);
-    OutputGainSld->setSliderStyle (Slider::RotaryVerticalDrag);
-    OutputGainSld->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    OutputGainSld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
+    OutputGainSld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     OutputGainSld->addListener (this);
 
     OutputGainSld->setBounds (280, 117, 72, 56);
 
-    OutputGainLbl.reset (new Label ("Output Gain Label",
-                                    TRANS("Output Gain")));
+    OutputGainLbl.reset (new juce::Label ("Output Gain Label",
+                                          TRANS("Output Gain")));
     addAndMakeVisible (OutputGainLbl.get());
-    OutputGainLbl->setFont (Font (15.0f, Font::plain).withTypefaceStyle ("Regular"));
-    OutputGainLbl->setJustificationType (Justification::centredLeft);
+    OutputGainLbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    OutputGainLbl->setJustificationType (juce::Justification::centredLeft);
     OutputGainLbl->setEditable (false, false, false);
-    OutputGainLbl->setColour (Label::textColourId, Colour (0xffffdf5e));
-    OutputGainLbl->setColour (TextEditor::textColourId, Colours::black);
-    OutputGainLbl->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    OutputGainLbl->setColour (juce::Label::textColourId, juce::Colour (0xffffdf5e));
+    OutputGainLbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    OutputGainLbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
     OutputGainLbl->setBounds (272, 176, 88, 24);
 
@@ -375,12 +375,12 @@ SongbirdAudioProcessorEditor::~SongbirdAudioProcessorEditor()
 }
 
 //==============================================================================
-void SongbirdAudioProcessorEditor::paint (Graphics& g)
+void SongbirdAudioProcessorEditor::paint (juce::Graphics& g)
 {
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (Colours::white);
+    g.fillAll (juce::Colours::white);
 
     //[UserPaint] Add your own custom painting code here..
     Image bg = ImageCache::getFromMemory(BinaryData::Background_png, BinaryData::Background_pngSize);
@@ -397,7 +397,7 @@ void SongbirdAudioProcessorEditor::resized()
     //[/UserResized]
 }
 
-void SongbirdAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
+void SongbirdAudioProcessorEditor::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
 {
     //[UsercomboBoxChanged_Pre]
     SongbirdAudioProcessor* ourProcessor {getProcessor()};
@@ -429,7 +429,7 @@ void SongbirdAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasCha
     //[/UsercomboBoxChanged_Post]
 }
 
-void SongbirdAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWasMoved)
+void SongbirdAudioProcessorEditor::sliderValueChanged (juce::Slider* sliderThatWasMoved)
 {
     //[UsersliderValueChanged_Pre]
     SongbirdAudioProcessor* ourProcessor {getProcessor()};
@@ -496,7 +496,7 @@ void SongbirdAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWasMove
     //[/UsersliderValueChanged_Post]
 }
 
-void SongbirdAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
+void SongbirdAudioProcessorEditor::buttonClicked (juce::Button* buttonThatWasClicked)
 {
     //[UserbuttonClicked_Pre]
     SongbirdAudioProcessor* ourProcessor {getProcessor()};
@@ -649,7 +649,7 @@ BEGIN_JUCER_METADATA
 <JUCER_COMPONENT documentType="Component" className="SongbirdAudioProcessorEditor"
                  componentName="" parentClasses="public WECore::JUCEPlugin::CoreProcessorEditor, public Timer"
                  constructorParams="SongbirdAudioProcessor&amp; ownerFilter" variableInitialisers="CoreProcessorEditor(ownerFilter)"
-                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.33"
+                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
                  fixedSize="0" initialWidth="425" initialHeight="350">
   <BACKGROUND backgroundColour="ffffffff"/>
   <GROUPCOMPONENT name="MOD 1 Group" id="a2c7412d0fb46a58" memberName="MOD1Group"
@@ -669,21 +669,23 @@ BEGIN_JUCER_METADATA
             virtualName="" explicitFocusOrder="0" pos="316 64 48 24" tooltip="Vowel to apply in the right position"
             editable="0" layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
-  <SLIDER name="Mix Slider" id="b75c053482d8ac35" memberName="MixSld"
-          virtualName="WECore::JUCEPlugin::LabelReadoutSlider<double>" explicitFocusOrder="0" pos="80 117 72 56" tooltip="Dry/Wet mix level"
+  <SLIDER name="Mix Slider" id="b75c053482d8ac35" memberName="MixSld" virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
+          explicitFocusOrder="0" pos="80 117 72 56" tooltip="Dry/Wet mix level"
           min="0.0" max="1.0" int="0.0" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
   <SLIDER name="MOD 1 Depth Slider" id="499f6451911662cc" memberName="DepthMOD1Sld"
-          virtualName="WECore::JUCEPlugin::LabelReadoutSlider<double>" explicitFocusOrder="0" pos="151 276 32 24" tooltip="Depth of the LFO"
-          min="0.0" max="1.0" int="0.01000000000000000021" style="RotaryVerticalDrag"
-          textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
-          textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
+          virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
+          explicitFocusOrder="0" pos="151 276 32 24" tooltip="Depth of the LFO"
+          min="0.0" max="1.0" int="0.01" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
+          needsCallback="1"/>
   <SLIDER name="MOD 1 Freq Slider" id="1d9800ca18cf5bba" memberName="FreqMOD1Sld"
-          virtualName="WECore::JUCEPlugin::LabelReadoutSlider<double>" explicitFocusOrder="0" pos="92 276 32 24" tooltip="Frequency of the LFO, from 2Hz to 20Hz"
-          min="0.0" max="1.0" int="0.01000000000000000021" style="RotaryVerticalDrag"
-          textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
-          textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
+          virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
+          explicitFocusOrder="0" pos="92 276 32 24" tooltip="Frequency of the LFO, from 2Hz to 20Hz"
+          min="0.0" max="1.0" int="0.01" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
+          needsCallback="1"/>
   <COMBOBOX name="MOD 1 Wave" id="370e5062e67cf738" memberName="WaveMOD1Cmb"
             virtualName="" explicitFocusOrder="0" pos="259 283 80 24" tooltip="LFO wave shape"
             editable="0" layout="33" items="Sine&#10;Square&#10;Saw" textWhenNonSelected=""
@@ -716,10 +718,11 @@ BEGIN_JUCER_METADATA
               virtualName="" explicitFocusOrder="0" pos="205 242 43 16" tooltip="Enable phase sync to ensure the phase of the LFO is consistent regardless of where the DAW playhead starts from"
               buttonText="Sync" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <SLIDER name="MOD 1 Phase Slider" id="3f1ef3d10c303bac" memberName="PhaseMOD1Sld"
-          virtualName="WECore::JUCEPlugin::LabelReadoutSlider<double>" explicitFocusOrder="0" pos="210 276 32 24" tooltip="Phase shift the LFO by up to 360 degrees"
-          min="0.0" max="1.0" int="0.01000000000000000021" style="RotaryVerticalDrag"
-          textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
-          textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
+          virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
+          explicitFocusOrder="0" pos="210 276 32 24" tooltip="Phase shift the LFO by up to 360 degrees"
+          min="0.0" max="1.0" int="0.01" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
+          needsCallback="1"/>
   <LABEL name="MOD 1 Phase Label" id="af1abf98d305cb5c" memberName="PhaseMOD1Lbl"
          virtualName="" explicitFocusOrder="0" pos="202 306 56 24" textCol="ffffdf5e"
          edTextCol="ff000000" edBkgCol="0" labelText="Phase" editableSingleClick="0"
@@ -740,7 +743,8 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="33"/>
   <SLIDER name="Output Gain Slider" id="69d51698f3b89634" memberName="OutputGainSld"
-          virtualName="WECore::JUCEPlugin::LabelReadoutSlider<double>" explicitFocusOrder="0" pos="280 117 72 56" tooltip="Output gain"
+          virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
+          explicitFocusOrder="0" pos="280 117 72 56" tooltip="Output gain"
           min="0.0" max="1.0" int="0.0" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
@@ -758,3 +762,4 @@ END_JUCER_METADATA
 
 //[EndFile] You can add extra defines here...
 //[/EndFile]
+
