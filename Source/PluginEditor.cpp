@@ -58,7 +58,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     Vowel1Cmb->setBounds (60, 64, 48, 24);
 
-    FilterPosSld.reset (new Slider ("Filter Position Slider"));
+    FilterPosSld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("Filter Position Slider"));
     addAndMakeVisible (FilterPosSld.get());
     FilterPosSld->setTooltip (TRANS("Manully modulate between the two vowels using the mode selected below"));
     FilterPosSld->setRange (0, 1, 0);
@@ -273,6 +273,18 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     OutputGainLbl->setBounds (271, 176, 88, 24);
 
+    FilterPosLbl.reset (new juce::Label ("Filter Position Label",
+                                         juce::String()));
+    addAndMakeVisible (FilterPosLbl.get());
+    FilterPosLbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    FilterPosLbl->setJustificationType (juce::Justification::centred);
+    FilterPosLbl->setEditable (false, false, false);
+    FilterPosLbl->setColour (juce::Label::textColourId, juce::Colour (0xffff8773));
+    FilterPosLbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    FilterPosLbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
+
+    FilterPosLbl->setBounds (192, 88, 46, 24);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -367,6 +379,7 @@ SongbirdAudioProcessorEditor::~SongbirdAudioProcessorEditor()
     ModeLbl = nullptr;
     OutputGainSld = nullptr;
     OutputGainLbl = nullptr;
+    FilterPosLbl = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -617,6 +630,7 @@ void SongbirdAudioProcessorEditor::_enableDoubleClickToDefault() {
 }
 
 void SongbirdAudioProcessorEditor::_startSliderReadouts() {
+    FilterPosSld->start(FilterPosLbl.get(), FilterPosLbl->getText(), &WECore::Songbird::Parameters::FILTER_POSITION);
     MixSld->start(MixLbl.get(), MixLbl->getText(), &WECore::Songbird::Parameters::MIX);
     OutputGainSld->start(OutputGainLbl.get(), OutputGainLbl->getText(), &WECore::Songbird::Parameters::OUTPUTGAIN);
 
@@ -626,6 +640,7 @@ void SongbirdAudioProcessorEditor::_startSliderReadouts() {
 }
 
 void SongbirdAudioProcessorEditor::_stopSliderReadouts() {
+    FilterPosSld->stop();
     MixSld->stop();
     OutputGainSld->stop();
 
@@ -660,8 +675,8 @@ BEGIN_JUCER_METADATA
             editable="0" layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <SLIDER name="Filter Position Slider" id="1be87d051f6ceb97" memberName="FilterPosSld"
-          virtualName="Slider" explicitFocusOrder="0" pos="124 64 184 24"
-          tooltip="Manully modulate between the two vowels using the mode selected below"
+          virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
+          explicitFocusOrder="0" pos="124 64 184 24" tooltip="Manully modulate between the two vowels using the mode selected below"
           min="0.0" max="1.0" int="0.0" style="LinearHorizontal" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
@@ -751,6 +766,11 @@ BEGIN_JUCER_METADATA
   <LABEL name="Output Gain Label" id="fe76b3e123fa3f5" memberName="OutputGainLbl"
          virtualName="" explicitFocusOrder="0" pos="271 176 88 24" textCol="ffffdf5e"
          edTextCol="ff000000" edBkgCol="0" labelText="Output Gain" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
+  <LABEL name="Filter Position Label" id="1b9fe7c323e1b093" memberName="FilterPosLbl"
+         virtualName="" explicitFocusOrder="0" pos="192 88 46 24" textCol="ffff8773"
+         edTextCol="ff000000" edBkgCol="0" labelText="" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
 </JUCER_COMPONENT>

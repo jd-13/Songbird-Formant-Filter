@@ -79,7 +79,7 @@ private:
     //==============================================================================
     std::unique_ptr<juce::GroupComponent> MOD1Group;
     std::unique_ptr<juce::ComboBox> Vowel1Cmb;
-    std::unique_ptr<Slider> FilterPosSld;
+    std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> FilterPosSld;
     std::unique_ptr<juce::ComboBox> Vowel2Cmb;
     std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> MixSld;
     std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> DepthMOD1Sld;
@@ -98,6 +98,7 @@ private:
     std::unique_ptr<juce::Label> ModeLbl;
     std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> OutputGainSld;
     std::unique_ptr<juce::Label> OutputGainLbl;
+    std::unique_ptr<juce::Label> FilterPosLbl;
 
 
     //==============================================================================
