@@ -37,8 +37,8 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
                                                TRANS("LFO")));
     addAndMakeVisible (MOD1Group.get());
     MOD1Group->setTextLabelPosition (juce::Justification::centred);
-    MOD1Group->setColour (juce::GroupComponent::outlineColourId, juce::Colour (0xffff8773));
-    MOD1Group->setColour (juce::GroupComponent::textColourId, juce::Colour (0xffff8773));
+    MOD1Group->setColour (juce::GroupComponent::outlineColourId, juce::Colour (0xffffdf5e));
+    MOD1Group->setColour (juce::GroupComponent::textColourId, juce::Colour (0xffffdf5e));
 
     MOD1Group->setBounds (72, 214, 280, 136);
 
@@ -191,7 +191,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     PhaseSyncMOD1Btn->setButtonText (TRANS("Phase"));
     PhaseSyncMOD1Btn->addListener (this);
 
-    PhaseSyncMOD1Btn->setBounds (205, 242, 43, 16);
+    PhaseSyncMOD1Btn->setBounds (199, 242, 54, 16);
 
     PhaseMOD1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("MOD 1 Phase Slider"));
     addAndMakeVisible (PhaseMOD1Sld.get());
@@ -267,7 +267,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     OutputGainLbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     OutputGainLbl->setJustificationType (juce::Justification::centred);
     OutputGainLbl->setEditable (false, false, false);
-    OutputGainLbl->setColour (juce::Label::textColourId, juce::Colour (0xffffdf5e));
+    OutputGainLbl->setColour (juce::Label::textColourId, juce::Colour (0xffff8773));
     OutputGainLbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
     OutputGainLbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
@@ -332,7 +332,8 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     Vowel2Cmb->setLookAndFeel(&yellowLookAndFeel);
     PhaseMOD1Sld->setLookAndFeel(&yellowLookAndFeel);
     WaveMOD1Cmb->setLookAndFeel(&yellowLookAndFeel);
-    OutputGainSld->setLookAndFeel(&yellowLookAndFeel);
+    TempoSyncMOD1Btn->setLookAndFeel(&yellowLookAndFeel);
+    PhaseSyncMOD1Btn->setLookAndFeel(&yellowLookAndFeel);
 
     TempoNumerMOD1Sld->setLookAndFeel(&tempoButtonLookAndFeel);
     TempoDenomMOD1Sld->setLookAndFeel(&tempoButtonLookAndFeel);
@@ -668,8 +669,8 @@ BEGIN_JUCER_METADATA
                  fixedSize="0" initialWidth="425" initialHeight="350">
   <BACKGROUND backgroundColour="ffffffff"/>
   <GROUPCOMPONENT name="MOD 1 Group" id="a2c7412d0fb46a58" memberName="MOD1Group"
-                  virtualName="" explicitFocusOrder="0" pos="72 214 280 136" outlinecol="ffff8773"
-                  textcol="ffff8773" title="LFO" textpos="36"/>
+                  virtualName="" explicitFocusOrder="0" pos="72 214 280 136" outlinecol="ffffdf5e"
+                  textcol="ffffdf5e" title="LFO" textpos="36"/>
   <COMBOBOX name="Vowel 1 Combo Box" id="ab5acbd6ca836993" memberName="Vowel1Cmb"
             virtualName="" explicitFocusOrder="0" pos="60 64 48 24" tooltip="Vowel to apply in the left position"
             editable="0" layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
@@ -730,7 +731,7 @@ BEGIN_JUCER_METADATA
           textBoxEditable="1" textBoxWidth="40" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
   <TEXTBUTTON name="MOD 1 Phase Sync Button" id="4509e154e4918174" memberName="PhaseSyncMOD1Btn"
-              virtualName="" explicitFocusOrder="0" pos="205 242 43 16" tooltip="Enable phase sync to ensure the phase of the LFO is consistent regardless of where the DAW playhead starts from"
+              virtualName="" explicitFocusOrder="0" pos="199 242 54 16" tooltip="Enable phase sync to ensure the phase of the LFO is consistent regardless of where the DAW playhead starts from"
               buttonText="Phase" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <SLIDER name="MOD 1 Phase Slider" id="3f1ef3d10c303bac" memberName="PhaseMOD1Sld"
           virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
@@ -764,7 +765,7 @@ BEGIN_JUCER_METADATA
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
   <LABEL name="Output Gain Label" id="fe76b3e123fa3f5" memberName="OutputGainLbl"
-         virtualName="" explicitFocusOrder="0" pos="271 176 88 24" textCol="ffffdf5e"
+         virtualName="" explicitFocusOrder="0" pos="271 176 88 24" textCol="ffff8773"
          edTextCol="ff000000" edBkgCol="0" labelText="Output Gain" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
