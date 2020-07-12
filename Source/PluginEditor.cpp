@@ -637,7 +637,7 @@ void SongbirdAudioProcessorEditor::_startSliderReadouts() {
 
     FreqMOD1Sld->start(FreqMOD1Lbl.get(), FreqMOD1Lbl->getText(), &WECore::Richter::Parameters::FREQ);
     DepthMOD1Sld->start(DepthMOD1Lbl.get(), DepthMOD1Lbl->getText(), &WECore::Richter::Parameters::DEPTH);
-    PhaseMOD1Sld->start(PhaseMOD1Lbl.get(), PhaseMOD1Lbl->getText(), &WECore::Richter::Parameters::PHASE);
+    PhaseMOD1Sld->start(PhaseMOD1Lbl.get(), PhaseMOD1Lbl->getText(), &PHASE_DISPLAY);
 }
 
 void SongbirdAudioProcessorEditor::_stopSliderReadouts() {

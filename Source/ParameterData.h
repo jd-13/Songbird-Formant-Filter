@@ -26,6 +26,10 @@
 #define PARAMETERDATA_H_INCLUDED
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "General/ParameterDefinition.h"
+
+// This exists to provide the conversion for the decimal readout
+const ParameterDefinition::RangedParameter<double> PHASE_DISPLAY(0, 360, 0);
 
 const String    VOWEL1_STR {"Vowel1"},
                 VOWEL2_STR {"Vowel2"},
