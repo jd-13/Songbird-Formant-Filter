@@ -520,21 +520,21 @@ void SongbirdAudioProcessorEditor::buttonClicked (juce::Button* buttonThatWasCli
     {
         //[UserButtonCode_TempoSyncMOD1Btn] -- add your button handler code here..
         ourProcessor->setParameter(SongbirdAudioProcessor::tempoSyncMOD1,
-                                   static_cast<float>(TempoSyncMOD1Btn->getToggleState()));
+                                   static_cast<float>(!TempoSyncMOD1Btn->getToggleState()));
         //[/UserButtonCode_TempoSyncMOD1Btn]
     }
     else if (buttonThatWasClicked == PhaseSyncMOD1Btn.get())
     {
         //[UserButtonCode_PhaseSyncMOD1Btn] -- add your button handler code here..
         ourProcessor->setParameter(SongbirdAudioProcessor::phaseSyncMOD1,
-                                   static_cast<float>(PhaseSyncMOD1Btn->getToggleState()));
+                                   static_cast<float>(!PhaseSyncMOD1Btn->getToggleState()));
         //[/UserButtonCode_PhaseSyncMOD1Btn]
     }
     else if (buttonThatWasClicked == ModModeBtn.get())
     {
         //[UserButtonCode_ModModeBtn] -- add your button handler code here..
         ourProcessor->setParameter(SongbirdAudioProcessor::modMode,
-                                   static_cast<float>(ModModeBtn->getToggleState()));
+                                   static_cast<float>(!ModModeBtn->getToggleState()));
         //[/UserButtonCode_ModModeBtn]
     }
 

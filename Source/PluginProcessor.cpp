@@ -16,23 +16,10 @@
 //==============================================================================
 SongbirdAudioProcessor::SongbirdAudioProcessor()
 {
-    mSongbird.mFilter.setVowel1(WECore::Songbird::Parameters::VOWEL.defaultValue);
-    mSongbird.mFilter.setVowel2(WECore::Songbird::Parameters::VOWEL.defaultValue);
-    mSongbird.mFilter.setFilterPosition(WECore::Songbird::Parameters::FILTER_POSITION.defaultValue);
-    mSongbird.mFilter.setMix(WECore::Songbird::Parameters::MIX.defaultValue);
-    mSongbird.mFilter.setFilterPosition(WECore::Songbird::Parameters::FILTER_POSITION.defaultValue);
-    mSongbird.mFilter.setModMode(WECore::Songbird::Parameters::MODMODE_DEFAULT);
-    mSongbird.mFilter.setOutputGain(WECore::Songbird::Parameters::OUTPUTGAIN.defaultValue);
+    mSongbird.mFilter.setVowel1(WECore::Songbird::Parameters::VOWEL.VOWEL_A);
+    mSongbird.mFilter.setVowel2(WECore::Songbird::Parameters::VOWEL.VOWEL_E);
 
     mSongbird.mMOD.setBypassSwitch(WECore::Richter::Parameters::LFOSWITCH_ON);
-    mSongbird.mMOD.setPhaseSyncSwitch(WECore::Richter::Parameters::PHASESYNC_DEFAULT);
-    mSongbird.mMOD.setTempoSyncSwitch(WECore::Richter::Parameters::TEMPOSYNC_DEFAULT);
-    mSongbird.mMOD.setWave(WECore::Richter::Parameters::WAVE.defaultValue);
-    mSongbird.mMOD.setDepth(WECore::Richter::Parameters::DEPTH.defaultValue);
-    mSongbird.mMOD.setFreq(WECore::Richter::Parameters::FREQ.defaultValue);
-    mSongbird.mMOD.setManualPhase(WECore::Richter::Parameters::PHASE.defaultValue);
-    mSongbird.mMOD.setTempoNumer(WECore::Richter::Parameters::TEMPONUMER.defaultValue);
-    mSongbird.mMOD.setTempoDenom(WECore::Richter::Parameters::TEMPODENOM.defaultValue);
 
     _UIUpdateFlag = true;
 }
@@ -124,7 +111,7 @@ void SongbirdAudioProcessor::setParameter(int index, float newValue) {
             break;
 
         case modMode:
-            mSongbird.mFilter.setModMode(newValue < 0.5);
+            mSongbird.mFilter.setModMode(newValue > 0.5);
             break;
 
         case outputGain:
@@ -134,11 +121,11 @@ void SongbirdAudioProcessor::setParameter(int index, float newValue) {
 
 
         case phaseSyncMOD1:
-            mSongbird.mMOD.setPhaseSyncSwitch(newValue < 0.5);
+            mSongbird.mMOD.setPhaseSyncSwitch(newValue > 0.5);
             break;
 
         case tempoSyncMOD1:
-            mSongbird.mMOD.setTempoSyncSwitch(newValue < 0.5);
+            mSongbird.mMOD.setTempoSyncSwitch(newValue > 0.5);
             break;
 
         case waveMOD1:
@@ -458,13 +445,6 @@ void SongbirdAudioProcessor::setStateInformation (const void* data, int sizeInBy
                 }
             }
         }
-
-        // Slightly hacky fix to prevent inverted button settings on startup
-        setParameter(modMode, getParameter(modMode));
-
-        setParameter(phaseSyncMOD1, getParameter(phaseSyncMOD1));
-        setParameter(tempoSyncMOD1, getParameter(tempoSyncMOD1));
-
 
         _UIUpdateFlag = true;
     }
