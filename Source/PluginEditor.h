@@ -25,6 +25,7 @@
 #include "SongbirdLookAndFeel.h"
 #include "CoreJUCEPlugin/CoreProcessorEditor.h"
 #include "CoreJUCEPlugin/LabelReadoutSlider.h"
+#include "RichterLFO/UI/RichterWaveViewer.h"
 //[/Headers]
 
 
@@ -99,6 +100,7 @@ private:
     std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> OutputGainSld;
     std::unique_ptr<juce::Label> OutputGainLbl;
     std::unique_ptr<juce::Label> FilterPosLbl;
+    std::unique_ptr<WECore::Richter::WaveViewer> WaveViewMOD1;
 
 
     //==============================================================================

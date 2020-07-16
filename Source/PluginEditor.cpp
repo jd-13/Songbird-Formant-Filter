@@ -126,7 +126,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     WaveMOD1Cmb->addItem (TRANS("Saw"), 3);
     WaveMOD1Cmb->addListener (this);
 
-    WaveMOD1Cmb->setBounds (259, 283, 80, 24);
+    WaveMOD1Cmb->setBounds (259, 306, 80, 24);
 
     FreqMOD1Lbl.reset (new juce::Label ("MOD 1 Freq Label",
                                         TRANS("Rate")));
@@ -285,6 +285,12 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     FilterPosLbl->setBounds (192, 88, 46, 24);
 
+    WaveViewMOD1.reset (new WECore::Richter::WaveViewer());
+    addAndMakeVisible (WaveViewMOD1.get());
+    WaveViewMOD1->setName ("MOD1 Wave View");
+
+    WaveViewMOD1->setBounds (261, 276, 75, 23);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -334,9 +340,17 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     WaveMOD1Cmb->setLookAndFeel(&yellowLookAndFeel);
     TempoSyncMOD1Btn->setLookAndFeel(&yellowLookAndFeel);
     PhaseSyncMOD1Btn->setLookAndFeel(&yellowLookAndFeel);
+    WaveViewMOD1->setLookAndFeel(&yellowLookAndFeel);
+
+    WaveMOD1Cmb->setColour(ComboBox::ColourIds::textColourId, lightYellow);
+    WaveMOD1Cmb->setColour(ComboBox::ColourIds::arrowColourId, lightYellow);
 
     TempoNumerMOD1Sld->setLookAndFeel(&tempoButtonLookAndFeel);
     TempoDenomMOD1Sld->setLookAndFeel(&tempoButtonLookAndFeel);
+
+    // Wave viewer colour
+    yellowLookAndFeel.setColour(WECore::Richter::WaveViewer::ColourIds::highlightColourId,
+                                yellowHighlight);
 
     // This is needed for the fonts to be applied
     SongbirdLookAndFeel::setDefaultLookAndFeel(&yellowLookAndFeel);
@@ -357,6 +371,8 @@ SongbirdAudioProcessorEditor::~SongbirdAudioProcessorEditor()
 {
     //[Destructor_pre]. You can add your own custom destruction code here..
     _stopSliderReadouts();
+
+    WaveViewMOD1->stop();
     //[/Destructor_pre]
 
     MOD1Group = nullptr;
@@ -381,6 +397,7 @@ SongbirdAudioProcessorEditor::~SongbirdAudioProcessorEditor()
     OutputGainSld = nullptr;
     OutputGainLbl = nullptr;
     FilterPosLbl = nullptr;
+    WaveViewMOD1 = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -592,7 +609,7 @@ void SongbirdAudioProcessorEditor::timerCallback() {
                 ourProcessor->getParameter(SongbirdAudioProcessor::tempoDenomMOD1),
                                            dontSendNotification);
 
-        // Activate/Deactivale phase control depending on phase sync
+        // Activate/Deactivate phase control depending on phase sync
         PhaseMOD1Sld->setEnabled(PhaseSyncMOD1Btn->getToggleState());
 
         // Toggle visibility for rate controls depending on tempo sync
@@ -607,6 +624,17 @@ void SongbirdAudioProcessorEditor::timerCallback() {
             TempoNumerMOD1Sld->setVisible(false);
             TempoDenomMOD1Sld->setVisible(false);
         }
+
+        // Update wave viewer
+        if (ourProcessor->getParameter(SongbirdAudioProcessor::waveMOD1) < 1.5) {
+            WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSine());
+        } else if (ourProcessor->getParameter(SongbirdAudioProcessor::waveMOD1) < 2.5) {
+            WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSquare());
+        } else {
+            WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSaw());
+        }
+
+        WaveViewMOD1->repaint();
     }
 
     // Pickup LFO output value
@@ -703,7 +731,7 @@ BEGIN_JUCER_METADATA
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
   <COMBOBOX name="MOD 1 Wave" id="370e5062e67cf738" memberName="WaveMOD1Cmb"
-            virtualName="" explicitFocusOrder="0" pos="259 283 80 24" tooltip="LFO wave shape"
+            virtualName="" explicitFocusOrder="0" pos="259 306 80 24" tooltip="LFO wave shape"
             editable="0" layout="33" items="Sine&#10;Square&#10;Saw" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <LABEL name="MOD 1 Freq Label" id="dabfca26c640fd58" memberName="FreqMOD1Lbl"
@@ -774,6 +802,9 @@ BEGIN_JUCER_METADATA
          edTextCol="ff000000" edBkgCol="0" labelText="" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
+  <GENERICCOMPONENT name="MOD1 Wave View" id="3c0e47dfa5180365" memberName="WaveViewMOD1"
+                    virtualName="WECore::Richter::WaveViewer" explicitFocusOrder="0"
+                    pos="261 276 75 23" class="juce::Component" params=""/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
