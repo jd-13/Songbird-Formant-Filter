@@ -644,18 +644,18 @@ void SongbirdAudioProcessorEditor::timerCallback() {
 
 void SongbirdAudioProcessorEditor::_enableDoubleClickToDefault() {
     FilterPosSld->setDoubleClickReturnValue(true,
-        WECore::Songbird::Parameters::FILTER_POSITION.InteralToNormalised(WECore::Songbird::Parameters::FILTER_POSITION.defaultValue));
+        WECore::Songbird::Parameters::FILTER_POSITION.InternalToNormalised(WECore::Songbird::Parameters::FILTER_POSITION.defaultValue));
     MixSld->setDoubleClickReturnValue(true,
-        WECore::Songbird::Parameters::MIX.InteralToNormalised(WECore::Songbird::Parameters::MIX.defaultValue));
+        WECore::Songbird::Parameters::MIX.InternalToNormalised(WECore::Songbird::Parameters::MIX.defaultValue));
     OutputGainSld->setDoubleClickReturnValue(true,
-        WECore::Songbird::Parameters::OUTPUTGAIN.InteralToNormalised(WECore::Songbird::Parameters::OUTPUTGAIN.defaultValue));
+        WECore::Songbird::Parameters::OUTPUTGAIN.InternalToNormalised(WECore::Songbird::Parameters::OUTPUTGAIN.defaultValue));
 
     FreqMOD1Sld->setDoubleClickReturnValue(true,
-        WECore::Richter::Parameters::FREQ.InteralToNormalised(WECore::Richter::Parameters::FREQ.defaultValue));
+        WECore::Richter::Parameters::FREQ.InternalToNormalised(WECore::Richter::Parameters::FREQ.defaultValue));
     DepthMOD1Sld->setDoubleClickReturnValue(true,
-        WECore::Richter::Parameters::DEPTH.InteralToNormalised(WECore::Richter::Parameters::DEPTH.defaultValue));
+        WECore::Richter::Parameters::DEPTH.InternalToNormalised(WECore::Richter::Parameters::DEPTH.defaultValue));
     PhaseMOD1Sld->setDoubleClickReturnValue(true,
-        WECore::Richter::Parameters::PHASE.InteralToNormalised(WECore::Richter::Parameters::PHASE.defaultValue));
+        WECore::Richter::Parameters::PHASE.InternalToNormalised(WECore::Richter::Parameters::PHASE.defaultValue));
 }
 
 void SongbirdAudioProcessorEditor::_startSliderReadouts() {
