@@ -43,13 +43,6 @@ public:
     //==============================================================================
     const String getName() const override;
 
-    int getNumParameters() override;
-    float getParameter (int index) override;
-    void setParameter (int index, float newValue) override;
-
-    const String getParameterName (int index) override;
-    const String getParameterText (int index) override;
-
     bool acceptsMidi() const override;
     bool producesMidi() const override;
     double getTailLengthSeconds() const override;
@@ -62,31 +55,55 @@ public:
     void changeProgramName (int index, const String& newName) override;
 
     //==============================================================================
-    void getStateInformation (MemoryBlock& destData) override;
-    void setStateInformation (const void* data, int sizeInBytes) override;
-
-    enum Parameters{
-        vowel1 = 0,
-        vowel2,
-        filterPosition,
-        mix,
-        modMode,
-
-        phaseSyncMOD1,
-        tempoSyncMOD1,
-        waveMOD1,
-        depthMOD1,
-        freqMOD1,
-        phaseMOD1,
-        tempoNumerMOD1,
-        tempoDenomMOD1,
-
-        outputGain,
-
-        totalNumParams
-    };
-
     double getLastLFOOutput() { return mSongbird.getLastLFOOutput(); }
+
+    /**
+     * Parameter setters.
+     *
+     * For float parameters a value in the normalised 0 to 1 range is expected.
+     *
+     * For int parameters are used to represent menu items, the integer value in the real range of
+     * the parameter (eg. 0 to 4) is expected.
+     *
+     * For bool parameters they can only be true or false anyway.
+     *
+     * These do not call the ChangeBroadcaster as the UI will already know about these changes since
+     * it is the only one calling these methods.
+     */
+    /** @{ */
+    void setVowel1(int val);
+    void setVowel2(int val);
+    void setFilterPosition(float val);
+    void setMix(float val);
+    void setModMode(bool val);
+    void setOutputGain(float val);
+
+    void setPhaseSyncMOD1(bool val);
+    void setTempoSyncMOD1(bool val);
+    void setWaveMOD1(int val);
+    void setDepthMOD1(float val);
+    void setFreqMOD1(float val);
+    void setPhaseMOD1(float val);
+    void setTempoNumerMOD1(int val);
+    void setTempoDenomMOD1(int val);
+    /** @} */
+
+    // Parameters (public for beginChangeGesture/endChangeGesture/get)
+    AudioParameterInt* vowel1;
+    AudioParameterInt* vowel2;
+    AudioParameterFloat* filterPosition;
+    AudioParameterFloat* mix;
+    AudioParameterBool* modMode;
+    AudioParameterFloat* outputGain;
+
+    AudioParameterBool* phaseSyncMOD1;
+    AudioParameterBool* tempoSyncMOD1;
+    AudioParameterInt* waveMOD1;
+    AudioParameterFloat* depthMOD1;
+    AudioParameterFloat* freqMOD1;
+    AudioParameterFloat* phaseMOD1;
+    AudioParameterInt* tempoNumerMOD1;
+    AudioParameterInt* tempoDenomMOD1;
 
 private:
     Songbird mSongbird;

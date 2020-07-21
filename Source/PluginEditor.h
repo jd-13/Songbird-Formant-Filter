@@ -55,6 +55,8 @@ public:
     SongbirdAudioProcessor* getProcessor() const {
         return static_cast<SongbirdAudioProcessor*>(getAudioProcessor());
     }
+    void sliderDragStarted(Slider* slider) override;
+    void sliderDragEnded(Slider* slider) override;
     //[/UserMethods]
 
     void paint (juce::Graphics& g) override;
@@ -63,8 +65,6 @@ public:
     void sliderValueChanged (juce::Slider* sliderThatWasMoved) override;
     void buttonClicked (juce::Button* buttonThatWasClicked) override;
 
-
-
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
     SongbirdLookAndFeel orangeLookAndFeel,
@@ -72,6 +72,7 @@ private:
 
     SongbirdTempoButtonLookAndFeel tempoButtonLookAndFeel;
 
+    virtual void _onParameterUpdate() override;
     void _enableDoubleClickToDefault();
     void _startSliderReadouts();
     void _stopSliderReadouts();

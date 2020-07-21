@@ -364,6 +364,9 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     _enableDoubleClickToDefault();
 
     _startSliderReadouts();
+
+    // Call this manually once to make sure the UI reflects the parameters' states correctly
+    _onParameterUpdate();
     //[/Constructor]
 }
 
@@ -437,22 +440,19 @@ void SongbirdAudioProcessorEditor::comboBoxChanged (juce::ComboBox* comboBoxThat
     if (comboBoxThatHasChanged == Vowel1Cmb.get())
     {
         //[UserComboBoxCode_Vowel1Cmb] -- add your combo box handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::vowel1,
-                                   static_cast<float>(Vowel1Cmb->getSelectedId()));
+        ourProcessor->setVowel1(Vowel1Cmb->getSelectedId());
         //[/UserComboBoxCode_Vowel1Cmb]
     }
     else if (comboBoxThatHasChanged == Vowel2Cmb.get())
     {
         //[UserComboBoxCode_Vowel2Cmb] -- add your combo box handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::vowel2,
-                                   static_cast<float>(Vowel2Cmb->getSelectedId()));
+        ourProcessor->setVowel2(Vowel2Cmb->getSelectedId());
         //[/UserComboBoxCode_Vowel2Cmb]
     }
     else if (comboBoxThatHasChanged == WaveMOD1Cmb.get())
     {
         //[UserComboBoxCode_WaveMOD1Cmb] -- add your combo box handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::waveMOD1,
-                                   static_cast<float>(WaveMOD1Cmb->getSelectedId()));
+        ourProcessor->setWaveMOD1(WaveMOD1Cmb->getSelectedId());
         //[/UserComboBoxCode_WaveMOD1Cmb]
     }
 
@@ -469,57 +469,49 @@ void SongbirdAudioProcessorEditor::sliderValueChanged (juce::Slider* sliderThatW
     if (sliderThatWasMoved == FilterPosSld.get())
     {
         //[UserSliderCode_FilterPosSld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::filterPosition,
-                                   static_cast<float>(FilterPosSld->getValue()));
+        ourProcessor->setFilterPosition(FilterPosSld->getValue());
         //[/UserSliderCode_FilterPosSld]
     }
     else if (sliderThatWasMoved == MixSld.get())
     {
         //[UserSliderCode_MixSld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::mix,
-                                   static_cast<float>(MixSld->getValue()));
+        ourProcessor->setMix(MixSld->getValue());
         //[/UserSliderCode_MixSld]
     }
     else if (sliderThatWasMoved == DepthMOD1Sld.get())
     {
         //[UserSliderCode_DepthMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::depthMOD1,
-                                   static_cast<float>(DepthMOD1Sld->getValue()));
+        ourProcessor->setDepthMOD1(DepthMOD1Sld->getValue());
         //[/UserSliderCode_DepthMOD1Sld]
     }
     else if (sliderThatWasMoved == FreqMOD1Sld.get())
     {
         //[UserSliderCode_FreqMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::freqMOD1,
-                                   static_cast<float>(FreqMOD1Sld->getValue()));
+        ourProcessor->setFreqMOD1(FreqMOD1Sld->getValue());
         //[/UserSliderCode_FreqMOD1Sld]
     }
     else if (sliderThatWasMoved == TempoNumerMOD1Sld.get())
     {
         //[UserSliderCode_TempoNumerMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::tempoNumerMOD1,
-                                   static_cast<float>(TempoNumerMOD1Sld->getValue()));
+        ourProcessor->setTempoNumerMOD1(TempoNumerMOD1Sld->getValue());
         //[/UserSliderCode_TempoNumerMOD1Sld]
     }
     else if (sliderThatWasMoved == TempoDenomMOD1Sld.get())
     {
         //[UserSliderCode_TempoDenomMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::tempoDenomMOD1,
-                                   static_cast<float>(TempoDenomMOD1Sld->getValue()));
+        ourProcessor->setTempoDenomMOD1(TempoDenomMOD1Sld->getValue());
         //[/UserSliderCode_TempoDenomMOD1Sld]
     }
     else if (sliderThatWasMoved == PhaseMOD1Sld.get())
     {
         //[UserSliderCode_PhaseMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::phaseMOD1,
-                                   static_cast<float>(PhaseMOD1Sld->getValue()));
+        ourProcessor->setPhaseMOD1(PhaseMOD1Sld->getValue());
         //[/UserSliderCode_PhaseMOD1Sld]
     }
     else if (sliderThatWasMoved == OutputGainSld.get())
     {
         //[UserSliderCode_OutputGainSld] -- add your slider handling code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::outputGain,
-                                   static_cast<float>(OutputGainSld->getValue()));
+        ourProcessor->setOutputGain(OutputGainSld->getValue());
         //[/UserSliderCode_OutputGainSld]
     }
 
@@ -536,22 +528,19 @@ void SongbirdAudioProcessorEditor::buttonClicked (juce::Button* buttonThatWasCli
     if (buttonThatWasClicked == TempoSyncMOD1Btn.get())
     {
         //[UserButtonCode_TempoSyncMOD1Btn] -- add your button handler code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::tempoSyncMOD1,
-                                   static_cast<float>(!TempoSyncMOD1Btn->getToggleState()));
+        ourProcessor->setTempoSyncMOD1(!TempoSyncMOD1Btn->getToggleState());
         //[/UserButtonCode_TempoSyncMOD1Btn]
     }
     else if (buttonThatWasClicked == PhaseSyncMOD1Btn.get())
     {
         //[UserButtonCode_PhaseSyncMOD1Btn] -- add your button handler code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::phaseSyncMOD1,
-                                   static_cast<float>(!PhaseSyncMOD1Btn->getToggleState()));
+        ourProcessor->setPhaseSyncMOD1(!PhaseSyncMOD1Btn->getToggleState());
         //[/UserButtonCode_PhaseSyncMOD1Btn]
     }
     else if (buttonThatWasClicked == ModModeBtn.get())
     {
         //[UserButtonCode_ModModeBtn] -- add your button handler code here..
-        ourProcessor->setParameter(SongbirdAudioProcessor::modMode,
-                                   static_cast<float>(!ModModeBtn->getToggleState()));
+        ourProcessor->setModMode(!ModModeBtn->getToggleState());
         //[/UserButtonCode_ModModeBtn]
     }
 
@@ -562,84 +551,108 @@ void SongbirdAudioProcessorEditor::buttonClicked (juce::Button* buttonThatWasCli
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
-void SongbirdAudioProcessorEditor::timerCallback() {
+void SongbirdAudioProcessorEditor::sliderDragStarted(Slider* slider) {
     SongbirdAudioProcessor* ourProcessor {getProcessor()};
 
-    if (ourProcessor->needsUIUpdate()) {
-        Vowel1Cmb->setSelectedId(ourProcessor->getParameter(SongbirdAudioProcessor::vowel1),
-                                 dontSendNotification);
-        Vowel2Cmb->setSelectedId(ourProcessor->getParameter(SongbirdAudioProcessor::vowel2),
-                                 dontSendNotification);
-        FilterPosSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::filterPosition),
-                               dontSendNotification);
-        MixSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::mix),
-                         dontSendNotification);
-        ModModeBtn->setToggleState(ourProcessor->getParameter(SongbirdAudioProcessor::modMode),
-                                   dontSendNotification);
-        OutputGainSld->setValue(ourProcessor->getParameter(SongbirdAudioProcessor::outputGain),
-                                dontSendNotification);
-
-        // Set text for mod mode button
-        ModModeBtn->getToggleState() ? ModModeBtn->setButtonText("FREQ") :
-                                       ModModeBtn->setButtonText("BLEND");
-
-        // MOD 1
-        PhaseSyncMOD1Btn->setToggleState(
-                ourProcessor->getParameter(SongbirdAudioProcessor::phaseSyncMOD1),
-                                           dontSendNotification);
-        TempoSyncMOD1Btn->setToggleState(
-                ourProcessor->getParameter(SongbirdAudioProcessor::tempoSyncMOD1),
-                                           dontSendNotification);
-        WaveMOD1Cmb->setSelectedId(
-                ourProcessor->getParameter(SongbirdAudioProcessor::waveMOD1),
-                                           dontSendNotification);
-        DepthMOD1Sld->setValue(
-                ourProcessor->getParameter(SongbirdAudioProcessor::depthMOD1),
-                                           dontSendNotification);
-        FreqMOD1Sld->setValue(
-                ourProcessor->getParameter(SongbirdAudioProcessor::freqMOD1),
-                                           dontSendNotification);
-        PhaseMOD1Sld->setValue(
-                ourProcessor->getParameter(SongbirdAudioProcessor::phaseMOD1),
-                                           dontSendNotification);
-        TempoNumerMOD1Sld->setValue(
-                ourProcessor->getParameter(SongbirdAudioProcessor::tempoNumerMOD1),
-                                           dontSendNotification);
-        TempoDenomMOD1Sld->setValue(
-                ourProcessor->getParameter(SongbirdAudioProcessor::tempoDenomMOD1),
-                                           dontSendNotification);
-
-        // Activate/Deactivate phase control depending on phase sync
-        PhaseMOD1Sld->setEnabled(PhaseSyncMOD1Btn->getToggleState());
-
-        // Toggle visibility for rate controls depending on tempo sync
-        if (TempoSyncMOD1Btn->getToggleState()) {
-            FreqMOD1Sld->setVisible(false);
-            FreqMOD1Lbl->setVisible(false);
-            TempoNumerMOD1Sld->setVisible(true);
-            TempoDenomMOD1Sld->setVisible(true);
-        } else {
-            FreqMOD1Sld->setVisible(true);
-            FreqMOD1Lbl->setVisible(true);
-            TempoNumerMOD1Sld->setVisible(false);
-            TempoDenomMOD1Sld->setVisible(false);
-        }
-
-        // Update wave viewer
-        if (ourProcessor->getParameter(SongbirdAudioProcessor::waveMOD1) < 1.5) {
-            WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSine());
-        } else if (ourProcessor->getParameter(SongbirdAudioProcessor::waveMOD1) < 2.5) {
-            WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSquare());
-        } else {
-            WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSaw());
-        }
-
-        WaveViewMOD1->repaint();
+    if (slider == FilterPosSld.get()) {
+        ourProcessor->filterPosition->beginChangeGesture();
+    } else if (slider == MixSld.get()) {
+        ourProcessor->mix->beginChangeGesture();
+    } else if (slider == DepthMOD1Sld.get()) {
+        ourProcessor->depthMOD1->beginChangeGesture();
+    } else if (slider == FreqMOD1Sld.get()) {
+        ourProcessor->freqMOD1->beginChangeGesture();
+    } else if (slider == TempoNumerMOD1Sld.get()) {
+        ourProcessor->tempoNumerMOD1->beginChangeGesture();
+    } else if (slider == TempoDenomMOD1Sld.get()) {
+        ourProcessor->tempoDenomMOD1->beginChangeGesture();
+    } else if (slider == PhaseMOD1Sld.get()) {
+        ourProcessor->phaseMOD1->beginChangeGesture();
+    } else if (slider == OutputGainSld.get()) {
+        ourProcessor->outputGain->beginChangeGesture();
     }
+}
+
+void SongbirdAudioProcessorEditor::sliderDragEnded(Slider* slider) {
+    SongbirdAudioProcessor* ourProcessor {getProcessor()};
+
+    if (slider == FilterPosSld.get()) {
+        ourProcessor->filterPosition->endChangeGesture();
+    } else if (slider == MixSld.get()) {
+        ourProcessor->mix->endChangeGesture();
+    } else if (slider == DepthMOD1Sld.get()) {
+        ourProcessor->depthMOD1->endChangeGesture();
+    } else if (slider == FreqMOD1Sld.get()) {
+        ourProcessor->freqMOD1->endChangeGesture();
+    } else if (slider == TempoNumerMOD1Sld.get()) {
+        ourProcessor->tempoNumerMOD1->endChangeGesture();
+    } else if (slider == TempoDenomMOD1Sld.get()) {
+        ourProcessor->tempoDenomMOD1->endChangeGesture();
+    } else if (slider == PhaseMOD1Sld.get()) {
+        ourProcessor->phaseMOD1->endChangeGesture();
+    } else if (slider == OutputGainSld.get()) {
+        ourProcessor->outputGain->endChangeGesture();
+    }
+}
+
+void SongbirdAudioProcessorEditor::timerCallback() {
+    SongbirdAudioProcessor* ourProcessor {getProcessor()};
 
     // Pickup LFO output value
     orangeLookAndFeel.updateLFOOutput(ourProcessor->getLastLFOOutput());
     FilterPosSld->repaint();
+}
+
+void SongbirdAudioProcessorEditor::_onParameterUpdate() {
+    SongbirdAudioProcessor* ourProcessor {getProcessor()};
+
+    Vowel1Cmb->setSelectedId(ourProcessor->vowel1->get(), dontSendNotification);
+    Vowel2Cmb->setSelectedId(ourProcessor->vowel2->get(), dontSendNotification);
+    FilterPosSld->setValue(ourProcessor->filterPosition->get(), dontSendNotification);
+    MixSld->setValue(ourProcessor->mix->get(), dontSendNotification);
+    ModModeBtn->setToggleState(ourProcessor->modMode->get(), dontSendNotification);
+    OutputGainSld->setValue(ourProcessor->outputGain->get(), dontSendNotification);
+
+    // Set text for mod mode button
+    ModModeBtn->getToggleState() ? ModModeBtn->setButtonText("FREQ") :
+                                    ModModeBtn->setButtonText("BLEND");
+
+    // MOD 1
+    PhaseSyncMOD1Btn->setToggleState(ourProcessor->phaseSyncMOD1->get(), dontSendNotification);
+    TempoSyncMOD1Btn->setToggleState(ourProcessor->tempoSyncMOD1->get(), dontSendNotification);
+    WaveMOD1Cmb->setSelectedId(ourProcessor->waveMOD1->get(), dontSendNotification);
+    DepthMOD1Sld->setValue(ourProcessor->depthMOD1->get(), dontSendNotification);
+    FreqMOD1Sld->setValue(ourProcessor->freqMOD1->get(), dontSendNotification);
+    PhaseMOD1Sld->setValue(ourProcessor->phaseMOD1->get(), dontSendNotification);
+    TempoNumerMOD1Sld->setValue(ourProcessor->tempoNumerMOD1->get(), dontSendNotification);
+    TempoDenomMOD1Sld->setValue(ourProcessor->tempoDenomMOD1->get(), dontSendNotification);
+
+    // Activate/Deactivate phase control depending on phase sync
+    PhaseMOD1Sld->setEnabled(PhaseSyncMOD1Btn->getToggleState());
+
+    // Toggle visibility for rate controls depending on tempo sync
+    if (TempoSyncMOD1Btn->getToggleState()) {
+        FreqMOD1Sld->setVisible(false);
+        FreqMOD1Lbl->setVisible(false);
+        TempoNumerMOD1Sld->setVisible(true);
+        TempoDenomMOD1Sld->setVisible(true);
+    } else {
+        FreqMOD1Sld->setVisible(true);
+        FreqMOD1Lbl->setVisible(true);
+        TempoNumerMOD1Sld->setVisible(false);
+        TempoDenomMOD1Sld->setVisible(false);
+    }
+
+    // Update wave viewer
+    if (ourProcessor->waveMOD1->get() == 1) {
+        WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSine());
+    } else if (ourProcessor->waveMOD1->get() == 2) {
+        WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSquare());
+    } else {
+        WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSaw());
+    }
+
+    WaveViewMOD1->repaint();
 }
 
 void SongbirdAudioProcessorEditor::_enableDoubleClickToDefault() {
