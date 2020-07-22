@@ -30,7 +30,6 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
     registerParameter(filterPosition, FILTER_POSITION_STR, SP::FILTER_POSITION.defaultValue, [&](float val) { setFilterPosition(val); });
     registerParameter(mix, MIX_STR, SP::MIX.defaultValue, [&](float val) { setMix(val); });
     registerParameter(modMode, MODMODE_STR, SP::MODMODE_DEFAULT, [&](bool val) { setModMode(val); });
-    registerParameter(outputGain, OUTPUTGAIN_STR, SP::OUTPUTGAIN.defaultValue, [&](float val) { setOutputGain(val); });
 
     registerParameter(phaseSyncMOD1, PHASESYNCMOD1_STR, RP::PHASESYNC_DEFAULT, [&](bool val) { setPhaseSyncMOD1(val); });
     registerParameter(tempoSyncMOD1, TEMPOSYNCMOD1_STR, RP::TEMPOSYNC_DEFAULT, [&](bool val) { setTempoSyncMOD1(val); });
@@ -41,6 +40,7 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
     registerParameter(tempoNumerMOD1, TEMPONUMERMOD1_STR, &RP::TEMPONUMER, RP::TEMPONUMER.defaultValue, [&](int val) { setTempoNumerMOD1(val); });
     registerParameter(tempoDenomMOD1, TEMPODENOMMOD1_STR, &RP::TEMPODENOM, RP::TEMPODENOM.defaultValue, [&](int val) { setTempoDenomMOD1(val); });
 
+    registerParameter(outputGain, OUTPUTGAIN_STR, SP::OUTPUTGAIN.defaultValue, [&](float val) { setOutputGain(val); });
 }
 
 SongbirdAudioProcessor::~SongbirdAudioProcessor()
