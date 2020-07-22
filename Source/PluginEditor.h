@@ -65,6 +65,8 @@ public:
     void sliderValueChanged (juce::Slider* sliderThatWasMoved) override;
     void buttonClicked (juce::Button* buttonThatWasClicked) override;
 
+
+
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
     SongbirdLookAndFeel orangeLookAndFeel,
