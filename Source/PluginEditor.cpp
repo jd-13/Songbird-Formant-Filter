@@ -92,7 +92,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     MixSld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     MixSld->addListener (this);
 
-    MixSld->setBounds (80, 117, 72, 56);
+    MixSld->setBounds (75, 117, 72, 56);
 
     DepthMOD1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("MOD 1 Depth Slider"));
     addAndMakeVisible (DepthMOD1Sld.get());
@@ -225,7 +225,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     ModModeBtn->setColour (juce::TextButton::textColourOffId, juce::Colour (0xffffcc00));
     ModModeBtn->setColour (juce::TextButton::textColourOnId, juce::Colour (0xffff5032));
 
-    ModModeBtn->setBounds (184, 136, 64, 24);
+    ModModeBtn->setBounds (181, 136, 64, 24);
 
     MixLbl.reset (new juce::Label ("Mix Label",
                                    TRANS("Mix")));
@@ -237,7 +237,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     MixLbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
     MixLbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
-    MixLbl->setBounds (100, 176, 32, 24);
+    MixLbl->setBounds (95, 176, 32, 24);
 
     ModeLbl.reset (new juce::Label ("Mode Label",
                                     TRANS("Mode")));
@@ -249,7 +249,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     ModeLbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
     ModeLbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
-    ModeLbl->setBounds (193, 176, 46, 24);
+    ModeLbl->setBounds (190, 176, 46, 24);
 
     OutputGainSld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("Output Gain Slider"));
     addAndMakeVisible (OutputGainSld.get());
@@ -259,7 +259,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     OutputGainSld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     OutputGainSld->addListener (this);
 
-    OutputGainSld->setBounds (280, 117, 72, 56);
+    OutputGainSld->setBounds (278, 117, 72, 56);
 
     OutputGainLbl.reset (new juce::Label ("Output Gain Label",
                                           TRANS("Output Gain")));
@@ -271,7 +271,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     OutputGainLbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
     OutputGainLbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
-    OutputGainLbl->setBounds (271, 176, 88, 24);
+    OutputGainLbl->setBounds (270, 176, 88, 24);
 
     FilterPosLbl.reset (new juce::Label ("Filter Position Label",
                                          juce::String()));
@@ -733,7 +733,7 @@ BEGIN_JUCER_METADATA
             editable="0" layout="33" items="A&#10;E&#10;I&#10;O&#10;U" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <SLIDER name="Mix Slider" id="b75c053482d8ac35" memberName="MixSld" virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
-          explicitFocusOrder="0" pos="80 117 72 56" tooltip="Dry/Wet mix level"
+          explicitFocusOrder="0" pos="75 117 72 56" tooltip="Dry/Wet mix level"
           min="0.0" max="1.0" int="0.0" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
@@ -792,27 +792,27 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
   <TEXTBUTTON name="Mod Mode Button" id="82ccbd2e4873bcd5" memberName="ModModeBtn"
-              virtualName="" explicitFocusOrder="0" pos="184 136 64 24" tooltip="Modulation mode: &quot;Blend&quot; applies both vowels in parallel and blends between the two, &quot;Freq&quot; applies a single vowel which is some combination of the two selected"
+              virtualName="" explicitFocusOrder="0" pos="181 136 64 24" tooltip="Modulation mode: &quot;Blend&quot; applies both vowels in parallel and blends between the two, &quot;Freq&quot; applies a single vowel which is some combination of the two selected"
               bgColOff="ffffcc00" bgColOn="ffff5032" textCol="ffffcc00" textColOn="ffff5032"
               buttonText="Blend" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <LABEL name="Mix Label" id="49736b42e5833ce0" memberName="MixLbl" virtualName=""
-         explicitFocusOrder="0" pos="100 176 32 24" textCol="ffff8773"
+         explicitFocusOrder="0" pos="95 176 32 24" textCol="ffff8773"
          edTextCol="ff000000" edBkgCol="0" labelText="Mix" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
   <LABEL name="Mode Label" id="8aeac08f9afe843a" memberName="ModeLbl"
-         virtualName="" explicitFocusOrder="0" pos="193 176 46 24" textCol="ffff8773"
+         virtualName="" explicitFocusOrder="0" pos="190 176 46 24" textCol="ffff8773"
          edTextCol="ff000000" edBkgCol="0" labelText="Mode" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
   <SLIDER name="Output Gain Slider" id="69d51698f3b89634" memberName="OutputGainSld"
           virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
-          explicitFocusOrder="0" pos="280 117 72 56" tooltip="Output gain"
+          explicitFocusOrder="0" pos="278 117 72 56" tooltip="Output gain"
           min="0.0" max="1.0" int="0.0" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
   <LABEL name="Output Gain Label" id="fe76b3e123fa3f5" memberName="OutputGainLbl"
-         virtualName="" explicitFocusOrder="0" pos="271 176 88 24" textCol="ffff8773"
+         virtualName="" explicitFocusOrder="0" pos="270 176 88 24" textCol="ffff8773"
          edTextCol="ff000000" edBkgCol="0" labelText="Output Gain" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
