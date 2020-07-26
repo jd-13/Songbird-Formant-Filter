@@ -630,8 +630,8 @@ void SongbirdAudioProcessorEditor::_onParameterUpdate() {
     // Activate/Deactivate phase control depending on phase sync
     PhaseMOD1Sld->setEnabled(PhaseSyncMOD1Btn->getToggleState());
 
-    const Colour labelColour = PhaseMOD1Sld->findColour(PhaseSyncMOD1Btn->getToggleState() ?
-            Slider::rotarySliderFillColourId : Slider::rotarySliderOutlineColourId);
+    const Colour labelColour = PhaseSyncMOD1Btn->getToggleState() ?
+            Colour (0xffffdf5e) : PhaseMOD1Sld->findColour(Slider::rotarySliderOutlineColourId);
 
     PhaseMOD1Lbl->setColour(Label::textColourId, labelColour);
 
