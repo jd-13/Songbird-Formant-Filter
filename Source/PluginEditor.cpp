@@ -613,9 +613,12 @@ void SongbirdAudioProcessorEditor::_onParameterUpdate() {
     ModModeBtn->setToggleState(ourProcessor->modMode->get(), dontSendNotification);
     OutputGainSld->setValue(ourProcessor->outputGain->get(), dontSendNotification);
 
-    // Set text for mod mode button
+    // Set text and label colour for mod mode button
     ModModeBtn->getToggleState() ? ModModeBtn->setButtonText("FREQ") :
                                     ModModeBtn->setButtonText("BLEND");
+
+    const Colour modeLabelColour = Colour(ModModeBtn->getToggleState() ? 0xffff8773 : 0xffffdf5e);
+    ModeLbl->setColour(Label::textColourId, modeLabelColour);
 
     // MOD 1
     PhaseSyncMOD1Btn->setToggleState(ourProcessor->phaseSyncMOD1->get(), dontSendNotification);
@@ -630,10 +633,10 @@ void SongbirdAudioProcessorEditor::_onParameterUpdate() {
     // Activate/Deactivate phase control depending on phase sync
     PhaseMOD1Sld->setEnabled(PhaseSyncMOD1Btn->getToggleState());
 
-    const Colour labelColour = PhaseSyncMOD1Btn->getToggleState() ?
-            Colour (0xffffdf5e) : PhaseMOD1Sld->findColour(Slider::rotarySliderOutlineColourId);
+    const Colour phaseLabelColour = PhaseSyncMOD1Btn->getToggleState() ?
+            Colour(0xffffdf5e) : PhaseMOD1Sld->findColour(Slider::rotarySliderOutlineColourId);
 
-    PhaseMOD1Lbl->setColour(Label::textColourId, labelColour);
+    PhaseMOD1Lbl->setColour(Label::textColourId, phaseLabelColour);
 
 
     // Toggle visibility for rate controls depending on tempo sync
