@@ -61,7 +61,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     FilterPosSld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("Filter Position Slider"));
     addAndMakeVisible (FilterPosSld.get());
     FilterPosSld->setTooltip (TRANS("Manully modulate between the two vowels using the mode selected below"));
-    FilterPosSld->setRange (0, 1, 0);
+    FilterPosSld->setRange (0, 1, 0.01);
     FilterPosSld->setSliderStyle (juce::Slider::LinearHorizontal);
     FilterPosSld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     FilterPosSld->addListener (this);
@@ -87,7 +87,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     MixSld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("Mix Slider"));
     addAndMakeVisible (MixSld.get());
     MixSld->setTooltip (TRANS("Dry/Wet mix level"));
-    MixSld->setRange (0, 1, 0);
+    MixSld->setRange (0, 1, 0.01);
     MixSld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
     MixSld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     MixSld->addListener (this);
@@ -254,7 +254,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     OutputGainSld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("Output Gain Slider"));
     addAndMakeVisible (OutputGainSld.get());
     OutputGainSld->setTooltip (TRANS("Output gain"));
-    OutputGainSld->setRange (0, 1, 0);
+    OutputGainSld->setRange (0, 1, 0.01);
     OutputGainSld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
     OutputGainSld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     OutputGainSld->addListener (this);
@@ -725,7 +725,7 @@ BEGIN_JUCER_METADATA
   <SLIDER name="Filter Position Slider" id="1be87d051f6ceb97" memberName="FilterPosSld"
           virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
           explicitFocusOrder="0" pos="124 64 184 24" tooltip="Manully modulate between the two vowels using the mode selected below"
-          min="0.0" max="1.0" int="0.0" style="LinearHorizontal" textBoxPos="NoTextBox"
+          min="0.0" max="1.0" int="0.01" style="LinearHorizontal" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
   <COMBOBOX name="Vowel 2 Combo Box" id="9ac26013f2f51695" memberName="Vowel2Cmb"
@@ -734,7 +734,7 @@ BEGIN_JUCER_METADATA
             textWhenNoItems="(no choices)"/>
   <SLIDER name="Mix Slider" id="b75c053482d8ac35" memberName="MixSld" virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
           explicitFocusOrder="0" pos="75 117 72 56" tooltip="Dry/Wet mix level"
-          min="0.0" max="1.0" int="0.0" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
+          min="0.0" max="1.0" int="0.01" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
   <SLIDER name="MOD 1 Depth Slider" id="499f6451911662cc" memberName="DepthMOD1Sld"
@@ -808,7 +808,7 @@ BEGIN_JUCER_METADATA
   <SLIDER name="Output Gain Slider" id="69d51698f3b89634" memberName="OutputGainSld"
           virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
           explicitFocusOrder="0" pos="278 117 72 56" tooltip="Output gain"
-          min="0.0" max="1.0" int="0.0" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
+          min="0.0" max="1.0" int="0.01" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
   <LABEL name="Output Gain Label" id="fe76b3e123fa3f5" memberName="OutputGainLbl"
