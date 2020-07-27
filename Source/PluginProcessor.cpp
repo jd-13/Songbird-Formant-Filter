@@ -26,7 +26,7 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
     mSongbird.mMOD.setBypassSwitch(RP::LFOSWITCH_ON);
 
     registerParameter(vowel1, VOWEL1_STR, &SP::VOWEL, SP::VOWEL.VOWEL_A, [&](int val) { setVowel1(val); });
-    registerParameter(vowel2, VOWEL2_STR, &SP::VOWEL, SP::VOWEL.VOWEL_E, [&](int val) { setVowel1(val); });
+    registerParameter(vowel2, VOWEL2_STR, &SP::VOWEL, SP::VOWEL.VOWEL_E, [&](int val) { setVowel2(val); });
     registerParameter(filterPosition, FILTER_POSITION_STR, SP::FILTER_POSITION.defaultValue, [&](float val) { setFilterPosition(val); });
     registerParameter(mix, MIX_STR, SP::MIX.defaultValue, [&](float val) { setMix(val); });
     registerParameter(modMode, MODMODE_STR, SP::MODMODE_DEFAULT, [&](bool val) { setModMode(val); });
