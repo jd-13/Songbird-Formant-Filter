@@ -86,7 +86,8 @@
     </LINUX_MAKE>
     <VS2017 targetFolder="Builds/VisualStudio2017" extraCompilerFlags="/std:c++17">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="0" name="Debug" headerPath="C:\WEA\WECore\Source\WECore"/>
+        <CONFIGURATION isDebug="0" name="Debug" headerPath="C:\WEA\WECore\Source\WECore"
+                       optimisation="3"/>
         <CONFIGURATION isDebug="0" name="Release"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
