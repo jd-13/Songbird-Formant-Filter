@@ -27,20 +27,20 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
 
     registerParameter(vowel1, VOWEL1_STR, &SP::VOWEL, SP::VOWEL.VOWEL_A, [&](int val) { setVowel1(val); });
     registerParameter(vowel2, VOWEL2_STR, &SP::VOWEL, SP::VOWEL.VOWEL_E, [&](int val) { setVowel2(val); });
-    registerParameter(filterPosition, FILTER_POSITION_STR, SP::FILTER_POSITION.defaultValue, [&](float val) { setFilterPosition(val); });
-    registerParameter(mix, MIX_STR, SP::MIX.defaultValue, [&](float val) { setMix(val); });
+    registerParameter(filterPosition, FILTER_POSITION_STR, &SP::FILTER_POSITION, SP::FILTER_POSITION.defaultValue, [&](float val) { setFilterPosition(val); });
+    registerParameter(mix, MIX_STR, &SP::MIX, SP::MIX.defaultValue, [&](float val) { setMix(val); });
     registerParameter(modMode, MODMODE_STR, SP::MODMODE_DEFAULT, [&](bool val) { setModMode(val); });
 
     registerParameter(phaseSyncMOD1, PHASESYNCMOD1_STR, RP::PHASESYNC_DEFAULT, [&](bool val) { setPhaseSyncMOD1(val); });
     registerParameter(tempoSyncMOD1, TEMPOSYNCMOD1_STR, RP::TEMPOSYNC_DEFAULT, [&](bool val) { setTempoSyncMOD1(val); });
     registerParameter(waveMOD1, WAVEMOD1_STR, &RP::WAVE, RP::WAVE.defaultValue, [&](int val) { setWaveMOD1(val); });
-    registerParameter(depthMOD1, DEPTHMOD1_STR, RP::DEPTH.defaultValue, [&](float val) { setDepthMOD1(val); });
-    registerParameter(freqMOD1, FREQMOD1_STR, RP::FREQ.defaultValue, [&](float val) { setFreqMOD1(val); });
-    registerParameter(phaseMOD1, PHASEMOD1_STR, RP::PHASE.defaultValue, [&](float val) { setPhaseMOD1(val); });
+    registerParameter(depthMOD1, DEPTHMOD1_STR, &RP::DEPTH, RP::DEPTH.defaultValue, [&](float val) { setDepthMOD1(val); });
+    registerParameter(freqMOD1, FREQMOD1_STR, &RP::FREQ, RP::FREQ.defaultValue, [&](float val) { setFreqMOD1(val); });
+    registerParameter(phaseMOD1, PHASEMOD1_STR, &RP::PHASE, RP::PHASE.defaultValue, [&](float val) { setPhaseMOD1(val); });
     registerParameter(tempoNumerMOD1, TEMPONUMERMOD1_STR, &RP::TEMPONUMER, RP::TEMPONUMER.defaultValue, [&](int val) { setTempoNumerMOD1(val); });
     registerParameter(tempoDenomMOD1, TEMPODENOMMOD1_STR, &RP::TEMPODENOM, RP::TEMPODENOM.defaultValue, [&](int val) { setTempoDenomMOD1(val); });
 
-    registerParameter(outputGain, OUTPUTGAIN_STR, SP::OUTPUTGAIN.defaultValue, [&](float val) { setOutputGain(val); });
+    registerParameter(outputGain, OUTPUTGAIN_STR, &SP::OUTPUTGAIN, SP::OUTPUTGAIN.defaultValue, [&](float val) { setOutputGain(val); });
 }
 
 SongbirdAudioProcessor::~SongbirdAudioProcessor()
