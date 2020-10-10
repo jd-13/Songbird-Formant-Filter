@@ -1,3 +1,7 @@
+[![CI Main](https://github.com/jd-13/Songbird-Formant-Filter/workflows/CI%20Main/badge.svg)](https://github.com/jd-13/Songbird-Formant-Filter/actions?query=workflow%3A%22CI+Main%22)
+![](https://img.shields.io/badge/C%2B%2B-17-informational)
+![](https://img.shields.io/badge/license-GPLv3-informational)
+
 # Songbird-Formant-Filter
 A VST and Audio Unit, which provides two formant filters and an LFO modulated blend control between the two.
 
