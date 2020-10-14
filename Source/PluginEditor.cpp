@@ -124,6 +124,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     WaveMOD1Cmb->addItem (TRANS("Sine"), 1);
     WaveMOD1Cmb->addItem (TRANS("Square"), 2);
     WaveMOD1Cmb->addItem (TRANS("Saw"), 3);
+    WaveMOD1Cmb->addItem (TRANS("SC Comp"), 4);
     WaveMOD1Cmb->addListener (this);
 
     WaveMOD1Cmb->setBounds (259, 306, 80, 24);
@@ -657,8 +658,10 @@ void SongbirdAudioProcessorEditor::_onParameterUpdate() {
         WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSine());
     } else if (ourProcessor->waveMOD1->get() == 2) {
         WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSquare());
-    } else {
+    } else if (ourProcessor->waveMOD1->get() == 3) {
         WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSaw());
+    } else {
+        WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSidechain());
     }
 
     WaveViewMOD1->repaint();
@@ -754,8 +757,8 @@ BEGIN_JUCER_METADATA
           needsCallback="1"/>
   <COMBOBOX name="MOD 1 Wave" id="370e5062e67cf738" memberName="WaveMOD1Cmb"
             virtualName="" explicitFocusOrder="0" pos="259 306 80 24" tooltip="LFO wave shape"
-            editable="0" layout="33" items="Sine&#10;Square&#10;Saw" textWhenNonSelected=""
-            textWhenNoItems="(no choices)"/>
+            editable="0" layout="33" items="Sine&#10;Square&#10;Saw&#10;SC Comp"
+            textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="MOD 1 Freq Label" id="dabfca26c640fd58" memberName="FreqMOD1Lbl"
          virtualName="" explicitFocusOrder="0" pos="80 306 56 24" textCol="ffffdf5e"
          edTextCol="ff000000" edBkgCol="0" labelText="Rate" editableSingleClick="0"
