@@ -80,6 +80,7 @@ public:
 
     void setPhaseSyncMOD1(bool val);
     void setTempoSyncMOD1(bool val);
+    void setInvertMOD1(bool val);
     void setWaveMOD1(int val);
     void setDepthMOD1(float val);
     void setFreqMOD1(float val);
@@ -98,6 +99,7 @@ public:
 
     AudioParameterBool* phaseSyncMOD1;
     AudioParameterBool* tempoSyncMOD1;
+    AudioParameterBool* invertMOD1;
     AudioParameterInt* waveMOD1;
     AudioParameterFloat* depthMOD1;
     AudioParameterFloat* freqMOD1;

@@ -104,6 +104,7 @@ private:
     std::unique_ptr<juce::Label> OutputGainLbl;
     std::unique_ptr<juce::Label> FilterPosLbl;
     std::unique_ptr<WECore::Richter::WaveViewer> WaveViewMOD1;
+    std::unique_ptr<juce::TextButton> InvertMOD1Btn;
 
 
     //==============================================================================

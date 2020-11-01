@@ -292,6 +292,14 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     WaveViewMOD1->setBounds (261, 276, 75, 23);
 
+    InvertMOD1Btn.reset (new juce::TextButton ("MOD 1 Invert Button"));
+    addAndMakeVisible (InvertMOD1Btn.get());
+    InvertMOD1Btn->setTooltip (TRANS("Inverts the LFO output"));
+    InvertMOD1Btn->setButtonText (TRANS("Invert"));
+    InvertMOD1Btn->addListener (this);
+
+    InvertMOD1Btn->setBounds (271, 242, 56, 16);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -341,6 +349,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     WaveMOD1Cmb->setLookAndFeel(&yellowLookAndFeel);
     TempoSyncMOD1Btn->setLookAndFeel(&yellowLookAndFeel);
     PhaseSyncMOD1Btn->setLookAndFeel(&yellowLookAndFeel);
+    InvertMOD1Btn->setLookAndFeel(&yellowLookAndFeel);
     WaveViewMOD1->setLookAndFeel(&yellowLookAndFeel);
 
     WaveMOD1Cmb->setColour(ComboBox::ColourIds::textColourId, lightYellow);
@@ -402,6 +411,7 @@ SongbirdAudioProcessorEditor::~SongbirdAudioProcessorEditor()
     OutputGainLbl = nullptr;
     FilterPosLbl = nullptr;
     WaveViewMOD1 = nullptr;
+    InvertMOD1Btn = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -544,6 +554,12 @@ void SongbirdAudioProcessorEditor::buttonClicked (juce::Button* buttonThatWasCli
         ourProcessor->setModMode(!ModModeBtn->getToggleState());
         //[/UserButtonCode_ModModeBtn]
     }
+    else if (buttonThatWasClicked == InvertMOD1Btn.get())
+    {
+        //[UserButtonCode_InvertMOD1Btn] -- add your button handler code here..
+        ourProcessor->setInvertMOD1(!InvertMOD1Btn->getToggleState());
+        //[/UserButtonCode_InvertMOD1Btn]
+    }
 
     //[UserbuttonClicked_Post]
     //[/UserbuttonClicked_Post]
@@ -624,6 +640,7 @@ void SongbirdAudioProcessorEditor::_onParameterUpdate() {
     // MOD 1
     PhaseSyncMOD1Btn->setToggleState(ourProcessor->phaseSyncMOD1->get(), dontSendNotification);
     TempoSyncMOD1Btn->setToggleState(ourProcessor->tempoSyncMOD1->get(), dontSendNotification);
+    InvertMOD1Btn->setToggleState(ourProcessor->invertMOD1->get(), dontSendNotification);
     WaveMOD1Cmb->setSelectedId(ourProcessor->waveMOD1->get(), dontSendNotification);
     DepthMOD1Sld->setValue(ourProcessor->depthMOD1->get(), dontSendNotification);
     FreqMOD1Sld->setValue(ourProcessor->freqMOD1->get(), dontSendNotification);
@@ -654,16 +671,21 @@ void SongbirdAudioProcessorEditor::_onParameterUpdate() {
     }
 
     // Update wave viewer
+    const double* wave {nullptr};
     if (ourProcessor->waveMOD1->get() == 1) {
-        WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSine());
+        wave = WECore::Richter::Wavetables::getInstance()->getSine();
     } else if (ourProcessor->waveMOD1->get() == 2) {
-        WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSquare());
+        wave = WECore::Richter::Wavetables::getInstance()->getSquare();
     } else if (ourProcessor->waveMOD1->get() == 3) {
-        WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSaw());
+        wave = WECore::Richter::Wavetables::getInstance()->getSaw();
     } else {
-        WaveViewMOD1->setWave(WECore::Richter::Wavetables::getInstance()->getSidechain());
+        wave = WECore::Richter::Wavetables::getInstance()->getSidechain();
     }
 
+    WaveViewMOD1->setWave(wave,
+                          ourProcessor->depthMOD1->get(),
+                          ourProcessor->phaseSyncMOD1->get() ? WECore::Richter::Parameters::PHASE.NormalisedToInternal(ourProcessor->phaseMOD1->get()) : 0,
+                          ourProcessor->invertMOD1->get());
     WaveViewMOD1->repaint();
 }
 
@@ -830,6 +852,9 @@ BEGIN_JUCER_METADATA
   <GENERICCOMPONENT name="MOD1 Wave View" id="3c0e47dfa5180365" memberName="WaveViewMOD1"
                     virtualName="WECore::Richter::WaveViewer" explicitFocusOrder="0"
                     pos="261 276 75 23" class="juce::Component" params=""/>
+  <TEXTBUTTON name="MOD 1 Invert Button" id="395539a668deb434" memberName="InvertMOD1Btn"
+              virtualName="" explicitFocusOrder="0" pos="271 242 56 16" tooltip="Inverts the LFO output"
+              buttonText="Invert" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

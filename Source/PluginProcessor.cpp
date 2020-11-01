@@ -41,6 +41,10 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
     registerParameter(tempoDenomMOD1, TEMPODENOMMOD1_STR, &RP::TEMPODENOM, RP::TEMPODENOM.defaultValue, [&](int val) { setTempoDenomMOD1(val); });
 
     registerParameter(outputGain, OUTPUTGAIN_STR, &SP::OUTPUTGAIN, SP::OUTPUTGAIN.defaultValue, [&](float val) { setOutputGain(val); });
+
+    // New parameters must be registered last to maintain backwards compatibility during setStateInformation
+    registerParameter(invertMOD1, INVERTMOD1_STR, RP::INVERT_DEFAULT, [&](bool val) { setInvertMOD1(val); });
+
 }
 
 SongbirdAudioProcessor::~SongbirdAudioProcessor()
@@ -240,6 +244,11 @@ void SongbirdAudioProcessor::setPhaseSyncMOD1(bool val) {
 void SongbirdAudioProcessor::setTempoSyncMOD1(bool val) {
     mSongbird.mMOD.setTempoSyncSwitch(val);
     tempoSyncMOD1->setValueNotifyingHost(val);
+}
+
+void SongbirdAudioProcessor::setInvertMOD1(bool val) {
+    mSongbird.mMOD.setInvertSwitch(val);
+    invertMOD1->setValueNotifyingHost(val);
 }
 
 void SongbirdAudioProcessor::setWaveMOD1(int val) {
