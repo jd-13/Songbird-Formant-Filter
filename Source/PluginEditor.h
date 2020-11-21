@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 6.0.1
+  Created with Projucer version: 6.0.4
 
   ------------------------------------------------------------------------------
 
@@ -105,6 +105,13 @@ private:
     std::unique_ptr<juce::Label> FilterPosLbl;
     std::unique_ptr<WECore::Richter::WaveViewer> WaveViewMOD1;
     std::unique_ptr<juce::TextButton> InvertMOD1Btn;
+    std::unique_ptr<juce::GroupComponent> ENV1Group;
+    std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> AttackENV1Sld;
+    std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> ReleaseENV1Sld;
+    std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> AmountENV1Sld;
+    std::unique_ptr<juce::Label> AttackENV1Lbl;
+    std::unique_ptr<juce::Label> ReleaseENV1Lbl;
+    std::unique_ptr<juce::Label> AmountENV1Lbl;
 
 
     //==============================================================================

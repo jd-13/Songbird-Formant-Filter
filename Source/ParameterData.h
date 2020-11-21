@@ -31,6 +31,8 @@
 // This exists to provide the conversion for the decimal readout
 const ParameterDefinition::RangedParameter<double> PHASE_DISPLAY(0, 360, 0);
 
+const ParameterDefinition::RangedParameter<double> ENV1_AMOUNT(-2, 2, 0);
+
 const String    VOWEL1_STR {"Vowel1"},
                 VOWEL2_STR {"Vowel2"},
                 FILTER_POSITION_STR {"Position"},
@@ -47,6 +49,10 @@ const String    VOWEL1_STR {"Vowel1"},
                 FREQMOD1_STR {"MOD1Frequency"},
                 TEMPONUMERMOD1_STR {"MOD1TempoNumerator"},
                 TEMPODENOMMOD1_STR {"MOD1TempoDenominator"},
-                GROUP_MOD1 {"MOD1"};
+                GROUP_MOD1 {"MOD1"},
+
+                ATTACKENV1_STR {"ENV1Attack"},
+                RELEASEENV1_STR {"ENV1Release"},
+                AMOUNTENV1_STR {"ENV1Amount"};
 
 #endif  // PARAMETERDATA_H_INCLUDED

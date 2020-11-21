@@ -28,34 +28,43 @@
 #include "SongbirdFilters/SongbirdFilterModule.h"
 
 #include "RichterLFO/RichterMOD.h"
+#include "WEFilters/AREnvelopeFollowerSquareLaw.h"
 #include "ParameterData.h"
 
 class Songbird {
 public:
-    Songbird() : _lastLFOOutput(0) {}
+    Songbird() : _lastModOutput(0), _envelopeAmount(ENV1_AMOUNT.defaultValue) {}
     ~Songbird() = default;
 
     WECore::Songbird::SongbirdFilterModule<float> mFilter;
     WECore::Richter::RichterMOD mMOD;
+    WECore::AREnv::AREnvelopeFollowerSquareLaw mENV;
 
     void setSampleRate(double sampleRate);
+    void setEnvelopeAmount(double val) { _envelopeAmount = val; }
     void reset();
 
-    double getLastLFOOutput() const;
+    double getLastModOutput() const { return _lastModOutput; };
 
     void Process1in1out(float* inSamples, int numSamples);
     void Process1in2out(float* leftSamples, float* rightSamples, int numSamples);
     void Process2in2out(float* leftSamples, float* rightSamples, int numSamples);
 
 private:
-    double _lastLFOOutput;
+    double _lastModOutput;
+    double _envelopeAmount;
+
+    double _getModulationValue(float inSample);
 
     /**
      * This needs to be called once per buffer to advance the LFO's internal counters manually.
      *
      * TODO: provide protection to make sure this is still effective for large buffers.
      */
-    void _advanceLFOState(int numSteps);
+    /** @{ */
+    void _advanceModulationState(float* inSamples, int numSamples);
+    void _advanceModulationState(float* inLeftSamples, float* inRightSamples, int numSamples);
+    /** @} */
 };
 
 

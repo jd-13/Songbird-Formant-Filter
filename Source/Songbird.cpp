@@ -31,28 +31,25 @@ void Songbird::setSampleRate(double sampleRate) {
 void Songbird::reset() {
     mFilter.reset();
     mMOD.reset();
-}
-
-double Songbird::getLastLFOOutput() const {
-    return _lastLFOOutput;
+    mENV.reset();
 }
 
 void Songbird::Process1in1out(float* inSamples, int numSamples) {
 
-    mFilter.setModulation(mMOD.calcGainInLoop());
+    mFilter.setModulation(_getModulationValue(inSamples[0]));
 
     mFilter.Process1in1out(inSamples, numSamples);
 
-    _advanceLFOState(numSamples - 1);
+    _advanceModulationState(&inSamples[1], numSamples - 1);
 }
 
 void Songbird::Process1in2out(float* inLeftSamples, float* inRightSamples, int numSamples) {
 
-    mFilter.setModulation(mMOD.calcGainInLoop());
+    mFilter.setModulation(_getModulationValue(inLeftSamples[0]));
 
     mFilter.Process1in1out(inLeftSamples, numSamples);
 
-    _advanceLFOState(numSamples - 1);
+    _advanceModulationState(&inLeftSamples[1], numSamples - 1);
 
     // Copy the left buffer into the right, so that we have mono to stereo
     std::copy(inLeftSamples, inLeftSamples + numSamples, inRightSamples);
@@ -60,20 +57,39 @@ void Songbird::Process1in2out(float* inLeftSamples, float* inRightSamples, int n
 
 void Songbird::Process2in2out(float* inLeftSamples, float* inRightSamples, int numSamples) {
 
-    mFilter.setModulation(mMOD.calcGainInLoop());
+    mFilter.setModulation(_getModulationValue((inLeftSamples[0] + inRightSamples[0]) / 2));
 
     mFilter.Process2in2out(inLeftSamples, inRightSamples, numSamples);
 
-    _advanceLFOState(numSamples - 1);
+    _advanceModulationState(inLeftSamples, inRightSamples, numSamples - 1);
 }
 
-void Songbird::_advanceLFOState(int numSteps) {
+double Songbird::_getModulationValue(float inSample) {
+    return mMOD.calcGainInLoop() + mENV.updateEnvelope(inSample) * _envelopeAmount;
+}
+
+void Songbird::_advanceModulationState(float* inSamples, int numSamples) {
 
     // Stop one short of numSteps, we'll call calcGainInLoop once more to cache the last output
-    for (int iii {0}; iii < numSteps - 1; iii++) {
+    for (int iii {0}; iii < numSamples - 1; iii++) {
         mMOD.calcGainInLoop();
+        mENV.updateEnvelope(inSamples[iii]);
     }
 
-    // Cache the last LFO output from this buffer
-    _lastLFOOutput = mMOD.calcGainInLoop();
+    // Cache the last mod output from this buffer
+    _lastModOutput = _getModulationValue(inSamples[numSamples - 1]);
+}
+
+void Songbird::_advanceModulationState(float* inLeftSamples,
+                                       float* inRightSamples,
+                                       int numSamples) {
+    // Stop one short of numSteps, we'll call calcGainInLoop once more to cache the last output
+    for (int iii {0}; iii < numSamples - 1; iii++) {
+        mMOD.calcGainInLoop();
+        mENV.updateEnvelope((inLeftSamples[iii] + inRightSamples[iii]) / 2);
+    }
+
+    // Cache the last mod output from this buffer
+    _lastModOutput = _getModulationValue((inLeftSamples[numSamples - 1] + inRightSamples[numSamples - 1]) / 2);
+;
 }

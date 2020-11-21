@@ -55,7 +55,7 @@ public:
     void changeProgramName (int index, const String& newName) override;
 
     //==============================================================================
-    double getLastLFOOutput() { return mSongbird.getLastLFOOutput(); }
+    double getLastModOutput() { return mSongbird.getLastModOutput(); }
 
     /**
      * Parameter setters.
@@ -87,6 +87,10 @@ public:
     void setPhaseMOD1(float val);
     void setTempoNumerMOD1(int val);
     void setTempoDenomMOD1(int val);
+
+    void setAttackENV1(float val);
+    void setReleaseENV1(float val);
+    void setAmountENV1(float val);
     /** @} */
 
     // Parameters (public for beginChangeGesture/endChangeGesture/get)
@@ -106,6 +110,10 @@ public:
     AudioParameterFloat* phaseMOD1;
     AudioParameterInt* tempoNumerMOD1;
     AudioParameterInt* tempoDenomMOD1;
+
+    AudioParameterFloat* attackENV1;
+    AudioParameterFloat* releaseENV1;
+    AudioParameterFloat* amountENV1;
 
 private:
     Songbird mSongbird;

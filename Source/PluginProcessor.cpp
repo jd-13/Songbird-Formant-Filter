@@ -18,6 +18,7 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
 {
     namespace SP = WECore::Songbird::Parameters;
     namespace RP = WECore::Richter::Parameters;
+    namespace AP = WECore::AREnv::Parameters;
 
     // Set defaults
     mSongbird.mFilter.setVowel1(SP::VOWEL.VOWEL_A);
@@ -44,6 +45,10 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
 
     // New parameters must be registered last to maintain backwards compatibility during setStateInformation
     registerParameter(invertMOD1, INVERTMOD1_STR, RP::INVERT_DEFAULT, [&](bool val) { setInvertMOD1(val); });
+
+    registerParameter(attackENV1, ATTACKENV1_STR, &AP::ATTACK_MS, AP::ATTACK_MS.defaultValue, [&](float val) { setAttackENV1(val); });
+    registerParameter(releaseENV1, RELEASEENV1_STR, &AP::RELEASE_MS, AP::RELEASE_MS.defaultValue, [&](float val) { setReleaseENV1(val); });
+    registerParameter(amountENV1, AMOUNTENV1_STR, &ENV1_AMOUNT, ENV1_AMOUNT.defaultValue, [&](float val) { setAmountENV1(val); });
 
 }
 
@@ -279,6 +284,21 @@ void SongbirdAudioProcessor::setTempoNumerMOD1(int val) {
 void SongbirdAudioProcessor::setTempoDenomMOD1(int val) {
     mSongbird.mMOD.setTempoDenom(val);
     tempoDenomMOD1->setValueNotifyingHost(tempoDenomMOD1->getNormalisableRange().convertTo0to1(val));
+}
+
+void SongbirdAudioProcessor::setAttackENV1(float val) {
+    mSongbird.mENV.setAttackTimeMs(WECore::AREnv::Parameters::ATTACK_MS.NormalisedToInternal(val));
+    attackENV1->setValueNotifyingHost(val);
+}
+
+void SongbirdAudioProcessor::setReleaseENV1(float val) {
+    mSongbird.mENV.setReleaseTimeMs(WECore::AREnv::Parameters::RELEASE_MS.NormalisedToInternal(val));
+    releaseENV1->setValueNotifyingHost(val);
+}
+
+void SongbirdAudioProcessor::setAmountENV1(float val) {
+    mSongbird.setEnvelopeAmount(ENV1_AMOUNT.NormalisedToInternal(val));
+    amountENV1->setValueNotifyingHost(val);
 }
 
 //==============================================================================

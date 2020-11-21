@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 6.0.1
+  Created with Projucer version: 6.0.4
 
   ------------------------------------------------------------------------------
 
@@ -18,6 +18,7 @@
 */
 
 //[Headers] You can add your own extra header files here...
+#include "WEFilters/AREnvelopeFollowerParameters.h"
 //[/Headers]
 
 #include "PluginEditor.h"
@@ -40,7 +41,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     MOD1Group->setColour (juce::GroupComponent::outlineColourId, juce::Colour (0xffffdf5e));
     MOD1Group->setColour (juce::GroupComponent::textColourId, juce::Colour (0xffffdf5e));
 
-    MOD1Group->setBounds (72, 214, 280, 136);
+    MOD1Group->setBounds (72, 224, 280, 136);
 
     Vowel1Cmb.reset (new juce::ComboBox ("Vowel 1 Combo Box"));
     addAndMakeVisible (Vowel1Cmb.get());
@@ -102,7 +103,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     DepthMOD1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     DepthMOD1Sld->addListener (this);
 
-    DepthMOD1Sld->setBounds (151, 276, 32, 24);
+    DepthMOD1Sld->setBounds (151, 286, 32, 24);
 
     FreqMOD1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("MOD 1 Freq Slider"));
     addAndMakeVisible (FreqMOD1Sld.get());
@@ -112,7 +113,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     FreqMOD1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     FreqMOD1Sld->addListener (this);
 
-    FreqMOD1Sld->setBounds (92, 276, 32, 24);
+    FreqMOD1Sld->setBounds (92, 286, 32, 24);
 
     WaveMOD1Cmb.reset (new juce::ComboBox ("MOD 1 Wave"));
     addAndMakeVisible (WaveMOD1Cmb.get());
@@ -127,7 +128,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     WaveMOD1Cmb->addItem (TRANS("SC Comp"), 4);
     WaveMOD1Cmb->addListener (this);
 
-    WaveMOD1Cmb->setBounds (259, 306, 80, 24);
+    WaveMOD1Cmb->setBounds (259, 316, 80, 24);
 
     FreqMOD1Lbl.reset (new juce::Label ("MOD 1 Freq Label",
                                         TRANS("Rate")));
@@ -139,7 +140,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     FreqMOD1Lbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
     FreqMOD1Lbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
-    FreqMOD1Lbl->setBounds (80, 306, 56, 24);
+    FreqMOD1Lbl->setBounds (80, 316, 56, 24);
 
     DepthMOD1Lbl.reset (new juce::Label ("MOD 1 Depth Label",
                                          TRANS("Depth")));
@@ -151,7 +152,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     DepthMOD1Lbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
     DepthMOD1Lbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
-    DepthMOD1Lbl->setBounds (139, 306, 54, 24);
+    DepthMOD1Lbl->setBounds (139, 316, 54, 24);
 
     TempoSyncMOD1Btn.reset (new juce::TextButton ("MOD 1 Tempo Sync Button"));
     addAndMakeVisible (TempoSyncMOD1Btn.get());
@@ -159,7 +160,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     TempoSyncMOD1Btn->setButtonText (TRANS("Tempo"));
     TempoSyncMOD1Btn->addListener (this);
 
-    TempoSyncMOD1Btn->setBounds (83, 242, 54, 16);
+    TempoSyncMOD1Btn->setBounds (83, 252, 54, 16);
 
     TempoNumerMOD1Sld.reset (new juce::Slider ("MOD 1 Tempo Numer Slider"));
     addAndMakeVisible (TempoNumerMOD1Sld.get());
@@ -171,7 +172,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     TempoNumerMOD1Sld->setColour (juce::Slider::textBoxOutlineColourId, juce::Colour (0x00808080));
     TempoNumerMOD1Sld->addListener (this);
 
-    TempoNumerMOD1Sld->setBounds (78, 274, 56, 16);
+    TempoNumerMOD1Sld->setBounds (78, 284, 56, 16);
 
     TempoDenomMOD1Sld.reset (new juce::Slider ("MOD 1 Tempo Denom Slider"));
     addAndMakeVisible (TempoDenomMOD1Sld.get());
@@ -184,7 +185,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     TempoDenomMOD1Sld->setColour (juce::Slider::textBoxOutlineColourId, juce::Colour (0x00808080));
     TempoDenomMOD1Sld->addListener (this);
 
-    TempoDenomMOD1Sld->setBounds (78, 306, 56, 16);
+    TempoDenomMOD1Sld->setBounds (78, 316, 56, 16);
 
     PhaseSyncMOD1Btn.reset (new juce::TextButton ("MOD 1 Phase Sync Button"));
     addAndMakeVisible (PhaseSyncMOD1Btn.get());
@@ -192,7 +193,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     PhaseSyncMOD1Btn->setButtonText (TRANS("Phase"));
     PhaseSyncMOD1Btn->addListener (this);
 
-    PhaseSyncMOD1Btn->setBounds (199, 242, 54, 16);
+    PhaseSyncMOD1Btn->setBounds (199, 252, 54, 16);
 
     PhaseMOD1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("MOD 1 Phase Slider"));
     addAndMakeVisible (PhaseMOD1Sld.get());
@@ -202,7 +203,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     PhaseMOD1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     PhaseMOD1Sld->addListener (this);
 
-    PhaseMOD1Sld->setBounds (210, 276, 32, 24);
+    PhaseMOD1Sld->setBounds (210, 286, 32, 24);
 
     PhaseMOD1Lbl.reset (new juce::Label ("MOD 1 Phase Label",
                                          TRANS("Phase")));
@@ -214,7 +215,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     PhaseMOD1Lbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
     PhaseMOD1Lbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
 
-    PhaseMOD1Lbl->setBounds (198, 306, 56, 24);
+    PhaseMOD1Lbl->setBounds (198, 316, 56, 24);
 
     ModModeBtn.reset (new juce::TextButton ("Mod Mode Button"));
     addAndMakeVisible (ModModeBtn.get());
@@ -290,7 +291,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     addAndMakeVisible (WaveViewMOD1.get());
     WaveViewMOD1->setName ("MOD1 Wave View");
 
-    WaveViewMOD1->setBounds (261, 276, 75, 23);
+    WaveViewMOD1->setBounds (261, 286, 75, 23);
 
     InvertMOD1Btn.reset (new juce::TextButton ("MOD 1 Invert Button"));
     addAndMakeVisible (InvertMOD1Btn.get());
@@ -298,13 +299,88 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     InvertMOD1Btn->setButtonText (TRANS("Invert"));
     InvertMOD1Btn->addListener (this);
 
-    InvertMOD1Btn->setBounds (271, 242, 56, 16);
+    InvertMOD1Btn->setBounds (271, 252, 56, 16);
+
+    ENV1Group.reset (new juce::GroupComponent ("ENV 1 Group",
+                                               TRANS("ENV")));
+    addAndMakeVisible (ENV1Group.get());
+    ENV1Group->setTextLabelPosition (juce::Justification::centred);
+    ENV1Group->setColour (juce::GroupComponent::outlineColourId, juce::Colour (0xffffdf5e));
+    ENV1Group->setColour (juce::GroupComponent::textColourId, juce::Colour (0xffffdf5e));
+
+    ENV1Group->setBounds (72, 360, 280, 88);
+
+    AttackENV1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("ENV 1 Attack Slider"));
+    addAndMakeVisible (AttackENV1Sld.get());
+    AttackENV1Sld->setTooltip (TRANS("Attack of the envelope follower"));
+    AttackENV1Sld->setRange (0, 1, 0.001);
+    AttackENV1Sld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
+    AttackENV1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
+    AttackENV1Sld->addListener (this);
+
+    AttackENV1Sld->setBounds (115, 387, 32, 24);
+
+    ReleaseENV1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("ENV 1 RElease Slider"));
+    addAndMakeVisible (ReleaseENV1Sld.get());
+    ReleaseENV1Sld->setTooltip (TRANS("Release of the envelope follower"));
+    ReleaseENV1Sld->setRange (0, 1, 0.001);
+    ReleaseENV1Sld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
+    ReleaseENV1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
+    ReleaseENV1Sld->addListener (this);
+
+    ReleaseENV1Sld->setBounds (196, 387, 32, 24);
+
+    AmountENV1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("ENV 1 Amount Slider"));
+    addAndMakeVisible (AmountENV1Sld.get());
+    AmountENV1Sld->setTooltip (TRANS("Amount of envelope follower modulation"));
+    AmountENV1Sld->setRange (0, 1, 0.01);
+    AmountENV1Sld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
+    AmountENV1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
+    AmountENV1Sld->addListener (this);
+
+    AmountENV1Sld->setBounds (278, 387, 32, 24);
+
+    AttackENV1Lbl.reset (new juce::Label ("ENV 1 Attack Label",
+                                          TRANS("Attack")));
+    addAndMakeVisible (AttackENV1Lbl.get());
+    AttackENV1Lbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    AttackENV1Lbl->setJustificationType (juce::Justification::centred);
+    AttackENV1Lbl->setEditable (false, false, false);
+    AttackENV1Lbl->setColour (juce::Label::textColourId, juce::Colour (0xffffdf5e));
+    AttackENV1Lbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    AttackENV1Lbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
+
+    AttackENV1Lbl->setBounds (104, 417, 54, 24);
+
+    ReleaseENV1Lbl.reset (new juce::Label ("ENV 1 Release Label",
+                                           TRANS("Release")));
+    addAndMakeVisible (ReleaseENV1Lbl.get());
+    ReleaseENV1Lbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    ReleaseENV1Lbl->setJustificationType (juce::Justification::centred);
+    ReleaseENV1Lbl->setEditable (false, false, false);
+    ReleaseENV1Lbl->setColour (juce::Label::textColourId, juce::Colour (0xffffdf5e));
+    ReleaseENV1Lbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    ReleaseENV1Lbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
+
+    ReleaseENV1Lbl->setBounds (180, 417, 64, 24);
+
+    AmountENV1Lbl.reset (new juce::Label ("ENV 1 Amount Label",
+                                          TRANS("Amount")));
+    addAndMakeVisible (AmountENV1Lbl.get());
+    AmountENV1Lbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
+    AmountENV1Lbl->setJustificationType (juce::Justification::centred);
+    AmountENV1Lbl->setEditable (false, false, false);
+    AmountENV1Lbl->setColour (juce::Label::textColourId, juce::Colour (0xffffdf5e));
+    AmountENV1Lbl->setColour (juce::TextEditor::textColourId, juce::Colours::black);
+    AmountENV1Lbl->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
+
+    AmountENV1Lbl->setBounds (262, 417, 64, 24);
 
 
     //[UserPreSize]
     //[/UserPreSize]
 
-    setSize (425, 350);
+    setSize (425, 450);
 
 
     //[Constructor] You can add your own custom stuff here..
@@ -351,6 +427,9 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     PhaseSyncMOD1Btn->setLookAndFeel(&yellowLookAndFeel);
     InvertMOD1Btn->setLookAndFeel(&yellowLookAndFeel);
     WaveViewMOD1->setLookAndFeel(&yellowLookAndFeel);
+    AttackENV1Sld->setLookAndFeel(&yellowLookAndFeel);
+    ReleaseENV1Sld->setLookAndFeel(&yellowLookAndFeel);
+    AmountENV1Sld->setLookAndFeel(&yellowLookAndFeel);
 
     WaveMOD1Cmb->setColour(ComboBox::ColourIds::textColourId, lightYellow);
     WaveMOD1Cmb->setColour(ComboBox::ColourIds::arrowColourId, lightYellow);
@@ -412,6 +491,13 @@ SongbirdAudioProcessorEditor::~SongbirdAudioProcessorEditor()
     FilterPosLbl = nullptr;
     WaveViewMOD1 = nullptr;
     InvertMOD1Btn = nullptr;
+    ENV1Group = nullptr;
+    AttackENV1Sld = nullptr;
+    ReleaseENV1Sld = nullptr;
+    AmountENV1Sld = nullptr;
+    AttackENV1Lbl = nullptr;
+    ReleaseENV1Lbl = nullptr;
+    AmountENV1Lbl = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -429,7 +515,7 @@ void SongbirdAudioProcessorEditor::paint (juce::Graphics& g)
 
     //[UserPaint] Add your own custom painting code here..
     Image bg = ImageCache::getFromMemory(BinaryData::Background_png, BinaryData::Background_pngSize);
-    g.drawImage(bg, 0, 0, 425, 350, 0, 0, 5 * 425, 5 * 350);
+    g.drawImage(bg, 0, 0, 425, 450, 0, 0, 5 * 425, 5 * 450);
     //[/UserPaint]
 }
 
@@ -525,6 +611,24 @@ void SongbirdAudioProcessorEditor::sliderValueChanged (juce::Slider* sliderThatW
         ourProcessor->setOutputGain(OutputGainSld->getValue());
         //[/UserSliderCode_OutputGainSld]
     }
+    else if (sliderThatWasMoved == AttackENV1Sld.get())
+    {
+        //[UserSliderCode_AttackENV1Sld] -- add your slider handling code here..
+        ourProcessor->setAttackENV1(AttackENV1Sld->getValue());
+        //[/UserSliderCode_AttackENV1Sld]
+    }
+    else if (sliderThatWasMoved == ReleaseENV1Sld.get())
+    {
+        //[UserSliderCode_ReleaseENV1Sld] -- add your slider handling code here..
+        ourProcessor->setReleaseENV1(ReleaseENV1Sld->getValue());
+        //[/UserSliderCode_ReleaseENV1Sld]
+    }
+    else if (sliderThatWasMoved == AmountENV1Sld.get())
+    {
+        //[UserSliderCode_AmountENV1Sld] -- add your slider handling code here..
+        ourProcessor->setAmountENV1(AmountENV1Sld->getValue());
+        //[/UserSliderCode_AmountENV1Sld]
+    }
 
     //[UsersliderValueChanged_Post]
     //[/UsersliderValueChanged_Post]
@@ -587,6 +691,12 @@ void SongbirdAudioProcessorEditor::sliderDragStarted(Slider* slider) {
         ourProcessor->phaseMOD1->beginChangeGesture();
     } else if (slider == OutputGainSld.get()) {
         ourProcessor->outputGain->beginChangeGesture();
+    } else if (slider == AttackENV1Sld.get()) {
+        ourProcessor->attackENV1->beginChangeGesture();
+    } else if (slider == ReleaseENV1Sld.get()) {
+        ourProcessor->releaseENV1->beginChangeGesture();
+    } else if (slider == AmountENV1Sld.get()) {
+        ourProcessor->amountENV1->beginChangeGesture();
     }
 }
 
@@ -609,6 +719,12 @@ void SongbirdAudioProcessorEditor::sliderDragEnded(Slider* slider) {
         ourProcessor->phaseMOD1->endChangeGesture();
     } else if (slider == OutputGainSld.get()) {
         ourProcessor->outputGain->endChangeGesture();
+    } else if (slider == AttackENV1Sld.get()) {
+        ourProcessor->attackENV1->endChangeGesture();
+    } else if (slider == ReleaseENV1Sld.get()) {
+        ourProcessor->releaseENV1->endChangeGesture();
+    } else if (slider == AmountENV1Sld.get()) {
+        ourProcessor->amountENV1->endChangeGesture();
     }
 }
 
@@ -616,7 +732,7 @@ void SongbirdAudioProcessorEditor::timerCallback() {
     SongbirdAudioProcessor* ourProcessor {getProcessor()};
 
     // Pickup LFO output value
-    orangeLookAndFeel.updateLFOOutput(ourProcessor->getLastLFOOutput());
+    orangeLookAndFeel.updateLFOOutput(ourProcessor->getLastModOutput());
     FilterPosSld->repaint();
 }
 
@@ -647,6 +763,11 @@ void SongbirdAudioProcessorEditor::_onParameterUpdate() {
     PhaseMOD1Sld->setValue(ourProcessor->phaseMOD1->get(), dontSendNotification);
     TempoNumerMOD1Sld->setValue(ourProcessor->tempoNumerMOD1->get(), dontSendNotification);
     TempoDenomMOD1Sld->setValue(ourProcessor->tempoDenomMOD1->get(), dontSendNotification);
+
+    // ENV 1
+    AttackENV1Sld->setValue(ourProcessor->attackENV1->get(), dontSendNotification);
+    ReleaseENV1Sld->setValue(ourProcessor->releaseENV1->get(), dontSendNotification);
+    AmountENV1Sld->setValue(ourProcessor->amountENV1->get(), dontSendNotification);
 
     // Activate/Deactivate phase control depending on phase sync
     PhaseMOD1Sld->setEnabled(PhaseSyncMOD1Btn->getToggleState());
@@ -703,6 +824,13 @@ void SongbirdAudioProcessorEditor::_enableDoubleClickToDefault() {
         WECore::Richter::Parameters::DEPTH.InternalToNormalised(WECore::Richter::Parameters::DEPTH.defaultValue));
     PhaseMOD1Sld->setDoubleClickReturnValue(true,
         WECore::Richter::Parameters::PHASE.InternalToNormalised(WECore::Richter::Parameters::PHASE.defaultValue));
+
+    AttackENV1Sld->setDoubleClickReturnValue(true,
+        WECore::AREnv::Parameters::ATTACK_MS.InternalToNormalised(WECore::AREnv::Parameters::ATTACK_MS.defaultValue));
+    ReleaseENV1Sld->setDoubleClickReturnValue(true,
+        WECore::AREnv::Parameters::RELEASE_MS.InternalToNormalised(WECore::AREnv::Parameters::RELEASE_MS.defaultValue));
+    AmountENV1Sld->setDoubleClickReturnValue(true,
+        ENV1_AMOUNT.InternalToNormalised(ENV1_AMOUNT.defaultValue));
 }
 
 void SongbirdAudioProcessorEditor::_startSliderReadouts() {
@@ -713,6 +841,10 @@ void SongbirdAudioProcessorEditor::_startSliderReadouts() {
     FreqMOD1Sld->start(FreqMOD1Lbl.get(), FreqMOD1Lbl->getText(), &WECore::Richter::Parameters::FREQ);
     DepthMOD1Sld->start(DepthMOD1Lbl.get(), DepthMOD1Lbl->getText(), &WECore::Richter::Parameters::DEPTH);
     PhaseMOD1Sld->start(PhaseMOD1Lbl.get(), PhaseMOD1Lbl->getText(), &PHASE_DISPLAY);
+
+    AttackENV1Sld->start(AttackENV1Lbl.get(), AttackENV1Lbl->getText(), &WECore::AREnv::Parameters::ATTACK_MS);
+    ReleaseENV1Sld->start(ReleaseENV1Lbl.get(), ReleaseENV1Lbl->getText(), &WECore::AREnv::Parameters::RELEASE_MS);
+    AmountENV1Sld->start(AmountENV1Lbl.get(), AmountENV1Lbl->getText(), &ENV1_AMOUNT);
 }
 
 void SongbirdAudioProcessorEditor::_stopSliderReadouts() {
@@ -723,6 +855,10 @@ void SongbirdAudioProcessorEditor::_stopSliderReadouts() {
     FreqMOD1Sld->stop();
     DepthMOD1Sld->stop();
     PhaseMOD1Sld->stop();
+
+    AttackENV1Sld->stop();
+    ReleaseENV1Sld->stop();
+    AmountENV1Sld->stop();
 }
 
 //[/MiscUserCode]
@@ -741,10 +877,10 @@ BEGIN_JUCER_METADATA
                  componentName="" parentClasses="public WECore::JUCEPlugin::CoreProcessorEditor, public Timer"
                  constructorParams="SongbirdAudioProcessor&amp; ownerFilter" variableInitialisers="CoreProcessorEditor(ownerFilter)"
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
-                 fixedSize="0" initialWidth="425" initialHeight="350">
+                 fixedSize="1" initialWidth="425" initialHeight="450">
   <BACKGROUND backgroundColour="ffffffff"/>
   <GROUPCOMPONENT name="MOD 1 Group" id="a2c7412d0fb46a58" memberName="MOD1Group"
-                  virtualName="" explicitFocusOrder="0" pos="72 214 280 136" outlinecol="ffffdf5e"
+                  virtualName="" explicitFocusOrder="0" pos="72 224 280 136" outlinecol="ffffdf5e"
                   textcol="ffffdf5e" title="LFO" textpos="36"/>
   <COMBOBOX name="Vowel 1 Combo Box" id="ab5acbd6ca836993" memberName="Vowel1Cmb"
             virtualName="" explicitFocusOrder="0" pos="60 64 48 24" tooltip="Vowel to apply in the left position"
@@ -767,55 +903,55 @@ BEGIN_JUCER_METADATA
           needsCallback="1"/>
   <SLIDER name="MOD 1 Depth Slider" id="499f6451911662cc" memberName="DepthMOD1Sld"
           virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
-          explicitFocusOrder="0" pos="151 276 32 24" tooltip="Depth of the LFO"
+          explicitFocusOrder="0" pos="151 286 32 24" tooltip="Depth of the LFO"
           min="0.0" max="1.0" int="0.01" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
   <SLIDER name="MOD 1 Freq Slider" id="1d9800ca18cf5bba" memberName="FreqMOD1Sld"
           virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
-          explicitFocusOrder="0" pos="92 276 32 24" tooltip="Frequency of the LFO, from 2Hz to 20Hz"
+          explicitFocusOrder="0" pos="92 286 32 24" tooltip="Frequency of the LFO, from 2Hz to 20Hz"
           min="0.0" max="1.0" int="0.01" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
   <COMBOBOX name="MOD 1 Wave" id="370e5062e67cf738" memberName="WaveMOD1Cmb"
-            virtualName="" explicitFocusOrder="0" pos="259 306 80 24" tooltip="LFO wave shape"
+            virtualName="" explicitFocusOrder="0" pos="259 316 80 24" tooltip="LFO wave shape"
             editable="0" layout="33" items="Sine&#10;Square&#10;Saw&#10;SC Comp"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="MOD 1 Freq Label" id="dabfca26c640fd58" memberName="FreqMOD1Lbl"
-         virtualName="" explicitFocusOrder="0" pos="80 306 56 24" textCol="ffffdf5e"
+         virtualName="" explicitFocusOrder="0" pos="80 316 56 24" textCol="ffffdf5e"
          edTextCol="ff000000" edBkgCol="0" labelText="Rate" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
   <LABEL name="MOD 1 Depth Label" id="77092a4a55225c68" memberName="DepthMOD1Lbl"
-         virtualName="" explicitFocusOrder="0" pos="139 306 54 24" textCol="ffffdf5e"
+         virtualName="" explicitFocusOrder="0" pos="139 316 54 24" textCol="ffffdf5e"
          edTextCol="ff000000" edBkgCol="0" labelText="Depth" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
   <TEXTBUTTON name="MOD 1 Tempo Sync Button" id="b43affdb8ac7bb90" memberName="TempoSyncMOD1Btn"
-              virtualName="" explicitFocusOrder="0" pos="83 242 54 16" tooltip="Tempo sync LFO frequency"
+              virtualName="" explicitFocusOrder="0" pos="83 252 54 16" tooltip="Tempo sync LFO frequency"
               buttonText="Tempo" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <SLIDER name="MOD 1 Tempo Numer Slider" id="6c49dac77f3e6f4b" memberName="TempoNumerMOD1Sld"
-          virtualName="" explicitFocusOrder="0" pos="78 274 56 16" textboxtext="ffffdf5e"
+          virtualName="" explicitFocusOrder="0" pos="78 284 56 16" textboxtext="ffffdf5e"
           textboxbkgd="c8c8c8" textboxoutline="808080" min="1.0" max="4.0"
           int="1.0" style="IncDecButtons" textBoxPos="TextBoxLeft" textBoxEditable="1"
           textBoxWidth="40" textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
   <SLIDER name="MOD 1 Tempo Denom Slider" id="a116d9c60bf4c7b5" memberName="TempoDenomMOD1Sld"
-          virtualName="" explicitFocusOrder="0" pos="78 306 56 16" bkgcol="ff263238"
+          virtualName="" explicitFocusOrder="0" pos="78 316 56 16" bkgcol="ff263238"
           textboxtext="ffffdf5e" textboxbkgd="c8c8c8" textboxoutline="808080"
           min="1.0" max="32.0" int="1.0" style="IncDecButtons" textBoxPos="TextBoxLeft"
           textBoxEditable="1" textBoxWidth="40" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
   <TEXTBUTTON name="MOD 1 Phase Sync Button" id="4509e154e4918174" memberName="PhaseSyncMOD1Btn"
-              virtualName="" explicitFocusOrder="0" pos="199 242 54 16" tooltip="Enable phase sync to ensure the phase of the LFO is consistent regardless of where the DAW playhead starts from"
+              virtualName="" explicitFocusOrder="0" pos="199 252 54 16" tooltip="Enable phase sync to ensure the phase of the LFO is consistent regardless of where the DAW playhead starts from"
               buttonText="Phase" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <SLIDER name="MOD 1 Phase Slider" id="3f1ef3d10c303bac" memberName="PhaseMOD1Sld"
           virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
-          explicitFocusOrder="0" pos="210 276 32 24" tooltip="Phase shift the LFO by up to 360 degrees"
+          explicitFocusOrder="0" pos="210 286 32 24" tooltip="Phase shift the LFO by up to 360 degrees"
           min="0.0" max="1.0" int="0.01" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
   <LABEL name="MOD 1 Phase Label" id="af1abf98d305cb5c" memberName="PhaseMOD1Lbl"
-         virtualName="" explicitFocusOrder="0" pos="198 306 56 24" textCol="ffffdf5e"
+         virtualName="" explicitFocusOrder="0" pos="198 316 56 24" textCol="ffffdf5e"
          edTextCol="ff000000" edBkgCol="0" labelText="Phase" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
@@ -851,10 +987,46 @@ BEGIN_JUCER_METADATA
          fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
   <GENERICCOMPONENT name="MOD1 Wave View" id="3c0e47dfa5180365" memberName="WaveViewMOD1"
                     virtualName="WECore::Richter::WaveViewer" explicitFocusOrder="0"
-                    pos="261 276 75 23" class="juce::Component" params=""/>
+                    pos="261 286 75 23" class="juce::Component" params=""/>
   <TEXTBUTTON name="MOD 1 Invert Button" id="395539a668deb434" memberName="InvertMOD1Btn"
-              virtualName="" explicitFocusOrder="0" pos="271 242 56 16" tooltip="Inverts the LFO output"
+              virtualName="" explicitFocusOrder="0" pos="271 252 56 16" tooltip="Inverts the LFO output"
               buttonText="Invert" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <GROUPCOMPONENT name="ENV 1 Group" id="1d76738168bbbf4a" memberName="ENV1Group"
+                  virtualName="" explicitFocusOrder="0" pos="72 360 280 88" outlinecol="ffffdf5e"
+                  textcol="ffffdf5e" title="ENV" textpos="36"/>
+  <SLIDER name="ENV 1 Attack Slider" id="264aa0e56bd20789" memberName="AttackENV1Sld"
+          virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
+          explicitFocusOrder="0" pos="115 387 32 24" tooltip="Attack of the envelope follower"
+          min="0.0" max="1.0" int="0.001" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
+          needsCallback="1"/>
+  <SLIDER name="ENV 1 RElease Slider" id="18435c1b5fc88e12" memberName="ReleaseENV1Sld"
+          virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
+          explicitFocusOrder="0" pos="196 387 32 24" tooltip="Release of the envelope follower"
+          min="0.0" max="1.0" int="0.001" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
+          needsCallback="1"/>
+  <SLIDER name="ENV 1 Amount Slider" id="5f1616997a701625" memberName="AmountENV1Sld"
+          virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
+          explicitFocusOrder="0" pos="278 387 32 24" tooltip="Amount of envelope follower modulation"
+          min="0.0" max="1.0" int="0.01" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
+          needsCallback="1"/>
+  <LABEL name="ENV 1 Attack Label" id="e2a626de44f6d7b7" memberName="AttackENV1Lbl"
+         virtualName="" explicitFocusOrder="0" pos="104 417 54 24" textCol="ffffdf5e"
+         edTextCol="ff000000" edBkgCol="0" labelText="Attack" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
+  <LABEL name="ENV 1 Release Label" id="126de3ff2ed85010" memberName="ReleaseENV1Lbl"
+         virtualName="" explicitFocusOrder="0" pos="180 417 64 24" textCol="ffffdf5e"
+         edTextCol="ff000000" edBkgCol="0" labelText="Release" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
+  <LABEL name="ENV 1 Amount Label" id="2831f91f2dee16d4" memberName="AmountENV1Lbl"
+         virtualName="" explicitFocusOrder="0" pos="262 417 64 24" textCol="ffffdf5e"
+         edTextCol="ff000000" edBkgCol="0" labelText="Amount" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15.0" kerning="0.0" bold="0" italic="0" justification="36"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
