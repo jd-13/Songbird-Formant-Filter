@@ -35,6 +35,8 @@ typedef LF::ButtonV2<
             WECore::JUCEPlugin::CoreLookAndFeel
         >>>> SongbirdLookAndFeelBase;
 
+typedef LF::MidAnchoredRotarySlider<SongbirdLookAndFeelBase> MidAnchoredSliderLookAndFeel;
+
 class SongbirdLookAndFeel : public SongbirdLookAndFeelBase {
 public:
     SongbirdLookAndFeel();

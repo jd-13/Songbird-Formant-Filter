@@ -72,6 +72,8 @@ private:
     SongbirdLookAndFeel orangeLookAndFeel,
                         yellowLookAndFeel;
 
+    MidAnchoredSliderLookAndFeel yellowMidAnchoredLookAndFeel;
+
     SongbirdTempoButtonLookAndFeel tempoButtonLookAndFeel;
 
     virtual void _onParameterUpdate() override;

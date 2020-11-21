@@ -393,6 +393,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     orangeLookAndFeel.setHighlightColours(orangeHighlight, yellowHighlight);
     yellowLookAndFeel.setHighlightColour(yellowHighlight);
+    yellowMidAnchoredLookAndFeel.setHighlightColour(yellowHighlight);
     tempoButtonLookAndFeel.setHighlightColours(orangeHighlight, yellowHighlight);
 
     // Set the popup menu colours
@@ -429,7 +430,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     WaveViewMOD1->setLookAndFeel(&yellowLookAndFeel);
     AttackENV1Sld->setLookAndFeel(&yellowLookAndFeel);
     ReleaseENV1Sld->setLookAndFeel(&yellowLookAndFeel);
-    AmountENV1Sld->setLookAndFeel(&yellowLookAndFeel);
+    AmountENV1Sld->setLookAndFeel(&yellowMidAnchoredLookAndFeel);
 
     WaveMOD1Cmb->setColour(ComboBox::ColourIds::textColourId, lightYellow);
     WaveMOD1Cmb->setColour(ComboBox::ColourIds::arrowColourId, lightYellow);
