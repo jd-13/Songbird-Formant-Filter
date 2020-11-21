@@ -35,7 +35,7 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
     registerParameter(phaseSyncMOD1, PHASESYNCMOD1_STR, RP::PHASESYNC_DEFAULT, [&](bool val) { setPhaseSyncMOD1(val); });
     registerParameter(tempoSyncMOD1, TEMPOSYNCMOD1_STR, RP::TEMPOSYNC_DEFAULT, [&](bool val) { setTempoSyncMOD1(val); });
     registerParameter(waveMOD1, WAVEMOD1_STR, &RP::WAVE, RP::WAVE.defaultValue, [&](int val) { setWaveMOD1(val); });
-    registerParameter(depthMOD1, DEPTHMOD1_STR, &RP::DEPTH, RP::DEPTH.defaultValue, [&](float val) { setDepthMOD1(val); });
+    registerParameter(depthMOD1, DEPTHMOD1_STR, &RP::DEPTH, 0, [&](float val) { setDepthMOD1(val); });
     registerParameter(freqMOD1, FREQMOD1_STR, &RP::FREQ, RP::FREQ.defaultValue, [&](float val) { setFreqMOD1(val); });
     registerParameter(phaseMOD1, PHASEMOD1_STR, &RP::PHASE, RP::PHASE.defaultValue, [&](float val) { setPhaseMOD1(val); });
     registerParameter(tempoNumerMOD1, TEMPONUMERMOD1_STR, &RP::TEMPONUMER, RP::TEMPONUMER.defaultValue, [&](int val) { setTempoNumerMOD1(val); });

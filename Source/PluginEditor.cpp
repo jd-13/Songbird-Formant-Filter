@@ -821,8 +821,7 @@ void SongbirdAudioProcessorEditor::_enableDoubleClickToDefault() {
 
     FreqMOD1Sld->setDoubleClickReturnValue(true,
         WECore::Richter::Parameters::FREQ.InternalToNormalised(WECore::Richter::Parameters::FREQ.defaultValue));
-    DepthMOD1Sld->setDoubleClickReturnValue(true,
-        WECore::Richter::Parameters::DEPTH.InternalToNormalised(WECore::Richter::Parameters::DEPTH.defaultValue));
+    DepthMOD1Sld->setDoubleClickReturnValue(true, 0);
     PhaseMOD1Sld->setDoubleClickReturnValue(true,
         WECore::Richter::Parameters::PHASE.InternalToNormalised(WECore::Richter::Parameters::PHASE.defaultValue));
 
