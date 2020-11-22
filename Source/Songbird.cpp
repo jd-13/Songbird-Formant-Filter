@@ -65,15 +65,15 @@ void Songbird::Process2in2out(float* inLeftSamples, float* inRightSamples, int n
 }
 
 double Songbird::_getModulationValue(float inSample) {
-    return mMOD.calcGainInLoop() + mENV.updateEnvelope(inSample) * _envelopeAmount;
+    return mMOD.getNextOutput(0) + mENV.getNextOutput(inSample) * _envelopeAmount;
 }
 
 void Songbird::_advanceModulationState(float* inSamples, int numSamples) {
 
     // Stop one short of numSteps, we'll call calcGainInLoop once more to cache the last output
     for (int iii {0}; iii < numSamples - 1; iii++) {
-        mMOD.calcGainInLoop();
-        mENV.updateEnvelope(inSamples[iii]);
+        mMOD.getNextOutput(0);
+        mENV.getNextOutput(inSamples[iii]);
     }
 
     // Cache the last mod output from this buffer
@@ -85,8 +85,8 @@ void Songbird::_advanceModulationState(float* inLeftSamples,
                                        int numSamples) {
     // Stop one short of numSteps, we'll call calcGainInLoop once more to cache the last output
     for (int iii {0}; iii < numSamples - 1; iii++) {
-        mMOD.calcGainInLoop();
-        mENV.updateEnvelope((inLeftSamples[iii] + inRightSamples[iii]) / 2);
+        mMOD.getNextOutput(0);
+        mENV.getNextOutput((inLeftSamples[iii] + inRightSamples[iii]) / 2);
     }
 
     // Cache the last mod output from this buffer
