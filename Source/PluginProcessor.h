@@ -55,7 +55,7 @@ public:
     void changeProgramName (int index, const String& newName) override;
 
     //==============================================================================
-    double getLastModOutput() { return mSongbird.getLastModOutput(); }
+    double getLastModOutput() { return mSongbird.mModulator->getLastOutput(); }
 
     /**
      * Parameter setters.

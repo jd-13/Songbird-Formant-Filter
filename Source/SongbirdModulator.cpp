@@ -1,9 +1,9 @@
 /*
- *	File:		Songbird.h
+ *	File:		SongbirdModulator.cpp
  *
  *	Version:	1.0.0
  *
- *	Created:	11/06/2016
+ *	Created:	23/11/2020
  *
  *	This file is part of Songbird.
  *
@@ -22,29 +22,19 @@
  *
  */
 
-#ifndef SONGBIRD_H_INCLUDED
-#define SONGBIRD_H_INCLUDED
-
-#include "SongbirdFilters/SongbirdFilterModule.h"
+#pragma once
 
 #include "SongbirdModulator.h"
 
-class Songbird {
-public:
-    Songbird();
-    ~Songbird() = default;
+void SongbirdModulator::setSampleRate(double sampleRate) {
+    ENV.setSampleRate(sampleRate);
+}
 
-    WECore::Songbird::SongbirdFilterModule<float> mFilter;
-    std::shared_ptr<SongbirdModulator> mModulator;
+double SongbirdModulator::_getNextOutputImpl(double inSample) {
+    return MOD.getNextOutput(0) + ENV.getNextOutput(inSample) * _envelopeAmount;
+}
 
-    void setSampleRate(double sampleRate);
-    void reset();
-
-    void Process1in1out(float* inSamples, int numSamples);
-    void Process1in2out(float* leftSamples, float* rightSamples, int numSamples);
-    void Process2in2out(float* leftSamples, float* rightSamples, int numSamples);
-};
-
-
-
-#endif  // SONGBIRD_H_INCLUDED
+void SongbirdModulator::_resetImpl() {
+    MOD.reset();
+    ENV.reset();
+}

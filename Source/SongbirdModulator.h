@@ -1,9 +1,9 @@
 /*
- *	File:		Songbird.h
+ *	File:		SongbirdModulator.h
  *
  *	Version:	1.0.0
  *
- *	Created:	11/06/2016
+ *	Created:	23/11/2020
  *
  *	This file is part of Songbird.
  *
@@ -22,29 +22,28 @@
  *
  */
 
-#ifndef SONGBIRD_H_INCLUDED
-#define SONGBIRD_H_INCLUDED
+#pragma once
 
-#include "SongbirdFilters/SongbirdFilterModule.h"
+#include "ParameterData.h"
+#include "RichterLFO/RichterMOD.h"
+#include "WEFilters/AREnvelopeFollowerSquareLaw.h"
+#include "WEFilters/ModulationSource.h"
 
-#include "SongbirdModulator.h"
-
-class Songbird {
+class SongbirdModulator : public WECore::ModulationSource<double> {
 public:
-    Songbird();
-    ~Songbird() = default;
+    SongbirdModulator() : _envelopeAmount(ENV1_AMOUNT.defaultValue) {}
+    ~SongbirdModulator() override = default;
 
-    WECore::Songbird::SongbirdFilterModule<float> mFilter;
-    std::shared_ptr<SongbirdModulator> mModulator;
+    WECore::Richter::RichterMOD MOD;
+    WECore::AREnv::AREnvelopeFollowerSquareLaw ENV;
 
     void setSampleRate(double sampleRate);
-    void reset();
+    void setEnvelopeAmount(double val) { _envelopeAmount = ENV1_AMOUNT.BoundsCheck(val); }
 
-    void Process1in1out(float* inSamples, int numSamples);
-    void Process1in2out(float* leftSamples, float* rightSamples, int numSamples);
-    void Process2in2out(float* leftSamples, float* rightSamples, int numSamples);
+private:
+    double _envelopeAmount;
+
+    double _getNextOutputImpl(double inSample) override;
+
+    void _resetImpl() override;
 };
-
-
-
-#endif  // SONGBIRD_H_INCLUDED

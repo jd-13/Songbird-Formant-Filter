@@ -24,7 +24,7 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
     mSongbird.mFilter.setVowel1(SP::VOWEL.VOWEL_A);
     mSongbird.mFilter.setVowel2(SP::VOWEL.VOWEL_E);
 
-    mSongbird.mMOD.setBypassSwitch(RP::LFOSWITCH_ON);
+    mSongbird.mModulator->MOD.setBypassSwitch(RP::LFOSWITCH_ON);
 
     registerParameter(vowel1, VOWEL1_STR, &SP::VOWEL, SP::VOWEL.VOWEL_A, [&](int val) { setVowel1(val); });
     registerParameter(vowel2, VOWEL2_STR, &SP::VOWEL, SP::VOWEL.VOWEL_E, [&](int val) { setVowel2(val); });
@@ -166,7 +166,7 @@ void SongbirdAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer
     juce::AudioPlayHead::CurrentPositionInfo mTempoInfo;
     getPlayHead()->getCurrentPosition(mTempoInfo);
 
-    mSongbird.mMOD.prepareForNextBuffer(mTempoInfo.bpm,
+    mSongbird.mModulator->MOD.prepareForNextBuffer(mTempoInfo.bpm,
                                         mTempoInfo.timeInSeconds,
                                         getSampleRate());
 
@@ -242,62 +242,62 @@ void SongbirdAudioProcessor::setOutputGain(float val) {
 }
 
 void SongbirdAudioProcessor::setPhaseSyncMOD1(bool val) {
-    mSongbird.mMOD.setPhaseSyncSwitch(val);
+    mSongbird.mModulator->MOD.setPhaseSyncSwitch(val);
     phaseSyncMOD1->setValueNotifyingHost(val);
 }
 
 void SongbirdAudioProcessor::setTempoSyncMOD1(bool val) {
-    mSongbird.mMOD.setTempoSyncSwitch(val);
+    mSongbird.mModulator->MOD.setTempoSyncSwitch(val);
     tempoSyncMOD1->setValueNotifyingHost(val);
 }
 
 void SongbirdAudioProcessor::setInvertMOD1(bool val) {
-    mSongbird.mMOD.setInvertSwitch(val);
+    mSongbird.mModulator->MOD.setInvertSwitch(val);
     invertMOD1->setValueNotifyingHost(val);
 }
 
 void SongbirdAudioProcessor::setWaveMOD1(int val) {
-    mSongbird.mMOD.setWave(val);
+    mSongbird.mModulator->MOD.setWave(val);
     waveMOD1->setValueNotifyingHost(waveMOD1->getNormalisableRange().convertTo0to1(val));
 }
 
 void SongbirdAudioProcessor::setDepthMOD1(float val) {
-    mSongbird.mMOD.setDepth(WECore::Richter::Parameters::DEPTH.NormalisedToInternal(val));
+    mSongbird.mModulator->MOD.setDepth(WECore::Richter::Parameters::DEPTH.NormalisedToInternal(val));
     depthMOD1->setValueNotifyingHost(val);
 }
 
 void SongbirdAudioProcessor::setFreqMOD1(float val) {
-    mSongbird.mMOD.setFreq(WECore::Richter::Parameters::FREQ.NormalisedToInternal(val));
+    mSongbird.mModulator->MOD.setFreq(WECore::Richter::Parameters::FREQ.NormalisedToInternal(val));
     freqMOD1->setValueNotifyingHost(val);
 }
 
 void SongbirdAudioProcessor::setPhaseMOD1(float val) {
-    mSongbird.mMOD.setManualPhase(WECore::Richter::Parameters::PHASE.NormalisedToInternal(val));
+    mSongbird.mModulator->MOD.setManualPhase(WECore::Richter::Parameters::PHASE.NormalisedToInternal(val));
     phaseMOD1->setValueNotifyingHost(val);
 }
 
 void SongbirdAudioProcessor::setTempoNumerMOD1(int val) {
-    mSongbird.mMOD.setTempoNumer(val);
+    mSongbird.mModulator->MOD.setTempoNumer(val);
     tempoNumerMOD1->setValueNotifyingHost(tempoNumerMOD1->getNormalisableRange().convertTo0to1(val));
 }
 
 void SongbirdAudioProcessor::setTempoDenomMOD1(int val) {
-    mSongbird.mMOD.setTempoDenom(val);
+    mSongbird.mModulator->MOD.setTempoDenom(val);
     tempoDenomMOD1->setValueNotifyingHost(tempoDenomMOD1->getNormalisableRange().convertTo0to1(val));
 }
 
 void SongbirdAudioProcessor::setAttackENV1(float val) {
-    mSongbird.mENV.setAttackTimeMs(WECore::AREnv::Parameters::ATTACK_MS.NormalisedToInternal(val));
+    mSongbird.mModulator->ENV.setAttackTimeMs(WECore::AREnv::Parameters::ATTACK_MS.NormalisedToInternal(val));
     attackENV1->setValueNotifyingHost(val);
 }
 
 void SongbirdAudioProcessor::setReleaseENV1(float val) {
-    mSongbird.mENV.setReleaseTimeMs(WECore::AREnv::Parameters::RELEASE_MS.NormalisedToInternal(val));
+    mSongbird.mModulator->ENV.setReleaseTimeMs(WECore::AREnv::Parameters::RELEASE_MS.NormalisedToInternal(val));
     releaseENV1->setValueNotifyingHost(val);
 }
 
 void SongbirdAudioProcessor::setAmountENV1(float val) {
-    mSongbird.setEnvelopeAmount(ENV1_AMOUNT.NormalisedToInternal(val));
+    mSongbird.mModulator->setEnvelopeAmount(ENV1_AMOUNT.NormalisedToInternal(val));
     amountENV1->setValueNotifyingHost(val);
 }
 

@@ -34,6 +34,10 @@
             file="Source/PluginProcessor.h"/>
       <FILE id="Sdy0tc" name="Songbird.cpp" compile="1" resource="0" file="Source/Songbird.cpp"/>
       <FILE id="OrXYqO" name="Songbird.h" compile="0" resource="0" file="Source/Songbird.h"/>
+      <FILE id="WpzVM6" name="SongbirdModulator.cpp" compile="1" resource="0"
+            file="Source/SongbirdModulator.cpp"/>
+      <FILE id="ErQ5au" name="SongbirdModulator.h" compile="0" resource="0"
+            file="Source/SongbirdModulator.h"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
