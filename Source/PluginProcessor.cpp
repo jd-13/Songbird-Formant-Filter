@@ -23,6 +23,7 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
     // Set defaults
     mSongbird.mFilter.setVowel1(SP::VOWEL.VOWEL_A);
     mSongbird.mFilter.setVowel2(SP::VOWEL.VOWEL_E);
+    mSongbird.mModulator->MOD.setDepth(0);
 
     mSongbird.mModulator->MOD.setBypassSwitch(RP::LFOSWITCH_ON);
 
