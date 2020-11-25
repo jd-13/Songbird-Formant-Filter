@@ -31,7 +31,7 @@
 // This exists to provide the conversion for the decimal readout
 const ParameterDefinition::RangedParameter<double> PHASE_DISPLAY(0, 360, 0);
 
-const ParameterDefinition::RangedParameter<double> ENV1_AMOUNT(-2, 2, 0);
+const ParameterDefinition::RangedParameter<double> ENV1_AMOUNT(-5, 5, 0);
 
 const String    VOWEL1_STR {"Vowel1"},
                 VOWEL2_STR {"Vowel2"},
