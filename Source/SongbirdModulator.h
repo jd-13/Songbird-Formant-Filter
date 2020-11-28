@@ -25,7 +25,7 @@
 #pragma once
 
 #include "ParameterData.h"
-#include "RichterLFO/RichterMOD.h"
+#include "RichterLFO/RichterLFO.h"
 #include "WEFilters/AREnvelopeFollowerSquareLaw.h"
 #include "WEFilters/ModulationSource.h"
 
@@ -34,7 +34,7 @@ public:
     SongbirdModulator() : _envelopeAmount(ENV1_AMOUNT.defaultValue) {}
     ~SongbirdModulator() override = default;
 
-    WECore::Richter::RichterMOD MOD;
+    WECore::Richter::RichterLFO MOD;
     WECore::AREnv::AREnvelopeFollowerSquareLaw ENV;
 
     void setSampleRate(double sampleRate);
