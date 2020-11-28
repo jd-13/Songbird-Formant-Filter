@@ -31,7 +31,7 @@ void SongbirdModulator::setSampleRate(double sampleRate) {
 }
 
 double SongbirdModulator::_getNextOutputImpl(double inSample) {
-    return MOD.getNextOutput(0) + ENV.getNextOutput(inSample) * _envelopeAmount;
+    return MOD.getNextOutput(0) / 2 + ENV.getNextOutput(inSample) * _envelopeAmount;
 }
 
 void SongbirdModulator::_resetImpl() {
