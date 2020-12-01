@@ -317,6 +317,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     AttackENV1Sld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
     AttackENV1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     AttackENV1Sld->addListener (this);
+    AttackENV1Sld->setSkewFactor (0.6);
 
     AttackENV1Sld->setBounds (115, 387, 32, 24);
 
@@ -327,6 +328,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     ReleaseENV1Sld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
     ReleaseENV1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     ReleaseENV1Sld->addListener (this);
+    ReleaseENV1Sld->setSkewFactor (0.6);
 
     ReleaseENV1Sld->setBounds (196, 387, 32, 24);
 
@@ -998,13 +1000,13 @@ BEGIN_JUCER_METADATA
           virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
           explicitFocusOrder="0" pos="115 387 32 24" tooltip="Attack of the envelope follower"
           min="0.0" max="1.0" int="0.001" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
-          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="0.6"
           needsCallback="1"/>
   <SLIDER name="ENV 1 RElease Slider" id="18435c1b5fc88e12" memberName="ReleaseENV1Sld"
           virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
           explicitFocusOrder="0" pos="196 387 32 24" tooltip="Release of the envelope follower"
           min="0.0" max="1.0" int="0.001" style="RotaryVerticalDrag" textBoxPos="NoTextBox"
-          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1.0"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="0.6"
           needsCallback="1"/>
   <SLIDER name="ENV 1 Amount Slider" id="5f1616997a701625" memberName="AmountENV1Sld"
           virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
