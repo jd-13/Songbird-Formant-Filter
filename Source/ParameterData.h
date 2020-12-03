@@ -39,6 +39,7 @@ const String    VOWEL1_STR {"Vowel1"},
                 MIX_STR {"Mix"},
                 MODMODE_STR {"ModMode"},
                 OUTPUTGAIN_STR {"OutputGain"},
+                AIR_STR {"Air"},
 
                 PHASESYNCMOD1_STR {"MOD1PhaseSync"},
                 PHASEMOD1_STR {"MOD1Phase"},

@@ -51,6 +51,7 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
     registerParameter(releaseENV1, RELEASEENV1_STR, &AP::RELEASE_MS, AP::RELEASE_MS.defaultValue, [&](float val) { setReleaseENV1(val); });
     registerParameter(amountENV1, AMOUNTENV1_STR, &ENV1_AMOUNT, ENV1_AMOUNT.defaultValue, [&](float val) { setAmountENV1(val); });
 
+    registerParameter(airGain, AIR_STR, &SP::AIR_GAIN, SP::AIR_GAIN.defaultValue, [&](float val) { setAirGain(val); });
 }
 
 SongbirdAudioProcessor::~SongbirdAudioProcessor()
@@ -235,6 +236,11 @@ void SongbirdAudioProcessor::setMix(float val) {
 void SongbirdAudioProcessor::setModMode(bool val) {
     mSongbird.mFilter.setModMode(val);
     modMode->setValueNotifyingHost(val);
+}
+
+void SongbirdAudioProcessor::setAirGain(float val) {
+    mSongbird.mFilter.setAirGain(val);
+    airGain->setValueNotifyingHost(val);
 }
 
 void SongbirdAudioProcessor::setOutputGain(float val) {

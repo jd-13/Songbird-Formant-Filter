@@ -76,6 +76,7 @@ public:
     void setFilterPosition(float val);
     void setMix(float val);
     void setModMode(bool val);
+    void setAirGain(float val);
     void setOutputGain(float val);
 
     void setPhaseSyncMOD1(bool val);
@@ -99,6 +100,7 @@ public:
     AudioParameterFloat* filterPosition;
     AudioParameterFloat* mix;
     AudioParameterBool* modMode;
+    AudioParameterFloat* airGain;
     AudioParameterFloat* outputGain;
 
     AudioParameterBool* phaseSyncMOD1;

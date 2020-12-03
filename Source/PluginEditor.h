@@ -101,7 +101,6 @@ private:
     std::unique_ptr<juce::Label> PhaseMOD1Lbl;
     std::unique_ptr<juce::TextButton> ModModeBtn;
     std::unique_ptr<juce::Label> MixLbl;
-    std::unique_ptr<juce::Label> ModeLbl;
     std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> OutputGainSld;
     std::unique_ptr<juce::Label> OutputGainLbl;
     std::unique_ptr<juce::Label> FilterPosLbl;
@@ -114,6 +113,8 @@ private:
     std::unique_ptr<juce::Label> AttackENV1Lbl;
     std::unique_ptr<juce::Label> ReleaseENV1Lbl;
     std::unique_ptr<juce::Label> AmountENV1Lbl;
+    std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> AirSld;
+    std::unique_ptr<juce::Label> AirLbl;
 
 
     //==============================================================================
