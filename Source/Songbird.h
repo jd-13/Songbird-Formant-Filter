@@ -26,6 +26,7 @@
 #define SONGBIRD_H_INCLUDED
 
 #include "SongbirdFilters/SongbirdFilterModule.h"
+#include "WEFilters/SimpleCompressor.h"
 
 #include "SongbirdModulator.h"
 
@@ -43,6 +44,12 @@ public:
     void Process1in1out(float* inSamples, int numSamples);
     void Process1in2out(float* leftSamples, float* rightSamples, int numSamples);
     void Process2in2out(float* leftSamples, float* rightSamples, int numSamples);
+
+private:
+    // We use a compressor over the output to catch some of the more aggressive formant peaks
+    WECore::SimpleCompressor::SimpleCompressor<float> _compressorLeft;
+    WECore::SimpleCompressor::SimpleCompressor<float> _compressorRight;
+
 };
 
 
