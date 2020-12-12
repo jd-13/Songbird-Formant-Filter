@@ -117,6 +117,7 @@ void SongbirdAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlo
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
     mSongbird.reset();
+    mSongbird.setSampleRate(getSampleRate());
 }
 
 void SongbirdAudioProcessor::releaseResources()
@@ -179,14 +180,12 @@ void SongbirdAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer
     if (getNumOutputChannels() == 1 && getNumOutputChannels() == 1) {
         float* inSample {buffer.getWritePointer(0)};
 
-        mSongbird.setSampleRate(getSampleRate());
         mSongbird.Process1in1out(inSample, buffer.getNumSamples());
 
     } else if (getNumInputChannels() == 1 && getNumOutputChannels() == 2) {
         float* inLeftSample {buffer.getWritePointer(0)};
         float* inRightSample {buffer.getWritePointer(1)};
 
-        mSongbird.setSampleRate(getSampleRate());
         mSongbird.Process1in2out(inLeftSample, inLeftSample, buffer.getNumSamples());
 
         // copy the processed left channel over to the right
@@ -196,7 +195,6 @@ void SongbirdAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer
         float* inLeftSample {buffer.getWritePointer(0)};
         float* inRightSample {buffer.getWritePointer(1)};
 
-        mSongbird.setSampleRate(getSampleRate());
         mSongbird.Process2in2out(inLeftSample, inRightSample, buffer.getNumSamples());
     }
 }
