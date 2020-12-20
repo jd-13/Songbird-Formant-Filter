@@ -44,8 +44,7 @@
     <XCODE_MAC targetFolder="Builds/MacOSX" vstFolder="" extraCompilerFlags="-Wall -Wextra -Wconversion -Wshadow -Wpedantic -Wdocumentation">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" optimisation="3" targetName="Songbird" headerPath="../../../WECore/WECore"
-                       linkTimeOptimisation="1" osxArchitecture="64BitIntel" isDebug="0"
-                       enablePluginBinaryCopyStep="1"/>
+                       linkTimeOptimisation="1" osxArchitecture="64BitIntel" isDebug="0"/>
         <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="Songbird"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
