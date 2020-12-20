@@ -38,3 +38,22 @@ jobs:
         with:
           name: songbird-linux-gcc
           path: Builds/LinuxMakefile/build/*.vst3
+
+  BuildMacOS:
+    runs-on: macos-10.15
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: RunBuild
+        run: Scripts/BuildMacOS.sh
+      - name: RunPluginval
+        run: Scripts/PluginvalMacOS.sh
+      - uses: actions/upload-artifact@v2
+        if: ${{ success() }}
+        with:
+          name: songbird-macOS
+          path: |
+            Builds/MacOSX/build/Debug/*.vst3
+            Builds/MacOSX/build/Debug/*.component
