@@ -55,5 +55,5 @@ jobs:
         with:
           name: songbird-macOS
           path: |
-            Builds/MacOSX/build/Debug/*.vst3
-            Builds/MacOSX/build/Debug/*.component
+            ~/Library/Audio/Plug-Ins/VST3/*.vst3
+            ~/Library/Audio/Plug-Ins/Components/*.component
