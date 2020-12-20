@@ -52,6 +52,4 @@ jobs:
         if: ${{ success() }}
         with:
           name: songbird-macOS
-          path: |
-            ~/Library/Audio/Plug-Ins/VST3/Songbird.vst3
-            ~/Library/Audio/Plug-Ins/Components/Songbird.component
+          path: Scripts/dist

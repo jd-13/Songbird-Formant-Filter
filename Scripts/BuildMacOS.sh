@@ -34,3 +34,8 @@ echo "=== Starting build ==="
 cd $SCRIPT_DIR/../Builds/MacOSX
 xcodebuild -version
 xcodebuild -project Songbird.xcodeproj -scheme "Songbird - All" -configuration Debug
+
+echo "=== Collecting artefacts ==="
+mkdir -p $SCRIPT_DIR/dist
+cp -r ~/Library/Audio/Plug-Ins/VST3/Songbird.vst3 $SCRIPT_DIR/dist
+cp -r ~/Library/Audio/Plug-Ins/Components/Songbird.component $SCRIPT_DIR/dist
