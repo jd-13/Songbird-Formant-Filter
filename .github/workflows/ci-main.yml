@@ -48,8 +48,6 @@ jobs:
           submodules: true
       - name: RunBuild
         run: Scripts/BuildMacOS.sh
-      - name: RunPluginval
-        run: Scripts/PluginvalMacOS.sh
       - uses: actions/upload-artifact@v2
         if: ${{ success() }}
         with:
