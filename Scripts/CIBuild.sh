@@ -9,8 +9,9 @@ WECORE_HOME="$(cd $SCRIPT_DIR/.. > /dev/null 2>&1 && pwd)"
 WECORE_SRC="$WECORE_HOME/WECore"
 git clone https://github.com/jd-13/WE-Core $SCRIPT_DIR/../WECore
 
-# We can't download the fonts so create blank files in their place
-touch $SCRIPT_DIR/../Source/Graphics/Montserrat-Regular.ttf
+# Download fonts from github
+wget https://github.com/JulietaUla/Montserrat/raw/master/fonts/ttf/Montserrat-Regular.ttf \
+     -P $SCRIPT_DIR/../Source/Graphics
 
 # Set JUCE module paths
 sed -i 's#../JUCE/modules#/home/JUCE/modules#g' $SCRIPT_DIR/../Songbird.jucer
