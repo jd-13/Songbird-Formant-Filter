@@ -27,6 +27,9 @@ sed -i '' -e 's#../../../../../SDKs/JUCE/modules#JUCE/modules#g' $SCRIPT_DIR/../
 echo "=== Updating include paths ==="
 sed -i '' -e 's#../../../WECore/WECore#../../WECore/WECore#g' $SCRIPT_DIR/../Songbird.jucer
 
+echo "=== Disabling plugin copy step ==="
+sed -i '' -e 's#enablePluginBinaryCopyStep="1"#enablePluginBinaryCopyStep="0"#g' $SCRIPT_DIR/../Songbird.jucer
+
 echo "=== Generating project ==="
 $SCRIPT_DIR/../JUCE/Projucer.app/Contents/MacOS/Projucer --resave $SCRIPT_DIR/../Songbird.jucer
 
