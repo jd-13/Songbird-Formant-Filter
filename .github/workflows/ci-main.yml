@@ -14,7 +14,7 @@ jobs:
       - name: RunBuild
         run: Scripts/BuildLinux.sh
       - name: RunPluginval
-        run: Scripts/CIPluginval.sh
+        run: Scripts/PluginvalLinux.sh
       - uses: actions/upload-artifact@v2
         if: ${{ success() }}
         with:
@@ -32,7 +32,7 @@ jobs:
       - name: RunBuild
         run: Scripts/BuildLinux.sh
       - name: RunPluginval
-        run: Scripts/CIPluginval.sh
+        run: Scripts/PluginvalLinux.sh
       - uses: actions/upload-artifact@v2
         if: ${{ success() }}
         with:
