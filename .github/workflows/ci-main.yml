@@ -3,7 +3,7 @@ name: CI Main
 on: [push, pull_request]
 
 jobs:
-  BuildClang:
+  BuildLinuxClang:
     runs-on: ubuntu-latest
     container: jackd13/audioplugins:clang10
 
@@ -12,7 +12,7 @@ jobs:
         with:
           submodules: true
       - name: RunBuild
-        run: Scripts/CIBuild.sh
+        run: Scripts/BuildLinux.sh
       - name: RunPluginval
         run: Scripts/CIPluginval.sh
       - uses: actions/upload-artifact@v2
@@ -21,7 +21,7 @@ jobs:
           name: songbird-linux-clang
           path: Builds/LinuxMakefile/build/*.vst3
 
-  BuildGCC:
+  BuildLinuxGCC:
     runs-on: ubuntu-latest
     container: jackd13/audioplugins:gcc10
 
@@ -30,7 +30,7 @@ jobs:
         with:
           submodules: true
       - name: RunBuild
-        run: Scripts/CIBuild.sh
+        run: Scripts/BuildLinux.sh
       - name: RunPluginval
         run: Scripts/CIPluginval.sh
       - uses: actions/upload-artifact@v2
