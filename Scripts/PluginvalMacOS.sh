@@ -12,6 +12,8 @@ unzip pluginval_macOS.zip
 PLUGINVAL=pluginval.app/Contents/MacOS/pluginval
 
 echo "=== Testing AU ==="
+killall -9 AudioComponentRegistrar
+
 $PLUGINVAL --validate $SCRIPT_DIR/../Builds/MacOSX/build/Debug/Songbird.component \
            --strictness-level 10 \
            --skip-gui-tests
