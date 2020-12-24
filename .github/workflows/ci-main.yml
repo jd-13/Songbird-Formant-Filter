@@ -53,3 +53,19 @@ jobs:
         with:
           name: songbird-macOS
           path: Scripts/dist
+
+  BuildWindows:
+    runs-on: windows-2019
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: RunBuild
+        shell: cmd
+        run: Scripts\BuildWindows.bat
+      - uses: actions/upload-artifact@v2
+        if: ${{ success() }}
+        with:
+          name: songbird-windows
+          path: Builds/VisualStudio2019/x64/Debug/VST3/*.vst3
