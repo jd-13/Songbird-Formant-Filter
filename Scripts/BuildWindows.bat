@@ -28,6 +28,5 @@ ECHO "=== Generating project ==="
 
 ECHO "=== Starting build ==="
 cd %SCRIPT_DIR%\..\Builds\VisualStudio2019
-set MSBUILD_PATH="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild"
-%MSBUILD_PATH% -version
-%MSBUILD_PATH% Songbird.sln /p:Configuration=Debug /p:Platform=x64
+msbuild -version
+msbuild Songbird.sln /p:Configuration=Debug /p:Platform=x64

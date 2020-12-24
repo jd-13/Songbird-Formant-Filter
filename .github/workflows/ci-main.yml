@@ -61,6 +61,8 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+      - name: SetupMSBuild
+        uses: microsoft/setup-msbuild@v1.0.2
       - name: RunBuild
         shell: cmd
         run: Scripts\BuildWindows.bat
