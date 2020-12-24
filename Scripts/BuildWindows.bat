@@ -27,6 +27,6 @@ ECHO "=== Generating project ==="
 %SCRIPT_DIR%..\JUCE\Projucer --resave %SCRIPT_DIR%..\Songbird.jucer
 
 ECHO "=== Starting build ==="
-cd %SCRIPT_DIR%\..\Builds\VisualStudio2019
+cd %SCRIPT_DIR%..\Builds\VisualStudio2019
 msbuild -version
 msbuild Songbird.sln /p:Configuration=Debug /p:Platform=x64
