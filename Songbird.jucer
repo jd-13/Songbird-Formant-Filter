@@ -88,7 +88,7 @@
         <MODULEPATH id="juce_audio_plugin_client" path="../JUCE/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
-    <VS2019 targetFolder="Builds/VisualStudio2019" extraCompilerFlags="/std:c++17">
+    <VS2019 targetFolder="Builds/VisualStudio2019">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="0" name="Debug" linkTimeOptimisation="1" optimisation="3"
                        headerPath="%USERPROFILE%\WEA\WECore\WECore"/>
