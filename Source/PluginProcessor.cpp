@@ -27,31 +27,33 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
 
     mSongbird.mModulator->MOD.setBypassSwitch(RP::LFOSWITCH_ON);
 
+    constexpr float PRECISION {0.01f};
+
     registerParameter(vowel1, VOWEL1_STR, &SP::VOWEL, SP::VOWEL.VOWEL_A, [&](int val) { setVowel1(val); });
     registerParameter(vowel2, VOWEL2_STR, &SP::VOWEL, SP::VOWEL.VOWEL_E, [&](int val) { setVowel2(val); });
-    registerParameter(filterPosition, FILTER_POSITION_STR, &SP::FILTER_POSITION, SP::FILTER_POSITION.defaultValue, [&](float val) { setFilterPosition(val); });
-    registerParameter(mix, MIX_STR, &SP::MIX, SP::MIX.defaultValue, [&](float val) { setMix(val); });
+    registerParameter(filterPosition, FILTER_POSITION_STR, &SP::FILTER_POSITION, SP::FILTER_POSITION.defaultValue, PRECISION, [&](float val) { setFilterPosition(val); });
+    registerParameter(mix, MIX_STR, &SP::MIX, SP::MIX.defaultValue, PRECISION, [&](float val) { setMix(val); });
     registerParameter(modMode, MODMODE_STR, SP::MODMODE_DEFAULT, [&](bool val) { setModMode(val); });
 
     registerParameter(phaseSyncMOD1, PHASESYNCMOD1_STR, RP::PHASESYNC_DEFAULT, [&](bool val) { setPhaseSyncMOD1(val); });
     registerParameter(tempoSyncMOD1, TEMPOSYNCMOD1_STR, RP::TEMPOSYNC_DEFAULT, [&](bool val) { setTempoSyncMOD1(val); });
     registerParameter(waveMOD1, WAVEMOD1_STR, &RP::WAVE, RP::WAVE.defaultValue, [&](int val) { setWaveMOD1(val); });
-    registerParameter(depthMOD1, DEPTHMOD1_STR, &RP::DEPTH, 0, [&](float val) { setDepthMOD1(val); });
-    registerParameter(freqMOD1, FREQMOD1_STR, &RP::FREQ, RP::FREQ.defaultValue, [&](float val) { setFreqMOD1(val); });
-    registerParameter(phaseMOD1, PHASEMOD1_STR, &RP::PHASE, RP::PHASE.defaultValue, [&](float val) { setPhaseMOD1(val); });
+    registerParameter(depthMOD1, DEPTHMOD1_STR, &RP::DEPTH, 0, PRECISION, [&](float val) { setDepthMOD1(val); });
+    registerParameter(freqMOD1, FREQMOD1_STR, &RP::FREQ, RP::FREQ.defaultValue, PRECISION, [&](float val) { setFreqMOD1(val); });
+    registerParameter(phaseMOD1, PHASEMOD1_STR, &RP::PHASE, RP::PHASE.defaultValue, PRECISION, [&](float val) { setPhaseMOD1(val); });
     registerParameter(tempoNumerMOD1, TEMPONUMERMOD1_STR, &RP::TEMPONUMER, RP::TEMPONUMER.defaultValue, [&](int val) { setTempoNumerMOD1(val); });
     registerParameter(tempoDenomMOD1, TEMPODENOMMOD1_STR, &RP::TEMPODENOM, RP::TEMPODENOM.defaultValue, [&](int val) { setTempoDenomMOD1(val); });
 
-    registerParameter(outputGain, OUTPUTGAIN_STR, &SP::OUTPUTGAIN, SP::OUTPUTGAIN.defaultValue, [&](float val) { setOutputGain(val); });
+    registerParameter(outputGain, OUTPUTGAIN_STR, &SP::OUTPUTGAIN, SP::OUTPUTGAIN.defaultValue, PRECISION, [&](float val) { setOutputGain(val); });
 
     // New parameters must be registered last to maintain backwards compatibility during setStateInformation
     registerParameter(invertMOD1, INVERTMOD1_STR, RP::INVERT_DEFAULT, [&](bool val) { setInvertMOD1(val); });
 
-    registerParameter(attackENV1, ATTACKENV1_STR, &AP::ATTACK_MS, AP::ATTACK_MS.defaultValue, [&](float val) { setAttackENV1(val); });
-    registerParameter(releaseENV1, RELEASEENV1_STR, &AP::RELEASE_MS, AP::RELEASE_MS.defaultValue, [&](float val) { setReleaseENV1(val); });
-    registerParameter(amountENV1, AMOUNTENV1_STR, &ENV1_AMOUNT, ENV1_AMOUNT.defaultValue, [&](float val) { setAmountENV1(val); });
+    registerParameter(attackENV1, ATTACKENV1_STR, &AP::ATTACK_MS, AP::ATTACK_MS.defaultValue, PRECISION, [&](float val) { setAttackENV1(val); });
+    registerParameter(releaseENV1, RELEASEENV1_STR, &AP::RELEASE_MS, AP::RELEASE_MS.defaultValue, PRECISION, [&](float val) { setReleaseENV1(val); });
+    registerParameter(amountENV1, AMOUNTENV1_STR, &ENV1_AMOUNT, ENV1_AMOUNT.defaultValue, PRECISION, [&](float val) { setAmountENV1(val); });
 
-    registerParameter(airGain, AIR_STR, &SP::AIR_GAIN, SP::AIR_GAIN.defaultValue, [&](float val) { setAirGain(val); });
+    registerParameter(airGain, AIR_STR, &SP::AIR_GAIN, SP::AIR_GAIN.defaultValue, PRECISION, [&](float val) { setAirGain(val); });
 }
 
 SongbirdAudioProcessor::~SongbirdAudioProcessor()
