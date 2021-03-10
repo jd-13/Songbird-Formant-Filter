@@ -3,7 +3,7 @@
 ![](https://img.shields.io/badge/license-GPLv3-informational)
 
 # Songbird-Formant-Filter
-A VST and Audio Unit, which provides two formant filters and an LFO modulated blend control between the two.
+A VST3 and Audio Unit, which provides two formant filters and an LFO modulated blend control between the two.
 
 For more details and a free download of the compiled plugin: https://www.whiteelephantaudio.com/plugins/songbird  
 
