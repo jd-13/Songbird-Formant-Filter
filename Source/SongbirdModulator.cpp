@@ -27,6 +27,7 @@
 #include "SongbirdModulator.h"
 
 void SongbirdModulator::setSampleRate(double sampleRate) {
+    MOD.setSampleRate(sampleRate);
     ENV.setSampleRate(sampleRate);
 }
 

@@ -171,9 +171,7 @@ void SongbirdAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer
     juce::AudioPlayHead::CurrentPositionInfo mTempoInfo;
     getPlayHead()->getCurrentPosition(mTempoInfo);
 
-    mSongbird.mModulator->MOD.prepareForNextBuffer(mTempoInfo.bpm,
-                                        mTempoInfo.timeInSeconds,
-                                        getSampleRate());
+    mSongbird.mModulator->MOD.prepareForNextBuffer(mTempoInfo.bpm, mTempoInfo.timeInSeconds);
 
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
