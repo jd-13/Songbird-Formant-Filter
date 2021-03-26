@@ -306,6 +306,54 @@ void SongbirdAudioProcessor::setAmountENV1(float val) {
     amountENV1->setValueNotifyingHost(val);
 }
 
+std::vector<juce::String> SongbirdAudioProcessor::_provideParamNamesForMigration() {
+    return std::vector<juce::String> {
+        VOWEL1_STR,
+        VOWEL2_STR,
+        FILTER_POSITION_STR,
+        MIX_STR,
+        MODMODE_STR,
+
+        PHASESYNCMOD1_STR,
+        TEMPOSYNCMOD1_STR,
+        WAVEMOD1_STR,
+        DEPTHMOD1_STR,
+        FREQMOD1_STR,
+        PHASEMOD1_STR,
+        TEMPONUMERMOD1_STR,
+        TEMPODENOMMOD1_STR,
+
+        OUTPUTGAIN_STR,
+        INVERTMOD1_STR,
+        ATTACKENV1_STR,
+        RELEASEENV1_STR,
+        AMOUNTENV1_STR,
+        AIR_STR
+    };
+}
+
+void SongbirdAudioProcessor::_migrateParamValues(std::vector<float>& paramValues) {
+
+    namespace SP = WECore::Songbird::Parameters;
+    namespace RP = WECore::Richter::Parameters;
+    namespace AP = WECore::AREnv::Parameters;
+
+    if (paramValues.size() == 19) {
+        paramValues[2] = SP::FILTER_POSITION.NormalisedToInternal(paramValues[2]);
+        paramValues[3] = SP::MIX.NormalisedToInternal(paramValues[3]);
+        paramValues[8] = RP::DEPTH.NormalisedToInternal(paramValues[8]);
+        paramValues[9] = RP::FREQ.NormalisedToInternal(paramValues[9]);
+        paramValues[10] = RP::PHASE.NormalisedToInternal(paramValues[10]);
+        paramValues[13] = SP::OUTPUTGAIN.NormalisedToInternal(paramValues[13]);
+        INVERTMOD1_STR,
+
+        paramValues[15] = AP::ATTACK_MS.NormalisedToInternal(paramValues[15]);
+        paramValues[16] = AP::RELEASE_MS.NormalisedToInternal(paramValues[16]);
+        paramValues[17] = ENV1_AMOUNT.NormalisedToInternal(paramValues[17]);
+        paramValues[18] = SP::AIR_GAIN.NormalisedToInternal(paramValues[18]);
+    }
+}
+
 //==============================================================================
 // This creates new instances of the plugin..
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
