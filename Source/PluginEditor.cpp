@@ -467,6 +467,8 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     _startSliderReadouts();
 
+    _setSliderRanges();
+
     // Call this manually once to make sure the UI reflects the parameters' states correctly
     _onParameterUpdate();
     //[/Constructor]
@@ -551,19 +553,19 @@ void SongbirdAudioProcessorEditor::comboBoxChanged (juce::ComboBox* comboBoxThat
     if (comboBoxThatHasChanged == Vowel1Cmb.get())
     {
         //[UserComboBoxCode_Vowel1Cmb] -- add your combo box handling code here..
-        ourProcessor->setVowel1(Vowel1Cmb->getSelectedId());
+        ourProcessor->setParameterValueInternal(ourProcessor->vowel1, Vowel1Cmb->getSelectedId());
         //[/UserComboBoxCode_Vowel1Cmb]
     }
     else if (comboBoxThatHasChanged == Vowel2Cmb.get())
     {
         //[UserComboBoxCode_Vowel2Cmb] -- add your combo box handling code here..
-        ourProcessor->setVowel2(Vowel2Cmb->getSelectedId());
+        ourProcessor->setParameterValueInternal(ourProcessor->vowel2, Vowel2Cmb->getSelectedId());
         //[/UserComboBoxCode_Vowel2Cmb]
     }
     else if (comboBoxThatHasChanged == WaveMOD1Cmb.get())
     {
         //[UserComboBoxCode_WaveMOD1Cmb] -- add your combo box handling code here..
-        ourProcessor->setWaveMOD1(WaveMOD1Cmb->getSelectedId());
+        ourProcessor->setParameterValueInternal(ourProcessor->waveMOD1, WaveMOD1Cmb->getSelectedId());
         //[/UserComboBoxCode_WaveMOD1Cmb]
     }
 
@@ -580,73 +582,73 @@ void SongbirdAudioProcessorEditor::sliderValueChanged (juce::Slider* sliderThatW
     if (sliderThatWasMoved == FilterPosSld.get())
     {
         //[UserSliderCode_FilterPosSld] -- add your slider handling code here..
-        ourProcessor->setFilterPosition(FilterPosSld->getValue());
+        ourProcessor->setParameterValueInternal(ourProcessor->filterPosition, FilterPosSld->getValue());
         //[/UserSliderCode_FilterPosSld]
     }
     else if (sliderThatWasMoved == MixSld.get())
     {
         //[UserSliderCode_MixSld] -- add your slider handling code here..
-        ourProcessor->setMix(MixSld->getValue());
+        ourProcessor->setParameterValueInternal(ourProcessor->mix, MixSld->getValue());
         //[/UserSliderCode_MixSld]
     }
     else if (sliderThatWasMoved == DepthMOD1Sld.get())
     {
         //[UserSliderCode_DepthMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setDepthMOD1(DepthMOD1Sld->getValue());
+        ourProcessor->setParameterValueInternal(ourProcessor->depthMOD1, DepthMOD1Sld->getValue());
         //[/UserSliderCode_DepthMOD1Sld]
     }
     else if (sliderThatWasMoved == FreqMOD1Sld.get())
     {
         //[UserSliderCode_FreqMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setFreqMOD1(FreqMOD1Sld->getValue());
+        ourProcessor->setParameterValueInternal(ourProcessor->freqMOD1, FreqMOD1Sld->getValue());
         //[/UserSliderCode_FreqMOD1Sld]
     }
     else if (sliderThatWasMoved == TempoNumerMOD1Sld.get())
     {
         //[UserSliderCode_TempoNumerMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setTempoNumerMOD1(TempoNumerMOD1Sld->getValue());
+        ourProcessor->setParameterValueInternal(ourProcessor->tempoNumerMOD1, TempoNumerMOD1Sld->getValue());
         //[/UserSliderCode_TempoNumerMOD1Sld]
     }
     else if (sliderThatWasMoved == TempoDenomMOD1Sld.get())
     {
         //[UserSliderCode_TempoDenomMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setTempoDenomMOD1(TempoDenomMOD1Sld->getValue());
+        ourProcessor->setParameterValueInternal(ourProcessor->tempoDenomMOD1, TempoDenomMOD1Sld->getValue());
         //[/UserSliderCode_TempoDenomMOD1Sld]
     }
     else if (sliderThatWasMoved == PhaseMOD1Sld.get())
     {
         //[UserSliderCode_PhaseMOD1Sld] -- add your slider handling code here..
-        ourProcessor->setPhaseMOD1(PhaseMOD1Sld->getValue());
+        ourProcessor->setParameterValueInternal(ourProcessor->phaseMOD1, PhaseMOD1Sld->getValue());
         //[/UserSliderCode_PhaseMOD1Sld]
     }
     else if (sliderThatWasMoved == OutputGainSld.get())
     {
         //[UserSliderCode_OutputGainSld] -- add your slider handling code here..
-        ourProcessor->setOutputGain(OutputGainSld->getValue());
+        ourProcessor->setParameterValueInternal(ourProcessor->outputGain, OutputGainSld->getValue());
         //[/UserSliderCode_OutputGainSld]
     }
     else if (sliderThatWasMoved == AttackENV1Sld.get())
     {
         //[UserSliderCode_AttackENV1Sld] -- add your slider handling code here..
-        ourProcessor->setAttackENV1(AttackENV1Sld->getValue());
+        ourProcessor->setParameterValueInternal(ourProcessor->attackENV1, AttackENV1Sld->getValue());
         //[/UserSliderCode_AttackENV1Sld]
     }
     else if (sliderThatWasMoved == ReleaseENV1Sld.get())
     {
         //[UserSliderCode_ReleaseENV1Sld] -- add your slider handling code here..
-        ourProcessor->setReleaseENV1(ReleaseENV1Sld->getValue());
+        ourProcessor->setParameterValueInternal(ourProcessor->releaseENV1, ReleaseENV1Sld->getValue());
         //[/UserSliderCode_ReleaseENV1Sld]
     }
     else if (sliderThatWasMoved == AmountENV1Sld.get())
     {
         //[UserSliderCode_AmountENV1Sld] -- add your slider handling code here..
-        ourProcessor->setAmountENV1(AmountENV1Sld->getValue());
+        ourProcessor->setParameterValueInternal(ourProcessor->amountENV1, AmountENV1Sld->getValue());
         //[/UserSliderCode_AmountENV1Sld]
     }
     else if (sliderThatWasMoved == AirSld.get())
     {
         //[UserSliderCode_AirSld] -- add your slider handling code here..
-        ourProcessor->setAirGain(AirSld->getValue());
+        ourProcessor->setParameterValueInternal(ourProcessor->airGain, AirSld->getValue());
         //[/UserSliderCode_AirSld]
     }
 
@@ -663,25 +665,25 @@ void SongbirdAudioProcessorEditor::buttonClicked (juce::Button* buttonThatWasCli
     if (buttonThatWasClicked == TempoSyncMOD1Btn.get())
     {
         //[UserButtonCode_TempoSyncMOD1Btn] -- add your button handler code here..
-        ourProcessor->setTempoSyncMOD1(!TempoSyncMOD1Btn->getToggleState());
+        ourProcessor->setParameterValueInternal(ourProcessor->tempoSyncMOD1, !TempoSyncMOD1Btn->getToggleState());
         //[/UserButtonCode_TempoSyncMOD1Btn]
     }
     else if (buttonThatWasClicked == PhaseSyncMOD1Btn.get())
     {
         //[UserButtonCode_PhaseSyncMOD1Btn] -- add your button handler code here..
-        ourProcessor->setPhaseSyncMOD1(!PhaseSyncMOD1Btn->getToggleState());
+        ourProcessor->setParameterValueInternal(ourProcessor->phaseSyncMOD1, !PhaseSyncMOD1Btn->getToggleState());
         //[/UserButtonCode_PhaseSyncMOD1Btn]
     }
     else if (buttonThatWasClicked == ModModeBtn.get())
     {
         //[UserButtonCode_ModModeBtn] -- add your button handler code here..
-        ourProcessor->setModMode(!ModModeBtn->getToggleState());
+        ourProcessor->setParameterValueInternal(ourProcessor->modMode, !ModModeBtn->getToggleState());
         //[/UserButtonCode_ModModeBtn]
     }
     else if (buttonThatWasClicked == InvertMOD1Btn.get())
     {
         //[UserButtonCode_InvertMOD1Btn] -- add your button handler code here..
-        ourProcessor->setInvertMOD1(!InvertMOD1Btn->getToggleState());
+        ourProcessor->setParameterValueInternal(ourProcessor->invertMOD1, !InvertMOD1Btn->getToggleState());
         //[/UserButtonCode_InvertMOD1Btn]
     }
 
@@ -829,48 +831,39 @@ void SongbirdAudioProcessorEditor::_onParameterUpdate() {
 
     WaveViewMOD1->setWave(wave,
                           ourProcessor->depthMOD1->get(),
-                          ourProcessor->phaseSyncMOD1->get() ? WECore::Richter::Parameters::PHASE.NormalisedToInternal(ourProcessor->phaseMOD1->get()) : 0,
+                          ourProcessor->phaseSyncMOD1->get() ? ourProcessor->phaseMOD1->get() : 0,
                           ourProcessor->invertMOD1->get());
     WaveViewMOD1->repaint();
 }
 
 void SongbirdAudioProcessorEditor::_enableDoubleClickToDefault() {
-    FilterPosSld->setDoubleClickReturnValue(true,
-        WECore::Songbird::Parameters::FILTER_POSITION.InternalToNormalised(WECore::Songbird::Parameters::FILTER_POSITION.defaultValue));
-    MixSld->setDoubleClickReturnValue(true,
-        WECore::Songbird::Parameters::MIX.InternalToNormalised(WECore::Songbird::Parameters::MIX.defaultValue));
-    AirSld->setDoubleClickReturnValue(true,
-        WECore::Songbird::Parameters::AIR_GAIN.InternalToNormalised(WECore::Songbird::Parameters::AIR_GAIN.defaultValue));
-    OutputGainSld->setDoubleClickReturnValue(true,
-        WECore::Songbird::Parameters::OUTPUTGAIN.InternalToNormalised(WECore::Songbird::Parameters::OUTPUTGAIN.defaultValue));
+    FilterPosSld->setDoubleClickReturnValue(true, WECore::Songbird::Parameters::FILTER_POSITION.defaultValue);
+    MixSld->setDoubleClickReturnValue(true, WECore::Songbird::Parameters::MIX.defaultValue);
+    AirSld->setDoubleClickReturnValue(true, WECore::Songbird::Parameters::AIR_GAIN.defaultValue);
+    OutputGainSld->setDoubleClickReturnValue(true, WECore::Songbird::Parameters::OUTPUTGAIN.defaultValue);
 
-    FreqMOD1Sld->setDoubleClickReturnValue(true,
-        WECore::Richter::Parameters::FREQ.InternalToNormalised(WECore::Richter::Parameters::FREQ.defaultValue));
+    FreqMOD1Sld->setDoubleClickReturnValue(true, WECore::Richter::Parameters::FREQ.defaultValue);
     DepthMOD1Sld->setDoubleClickReturnValue(true, 0);
-    PhaseMOD1Sld->setDoubleClickReturnValue(true,
-        WECore::Richter::Parameters::PHASE.InternalToNormalised(WECore::Richter::Parameters::PHASE.defaultValue));
+    PhaseMOD1Sld->setDoubleClickReturnValue(true, WECore::Richter::Parameters::PHASE.defaultValue);
 
-    AttackENV1Sld->setDoubleClickReturnValue(true,
-        WECore::AREnv::Parameters::ATTACK_MS.InternalToNormalised(WECore::AREnv::Parameters::ATTACK_MS.defaultValue));
-    ReleaseENV1Sld->setDoubleClickReturnValue(true,
-        WECore::AREnv::Parameters::RELEASE_MS.InternalToNormalised(WECore::AREnv::Parameters::RELEASE_MS.defaultValue));
-    AmountENV1Sld->setDoubleClickReturnValue(true,
-        ENV1_AMOUNT.InternalToNormalised(ENV1_AMOUNT.defaultValue));
+    AttackENV1Sld->setDoubleClickReturnValue(true, WECore::AREnv::Parameters::ATTACK_MS.defaultValue);
+    ReleaseENV1Sld->setDoubleClickReturnValue(true, WECore::AREnv::Parameters::RELEASE_MS.defaultValue);
+    AmountENV1Sld->setDoubleClickReturnValue(true, ENV1_AMOUNT.defaultValue);
 }
 
 void SongbirdAudioProcessorEditor::_startSliderReadouts() {
-    FilterPosSld->start(FilterPosLbl.get(), FilterPosLbl->getText(), &WECore::Songbird::Parameters::FILTER_POSITION);
-    MixSld->start(MixLbl.get(), MixLbl->getText(), &WECore::Songbird::Parameters::MIX);
-    AirSld->start(AirLbl.get(), AirLbl->getText(), &WECore::Songbird::Parameters::AIR_GAIN);
-    OutputGainSld->start(OutputGainLbl.get(), OutputGainLbl->getText(), &WECore::Songbird::Parameters::OUTPUTGAIN);
+    FilterPosSld->start(FilterPosLbl.get(), FilterPosLbl->getText());
+    MixSld->start(MixLbl.get(), MixLbl->getText());
+    AirSld->start(AirLbl.get(), AirLbl->getText());
+    OutputGainSld->start(OutputGainLbl.get(), OutputGainLbl->getText());
 
-    FreqMOD1Sld->start(FreqMOD1Lbl.get(), FreqMOD1Lbl->getText(), &WECore::Richter::Parameters::FREQ);
-    DepthMOD1Sld->start(DepthMOD1Lbl.get(), DepthMOD1Lbl->getText(), &WECore::Richter::Parameters::DEPTH);
-    PhaseMOD1Sld->start(PhaseMOD1Lbl.get(), PhaseMOD1Lbl->getText(), &PHASE_DISPLAY);
+    FreqMOD1Sld->start(FreqMOD1Lbl.get(), FreqMOD1Lbl->getText());
+    DepthMOD1Sld->start(DepthMOD1Lbl.get(), DepthMOD1Lbl->getText());
+    PhaseMOD1Sld->start(PhaseMOD1Lbl.get(), PhaseMOD1Lbl->getText());
 
-    AttackENV1Sld->start(AttackENV1Lbl.get(), AttackENV1Lbl->getText(), &WECore::AREnv::Parameters::ATTACK_MS);
-    ReleaseENV1Sld->start(ReleaseENV1Lbl.get(), ReleaseENV1Lbl->getText(), &WECore::AREnv::Parameters::RELEASE_MS);
-    AmountENV1Sld->start(AmountENV1Lbl.get(), AmountENV1Lbl->getText(), &ENV1_AMOUNT);
+    AttackENV1Sld->start(AttackENV1Lbl.get(), AttackENV1Lbl->getText());
+    ReleaseENV1Sld->start(ReleaseENV1Lbl.get(), ReleaseENV1Lbl->getText());
+    AmountENV1Sld->start(AmountENV1Lbl.get(), AmountENV1Lbl->getText());
 }
 
 void SongbirdAudioProcessorEditor::_stopSliderReadouts() {
@@ -887,6 +880,27 @@ void SongbirdAudioProcessorEditor::_stopSliderReadouts() {
     ReleaseENV1Sld->stop();
     AmountENV1Sld->stop();
 }
+
+void SongbirdAudioProcessorEditor::_setSliderRanges() {
+    namespace AP = WECore::AREnv::Parameters;
+    namespace RP = WECore::Richter::Parameters;
+    namespace SP = WECore::Songbird::Parameters;
+    constexpr double INTERVAL {0.01};
+
+    FilterPosSld->setRange(SP::FILTER_POSITION.minValue, SP::FILTER_POSITION.maxValue, INTERVAL);
+    MixSld->setRange(SP::MIX.minValue, SP::MIX.maxValue, INTERVAL);
+    AirSld->setRange(SP::AIR_GAIN.minValue, SP::AIR_GAIN.maxValue, INTERVAL);
+    OutputGainSld->setRange(SP::OUTPUTGAIN.minValue, SP::OUTPUTGAIN.maxValue, INTERVAL);
+
+    FreqMOD1Sld->setRange(RP::FREQ.minValue, RP::FREQ.maxValue, INTERVAL);
+    DepthMOD1Sld->setRange(RP::DEPTH.minValue, RP::DEPTH.maxValue, INTERVAL);
+    PhaseMOD1Sld->setRange(RP::PHASE.minValue, RP::PHASE.maxValue, INTERVAL);
+
+    AttackENV1Sld->setRange(AP::ATTACK_MS.minValue, AP::ATTACK_MS.maxValue, INTERVAL);
+    ReleaseENV1Sld->setRange(AP::RELEASE_MS.minValue, AP::RELEASE_MS.maxValue, INTERVAL);
+    AmountENV1Sld->setRange(ENV1_AMOUNT.minValue, ENV1_AMOUNT.maxValue, INTERVAL);
+}
+
 
 //[/MiscUserCode]
 

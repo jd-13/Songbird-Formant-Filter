@@ -57,43 +57,6 @@ public:
     //==============================================================================
     double getLastModOutput() { return mSongbird.mModulator->getLastOutput(); }
 
-    /**
-     * Parameter setters.
-     *
-     * For float parameters a value in the normalised 0 to 1 range is expected.
-     *
-     * For int parameters are used to represent menu items, the integer value in the real range of
-     * the parameter (eg. 0 to 4) is expected.
-     *
-     * For bool parameters they can only be true or false anyway.
-     *
-     * These do not call the ChangeBroadcaster as the UI will already know about these changes since
-     * it is the only one calling these methods.
-     */
-    /** @{ */
-    void setVowel1(int val);
-    void setVowel2(int val);
-    void setFilterPosition(float val);
-    void setMix(float val);
-    void setModMode(bool val);
-    void setAirGain(float val);
-    void setOutputGain(float val);
-
-    void setPhaseSyncMOD1(bool val);
-    void setTempoSyncMOD1(bool val);
-    void setInvertMOD1(bool val);
-    void setWaveMOD1(int val);
-    void setDepthMOD1(float val);
-    void setFreqMOD1(float val);
-    void setPhaseMOD1(float val);
-    void setTempoNumerMOD1(int val);
-    void setTempoDenomMOD1(int val);
-
-    void setAttackENV1(float val);
-    void setReleaseENV1(float val);
-    void setAmountENV1(float val);
-    /** @} */
-
     // Parameters (public for beginChangeGesture/endChangeGesture/get)
     AudioParameterInt* vowel1;
     AudioParameterInt* vowel2;
@@ -122,6 +85,8 @@ private:
 
     std::vector<juce::String> _provideParamNamesForMigration() override;
     void _migrateParamValues(std::vector<float>& paramValues) override;
+
+    void _onParameterUpdate() override;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SongbirdAudioProcessor)

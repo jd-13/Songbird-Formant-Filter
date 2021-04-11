@@ -80,6 +80,7 @@ private:
     void _enableDoubleClickToDefault();
     void _startSliderReadouts();
     void _stopSliderReadouts();
+    void _setSliderRanges();
     //[/UserVariables]
 
     //==============================================================================

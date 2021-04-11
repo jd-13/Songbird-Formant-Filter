@@ -29,31 +29,28 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
 
     constexpr float PRECISION {0.01f};
 
-    registerParameter(vowel1, VOWEL1_STR, &SP::VOWEL, SP::VOWEL.VOWEL_A, [&](int val) { setVowel1(val); });
-    registerParameter(vowel2, VOWEL2_STR, &SP::VOWEL, SP::VOWEL.VOWEL_E, [&](int val) { setVowel2(val); });
-    registerParameter(filterPosition, FILTER_POSITION_STR, &SP::FILTER_POSITION, SP::FILTER_POSITION.defaultValue, PRECISION, [&](float val) { setFilterPosition(val); });
-    registerParameter(mix, MIX_STR, &SP::MIX, SP::MIX.defaultValue, PRECISION, [&](float val) { setMix(val); });
-    registerParameter(modMode, MODMODE_STR, SP::MODMODE_DEFAULT, [&](bool val) { setModMode(val); });
+    registerParameter(vowel1, VOWEL1_STR, &SP::VOWEL, SP::VOWEL.VOWEL_A);
+    registerParameter(vowel2, VOWEL2_STR, &SP::VOWEL, SP::VOWEL.VOWEL_E);
+    registerParameter(filterPosition, FILTER_POSITION_STR, &SP::FILTER_POSITION, SP::FILTER_POSITION.defaultValue, PRECISION);
+    registerParameter(mix, MIX_STR, &SP::MIX, SP::MIX.defaultValue, PRECISION);
+    registerParameter(modMode, MODMODE_STR, SP::MODMODE_DEFAULT);
+    registerParameter(airGain, AIR_STR, &SP::AIR_GAIN, SP::AIR_GAIN.defaultValue, PRECISION);
 
-    registerParameter(phaseSyncMOD1, PHASESYNCMOD1_STR, RP::PHASESYNC_DEFAULT, [&](bool val) { setPhaseSyncMOD1(val); });
-    registerParameter(tempoSyncMOD1, TEMPOSYNCMOD1_STR, RP::TEMPOSYNC_DEFAULT, [&](bool val) { setTempoSyncMOD1(val); });
-    registerParameter(waveMOD1, WAVEMOD1_STR, &RP::WAVE, RP::WAVE.defaultValue, [&](int val) { setWaveMOD1(val); });
-    registerParameter(depthMOD1, DEPTHMOD1_STR, &RP::DEPTH, 0, PRECISION, [&](float val) { setDepthMOD1(val); });
-    registerParameter(freqMOD1, FREQMOD1_STR, &RP::FREQ, RP::FREQ.defaultValue, PRECISION, [&](float val) { setFreqMOD1(val); });
-    registerParameter(phaseMOD1, PHASEMOD1_STR, &RP::PHASE, RP::PHASE.defaultValue, PRECISION, [&](float val) { setPhaseMOD1(val); });
-    registerParameter(tempoNumerMOD1, TEMPONUMERMOD1_STR, &RP::TEMPONUMER, RP::TEMPONUMER.defaultValue, [&](int val) { setTempoNumerMOD1(val); });
-    registerParameter(tempoDenomMOD1, TEMPODENOMMOD1_STR, &RP::TEMPODENOM, RP::TEMPODENOM.defaultValue, [&](int val) { setTempoDenomMOD1(val); });
+    registerParameter(phaseSyncMOD1, PHASESYNCMOD1_STR, RP::PHASESYNC_DEFAULT);
+    registerParameter(tempoSyncMOD1, TEMPOSYNCMOD1_STR, RP::TEMPOSYNC_DEFAULT);
+    registerParameter(invertMOD1, INVERTMOD1_STR, RP::INVERT_DEFAULT);
+    registerParameter(waveMOD1, WAVEMOD1_STR, &RP::WAVE, RP::WAVE.defaultValue);
+    registerParameter(depthMOD1, DEPTHMOD1_STR, &RP::DEPTH, 0, PRECISION);
+    registerParameter(freqMOD1, FREQMOD1_STR, &RP::FREQ, RP::FREQ.defaultValue, PRECISION);
+    registerParameter(phaseMOD1, PHASEMOD1_STR, &RP::PHASE, RP::PHASE.defaultValue, PRECISION);
+    registerParameter(tempoNumerMOD1, TEMPONUMERMOD1_STR, &RP::TEMPONUMER, RP::TEMPONUMER.defaultValue);
+    registerParameter(tempoDenomMOD1, TEMPODENOMMOD1_STR, &RP::TEMPODENOM, RP::TEMPODENOM.defaultValue);
 
-    registerParameter(outputGain, OUTPUTGAIN_STR, &SP::OUTPUTGAIN, SP::OUTPUTGAIN.defaultValue, PRECISION, [&](float val) { setOutputGain(val); });
+    registerParameter(outputGain, OUTPUTGAIN_STR, &SP::OUTPUTGAIN, SP::OUTPUTGAIN.defaultValue, PRECISION);
 
-    // New parameters must be registered last to maintain backwards compatibility during setStateInformation
-    registerParameter(invertMOD1, INVERTMOD1_STR, RP::INVERT_DEFAULT, [&](bool val) { setInvertMOD1(val); });
-
-    registerParameter(attackENV1, ATTACKENV1_STR, &AP::ATTACK_MS, AP::ATTACK_MS.defaultValue, PRECISION, [&](float val) { setAttackENV1(val); });
-    registerParameter(releaseENV1, RELEASEENV1_STR, &AP::RELEASE_MS, AP::RELEASE_MS.defaultValue, PRECISION, [&](float val) { setReleaseENV1(val); });
-    registerParameter(amountENV1, AMOUNTENV1_STR, &ENV1_AMOUNT, ENV1_AMOUNT.defaultValue, PRECISION, [&](float val) { setAmountENV1(val); });
-
-    registerParameter(airGain, AIR_STR, &SP::AIR_GAIN, SP::AIR_GAIN.defaultValue, PRECISION, [&](float val) { setAirGain(val); });
+    registerParameter(attackENV1, ATTACKENV1_STR, &AP::ATTACK_MS, AP::ATTACK_MS.defaultValue, PRECISION);
+    registerParameter(releaseENV1, RELEASEENV1_STR, &AP::RELEASE_MS, AP::RELEASE_MS.defaultValue, PRECISION);
+    registerParameter(amountENV1, AMOUNTENV1_STR, &ENV1_AMOUNT, ENV1_AMOUNT.defaultValue, PRECISION);
 }
 
 SongbirdAudioProcessor::~SongbirdAudioProcessor()
@@ -211,101 +208,6 @@ AudioProcessorEditor* SongbirdAudioProcessor::createEditor()
 }
 
 //==============================================================================
-void SongbirdAudioProcessor::setVowel1(int val) {
-    mSongbird.mFilter.setVowel1(val);
-    vowel1->setValueNotifyingHost(vowel1->getNormalisableRange().convertTo0to1(val));
-}
-
-void SongbirdAudioProcessor::setVowel2(int val) {
-    mSongbird.mFilter.setVowel2(val);
-    vowel2->setValueNotifyingHost(vowel2->getNormalisableRange().convertTo0to1(val));
-}
-
-void SongbirdAudioProcessor::setFilterPosition(float val) {
-    mSongbird.mFilter.setFilterPosition(WECore::Songbird::Parameters::FILTER_POSITION.NormalisedToInternal(val));
-    filterPosition->setValueNotifyingHost(val);
-}
-
-void SongbirdAudioProcessor::setMix(float val) {
-    mSongbird.mFilter.setMix(WECore::Songbird::Parameters::MIX.NormalisedToInternal(val));
-    mix->setValueNotifyingHost(val);
-}
-
-void SongbirdAudioProcessor::setModMode(bool val) {
-    mSongbird.mFilter.setModMode(val);
-    modMode->setValueNotifyingHost(val);
-}
-
-void SongbirdAudioProcessor::setAirGain(float val) {
-    mSongbird.mFilter.setAirGain(val);
-    airGain->setValueNotifyingHost(val);
-}
-
-void SongbirdAudioProcessor::setOutputGain(float val) {
-    mSongbird.mFilter.setOutputGain(WECore::Songbird::Parameters::OUTPUTGAIN.NormalisedToInternal(val));
-    outputGain->setValueNotifyingHost(val);
-}
-
-void SongbirdAudioProcessor::setPhaseSyncMOD1(bool val) {
-    mSongbird.mModulator->MOD.setPhaseSyncSwitch(val);
-    phaseSyncMOD1->setValueNotifyingHost(val);
-}
-
-void SongbirdAudioProcessor::setTempoSyncMOD1(bool val) {
-    mSongbird.mModulator->MOD.setTempoSyncSwitch(val);
-    tempoSyncMOD1->setValueNotifyingHost(val);
-}
-
-void SongbirdAudioProcessor::setInvertMOD1(bool val) {
-    mSongbird.mModulator->MOD.setInvertSwitch(val);
-    invertMOD1->setValueNotifyingHost(val);
-}
-
-void SongbirdAudioProcessor::setWaveMOD1(int val) {
-    mSongbird.mModulator->MOD.setWave(val);
-    waveMOD1->setValueNotifyingHost(waveMOD1->getNormalisableRange().convertTo0to1(val));
-}
-
-void SongbirdAudioProcessor::setDepthMOD1(float val) {
-    mSongbird.mModulator->MOD.setDepth(WECore::Richter::Parameters::DEPTH.NormalisedToInternal(val));
-    depthMOD1->setValueNotifyingHost(val);
-}
-
-void SongbirdAudioProcessor::setFreqMOD1(float val) {
-    mSongbird.mModulator->MOD.setFreq(WECore::Richter::Parameters::FREQ.NormalisedToInternal(val));
-    freqMOD1->setValueNotifyingHost(val);
-}
-
-void SongbirdAudioProcessor::setPhaseMOD1(float val) {
-    mSongbird.mModulator->MOD.setManualPhase(WECore::Richter::Parameters::PHASE.NormalisedToInternal(val));
-    phaseMOD1->setValueNotifyingHost(val);
-}
-
-void SongbirdAudioProcessor::setTempoNumerMOD1(int val) {
-    mSongbird.mModulator->MOD.setTempoNumer(val);
-    tempoNumerMOD1->setValueNotifyingHost(tempoNumerMOD1->getNormalisableRange().convertTo0to1(val));
-}
-
-void SongbirdAudioProcessor::setTempoDenomMOD1(int val) {
-    mSongbird.mModulator->MOD.setTempoDenom(val);
-    tempoDenomMOD1->setValueNotifyingHost(tempoDenomMOD1->getNormalisableRange().convertTo0to1(val));
-}
-
-void SongbirdAudioProcessor::setAttackENV1(float val) {
-    mSongbird.mModulator->ENV.setAttackTimeMs(WECore::AREnv::Parameters::ATTACK_MS.NormalisedToInternal(val));
-    attackENV1->setValueNotifyingHost(val);
-}
-
-void SongbirdAudioProcessor::setReleaseENV1(float val) {
-    mSongbird.mModulator->ENV.setReleaseTimeMs(WECore::AREnv::Parameters::RELEASE_MS.NormalisedToInternal(val));
-    releaseENV1->setValueNotifyingHost(val);
-}
-
-void SongbirdAudioProcessor::setAmountENV1(float val) {
-    mSongbird.mModulator->setEnvelopeAmount(ENV1_AMOUNT.NormalisedToInternal(val));
-    amountENV1->setValueNotifyingHost(val);
-}
-
 std::vector<juce::String> SongbirdAudioProcessor::_provideParamNamesForMigration() {
     return std::vector<juce::String> {
         VOWEL1_STR,
@@ -352,6 +254,30 @@ void SongbirdAudioProcessor::_migrateParamValues(std::vector<float>& paramValues
         paramValues[17] = ENV1_AMOUNT.NormalisedToInternal(paramValues[17]);
         paramValues[18] = SP::AIR_GAIN.NormalisedToInternal(paramValues[18]);
     }
+}
+
+void SongbirdAudioProcessor::_onParameterUpdate() {
+    mSongbird.mFilter.setVowel1(vowel1->get());
+    mSongbird.mFilter.setVowel2(vowel2->get());
+    mSongbird.mFilter.setFilterPosition(filterPosition->get());
+    mSongbird.mFilter.setMix(mix->get());
+    mSongbird.mFilter.setModMode(modMode->get());
+    mSongbird.mFilter.setAirGain(airGain->get());
+    mSongbird.mFilter.setOutputGain(outputGain->get());
+
+    mSongbird.mModulator->MOD.setPhaseSyncSwitch(phaseSyncMOD1->get());
+    mSongbird.mModulator->MOD.setTempoSyncSwitch(tempoSyncMOD1->get());
+    mSongbird.mModulator->MOD.setInvertSwitch(invertMOD1->get());
+    mSongbird.mModulator->MOD.setWave(waveMOD1->get());
+    mSongbird.mModulator->MOD.setDepth(depthMOD1->get());
+    mSongbird.mModulator->MOD.setFreq(freqMOD1->get());
+    mSongbird.mModulator->MOD.setManualPhase(phaseMOD1->get());
+    mSongbird.mModulator->MOD.setTempoNumer(tempoNumerMOD1->get());
+    mSongbird.mModulator->MOD.setTempoDenom(tempoDenomMOD1->get());
+
+    mSongbird.mModulator->ENV.setAttackTimeMs(attackENV1->get());
+    mSongbird.mModulator->ENV.setReleaseTimeMs(releaseENV1->get());
+    mSongbird.mModulator->setEnvelopeAmount(amountENV1->get());
 }
 
 //==============================================================================
