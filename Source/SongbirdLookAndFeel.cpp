@@ -44,6 +44,21 @@ void SongbirdLookAndFeel::updateLFOOutput(double value) {
     _lfoOutput = value;
 }
 
+void SongbirdLookAndFeel::drawLinearSlider(juce::Graphics& g,
+                                           int x,
+                                           int y,
+                                           int width,
+                                           int height,
+                                           float sliderPos,
+                                           float minSliderPos,
+                                           float maxSliderPos,
+                                           const juce::Slider::SliderStyle style,
+                                           juce::Slider& slider) {
+        // Draw background first
+        drawLinearSliderBackground(g, x, y, width, height, sliderPos, minSliderPos, maxSliderPos, style, slider);
+        drawLinearSliderThumb(g, x, y, width, height, sliderPos, minSliderPos, maxSliderPos, style, slider);
+    }
+
 void SongbirdLookAndFeel::drawLinearSliderThumb(Graphics& g,
                                                 int /*x*/,
                                                 int /*y*/,

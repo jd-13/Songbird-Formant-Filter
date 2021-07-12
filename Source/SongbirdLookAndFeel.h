@@ -49,6 +49,17 @@ public:
 
     virtual void updateLFOOutput(double value);
 
+    virtual void drawLinearSlider(juce::Graphics& g,
+                                  int x,
+                                  int y,
+                                  int width,
+                                  int height,
+                                  float sliderPos,
+                                  float minSliderPos,
+                                  float maxSliderPos,
+                                  const juce::Slider::SliderStyle style,
+                                  juce::Slider& slider) override;
+
     virtual void drawLinearSliderThumb(Graphics& g,
                                        int x,
                                        int y,
