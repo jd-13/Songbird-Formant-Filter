@@ -25,6 +25,7 @@
 #include "SongbirdLookAndFeel.h"
 #include "CoreJUCEPlugin/CoreProcessorEditor.h"
 #include "CoreJUCEPlugin/LabelReadoutSlider.h"
+#include "CoreJUCEPlugin/TooltipLabelUpdater.h"
 #include "RichterLFO/UI/RichterWaveViewer.h"
 //[/Headers]
 
@@ -76,6 +77,8 @@ private:
 
     SongbirdTempoButtonLookAndFeel tempoButtonLookAndFeel;
 
+    WECore::JUCEPlugin::TooltipLabelUpdater _tooltipLabelUpdater;
+
     virtual void _onParameterUpdate() override;
     void _enableDoubleClickToDefault();
     void _startSliderReadouts();
@@ -116,6 +119,7 @@ private:
     std::unique_ptr<juce::Label> AmountENV1Lbl;
     std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> AirSld;
     std::unique_ptr<juce::Label> AirLbl;
+    std::unique_ptr<juce::Label> tooltipLbl;
 
 
     //==============================================================================
