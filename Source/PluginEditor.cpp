@@ -531,7 +531,7 @@ void SongbirdAudioProcessorEditor::paint (juce::Graphics& g)
 
     //[UserPaint] Add your own custom painting code here..
     Image bg = ImageCache::getFromMemory(BinaryData::Background_png, BinaryData::Background_pngSize);
-    g.drawImage(bg, 0, 0, 425, 450, 0, 0, 5 * 425, 5 * 450);
+    g.drawImage(bg, 0, 0, 425, 450, 0, 0, 2 * 425, 2 * 450);
     //[/UserPaint]
 }
 
