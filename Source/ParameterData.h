@@ -41,7 +41,6 @@ const String    VOWEL1_STR {"Vowel1"},
                 OUTPUTGAIN_STR {"OutputGain"},
                 AIR_STR {"Air"},
 
-                PHASESYNCMOD1_STR {"MOD1PhaseSync"},
                 PHASEMOD1_STR {"MOD1Phase"},
                 TEMPOSYNCMOD1_STR {"MOD1TempoSync"},
                 INVERTMOD1_STR {"MOD1Invert"},

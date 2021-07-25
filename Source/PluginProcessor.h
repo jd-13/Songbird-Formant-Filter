@@ -66,7 +66,6 @@ public:
     AudioParameterFloat* airGain;
     AudioParameterFloat* outputGain;
 
-    AudioParameterBool* phaseSyncMOD1;
     AudioParameterBool* tempoSyncMOD1;
     AudioParameterBool* invertMOD1;
     AudioParameterInt* waveMOD1;

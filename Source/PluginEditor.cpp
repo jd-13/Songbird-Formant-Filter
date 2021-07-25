@@ -189,14 +189,6 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     TempoDenomMOD1Sld->setBounds (78, 314, 56, 16);
 
-    PhaseSyncMOD1Btn.reset (new juce::TextButton ("MOD 1 Phase Sync Button"));
-    addAndMakeVisible (PhaseSyncMOD1Btn.get());
-    PhaseSyncMOD1Btn->setTooltip (TRANS("Syncs the starting phase to the DAW playhead"));
-    PhaseSyncMOD1Btn->setButtonText (TRANS("Phase"));
-    PhaseSyncMOD1Btn->addListener (this);
-
-    PhaseSyncMOD1Btn->setBounds (199, 250, 54, 16);
-
     PhaseMOD1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("MOD 1 Phase Slider"));
     addAndMakeVisible (PhaseMOD1Sld.get());
     PhaseMOD1Sld->setTooltip (TRANS("Phase shift the LFO by up to 360 degrees"));
@@ -451,7 +443,6 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     PhaseMOD1Sld->setLookAndFeel(&yellowLookAndFeel);
     WaveMOD1Cmb->setLookAndFeel(&yellowLookAndFeel);
     TempoSyncMOD1Btn->setLookAndFeel(&yellowLookAndFeel);
-    PhaseSyncMOD1Btn->setLookAndFeel(&yellowLookAndFeel);
     InvertMOD1Btn->setLookAndFeel(&yellowLookAndFeel);
     WaveViewMOD1->setLookAndFeel(&yellowLookAndFeel);
     AttackENV1Sld->setLookAndFeel(&yellowLookAndFeel);
@@ -513,7 +504,6 @@ SongbirdAudioProcessorEditor::~SongbirdAudioProcessorEditor()
     TempoSyncMOD1Btn = nullptr;
     TempoNumerMOD1Sld = nullptr;
     TempoDenomMOD1Sld = nullptr;
-    PhaseSyncMOD1Btn = nullptr;
     PhaseMOD1Sld = nullptr;
     PhaseMOD1Lbl = nullptr;
     ModModeBtn = nullptr;
@@ -687,12 +677,6 @@ void SongbirdAudioProcessorEditor::buttonClicked (juce::Button* buttonThatWasCli
         ourProcessor->setParameterValueInternal(ourProcessor->tempoSyncMOD1, !TempoSyncMOD1Btn->getToggleState());
         //[/UserButtonCode_TempoSyncMOD1Btn]
     }
-    else if (buttonThatWasClicked == PhaseSyncMOD1Btn.get())
-    {
-        //[UserButtonCode_PhaseSyncMOD1Btn] -- add your button handler code here..
-        ourProcessor->setParameterValueInternal(ourProcessor->phaseSyncMOD1, !PhaseSyncMOD1Btn->getToggleState());
-        //[/UserButtonCode_PhaseSyncMOD1Btn]
-    }
     else if (buttonThatWasClicked == ModModeBtn.get())
     {
         //[UserButtonCode_ModModeBtn] -- add your button handler code here..
@@ -799,7 +783,6 @@ void SongbirdAudioProcessorEditor::_onParameterUpdate() {
     const Colour modeLabelColour = Colour(ModModeBtn->getToggleState() ? 0xffff8773 : 0xffffdf5e);
 
     // MOD 1
-    PhaseSyncMOD1Btn->setToggleState(ourProcessor->phaseSyncMOD1->get(), dontSendNotification);
     TempoSyncMOD1Btn->setToggleState(ourProcessor->tempoSyncMOD1->get(), dontSendNotification);
     InvertMOD1Btn->setToggleState(ourProcessor->invertMOD1->get(), dontSendNotification);
     WaveMOD1Cmb->setSelectedId(ourProcessor->waveMOD1->get(), dontSendNotification);
@@ -813,15 +796,6 @@ void SongbirdAudioProcessorEditor::_onParameterUpdate() {
     AttackENV1Sld->setValue(ourProcessor->attackENV1->get(), dontSendNotification);
     ReleaseENV1Sld->setValue(ourProcessor->releaseENV1->get(), dontSendNotification);
     AmountENV1Sld->setValue(ourProcessor->amountENV1->get(), dontSendNotification);
-
-    // Activate/Deactivate phase control depending on phase sync
-    PhaseMOD1Sld->setEnabled(PhaseSyncMOD1Btn->getToggleState());
-
-    const Colour phaseLabelColour = PhaseSyncMOD1Btn->getToggleState() ?
-            Colour(0xffffdf5e) : PhaseMOD1Sld->findColour(Slider::rotarySliderOutlineColourId);
-
-    PhaseMOD1Lbl->setColour(Label::textColourId, phaseLabelColour);
-
 
     // Toggle visibility for rate controls depending on tempo sync
     if (TempoSyncMOD1Btn->getToggleState()) {
@@ -850,7 +824,7 @@ void SongbirdAudioProcessorEditor::_onParameterUpdate() {
 
     WaveViewMOD1->setWave(wave,
                           ourProcessor->depthMOD1->get(),
-                          ourProcessor->phaseSyncMOD1->get() ? ourProcessor->phaseMOD1->get() : 0,
+                          ourProcessor->phaseMOD1->get(),
                           ourProcessor->invertMOD1->get());
     WaveViewMOD1->repaint();
 }
@@ -1002,9 +976,6 @@ BEGIN_JUCER_METADATA
           textboxoutline="808080" min="1.0" max="32.0" int="1.0" style="IncDecButtons"
           textBoxPos="TextBoxLeft" textBoxEditable="1" textBoxWidth="40"
           textBoxHeight="20" skewFactor="1.0" needsCallback="1"/>
-  <TEXTBUTTON name="MOD 1 Phase Sync Button" id="4509e154e4918174" memberName="PhaseSyncMOD1Btn"
-              virtualName="" explicitFocusOrder="0" pos="199 250 54 16" tooltip="Syncs the starting phase to the DAW playhead"
-              buttonText="Phase" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <SLIDER name="MOD 1 Phase Slider" id="3f1ef3d10c303bac" memberName="PhaseMOD1Sld"
           virtualName="WECore::JUCEPlugin::LabelReadoutSlider&lt;double&gt;"
           explicitFocusOrder="0" pos="210 284 32 24" tooltip="Phase shift the LFO by up to 360 degrees"

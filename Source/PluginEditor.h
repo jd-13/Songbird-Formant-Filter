@@ -100,7 +100,6 @@ private:
     std::unique_ptr<juce::TextButton> TempoSyncMOD1Btn;
     std::unique_ptr<juce::Slider> TempoNumerMOD1Sld;
     std::unique_ptr<juce::Slider> TempoDenomMOD1Sld;
-    std::unique_ptr<juce::TextButton> PhaseSyncMOD1Btn;
     std::unique_ptr<WECore::JUCEPlugin::LabelReadoutSlider<double>> PhaseMOD1Sld;
     std::unique_ptr<juce::Label> PhaseMOD1Lbl;
     std::unique_ptr<juce::TextButton> ModModeBtn;

@@ -23,6 +23,7 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
     // Set defaults
     mSongbird.mFilter.setVowel1(SP::VOWEL.VOWEL_A);
     mSongbird.mFilter.setVowel2(SP::VOWEL.VOWEL_E);
+    mSongbird.mModulator->MOD.setPhaseSyncSwitch(true);
     mSongbird.mModulator->MOD.setDepth(0);
 
     mSongbird.mModulator->MOD.setBypassSwitch(RP::LFOSWITCH_ON);
@@ -36,7 +37,6 @@ SongbirdAudioProcessor::SongbirdAudioProcessor()
     registerParameter(modMode, MODMODE_STR, SP::MODMODE_DEFAULT);
     registerParameter(airGain, AIR_STR, &SP::AIR_GAIN, SP::AIR_GAIN.defaultValue, PRECISION);
 
-    registerParameter(phaseSyncMOD1, PHASESYNCMOD1_STR, RP::PHASESYNC_DEFAULT);
     registerParameter(tempoSyncMOD1, TEMPOSYNCMOD1_STR, RP::TEMPOSYNC_DEFAULT);
     registerParameter(invertMOD1, INVERTMOD1_STR, RP::INVERT_DEFAULT);
     registerParameter(waveMOD1, WAVEMOD1_STR, &RP::WAVE, RP::WAVE.defaultValue);
@@ -216,7 +216,7 @@ std::vector<juce::String> SongbirdAudioProcessor::_provideParamNamesForMigration
         MIX_STR,
         MODMODE_STR,
 
-        PHASESYNCMOD1_STR,
+        "REMOVED",
         TEMPOSYNCMOD1_STR,
         WAVEMOD1_STR,
         DEPTHMOD1_STR,
@@ -247,7 +247,6 @@ void SongbirdAudioProcessor::_migrateParamValues(std::vector<float>& paramValues
         paramValues[9] = RP::FREQ.NormalisedToInternal(paramValues[9]);
         paramValues[10] = RP::PHASE.NormalisedToInternal(paramValues[10]);
         paramValues[13] = SP::OUTPUTGAIN.NormalisedToInternal(paramValues[13]);
-        INVERTMOD1_STR,
 
         paramValues[15] = AP::ATTACK_MS.NormalisedToInternal(paramValues[15]);
         paramValues[16] = AP::RELEASE_MS.NormalisedToInternal(paramValues[16]);
@@ -265,7 +264,6 @@ void SongbirdAudioProcessor::_onParameterUpdate() {
     mSongbird.mFilter.setAirGain(airGain->get());
     mSongbird.mFilter.setOutputGain(outputGain->get());
 
-    mSongbird.mModulator->MOD.setPhaseSyncSwitch(phaseSyncMOD1->get());
     mSongbird.mModulator->MOD.setTempoSyncSwitch(tempoSyncMOD1->get());
     mSongbird.mModulator->MOD.setInvertSwitch(invertMOD1->get());
     mSongbird.mModulator->MOD.setWave(waveMOD1->get());
