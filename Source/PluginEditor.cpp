@@ -466,7 +466,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     // Start tooltip label
     addMouseListener(&_tooltipLabelUpdater, true);
-    _tooltipLabelUpdater.start(tooltipLbl.get());
+    _tooltipLabelUpdater.start(tooltipLbl.get(), getAudioProcessor()->wrapperType);
 
     // Make tempo sync buttons draggable
     TempoNumerMOD1Sld->setIncDecButtonsMode(Slider::incDecButtonsDraggable_Vertical);
