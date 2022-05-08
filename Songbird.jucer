@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="KSzb4y" name="Songbird" projectType="audioplug" version="2.2.0"
+<JUCERPROJECT id="KSzb4y" name="Songbird" projectType="audioplug" version="2.3.0"
               bundleIdentifier="com.whiteelephantaudio.Songbird" includeBinaryInAppConfig="1"
               buildVST="0" buildVST3="1" buildAU="1" buildAUv3="0" buildRTAS="0"
               buildAAX="0" pluginName="Songbird" pluginDesc="Songbird" pluginManufacturer="White Elephant Audio"
