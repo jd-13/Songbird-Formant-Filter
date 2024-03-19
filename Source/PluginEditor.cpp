@@ -165,7 +165,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     TempoNumerMOD1Sld.reset (new juce::Slider ("MOD 1 Tempo Numer Slider"));
     addAndMakeVisible (TempoNumerMOD1Sld.get());
     TempoNumerMOD1Sld->setTooltip (TRANS ("Nominator for the LFO\'s tempo sync"));
-    TempoNumerMOD1Sld->setRange (1, 4, 1);
+    TempoNumerMOD1Sld->setRange (1, 32, 1);
     TempoNumerMOD1Sld->setSliderStyle (juce::Slider::IncDecButtons);
     TempoNumerMOD1Sld->setTextBoxStyle (juce::Slider::TextBoxLeft, false, 40, 20);
     TempoNumerMOD1Sld->setColour (juce::Slider::textBoxTextColourId, juce::Colour (0xffffdf5e));
@@ -967,7 +967,7 @@ BEGIN_JUCER_METADATA
   <SLIDER name="MOD 1 Tempo Numer Slider" id="6c49dac77f3e6f4b" memberName="TempoNumerMOD1Sld"
           virtualName="" explicitFocusOrder="0" pos="78 282 56 16" tooltip="Nominator for the LFO's tempo sync"
           textboxtext="ffffdf5e" textboxbkgd="c8c8c8" textboxoutline="808080"
-          min="1.0" max="4.0" int="1.0" style="IncDecButtons" textBoxPos="TextBoxLeft"
+          min="1.0" max="32.0" int="1.0" style="IncDecButtons" textBoxPos="TextBoxLeft"
           textBoxEditable="1" textBoxWidth="40" textBoxHeight="20" skewFactor="1.0"
           needsCallback="1"/>
   <SLIDER name="MOD 1 Tempo Denom Slider" id="a116d9c60bf4c7b5" memberName="TempoDenomMOD1Sld"

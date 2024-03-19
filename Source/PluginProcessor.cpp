@@ -240,10 +240,14 @@ void SongbirdAudioProcessor::_migrateParamValues(std::vector<float>& paramValues
     namespace AP = WECore::AREnv::Parameters;
 
     if (paramValues.size() == 19) {
+        // The LFO frequency minimum changed from 0.5 to 0, but we need to use the original range
+        // when migrating the parameter value
+        const ParameterDefinition::RangedParameter<double> ORIGINAL_FREQ(0.5, 20, 2);
+
         paramValues[2] = SP::FILTER_POSITION.NormalisedToInternal(paramValues[2]);
         paramValues[3] = SP::MIX.NormalisedToInternal(paramValues[3]);
         paramValues[8] = RP::DEPTH.NormalisedToInternal(paramValues[8]);
-        paramValues[9] = RP::FREQ.NormalisedToInternal(paramValues[9]);
+        paramValues[9] = ORIGINAL_FREQ.NormalisedToInternal(paramValues[9]);
         paramValues[10] = RP::PHASE.NormalisedToInternal(paramValues[10]);
         paramValues[13] = SP::OUTPUTGAIN.NormalisedToInternal(paramValues[13]);
 
