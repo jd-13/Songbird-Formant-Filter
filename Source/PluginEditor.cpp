@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 6.1.6
+  Created with Projucer version: 7.0.9
 
   ------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     //[/Constructor_pre]
 
     MOD1Group.reset (new juce::GroupComponent ("MOD 1 Group",
-                                               TRANS("LFO")));
+                                               TRANS ("LFO")));
     addAndMakeVisible (MOD1Group.get());
     MOD1Group->setTextLabelPosition (juce::Justification::centred);
     MOD1Group->setColour (juce::GroupComponent::outlineColourId, juce::Colour (0xffffdf5e));
@@ -45,23 +45,23 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     Vowel1Cmb.reset (new juce::ComboBox ("Vowel 1 Combo Box"));
     addAndMakeVisible (Vowel1Cmb.get());
-    Vowel1Cmb->setTooltip (TRANS("Vowel to apply in the left position"));
+    Vowel1Cmb->setTooltip (TRANS ("Vowel to apply in the left position"));
     Vowel1Cmb->setEditableText (false);
     Vowel1Cmb->setJustificationType (juce::Justification::centredLeft);
     Vowel1Cmb->setTextWhenNothingSelected (juce::String());
-    Vowel1Cmb->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    Vowel1Cmb->addItem (TRANS("A"), 1);
-    Vowel1Cmb->addItem (TRANS("E"), 2);
-    Vowel1Cmb->addItem (TRANS("I"), 3);
-    Vowel1Cmb->addItem (TRANS("O"), 4);
-    Vowel1Cmb->addItem (TRANS("U"), 5);
+    Vowel1Cmb->setTextWhenNoChoicesAvailable (TRANS ("(no choices)"));
+    Vowel1Cmb->addItem (TRANS ("A"), 1);
+    Vowel1Cmb->addItem (TRANS ("E"), 2);
+    Vowel1Cmb->addItem (TRANS ("I"), 3);
+    Vowel1Cmb->addItem (TRANS ("O"), 4);
+    Vowel1Cmb->addItem (TRANS ("U"), 5);
     Vowel1Cmb->addListener (this);
 
     Vowel1Cmb->setBounds (60, 73, 48, 24);
 
     FilterPosSld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("Filter Position Slider"));
     addAndMakeVisible (FilterPosSld.get());
-    FilterPosSld->setTooltip (TRANS("Modulation position between the two vowels"));
+    FilterPosSld->setTooltip (TRANS ("Modulation position between the two vowels"));
     FilterPosSld->setRange (0, 1, 0.01);
     FilterPosSld->setSliderStyle (juce::Slider::LinearHorizontal);
     FilterPosSld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
@@ -71,23 +71,23 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     Vowel2Cmb.reset (new juce::ComboBox ("Vowel 2 Combo Box"));
     addAndMakeVisible (Vowel2Cmb.get());
-    Vowel2Cmb->setTooltip (TRANS("Vowel to apply in the right position"));
+    Vowel2Cmb->setTooltip (TRANS ("Vowel to apply in the right position"));
     Vowel2Cmb->setEditableText (false);
     Vowel2Cmb->setJustificationType (juce::Justification::centredLeft);
     Vowel2Cmb->setTextWhenNothingSelected (juce::String());
-    Vowel2Cmb->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    Vowel2Cmb->addItem (TRANS("A"), 1);
-    Vowel2Cmb->addItem (TRANS("E"), 2);
-    Vowel2Cmb->addItem (TRANS("I"), 3);
-    Vowel2Cmb->addItem (TRANS("O"), 4);
-    Vowel2Cmb->addItem (TRANS("U"), 5);
+    Vowel2Cmb->setTextWhenNoChoicesAvailable (TRANS ("(no choices)"));
+    Vowel2Cmb->addItem (TRANS ("A"), 1);
+    Vowel2Cmb->addItem (TRANS ("E"), 2);
+    Vowel2Cmb->addItem (TRANS ("I"), 3);
+    Vowel2Cmb->addItem (TRANS ("O"), 4);
+    Vowel2Cmb->addItem (TRANS ("U"), 5);
     Vowel2Cmb->addListener (this);
 
     Vowel2Cmb->setBounds (316, 73, 48, 24);
 
     MixSld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("Mix Slider"));
     addAndMakeVisible (MixSld.get());
-    MixSld->setTooltip (TRANS("Dry/Wet mix level"));
+    MixSld->setTooltip (TRANS ("Dry/Wet mix level"));
     MixSld->setRange (0, 1, 0.01);
     MixSld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
     MixSld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
@@ -97,7 +97,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     DepthMOD1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("MOD 1 Depth Slider"));
     addAndMakeVisible (DepthMOD1Sld.get());
-    DepthMOD1Sld->setTooltip (TRANS("Depth of the LFO"));
+    DepthMOD1Sld->setTooltip (TRANS ("Depth of the LFO"));
     DepthMOD1Sld->setRange (0, 1, 0.01);
     DepthMOD1Sld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
     DepthMOD1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
@@ -107,7 +107,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     FreqMOD1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("MOD 1 Freq Slider"));
     addAndMakeVisible (FreqMOD1Sld.get());
-    FreqMOD1Sld->setTooltip (TRANS("Frequency of the LFO, from 2Hz to 20Hz"));
+    FreqMOD1Sld->setTooltip (TRANS ("Frequency of the LFO, from 2Hz to 20Hz"));
     FreqMOD1Sld->setRange (0, 1, 0.01);
     FreqMOD1Sld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
     FreqMOD1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
@@ -117,21 +117,21 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     WaveMOD1Cmb.reset (new juce::ComboBox ("MOD 1 Wave"));
     addAndMakeVisible (WaveMOD1Cmb.get());
-    WaveMOD1Cmb->setTooltip (TRANS("Wave shape of the LFO"));
+    WaveMOD1Cmb->setTooltip (TRANS ("Wave shape of the LFO"));
     WaveMOD1Cmb->setEditableText (false);
     WaveMOD1Cmb->setJustificationType (juce::Justification::centredLeft);
     WaveMOD1Cmb->setTextWhenNothingSelected (juce::String());
-    WaveMOD1Cmb->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    WaveMOD1Cmb->addItem (TRANS("Sine"), 1);
-    WaveMOD1Cmb->addItem (TRANS("Square"), 2);
-    WaveMOD1Cmb->addItem (TRANS("Saw"), 3);
-    WaveMOD1Cmb->addItem (TRANS("SC Comp"), 4);
+    WaveMOD1Cmb->setTextWhenNoChoicesAvailable (TRANS ("(no choices)"));
+    WaveMOD1Cmb->addItem (TRANS ("Sine"), 1);
+    WaveMOD1Cmb->addItem (TRANS ("Square"), 2);
+    WaveMOD1Cmb->addItem (TRANS ("Saw"), 3);
+    WaveMOD1Cmb->addItem (TRANS ("SC Comp"), 4);
     WaveMOD1Cmb->addListener (this);
 
     WaveMOD1Cmb->setBounds (259, 314, 80, 24);
 
     FreqMOD1Lbl.reset (new juce::Label ("MOD 1 Freq Label",
-                                        TRANS("Rate")));
+                                        TRANS ("Rate")));
     addAndMakeVisible (FreqMOD1Lbl.get());
     FreqMOD1Lbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     FreqMOD1Lbl->setJustificationType (juce::Justification::centred);
@@ -143,7 +143,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     FreqMOD1Lbl->setBounds (80, 314, 56, 24);
 
     DepthMOD1Lbl.reset (new juce::Label ("MOD 1 Depth Label",
-                                         TRANS("Depth")));
+                                         TRANS ("Depth")));
     addAndMakeVisible (DepthMOD1Lbl.get());
     DepthMOD1Lbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     DepthMOD1Lbl->setJustificationType (juce::Justification::centred);
@@ -156,15 +156,15 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     TempoSyncMOD1Btn.reset (new juce::TextButton ("MOD 1 Tempo Sync Button"));
     addAndMakeVisible (TempoSyncMOD1Btn.get());
-    TempoSyncMOD1Btn->setTooltip (TRANS("Enables tempo sync for the LFO"));
-    TempoSyncMOD1Btn->setButtonText (TRANS("Tempo"));
+    TempoSyncMOD1Btn->setTooltip (TRANS ("Enables tempo sync for the LFO"));
+    TempoSyncMOD1Btn->setButtonText (TRANS ("Tempo"));
     TempoSyncMOD1Btn->addListener (this);
 
     TempoSyncMOD1Btn->setBounds (83, 250, 54, 16);
 
     TempoNumerMOD1Sld.reset (new juce::Slider ("MOD 1 Tempo Numer Slider"));
     addAndMakeVisible (TempoNumerMOD1Sld.get());
-    TempoNumerMOD1Sld->setTooltip (TRANS("Nominator for the LFO\'s tempo sync"));
+    TempoNumerMOD1Sld->setTooltip (TRANS ("Nominator for the LFO\'s tempo sync"));
     TempoNumerMOD1Sld->setRange (1, 4, 1);
     TempoNumerMOD1Sld->setSliderStyle (juce::Slider::IncDecButtons);
     TempoNumerMOD1Sld->setTextBoxStyle (juce::Slider::TextBoxLeft, false, 40, 20);
@@ -177,7 +177,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     TempoDenomMOD1Sld.reset (new juce::Slider ("MOD 1 Tempo Denom Slider"));
     addAndMakeVisible (TempoDenomMOD1Sld.get());
-    TempoDenomMOD1Sld->setTooltip (TRANS("Denominator for the LFO\'s tempo sync"));
+    TempoDenomMOD1Sld->setTooltip (TRANS ("Denominator for the LFO\'s tempo sync"));
     TempoDenomMOD1Sld->setRange (1, 32, 1);
     TempoDenomMOD1Sld->setSliderStyle (juce::Slider::IncDecButtons);
     TempoDenomMOD1Sld->setTextBoxStyle (juce::Slider::TextBoxLeft, false, 40, 20);
@@ -191,7 +191,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     PhaseMOD1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("MOD 1 Phase Slider"));
     addAndMakeVisible (PhaseMOD1Sld.get());
-    PhaseMOD1Sld->setTooltip (TRANS("Phase shift the LFO by up to 360 degrees"));
+    PhaseMOD1Sld->setTooltip (TRANS ("Phase shift the LFO by up to 360 degrees"));
     PhaseMOD1Sld->setRange (0, 1, 0.01);
     PhaseMOD1Sld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
     PhaseMOD1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
@@ -200,7 +200,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     PhaseMOD1Sld->setBounds (210, 284, 32, 24);
 
     PhaseMOD1Lbl.reset (new juce::Label ("MOD 1 Phase Label",
-                                         TRANS("Phase")));
+                                         TRANS ("Phase")));
     addAndMakeVisible (PhaseMOD1Lbl.get());
     PhaseMOD1Lbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     PhaseMOD1Lbl->setJustificationType (juce::Justification::centred);
@@ -213,8 +213,8 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     ModModeBtn.reset (new juce::TextButton ("Mod Mode Button"));
     addAndMakeVisible (ModModeBtn.get());
-    ModModeBtn->setTooltip (TRANS("Blends between both vowels in parallel or a frequency in between"));
-    ModModeBtn->setButtonText (TRANS("Blend"));
+    ModModeBtn->setTooltip (TRANS ("Blends between both vowels in parallel or a frequency in between"));
+    ModModeBtn->setButtonText (TRANS ("Blend"));
     ModModeBtn->addListener (this);
     ModModeBtn->setColour (juce::TextButton::buttonColourId, juce::Colour (0xffffcc00));
     ModModeBtn->setColour (juce::TextButton::buttonOnColourId, juce::Colour (0xffff5032));
@@ -224,7 +224,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     ModModeBtn->setBounds (181, 109, 64, 24);
 
     MixLbl.reset (new juce::Label ("Mix Label",
-                                   TRANS("Mix")));
+                                   TRANS ("Mix")));
     addAndMakeVisible (MixLbl.get());
     MixLbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     MixLbl->setJustificationType (juce::Justification::centred);
@@ -237,7 +237,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     OutputGainSld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("Output Gain Slider"));
     addAndMakeVisible (OutputGainSld.get());
-    OutputGainSld->setTooltip (TRANS("Output gain"));
+    OutputGainSld->setTooltip (TRANS ("Output gain"));
     OutputGainSld->setRange (0, 1, 0.01);
     OutputGainSld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
     OutputGainSld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
@@ -246,7 +246,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     OutputGainSld->setBounds (278, 126, 72, 56);
 
     OutputGainLbl.reset (new juce::Label ("Output Gain Label",
-                                          TRANS("Output Gain")));
+                                          TRANS ("Output Gain")));
     addAndMakeVisible (OutputGainLbl.get());
     OutputGainLbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     OutputGainLbl->setJustificationType (juce::Justification::centred);
@@ -277,14 +277,14 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     InvertMOD1Btn.reset (new juce::TextButton ("MOD 1 Invert Button"));
     addAndMakeVisible (InvertMOD1Btn.get());
-    InvertMOD1Btn->setTooltip (TRANS("Inverts the LFO output"));
-    InvertMOD1Btn->setButtonText (TRANS("Invert"));
+    InvertMOD1Btn->setTooltip (TRANS ("Inverts the LFO output"));
+    InvertMOD1Btn->setButtonText (TRANS ("Invert"));
     InvertMOD1Btn->addListener (this);
 
     InvertMOD1Btn->setBounds (271, 250, 56, 16);
 
     ENV1Group.reset (new juce::GroupComponent ("ENV 1 Group",
-                                               TRANS("ENV")));
+                                               TRANS ("ENV")));
     addAndMakeVisible (ENV1Group.get());
     ENV1Group->setTextLabelPosition (juce::Justification::centred);
     ENV1Group->setColour (juce::GroupComponent::outlineColourId, juce::Colour (0xffffdf5e));
@@ -294,7 +294,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     AttackENV1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("ENV 1 Attack Slider"));
     addAndMakeVisible (AttackENV1Sld.get());
-    AttackENV1Sld->setTooltip (TRANS("Attack time of the envelope follower"));
+    AttackENV1Sld->setTooltip (TRANS ("Attack time of the envelope follower"));
     AttackENV1Sld->setRange (0, 1, 0.001);
     AttackENV1Sld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
     AttackENV1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
@@ -305,7 +305,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     ReleaseENV1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("ENV 1 RElease Slider"));
     addAndMakeVisible (ReleaseENV1Sld.get());
-    ReleaseENV1Sld->setTooltip (TRANS("Release time of the envelope follower"));
+    ReleaseENV1Sld->setTooltip (TRANS ("Release time of the envelope follower"));
     ReleaseENV1Sld->setRange (0, 1, 0.001);
     ReleaseENV1Sld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
     ReleaseENV1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
@@ -316,7 +316,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     AmountENV1Sld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("ENV 1 Amount Slider"));
     addAndMakeVisible (AmountENV1Sld.get());
-    AmountENV1Sld->setTooltip (TRANS("Amount of envelope follower modulation"));
+    AmountENV1Sld->setTooltip (TRANS ("Amount of envelope follower modulation"));
     AmountENV1Sld->setRange (0, 1, 0.01);
     AmountENV1Sld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
     AmountENV1Sld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
@@ -325,7 +325,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     AmountENV1Sld->setBounds (278, 389, 32, 24);
 
     AttackENV1Lbl.reset (new juce::Label ("ENV 1 Attack Label",
-                                          TRANS("Attack")));
+                                          TRANS ("Attack")));
     addAndMakeVisible (AttackENV1Lbl.get());
     AttackENV1Lbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     AttackENV1Lbl->setJustificationType (juce::Justification::centred);
@@ -337,7 +337,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     AttackENV1Lbl->setBounds (104, 419, 54, 24);
 
     ReleaseENV1Lbl.reset (new juce::Label ("ENV 1 Release Label",
-                                           TRANS("Release")));
+                                           TRANS ("Release")));
     addAndMakeVisible (ReleaseENV1Lbl.get());
     ReleaseENV1Lbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     ReleaseENV1Lbl->setJustificationType (juce::Justification::centred);
@@ -349,7 +349,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     ReleaseENV1Lbl->setBounds (180, 419, 64, 24);
 
     AmountENV1Lbl.reset (new juce::Label ("ENV 1 Amount Label",
-                                          TRANS("Amount")));
+                                          TRANS ("Amount")));
     addAndMakeVisible (AmountENV1Lbl.get());
     AmountENV1Lbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     AmountENV1Lbl->setJustificationType (juce::Justification::centred);
@@ -362,7 +362,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
 
     AirSld.reset (new WECore::JUCEPlugin::LabelReadoutSlider<double> ("Air Slider"));
     addAndMakeVisible (AirSld.get());
-    AirSld->setTooltip (TRANS("Adds brightness using higher frequency formant filters"));
+    AirSld->setTooltip (TRANS ("Adds brightness using higher frequency formant filters"));
     AirSld->setRange (0, 1, 0.01);
     AirSld->setSliderStyle (juce::Slider::RotaryVerticalDrag);
     AirSld->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
@@ -371,7 +371,7 @@ SongbirdAudioProcessorEditor::SongbirdAudioProcessorEditor (SongbirdAudioProcess
     AirSld->setBounds (197, 155, 32, 24);
 
     AirLbl.reset (new juce::Label ("Air Label",
-                                   TRANS("Air")));
+                                   TRANS ("Air")));
     addAndMakeVisible (AirLbl.get());
     AirLbl->setFont (juce::Font (15.00f, juce::Font::plain).withTypefaceStyle ("Regular"));
     AirLbl->setJustificationType (juce::Justification::centred);
